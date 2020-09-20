@@ -1,128 +1,224 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_cityshop_store/http/httpUtil_method.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_cityshop_store/view/splash_screen_page.dart';
+import 'package:flutter_cityshop_store/widget/appbar.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter/foundation.dart';
 
-void main() {
-  runApp(MyApp());
+/**方式一实现Provider使用Consumer 方式 */
+
+main() {
+  runApp(ChangeNotifierProvider<CounterNotifier>.value(
+    value: CounterNotifier(),
+    child: MyApp(),
+  ));
+
+
+  SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(
+       //这是设置状态栏的图标和字体的颜色  
+       statusBarColor: Colors.orange,
+       statusBarIconBrightness: Brightness.dark
+    );
+  SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-        // This makes the visual density adapt to the platform that you run
-        // the app on. For desktop platforms, the controls will be smaller and
-        // closer together (more dense) than on mobile platforms.
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+    return MultiProvider(
+      providers: [
+        Provider.value(value: 36),
+        ChangeNotifierProvider.value(value: CounterNotifier())
+      ],
+      child: MaterialApp(
+        title: 'Privoder Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.orange,
+        ),
+        home: Page1(),
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+
+ }
+}
+
+class Page1 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    //获取文字大小
+    final size = Provider.of<int>(context).toDouble();
+    // 获取计数
+    final counter = Provider.of<CounterNotifier>(context);
+    // 调用 build 时输出
+    print('rebuild page 1');
+    return Scaffold(
+      appBar: AppBarWidget(title:'Page1',canBack:false).build(context),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            // 显示计数
+            Text(
+              'Current count: ${counter.count}',
+              // 设置文字大小
+              style: TextStyle(
+                fontSize: size,
+              ),
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            // 跳转 Page2
+            RaisedButton(
+              onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => Page2()),
+              ),
+              child: Text('Next'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
+class Page2 extends StatelessWidget {
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  Widget build(BuildContext context) {
+    print('rebuild page 2');
+    return Scaffold(
+      appBar: AppBarWidget(title:'Page2').build(context),
+    
+      body: Center(
+        child: Consumer2<CounterNotifier, int>(
+            builder: (context, counter, size, _) {
+              print('rebuild page 2 refresh count');
+
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'You have pushed the button this many times:',
+                  ),
+                  Text(
+                    '${counter.count}',
+                    style: TextStyle(
+                      fontSize: size.toDouble(),
+                    ),
+                  ),
+                ],
+              );
+            }),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // 不需要监听改变（listen: false 不会重新调用build）
+          Provider.of<CounterNotifier>(context, listen: false).increment();
+        },
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
 
-    @override
-   void initState() { 
-     super.initState();
-        httpUtil_method.requestGetWithPath("https://portal-web.cjwsc.com/home/topBanner.action").then((value) {
-             
-             print("====hdhddh========$value.toString()==========");
-        });
+class CounterNotifier with ChangeNotifier {
+  int _count = 0;
 
-   }
+  int get count => _count;
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+  increment() {
+    _count++;
+    notifyListeners();
   }
+}
+
+/**方式二实现Provider使用CounterNotifier 数据 （最简单的方式） 方式 */
+/*
+void main() {
+    runApp(MyApp());
+    SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(
+       //这是设置状态栏的图标和字体的颜色  
+       statusBarColor: Colors.blue,
+       statusBarIconBrightness: Brightness.dark
+    );
+  SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+}
+
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+    return ChangeNotifierProvider.value(
+      value: CounterNotifier(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false, //关闭显示debug模式
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: ProvidePage(title: 'Provider 测试页面'), //SplashScreenPage(),
       ),
+    );
+  }
+}
+
+class ProvidePage extends StatelessWidget {
+  final String title;
+
+  ProvidePage({Key key, this.title}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // 获取 CounterNotifier 数据 （最简单的方式）
+    final counter = Provider.of<CounterNotifier>(context);
+
+    return Scaffold(
+      appBar: AppBarWidget(title: title, canBack: false).build(context),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
+          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'You have pushed the button this many times:',
+              '按下按钮，使数字增长:',
             ),
             Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+              '${counter.count}',
+              // ignore: deprecated_member_use
+              style: Theme.of(context).textTheme.display1,
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () {
+          counter.increment();
+        },
         tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }
+
+//  核心：继承自ChangeNotifier
+// 这种文件本来应该单独放在一个类文件连的
+class CounterNotifier with ChangeNotifier {
+  int _count = 0;
+  int get count => _count;
+
+  increment() {
+    _count++;
+    // 核心方法，通知刷新UI,调用build方法
+    print("核心方法，通知刷新UI,调用build方法");
+    notifyListeners();
+  }
+}
+*/

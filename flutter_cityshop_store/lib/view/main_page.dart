@@ -26,7 +26,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar:AppBarWidget(title:"首页",canBack: true ).build(context),
+       appBar:AppBarWidget(title:"首页",canBack: false ).build(context),
        body: Container(
          child: SingleChildScrollView(
            //controller: controller,
