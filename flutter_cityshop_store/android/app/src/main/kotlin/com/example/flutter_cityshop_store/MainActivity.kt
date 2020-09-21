@@ -1,4 +1,4 @@
-package com.example.flutter_cityshop_store
+package com.cityshop.cityshop_store
 
 import io.flutter.embedding.android.FlutterActivity
 

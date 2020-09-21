@@ -16,7 +16,7 @@ main() {
 
   SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(
        //这是设置状态栏的图标和字体的颜色  
-       statusBarColor: Colors.orange,
+       statusBarColor: Colors.red,
        statusBarIconBrightness: Brightness.dark
     );
   SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false, //关闭显示debug模式
         title: 'Privoder Demo',
         theme: ThemeData(
-          primarySwatch: Colors.orange,
+          primarySwatch: Colors.red,
         ),
         home: Page1(),
       ),
