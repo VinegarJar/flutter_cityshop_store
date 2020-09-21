@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(value: CounterNotifier())
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false, //关闭显示debug模式
         title: 'Privoder Demo',
         theme: ThemeData(
           primarySwatch: Colors.orange,
