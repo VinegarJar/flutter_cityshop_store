@@ -13,8 +13,8 @@
          //设置全屏显示启动页
          This Theme is only used starting with V2 of Flutter's Android embedding. -->
     <style name="NormalTheme" parent="@android:style/Theme.Black.NoTitleBar">
-        <item name="android:windowFullscreen">true</item>
-        <item name="android:windowNoTitle">true</item>
+        <!-- <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item> -->
         <item name="android:windowBackground">@android:color/white</item>
     </style>
 </resources>
