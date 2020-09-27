@@ -11,32 +11,103 @@ typedef Fail = void Function(String error,int jsonCode);
 
 class  HttpManagerMethod  {
 
-//HttpManagerMethod
-// 工厂模式 单例
-  factory HttpManagerMethod(){
-     return _getInstance();
-  }
-  
-  static HttpManagerMethod get instance => _getInstance();
-  static HttpManagerMethod _instance;
+// 静态变量_instance，存储唯一对象
+ static HttpManagerMethod _instance;
 
-  HttpManagerMethod._internal() {
+// 工厂模式 单例
+factory HttpManagerMethod() =>_getInstance();
+
+  
+static HttpManagerMethod get instance => _getInstance();
+ 
+
+HttpManagerMethod._internal() {
     // 初始化
-    
-  }
+    // _instance = new HttpManagerMethod();
+     //print("单利调用初始化完成------%$_instance");
+}
 
   static HttpManagerMethod _getInstance() {
     if (_instance == null) {
+      print("单利调用初始化_getInstance------%$_instance");
       _instance = new HttpManagerMethod._internal();
     }
     return _instance;
   }
 
 
+  getInstan(){
+
+    print(" 获取getInstan------%$_instance");
+  } 
 
 
 }
 
+
+// class UserManager {
+
+//   // 如果一个函数的构造方法并不总是返回一个新的对象的时候，可以使用factory，
+
+//   // 比如从缓存中获取一个实例并返回或者返回一个子类型的实例
+
+ 
+
+//   // 工厂方法构造函数
+
+//   factory UserManager() => _getInstance();
+
+ 
+
+//   // instance的getter方法，通过UserManager.instance获取对象
+
+//   static UserManager get instance => _getInstance();
+
+ 
+
+//   // 静态变量_instance，存储唯一对象
+
+//   static UserManager _instance;
+
+ 
+
+//   // 私有的命名式构造方法，通过它可以实现一个类可以有多个构造函数，
+
+//   // 子类不能继承internal不是关键字，可定义其他名字
+
+//   UserManager._internal() {
+
+//     // 初始化
+
+//     user = new User(false, "", "", "", "", false, "", false, "", "");
+
+//   }
+
+  
+
+//   // 获取对象
+
+//   static UserManager _getInstance() {
+
+//     if (_instance == null) {
+
+//       // 使用私有的构造方法来创建对象
+
+//       _instance = new UserManager._internal();
+
+//     }
+
+//     return _instance;
+
+//   }
+
+  
+
+//   // 用户对象
+
+//   // User user;
+
+// }
 
 
 // class HttpManager {

@@ -1,6 +1,7 @@
 
 import "package:flutter/cupertino.dart";
 import 'package:flutter/material.dart';
+import 'package:flutter_cityshop_store/https/httpManager_method.dart';
 // import 'package:flutter_cityshop_store/https/httpmanager_method.dart'; 
 
 class HomePages extends StatefulWidget {
@@ -17,12 +18,20 @@ class _HomePagesState extends State<HomePages> {
   
     super.initState();
     
-    //  HttpUtilMethod manager =  HttpUtilMethod();
-    //  HttpUtilMethod manager2 = HttpUtilMethod.instance;
+     HttpManagerMethod manager =  HttpManagerMethod();
+     HttpManagerMethod manager2 = HttpManagerMethod.instance;
+    
+     Text  tset = Text(""); 
 
 
-    //  print("-------$manager----------");
-    //  print("-------$manager2----------");
+     print("-----单利一初始化调用--$manager----------");
+     print("-----单利二初始化调用--$manager2----------");
+
+
+     print("-----单利一获取调用--$tset----------");
+     print("-----单利二获取调用--${manager2.getInstan()}----------");
+    
+
 
   } 
 
