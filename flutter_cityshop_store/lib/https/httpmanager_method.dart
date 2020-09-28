@@ -1,226 +1,116 @@
-// import 'package:dio/dio.dart';
-// import 'dart:async';
+import 'package:dio/dio.dart';
+//flutter clean 清理
+
+typedef onSuccess = void Function(dynamic data);
+typedef onError = void Function(String error);
+
+const httpHeaders = {
+  'Content-Type': 'application/json',
+  'X-LC-Id': 'a4Cj1Hm5aMrdhob6xGw71B5A-gzGzoHsz',
+  'X-LC-Key': 'XQaL1tUQC0DCQxBA9fpoR21C',
+};
+
+const bannerUrl = "App/Api/homeBanner"; //首页轮播广告图
+const hotcommendUrl = "App/Api/homeHotCommendGoods"; //首页热卖推荐
+const categoryUrl = "App/Index/shopSecondCategory"; //分类列表数据
+const goodsList =  "v2/goods";//首页列表数据
 
 
+class HttpManagerMethod {
+  static Dio _dio;
 
+  /// default options
+  static const String BASE_URL = 'http://mock-api.com/Rz3ambnM.mock/';
 
-typedef Success = void Function(dynamic json);
-typedef Fail = void Function(String error,int jsonCode);
+  static const int CONNECT_TIMEOUT = 10000;
+  static const int RECEIVE_TIMEOUT = 10000;
 
+  //http request methods
+  static const String GET = 'get';
 
+  // 静态变量_instance，存储唯一对象
+  static HttpManagerMethod _instance;
 
-class  HttpManagerMethod  {
+  // 工厂模式 单例
+  factory HttpManagerMethod() => _getInstance();
 
-// 静态变量_instance，存储唯一对象
- static HttpManagerMethod _instance;
-
-// 工厂模式 单例
-factory HttpManagerMethod() =>_getInstance();
-
-  
-static HttpManagerMethod get instance => _getInstance();
- 
-
-HttpManagerMethod._internal() {
-    // 初始化
-    // _instance = new HttpManagerMethod();
-     //print("单利调用初始化完成------%$_instance");
-}
+  //获取单利
+  static HttpManagerMethod get instance => _getInstance();
 
   static HttpManagerMethod _getInstance() {
     if (_instance == null) {
-      print("单利调用初始化_getInstance------%$_instance");
       _instance = new HttpManagerMethod._internal();
     }
     return _instance;
   }
+  
+  //初始化通用全局单例，第一次使用时初始化
+  HttpManagerMethod._internal();
 
+  static Dio createInstance() {
+    if (_dio == null) {
+      _dio = new Dio(new BaseOptions(
+        baseUrl: BASE_URL,
+        connectTimeout: CONNECT_TIMEOUT,
+        receiveTimeout: RECEIVE_TIMEOUT, // 响应流上前后两次接受到数据的间隔，单位为毫秒。
+        responseType: ResponseType.plain,
+      ));
+    }
+    return _dio;
+  }
 
-  getInstan(){
+  Response response;
+  //future里面有几个函数：then：异步操作逻辑在这里写。whenComplete：异步完成时的回调。catchError：捕获异常或者异步出错时的回调。
+  /**
+   * Future<Null> future = new Future(() => null);
+    await  future.then((_){
+      print("then");
+    }).then((){
+      print("whenComplete");
+    }).catchError((_){
+      print("catchError");
+    });
+   */
+  Future<dynamic> requestWithMetod(api, {parameters, method, String baseUrl}) async {
+    
+    Options options = Options(method: method);
+    options.headers = httpHeaders;
+    Dio dio = createInstance();
 
-    print(" 获取getInstan------%$_instance");
-  } 
+    if (baseUrl!= null) {//重定向baseUrl 用于指定特定域名
+         dio.options.baseUrl = baseUrl;
+     } 
+    parameters = parameters ?? {};
+    method = method ?? GET;
 
+    /// 请求处理
+    parameters.forEach((key, value) {
+      if (api.indexOf(key) != -1) {
+        api = api.replaceAll(':$key', value.toString());
+      }
+    });
 
+    /// 打印:请求地址-请求方式-请求参数
+    print('请求地址-请求方式-请求参数【' +
+        api +
+        '  ' +
+        method +
+        '  ' +
+        parameters.toString() +
+        '】');
+    var result;
+    try {
+      Response response =
+          await dio.request(api, data: parameters, options: options);
+      print('响应数据：' + response.data);
+      if (response.statusCode == 200) {
+        result = response.data;
+      } else {
+        throw Exception('statusCode:${response.statusCode}-请检测代码和服务器情况..');
+      }
+    } on DioError catch (e) {
+      print('请求出错：' + e.toString());
+    }
+    return result;
+  }
 }
-
-
-// class UserManager {
-
-//   // 如果一个函数的构造方法并不总是返回一个新的对象的时候，可以使用factory，
-
-//   // 比如从缓存中获取一个实例并返回或者返回一个子类型的实例
-
- 
-
-//   // 工厂方法构造函数
-
-//   factory UserManager() => _getInstance();
-
- 
-
-//   // instance的getter方法，通过UserManager.instance获取对象
-
-//   static UserManager get instance => _getInstance();
-
- 
-
-//   // 静态变量_instance，存储唯一对象
-
-//   static UserManager _instance;
-
- 
-
-//   // 私有的命名式构造方法，通过它可以实现一个类可以有多个构造函数，
-
-//   // 子类不能继承internal不是关键字，可定义其他名字
-
-//   UserManager._internal() {
-
-//     // 初始化
-
-//     user = new User(false, "", "", "", "", false, "", false, "", "");
-
-//   }
-
-  
-
-//   // 获取对象
-
-//   static UserManager _getInstance() {
-
-//     if (_instance == null) {
-
-//       // 使用私有的构造方法来创建对象
-
-//       _instance = new UserManager._internal();
-
-//     }
-
-//     return _instance;
-
-//   }
-
-  
-
-//   // 用户对象
-
-//   // User user;
-
-// }
-
-
-// class HttpManager {
-//   static HttpManager _instance = HttpManager._internal();
-//   Dio _dio;
-
-//   static const CODE_SUCCESS = 200;
-//   static const CODE_TIME_OUT = -1;
-
-//   factory HttpManager() => _instance;
-
-//   ///通用全局单例，第一次使用时初始化
-//   HttpManager._internal({String baseUrl}) {
-//     if (null == _dio) {
-//       _dio = new Dio(
-//           new BaseOptions(baseUrl: Address.BASE_URL, connectTimeout: 15000));
-//       _dio.interceptors.add(new DioLogInterceptor());
-// //      _dio.interceptors.add(new PrettyDioLogger());
-//       _dio.interceptors.add(new ResponseInterceptors());
-//     }
-//   }
-
-//   static HttpManager getInstance({String baseUrl}) {
-//     if (baseUrl == null) {
-//       return _instance._normal();
-//     } else {
-//       return _instance._baseUrl(baseUrl);
-//     }
-//   }
-
-//   //用于指定特定域名
-//   HttpManager _baseUrl(String baseUrl) {
-//     if (_dio != null) {
-//       _dio.options.baseUrl = baseUrl;
-//     }
-//     return this;
-//   }
-
-//   //一般请求，默认域名
-//   HttpManager _normal() {
-//     if (_dio != null) {
-//       if (_dio.options.baseUrl != Address.BASE_URL) {
-//         _dio.options.baseUrl = Address.BASE_URL;
-//       }
-//     }
-//     return this;
-//   }
-
-//   ///通用的GET请求
-//   get(api, {params, withLoading = true}) async {
-//     if (withLoading) {
-//       LoadingUtils.show();
-//     }
-
-//     Response response;
-//     try {
-//       response = await _dio.get(api, queryParameters: params);
-//       if (withLoading) {
-//         LoadingUtils.dismiss();
-//       }
-//     } on DioError catch (e) {
-//       if (withLoading) {
-//         LoadingUtils.dismiss();
-//       }
-//       return resultError(e);
-//     }
-
-//     if (response.data is DioError) {
-//       return resultError(response.data['code']);
-//     }
-
-//     return response.data;
-//   }
-
-//   ///通用的POST请求
-//   post(api, {params, withLoading = true}) async {
-//     if (withLoading) {
-//       LoadingUtils.show();
-//     }
-
-//     Response response;
-
-//     try {
-//       response = await _dio.post(api, data: params);
-//       if (withLoading) {
-//         LoadingUtils.dismiss();
-//       }
-//     } on DioError catch (e) {
-//       if (withLoading) {
-//         LoadingUtils.dismiss();
-//       }
-//       return resultError(e);
-//     }
-
-//     if (response.data is DioError) {
-//       return resultError(response.data['code']);
-//     }
-
-//     return response.data;
-//   }
-// }
-
-// ResultData resultError(DioError e) {
-//   Response errorResponse;
-//   if (e.response != null) {
-//     errorResponse = e.response;
-//   } else {
-//     errorResponse = new Response(statusCode: 666);
-//   }
-//   if (e.type == DioErrorType.CONNECT_TIMEOUT ||
-//       e.type == DioErrorType.RECEIVE_TIMEOUT) {
-//     errorResponse.statusCode = Code.NETWORK_TIMEOUT;
-//   }
-//   return new ResultData(
-//       errorResponse.statusMessage, false, errorResponse.statusCode);
-// }
