@@ -1,13 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter_cityshop_store/pages/index_page.dart';
+import 'package:flutter_cityshop_store/pages/webView/webView_page.dart';
+
+Handler rootRouteHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+  return IndexPages();
+});
+
+// 网页加载 - 示例：传多个字符串参数
+Handler webViewHandler =
+    Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+
+  Map dict = getJsonParamsHandler(params);
+  print(' title传递的参数：$dict');
+  return WebViewUrlPage(
+    title: dict["title"],
+    url: dict["url"],
+  );
+});
 
 
-Handler rootRouteHandler =Handler(
-  handlerFunc: (BuildContext context,Map<String,List<String>> params){
-     return IndexPages();
+Map  getJsonParamsHandler(Map<String, dynamic> params){
+  Map dict = Map();
+  if (params.isNotEmpty) {
+    params.forEach((key, value) {
+      String title = value.toString();
+      String name = title.substring(1, title.length - 1);
+      dict[key] = name;
+    });
   }
-);
-
-
-
+  return dict;
+}

@@ -10,7 +10,7 @@ const httpHeaders = {
   'X-LC-Key': 'XQaL1tUQC0DCQxBA9fpoR21C',
 };
 
-const bannerUrl = "App/Api/homeBanner"; //首页轮播广告图
+
 const hotcommendUrl = "App/Api/homeHotCommendGoods"; //首页热卖推荐
 const categoryUrl = "App/Index/shopSecondCategory"; //分类列表数据
 const goodsList =  "v2/goods";//首页列表数据
@@ -61,7 +61,7 @@ class HttpManagerMethod {
 
   Response response;
   //future里面有几个函数：then：异步操作逻辑在这里写。whenComplete：异步完成时的回调。catchError：捕获异常或者异步出错时的回调。
-  /**
+  /** 
    * Future<Null> future = new Future(() => null);
     await  future.then((_){
       print("then");
@@ -71,7 +71,7 @@ class HttpManagerMethod {
       print("catchError");
     });
    */
-  Future<dynamic> requestWithMetod(api, {parameters, method, String baseUrl}) async {
+  Future  requestWithMetod(api, {parameters, method, String baseUrl}) async {
     
     Options options = Options(method: method);
     options.headers = httpHeaders;
@@ -91,12 +91,11 @@ class HttpManagerMethod {
     });
 
     /// 打印:请求地址-请求方式-请求参数
-    print('请求地址-请求方式-请求参数【' +
-        api +
-        '  ' +
-        method +
-        '  ' +
-        parameters.toString() +
+    /// 
+    print('请求地址-请求参数-请求方式\n【' +
+        api +"\n"+
+        parameters.toString()+"\n"+
+        method+
         '】');
     var result;
     try {

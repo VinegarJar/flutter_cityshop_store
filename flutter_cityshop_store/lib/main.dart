@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluro/fluro.dart';
-import 'package:flutter_cityshop_store/pages/index_page.dart';
 import 'package:flutter_cityshop_store/provide/common_provider.dart';
-import 'package:flutter_cityshop_store/router/application.dart';
 import 'package:flutter_cityshop_store/router/routes.dart';
 import 'package:provider/provider.dart';
 
@@ -24,18 +22,18 @@ class MyApp extends StatelessWidget {
 
     final router = Router();
     Routes.configureRoutes(router);
-    Application.router = router;
-
+    Routes.router = router;
    
     return ChangeNotifierProvider.value(
         value: CommonProvider(),
         child: MaterialApp(
           debugShowCheckedModeBanner: false, //关闭显示debug模式
           initialRoute: '/', //配置路由
-          onGenerateRoute: Application.router.generator, //配置路由引用
+          onGenerateRoute: Routes.router.generator, //配置路由引用
           title: '千城小店',
           theme: ThemeData(
             primaryColor: Colors.white,
+            fontFamily: 'Raleway'
           ),
         ));
 

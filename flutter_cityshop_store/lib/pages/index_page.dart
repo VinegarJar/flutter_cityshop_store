@@ -5,6 +5,7 @@ import 'package:flutter_cityshop_store/pages/catergory_pages/catergory_pages.dar
 import 'package:flutter_cityshop_store/pages/home_pages/home_pages.dart';
 import 'package:flutter_cityshop_store/pages/mine_pages/mine_pages.dart';
 import 'package:flutter_cityshop_store/provide/common_provider.dart';
+import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart'; //屏幕适配
 
@@ -41,7 +42,7 @@ class IndexPages extends StatelessWidget {
         backgroundColor: Color.fromRGBO(244, 245, 245, 1.0),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          fixedColor: Colors.red,
+          fixedColor: ThemeColors.mainColor,
           currentIndex:currentIndex,
           items: bottomTabs,
           onTap: (index) {
