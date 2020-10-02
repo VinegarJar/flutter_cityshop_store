@@ -4,7 +4,8 @@ class ThemeColors {
 
 
  static Color mainColor = Color.fromRGBO(127,89,241, 1);
- static Color mainGreenColor = Color.fromARGB(116,83,240, 1);    
+ static Color mainBgColor = Color.fromRGBO(245,245,245, 1);
+ static Color whiteColor = Color.fromRGBO(248,248,248, 0.8);    
   
 
 

@@ -14,7 +14,9 @@ const httpHeaders = {
 const hotcommendUrl = "App/Api/homeHotCommendGoods"; //首页热卖推荐
 const categoryUrl = "App/Index/shopSecondCategory"; //分类列表数据
 const goodsList =  "v2/goods";//首页列表数据
-
+        // HttpManagerMethod.instance.requestWithMetod(goodsList,
+          //     parameters: {'size': '50', 'page': page},
+          //     baseUrl: "http://apiv2.yangkeduo.com/"),
 
 class HttpManagerMethod {
   static Dio _dio;
@@ -23,7 +25,7 @@ class HttpManagerMethod {
   static const String BASE_URL = 'http://mock-api.com/Rz3ambnM.mock/';
 
   static const int CONNECT_TIMEOUT = 10000;
-  static const int RECEIVE_TIMEOUT = 10000;
+  static const int RECEIVE_TIMEOUT = 30000;
 
   //http request methods
   static const String GET = 'get';
@@ -54,6 +56,10 @@ class HttpManagerMethod {
         connectTimeout: CONNECT_TIMEOUT,
         receiveTimeout: RECEIVE_TIMEOUT, // 响应流上前后两次接受到数据的间隔，单位为毫秒。
         responseType: ResponseType.plain,
+        validateStatus: (status) {
+          // 不使用http状态码判断状态，使用AdapterInterceptor来处理（适用于标准REST风格）
+          return true;
+        },
       ));
     }
     return _dio;
@@ -101,7 +107,7 @@ class HttpManagerMethod {
     try {
       Response response =
           await dio.request(api, data: parameters, options: options);
-      print('响应数据：' + response.data);
+      //print('响应数据：' + response.data);
       if (response.statusCode == 200) {
         result = response.data;
       } else {
