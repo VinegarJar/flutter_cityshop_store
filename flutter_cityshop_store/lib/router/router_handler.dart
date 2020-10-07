@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter_cityshop_store/pages/index_page.dart';
+import 'package:flutter_cityshop_store/pages/search_pages/search_pages.dart';
 import 'package:flutter_cityshop_store/pages/webView/webView_page.dart';
 
 Handler rootRouteHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
   return IndexPages();
 });
+
+
+Handler searchPagesHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+  return SearchPages();
+});
+
+
 
 // 网页加载 - 示例：传多个字符串参数
 Handler webViewHandler =

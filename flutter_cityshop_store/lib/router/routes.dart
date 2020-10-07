@@ -8,7 +8,8 @@ class Routes{
   static Router router;
 
   static String root='/';
-  static String webView = '/webView'; // 网页加载
+  static String webView = '/webView'; // 网页加载 
+  static String search= '/search';
 
   static void configureRoutes(Router router){
     router.notFoundHandler= Handler(
@@ -19,8 +20,9 @@ class Routes{
     );
 
     
-    router.define(root,handler:rootRouteHandler);
+    router.define(root,    handler:rootRouteHandler);
     router.define(webView, handler: webViewHandler);
+    router.define(search,  handler: searchPagesHandler);
   }
 
 

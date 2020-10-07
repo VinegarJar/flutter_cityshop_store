@@ -4,6 +4,7 @@ import "package:flutter/cupertino.dart";
 import 'package:flutter/material.dart';
 import 'package:flutter_cityshop_store/https/httpManager_method.dart';
 import 'package:flutter_cityshop_store/model/goodsinfo.dart';
+import 'package:flutter_cityshop_store/router/routes.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_cityshop_store/widget/loding.dart';
 import 'package:flutter_cityshop_store/widget/searchbar.dart';
@@ -37,8 +38,7 @@ class _HomePagesState extends State<HomePages> {
         onPressed: () {
           print('FloatingActionButton');
           if (scrollContr.hasClients) {
-            scrollContr.animateTo(
-              0.0,
+            scrollContr.animateTo( 0.0,
               duration: const Duration(milliseconds: 300),
               curve: Curves.linear, // TODO(ianh): Use a more appropriate curve.
             );
@@ -50,14 +50,14 @@ class _HomePagesState extends State<HomePages> {
       ),
       appBar: AppBar(
         backgroundColor: ThemeColors.mainColor,
-
         title: SearchBar(
             isOpenCamera: true,
             onTapSearch: () {
-              print("请求成功的处理");
+              print("onTapSearch");
+             Routes.navigateTo(context,Routes.search);
             },
             openCamera: () {
-              print("请求失败的处理");
+              print("openCamera");
             }),
         centerTitle: true, //标题居中显示
       ),

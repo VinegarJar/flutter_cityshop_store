@@ -12,7 +12,7 @@ const httpHeaders = {
 
 
 const hotcommendUrl = "App/Api/homeHotCommendGoods"; //首页热卖推荐
-const categoryUrl = "App/Index/shopSecondCategory"; //分类列表数据
+const categoryUrl = "App/Index/shopSecondCategory"; //分类列表数据 
 const goodsList =  "v2/goods";//首页列表数据
         // HttpManagerMethod.instance.requestWithMetod(goodsList,
           //     parameters: {'size': '50', 'page': page},
