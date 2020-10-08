@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
+import 'package:flutter_cityshop_store/widget/buildback.dart';
 import 'package:flutter_cityshop_store/widget/searchbar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -27,24 +28,6 @@ class _SearchPagesState extends State<SearchPages> {
   
   ];
 
-  List<Widget> buildActions(BuildContext context) {
-    return [
-      InkWell(
-        onTap: () {
-          Navigator.pop(context);
-        },
-        child: Container(
-          padding: EdgeInsets.only(left: 5, right: 5),
-          alignment: Alignment.center,
-          child: Text("取消",
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: ScreenUtil().setSp(38))),
-        ),
-      )
-    ];
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +37,7 @@ class _SearchPagesState extends State<SearchPages> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: null,
-        actions: buildActions(context),
+        actions: [BuildBackActions(title:"取消",)],
         titleSpacing: 8,
         title: SearchBar(
             searchFieldLabel: "千城小店热搜",

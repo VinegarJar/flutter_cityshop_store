@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_cityshop_store/model/category.dart';
 
 class CommonProvider with ChangeNotifier {
+
+  int selectedIndex = 0;
   int currentIndex = 0;
 
   changeIndex(int newIndex) {
@@ -28,7 +30,8 @@ class CommonProvider with ChangeNotifier {
   //改变子类索引
   changeCategoryList(int index){
 
-      category = _model.category[index].list.cast<ListItem>();     
+      category = _model.category[index].list.cast<ListItem>();
+      selectedIndex = index;     
       notifyListeners();
     }  
 

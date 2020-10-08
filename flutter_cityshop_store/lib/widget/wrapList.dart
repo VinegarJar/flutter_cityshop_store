@@ -21,7 +21,7 @@ class WrapList extends StatelessWidget {
       List<Widget> listWidget = hotGoodsList.map((val) {
         return InkWell(
             onTap: () {
-              print("火爆专区---${val.goodsName}");
+              print("火爆专区---$val");
             },
             child: Container(
                 width: ScreenUtil().setWidth(330),

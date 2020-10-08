@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
     Routes.router = router;
    
     return ChangeNotifierProvider.value(
+  
         value: CommonProvider(),
         child: MaterialApp(
           debugShowCheckedModeBanner: false, //关闭显示debug模式

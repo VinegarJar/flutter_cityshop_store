@@ -69,9 +69,7 @@ class _SearchBarState extends State<SearchBar> {
 
   void _onQueryChanged() {
     widget.textFieldResults(_queryTextController.text);
-    setState(() {
-      // rebuild ourselves because query changed.
-    });
+
   }
 
 
@@ -89,9 +87,10 @@ class _SearchBarState extends State<SearchBar> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Container(
+                alignment: Alignment.topCenter,
                 child: Icon(CupertinoIcons.search,
                     size: 20, color: ThemeColors.titleColor),
-                padding: EdgeInsets.all(5),
+                padding: EdgeInsets.all(widget.isTextField?3:5),
               ),
               Expanded(
                   child: InkWell(
@@ -100,6 +99,7 @@ class _SearchBarState extends State<SearchBar> {
                       },
                       child: widget.isTextField
                           ? TextField(
+                            
                               controller: _queryTextController,
                               focusNode: focusNode,
                               textInputAction: TextInputAction.search,

@@ -2,6 +2,7 @@ import "package:flutter/cupertino.dart";
 import 'package:flutter/material.dart';
 import 'package:flutter_cityshop_store/https/httpmanager_method.dart';
 import 'package:flutter_cityshop_store/model/goodsinfo.dart';
+import 'package:flutter_cityshop_store/router/routes.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_cityshop_store/widget/wrapList.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
@@ -40,7 +41,8 @@ class _CarPagesState extends State<CarPages> {
         page++;
       });
     }).catchError((onError) {
-      print('onError-----$onError');
+       
+         print('onError-----$onError');
     });
   }
 
@@ -124,7 +126,9 @@ class _CarPagesState extends State<CarPages> {
       padding: EdgeInsets.all(5),
       alignment: Alignment.center,
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+           Routes.navigateTo(context,Routes.cityList);
+        },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

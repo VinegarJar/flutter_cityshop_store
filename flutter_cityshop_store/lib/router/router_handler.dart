@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart';
+import 'package:flutter_cityshop_store/pages/citylist_pages/citylist_pages.dart';
+import 'package:flutter_cityshop_store/pages/citylist_pages/citysearch.dart';
 import 'package:flutter_cityshop_store/pages/index_page.dart';
 import 'package:flutter_cityshop_store/pages/search_pages/search_pages.dart';
 import 'package:flutter_cityshop_store/pages/webView/webView_page.dart';
@@ -16,8 +18,21 @@ Handler searchPagesHandler = Handler(
 });
 
 
+Handler cityListPagesHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+  return CityListPages();
+});
 
-// 网页加载 - 示例：传多个字符串参数
+
+Handler searchCityHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+  return CitySearchResult();
+});
+
+
+
+
+// 网页加载 - 示例：传多个字符串参数 CityListPages
 Handler webViewHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
 

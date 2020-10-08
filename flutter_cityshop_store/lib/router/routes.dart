@@ -9,7 +9,10 @@ class Routes{
 
   static String root='/';
   static String webView = '/webView'; // 网页加载 
-  static String search= '/search';
+  static String search= '/search'; 
+  static String cityList= '/cityList'; 
+  static String searchCity= '/searchCity'; 
+
 
   static void configureRoutes(Router router){
     router.notFoundHandler= Handler(
@@ -23,6 +26,8 @@ class Routes{
     router.define(root,    handler:rootRouteHandler);
     router.define(webView, handler: webViewHandler);
     router.define(search,  handler: searchPagesHandler);
+    router.define(cityList,handler:cityListPagesHandler);
+    router.define(searchCity,handler:searchCityHandler);
   }
 
 

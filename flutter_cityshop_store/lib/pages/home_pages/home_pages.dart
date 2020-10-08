@@ -5,6 +5,7 @@ import 'package:flutter_cityshop_store/https/httpManager_method.dart';
 import 'package:flutter_cityshop_store/model/goodsinfo.dart';
 import 'package:flutter_cityshop_store/router/routes.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
+import 'package:flutter_cityshop_store/utils/utils.dart';
 import 'package:flutter_cityshop_store/widget/loding.dart';
 import 'package:flutter_cityshop_store/widget/searchbar.dart';
 import 'package:flutter_cityshop_store/widget/swiper.dart';
@@ -23,6 +24,8 @@ class HomePages extends StatefulWidget {
 class _HomePagesState extends State<HomePages> {
   EasyRefreshController _controller = EasyRefreshController();
   ScrollController scrollContr = ScrollController();
+
+
   @override
   void initState() {
     super.initState();
@@ -33,14 +36,16 @@ class _HomePagesState extends State<HomePages> {
     return Scaffold(
       backgroundColor: ThemeColors.mainBgColor,
       floatingActionButton: FloatingActionButton(
-        child: Image.asset('assets/images/btn_category_top.png',
+        //'assets/images/btn_category_top.png'
+        child: Image.asset(Utils.getImgPath('btn_category_top'),
             width: 30, height: 30, fit: BoxFit.contain),
         onPressed: () {
           print('FloatingActionButton');
           if (scrollContr.hasClients) {
             scrollContr.animateTo( 0.0,
               duration: const Duration(milliseconds: 300),
-              curve: Curves.linear, // TODO(ianh): Use a more appropriate curve.
+              curve: Curves.decelerate, 
+              
             );
           }
         },
@@ -238,6 +243,10 @@ class _HomePagesState extends State<HomePages> {
     );
   }
 
-  
+  void dispose() {
+    //为了避免内存泄露，需要调用 dispose
+    scrollContr.dispose();
+    super.dispose();
+  }
 
 }

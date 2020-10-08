@@ -8,6 +8,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.4.2"
+  azlistview:
+    dependency: "direct main"
+    description:
+      name: azlistview
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -123,6 +130,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.1.4"
+  lpinyin:
+    dependency: "direct main"
+    description:
+      name: lpinyin
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.9"
   matcher:
     dependency: transitive
     description:
@@ -158,6 +172,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.3.2+1"
+  scrollable_positioned_list:
+    dependency: transitive
+    description:
+      name: scrollable_positioned_list
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.7"
   sky_engine:
     dependency: transitive
     description: flutter
