@@ -1,4 +1,4 @@
-import 'dart:convert';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_cityshop_store/https/httpmanager_method.dart';
@@ -24,8 +24,7 @@ class _CaterGoryPagesState extends State<CaterGoryPages> {
     super.initState();
     HttpManagerMethod.instance
         .requestWithMetod(categoryUrl, method: "post")
-        .then((value) {
-      var data = json.decode(value.toString());
+        .then((data) {
       CategoryModel model = CategoryModel.fromJson(data);
       Provider.of<CommonProvider>(context, listen: false).savaCategory(model);
       // print("获取分类列表数据----${model.results}-----${model.category}");

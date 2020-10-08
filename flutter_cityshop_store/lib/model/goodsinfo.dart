@@ -14,6 +14,7 @@ class GoodsInfoModel {
              this.promotion});
 
   GoodsInfoModel.fromJson(Map<String, dynamic> json) {
+    
     if (json['goods_list'] != null) {
       goodsList = new List<GoodsList>();
       json['goods_list'].forEach((v) {

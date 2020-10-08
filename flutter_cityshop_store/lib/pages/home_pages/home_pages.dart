@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import "package:flutter/cupertino.dart";
 import 'package:flutter/material.dart';
@@ -9,6 +8,7 @@ import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_cityshop_store/widget/loding.dart';
 import 'package:flutter_cityshop_store/widget/searchbar.dart';
 import 'package:flutter_cityshop_store/widget/swiper.dart';
+import 'package:flutter_cityshop_store/widget/wrapList.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -66,7 +66,7 @@ class _HomePagesState extends State<HomePages> {
               .requestWithMetod(hotcommendUrl, method: "post"),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              var data = json.decode(snapshot.data.toString());
+              var data = snapshot.data;
               List<Map> swiperDataList =
                   (data['ads']['ads_list'] as List).cast();
               List<Map> navigatorList = (data['data']['lists'] as List).cast();
@@ -99,7 +99,8 @@ class _HomePagesState extends State<HomePages> {
                       SizedBox(height: ScreenUtil().setHeight(20)),
 
                       _titleContainer("火爆专区"),
-                      _wrapList(model.goodsList),
+                      WrapList(hotGoodsList: model.goodsList),
+                     
                       Container(
                         margin: EdgeInsets.only(left: 16, right: 16),
                         alignment: Alignment.center,
@@ -237,85 +238,6 @@ class _HomePagesState extends State<HomePages> {
     );
   }
 
-  //火爆专区
-  Widget _wrapList(List<GoodsList> hotGoodsList) {
-    if (hotGoodsList.length != 0) {
-      List<Widget> listWidget = hotGoodsList.map((val) {
-        return InkWell(
-            onTap: () {
-              print("火爆专区---${val.goodsName}");
-            },
-            child: Container(
-                width: ScreenUtil().setWidth(330),
-                margin: EdgeInsets.only(
-                    left: ScreenUtil().setWidth(30),
-                    top: ScreenUtil().setWidth(20)),
-                decoration: BoxDecoration(
-                    border: new Border.all(
-                        color: ThemeColors.colorF6F6F8, width: 0.5),
-                    color: Colors.white,
-                    borderRadius:
-                        BorderRadius.circular(ScreenUtil().setHeight(12))),
-                child: Column(children: [
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Image.network(val.imageUrl,
-                      width: ScreenUtil().setWidth(330),
-                      height: ScreenUtil().setWidth(330 * 0.7),
-                      fit: BoxFit.contain),
-                  Container(
-                    margin:
-                        EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
-                    child: Text(
-                      val.goodsName,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          color: ThemeColors.titleColor,
-                          fontSize: ScreenUtil().setSp(26)),
-                    ),
-                  ),
-                  Container(
-                      padding: EdgeInsets.all(5.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text("￥" + val.marketPrice.toString().substring(0, 3),
-                              style: TextStyle(
-                                  color: Colors.red,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: ScreenUtil().setSp(32))),
-                          Text(
-                            "￥${val.group["price"].toString()}",
-                            style: TextStyle(
-                                color: Colors.black26,
-                                fontSize: ScreenUtil().setSp(22),
-                                decoration:
-                                    TextDecoration.lineThrough), //价格横线显示样式
-                          )
-                        ],
-                      )),
-                  Container(
-                      padding: EdgeInsets.all(5.0),
-                      child: Row(
-                        children: [
-                          Text("火热抢购中 " + val.salesTip,
-                              style: TextStyle(
-                                  color: ThemeColors.titleColor,
-                                  fontSize: ScreenUtil().setSp(24)))
-                        ],
-                      )),
-                ])));
-      }).toList();
+  
 
-      return Wrap(
-        // spacing: 7.5, //左右
-        runSpacing: ScreenUtil().setWidth(10), //上下
-        children: listWidget, //加载子组件
-      );
-    } else {
-      return Text(' ');
-    }
-  }
 }

@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'package:dio/dio.dart';
+
 //flutter clean 清理
 
 typedef onSuccess = void Function(dynamic data);
@@ -15,8 +17,8 @@ const hotcommendUrl = "App/Api/homeHotCommendGoods"; //首页热卖推荐
 const categoryUrl = "App/Index/shopSecondCategory"; //分类列表数据 
 const goodsList =  "v2/goods";//首页列表数据
         // HttpManagerMethod.instance.requestWithMetod(goodsList,
-          //     parameters: {'size': '50', 'page': page},
-          //     baseUrl: "http://apiv2.yangkeduo.com/"),
+        //       parameters: {'size': '50', 'page': page},
+        //       baseUrl: "http://apiv2.yangkeduo.com/"),
 
 class HttpManagerMethod {
   static Dio _dio;
@@ -97,7 +99,7 @@ class HttpManagerMethod {
     });
 
     /// 打印:请求地址-请求方式-请求参数
-    /// 
+
     print('请求地址-请求参数-请求方式\n【' +
         api +"\n"+
         parameters.toString()+"\n"+
@@ -109,12 +111,14 @@ class HttpManagerMethod {
           await dio.request(api, data: parameters, options: options);
       //print('响应数据：' + response.data);
       if (response.statusCode == 200) {
-        result = response.data;
+           result = json.decode(response.data.toString());
+          // result = response.data;
       } else {
-        throw Exception('statusCode:${response.statusCode}-请检测代码和服务器情况..');
+          throw Exception('statusCode:${response.statusCode}-请检测代码和服务器情况..');
       }
     } on DioError catch (e) {
-      print('请求出错：' + e.toString());
+        throw Exception('请求出错:${e.toString()}');
+      // print('请求出错：' + e.toString());
     }
     return result;
   }
