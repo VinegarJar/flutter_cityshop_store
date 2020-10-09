@@ -2,11 +2,13 @@ import "package:flutter/cupertino.dart";
 import 'package:flutter/material.dart';
 import 'package:flutter_cityshop_store/https/httpmanager_method.dart';
 import 'package:flutter_cityshop_store/model/goodsinfo.dart';
+import 'package:flutter_cityshop_store/provide/common_provider.dart';
 import 'package:flutter_cityshop_store/router/routes.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_cityshop_store/widget/wrapList.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 class CarPages extends StatefulWidget {
   CarPages({Key key}) : super(key: key);
@@ -40,6 +42,8 @@ class _CarPagesState extends State<CarPages> {
         goodsListData.addAll(model.goodsList);
         page++;
       });
+      Provider.of<CommonProvider>(context, listen: false)
+              .savaGoodsCache(model.goodsList);
     }).catchError((onError) {
        
          print('onError-----$onError');

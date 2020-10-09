@@ -3,6 +3,7 @@ import "package:flutter/cupertino.dart";
 import 'package:flutter/material.dart';
 import 'package:flutter_cityshop_store/https/httpManager_method.dart';
 import 'package:flutter_cityshop_store/model/goodsinfo.dart';
+import 'package:flutter_cityshop_store/provide/common_provider.dart';
 import 'package:flutter_cityshop_store/router/routes.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_cityshop_store/utils/utils.dart';
@@ -12,6 +13,7 @@ import 'package:flutter_cityshop_store/widget/swiper.dart';
 import 'package:flutter_cityshop_store/widget/wrapList.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class HomePages extends StatefulWidget {
@@ -36,7 +38,6 @@ class _HomePagesState extends State<HomePages> {
     return Scaffold(
       backgroundColor: ThemeColors.mainBgColor,
       floatingActionButton: FloatingActionButton(
-        //'assets/images/btn_category_top.png'
         child: Image.asset(Utils.getImgPath('btn_category_top'),
             width: 30, height: 30, fit: BoxFit.contain),
         onPressed: () {
@@ -76,6 +77,9 @@ class _HomePagesState extends State<HomePages> {
                   (data['ads']['ads_list'] as List).cast();
               List<Map> navigatorList = (data['data']['lists'] as List).cast();
               GoodsInfoModel model = GoodsInfoModel.fromJson(data['goodsInfo']);
+              Provider.of<CommonProvider>(context, listen: false)
+                        .savaGoodsCache(model.goodsList);
+
               return EasyRefresh(
                   enableControlFinishRefresh: false,
                   enableControlFinishLoad: true,

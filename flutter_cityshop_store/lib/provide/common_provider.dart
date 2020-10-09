@@ -1,10 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_cityshop_store/model/category.dart';
+import 'package:flutter_cityshop_store/model/goodsinfo.dart';
+
+
+
 
 class CommonProvider with ChangeNotifier {
 
   int selectedIndex = 0;
   int currentIndex = 0;
+
+
+  //缓存商品数据搜索
+  List <GoodsList>lisCache =  []; 
+  //热搜词缓存 
+
+
 
   changeIndex(int newIndex) {
     currentIndex = newIndex;
@@ -36,6 +47,18 @@ class CommonProvider with ChangeNotifier {
     }  
 
 
+
+  savaGoodsCache(List <GoodsList> goods){
+     
+    goods.forEach((element) {
+      
+       lisCache.add(element);
+    }); 
+    
+  //  lisCache.addAll(goods);
+   notifyListeners();
+
+  } 
 
    
 

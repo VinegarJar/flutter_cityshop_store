@@ -10,18 +10,20 @@ class WrapList extends StatelessWidget {
 
 @override
   Widget build(BuildContext context) {
-    return _wrapList(hotGoodsList);
+    return _wrapList(hotGoodsList,context);
   }
 
 
    //火爆专区
-  Widget _wrapList(List<GoodsList> hotGoodsList) {
+  Widget _wrapList(List<GoodsList> hotGoodsList,BuildContext context) {
 
     if (hotGoodsList.length != 0) {
       List<Widget> listWidget = hotGoodsList.map((val) {
         return InkWell(
             onTap: () {
-              print("火爆专区---$val");
+              print("火爆专区---$val---");
+              // 触摸收起键盘FocusScope.of(context).requestFocus(FocusNode());
+      
             },
             child: Container(
                 width: ScreenUtil().setWidth(330),

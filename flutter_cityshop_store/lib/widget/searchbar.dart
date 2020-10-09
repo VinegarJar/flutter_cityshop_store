@@ -27,29 +27,35 @@ class SearchBar extends StatefulWidget {
       this.openCamera,
       this.isOpenCamera = false,
       this.bgColor = Colors.white,
-      this.isTextField = false, this.textFieldResults})
+      this.isTextField = false, 
+      this.textFieldResults})
       : super(key: key);
 
   @override
   _SearchBarState createState() => _SearchBarState();
+
+
+
 }
 
 class _SearchBarState extends State<SearchBar> {
+
   final TextEditingController _queryTextController = TextEditingController();
+  
   FocusNode focusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
      _queryTextController.addListener(_onQueryChanged);
-    // focusNode.addListener(_onFocusChanged);
-
+     
   }
 
   @override
   void dispose() {
     super.dispose();
     _queryTextController.removeListener(_onQueryChanged);
+    // _queryTextController.clear();
 
   }
 
