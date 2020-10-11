@@ -10,7 +10,7 @@ import 'package:flutter_cityshop_store/utils/utils.dart';
 import 'package:flutter_cityshop_store/widget/loding.dart';
 import 'package:flutter_cityshop_store/widget/searchbar.dart';
 import 'package:flutter_cityshop_store/widget/swiper.dart';
-import 'package:flutter_cityshop_store/widget/wrapList.dart';
+import 'package:flutter_cityshop_store/widget/wraplist.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';

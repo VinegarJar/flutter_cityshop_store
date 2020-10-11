@@ -60,9 +60,11 @@ class GoodsList {
   String linkUrl;
   String hdUrl;
   Map nearGroup;
+  int count;
 
   GoodsList(
-      {this.goodsId,
+      {this.count,
+      this.goodsId,
       this.goodsName,
       this.shortName,
       this.imageUrl,
@@ -86,6 +88,7 @@ class GoodsList {
       this.nearGroup});
 
   GoodsList.fromJson(Map<String, dynamic> json) {
+    count =json['count'] != null ? json['count'] : 0;
     goodsId = json['goods_id'];
     goodsName = json['goods_name'];
     shortName = json['short_name'];
@@ -112,6 +115,7 @@ class GoodsList {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['count'] = this.count;
     data['goods_id'] = this.goodsId;
     data['goods_name'] = this.goodsName;
     data['short_name'] = this.shortName;

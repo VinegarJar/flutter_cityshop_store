@@ -176,7 +176,7 @@ class _CityListPagesState extends State<CityListPages> {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     Icon(CupertinoIcons.location_solid,
-                        size: 20, color: ThemeColors.colorRed),
+                        size: 20, color: ThemeColors.mainColor),
                     Text(" 成都市"),
                   ],
                 )),

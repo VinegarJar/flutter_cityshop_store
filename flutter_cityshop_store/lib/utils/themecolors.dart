@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 class ThemeColors {
 
 
- static Color mainColor = Color.fromRGBO(127,89,241, 1);
+
+ static Color mainColor1 = Color.fromRGBO(127,89,241, 1);
+static Color mainColor = Color.fromARGB(255, 226, 36, 39);
  static Color mainBgColor = Color.fromRGBO(245,245,245, 1);
  static Color whiteColor = Color.fromRGBO(248,248,248, 0.8);    
   
@@ -27,7 +29,7 @@ class ThemeColors {
   static Color colorBtnRight = Color.fromARGB(255, 252, 191, 50);
 
   ///提示性文字，状态信息，按钮等
-  static Color colorRed = Color.fromARGB(255, 226, 36, 39);
+  // static Color colorRed = Color.fromARGB(255, 226, 36, 39);
 
  
 
