@@ -1,5 +1,6 @@
 import "package:flutter/cupertino.dart";
 import 'package:flutter/material.dart';
+
 import 'package:flutter_cityshop_store/pages/car_pages/car_pages.dart';
 import 'package:flutter_cityshop_store/pages/catergory_pages/catergory_pages.dart';
 import 'package:flutter_cityshop_store/pages/home_pages/home_pages.dart';
@@ -21,13 +22,15 @@ class IndexPages extends StatelessWidget {
         icon: Icon(CupertinoIcons.shopping_cart), title: Text('购物车')),
     BottomNavigationBarItem(
         icon: Icon(CupertinoIcons.profile_circled), title: Text('会员中心')),
+    
   ];
 
   final List<Widget> tabBodies = [
     HomePages(),
     CaterGoryPages(),
     CarPages(),
-    MinePages()
+    MinePages(),
+
   ];
 
 

@@ -11,8 +11,8 @@ class Routes{
   static String webView = '/webView'; // 网页加载 
   static String search= '/search'; 
   static String cityList= '/cityList'; 
-  static String searchCity= '/searchCity'; 
-
+  static String searchCity= '/searchCity'; //animationRouteHandler
+  static String animation= '/animation';
 
   static void configureRoutes(Router router){
     router.notFoundHandler= Handler(
@@ -28,11 +28,25 @@ class Routes{
     router.define(search,  handler: searchPagesHandler);
     router.define(cityList,handler:cityListPagesHandler);
     router.define(searchCity,handler:searchCityHandler);
+    router.define(animation,handler:animationRouteHandler);
   }
 
 
   // cupertino, push效果
   // cupertinoFullScreenDialog, prentViewConter
+  /**
+   *   native,
+  nativeModal,
+  inFromLeft,
+  inFromRight,
+  inFromBottom,
+  fadeIn,
+  custom, // if using custom then you must also provide a transition
+  material,
+  materialFullScreenDialog,
+  cupertino,
+  cupertinoFullScreenDialog,
+   */
 
   // 对参数进行encode，解决参数中有特殊字符，影响fluro路由匹配R
   static Future navigateTo(BuildContext context, String path, 

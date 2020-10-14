@@ -1,8 +1,9 @@
-
+import 'package:fluro/fluro.dart';
 import "package:flutter/cupertino.dart";
 import 'package:flutter/material.dart';
 import 'package:flutter_cityshop_store/https/httpManager_method.dart';
 import 'package:flutter_cityshop_store/model/goodsinfo.dart';
+import 'package:flutter_cityshop_store/pages/animation/animation_page.dart';
 import 'package:flutter_cityshop_store/provide/common_provider.dart';
 import 'package:flutter_cityshop_store/router/routes.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
@@ -16,6 +17,38 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 
+
+Route _createRoute() {
+
+ //Duration(milliseconds: 200)
+  return PageRouteBuilder(
+    opaque: false,
+    pageBuilder: (context, animation, secondaryAnimation) => AnimationPages(),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      var begin = Offset(0.0, 1.0);
+      var end = Offset.zero;
+      // var curve = Curves.ease;
+          var curve  = Curves.linear;
+
+      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+      return SlideTransition(
+        position: animation.drive(tween),
+         child: child,
+        // child: Semantics(
+        //   scopesRoute: true,
+        //   namesRoute: true,
+        //   // label: routeLabel,
+        //   explicitChildNodes: true,
+        //   child: ClipRect(
+        //     child: child,
+        //   ),
+        // ) 
+      );
+    },
+  );
+}
+
 class HomePages extends StatefulWidget {
   HomePages({Key key}) : super(key: key);
 
@@ -26,7 +59,6 @@ class HomePages extends StatefulWidget {
 class _HomePagesState extends State<HomePages> {
   EasyRefreshController _controller = EasyRefreshController();
   ScrollController scrollContr = ScrollController();
-
 
   @override
   void initState() {
@@ -43,12 +75,42 @@ class _HomePagesState extends State<HomePages> {
         onPressed: () {
           print('FloatingActionButton');
           if (scrollContr.hasClients) {
-            scrollContr.animateTo( 0.0,
+            scrollContr.animateTo(
+              0.0,
               duration: const Duration(milliseconds: 300),
-              curve: Curves.decelerate, 
-              
+              curve: Curves.decelerate,
             );
           }
+
+           Navigator.of(context).push(_createRoute());
+
+          // Navigator.push(context, FadeRoute(builder: (context) {
+          //  return AnimationPages();
+          // }));
+
+           
+          // Navigator.of(context).push(
+          //   PageRouteBuilder(
+          //     opaque: false,
+          //     pageBuilder: (context, animation, secondaryAnimation) {
+          //       return Scaffold(
+          //           backgroundColor: Colors.black54,
+          //           body: SafeArea(
+          //             child: Stack(
+          //               children: <Widget>[
+          //                 //...
+          //               ],
+          //             ),
+          //           ));
+          //     }));
+
+        
+
+          // Routes.router.navigateTo(context, Routes.animation,
+          //     transition: TransitionType.cupertinoFullScreenDialog);
+          // Navigator.of(context, rootNavigator: false).push(_ModalBottomSheetRoute<T>(
+
+          //   ));
         },
         foregroundColor: Colors.transparent,
         backgroundColor: Colors.white,
@@ -60,7 +122,7 @@ class _HomePagesState extends State<HomePages> {
             isOpenCamera: true,
             onTapSearch: () {
               print("onTapSearch");
-             Routes.navigateTo(context,Routes.search);
+              Routes.navigateTo(context, Routes.search);
             },
             openCamera: () {
               print("openCamera");
@@ -78,7 +140,7 @@ class _HomePagesState extends State<HomePages> {
               List<Map> navigatorList = (data['data']['lists'] as List).cast();
               GoodsInfoModel model = GoodsInfoModel.fromJson(data['goodsInfo']);
               Provider.of<CommonProvider>(context, listen: false)
-                        .savaGoodsCache(model.goodsList);
+                  .savaGoodsCache(model.goodsList);
 
               return EasyRefresh(
                   enableControlFinishRefresh: false,
@@ -109,7 +171,7 @@ class _HomePagesState extends State<HomePages> {
 
                       _titleContainer("火爆专区"),
                       WrapList(hotGoodsList: model.goodsList),
-                     
+
                       Container(
                         margin: EdgeInsets.only(left: 16, right: 16),
                         alignment: Alignment.center,
@@ -252,5 +314,53 @@ class _HomePagesState extends State<HomePages> {
     scrollContr.dispose();
     super.dispose();
   }
+}
 
+
+class FadeRoute extends PageRoute {
+  FadeRoute({
+    @required this.builder,
+    this.transitionDuration = const Duration(milliseconds: 300),
+    this.opaque = false,
+    this.barrierDismissible = false,
+    this.barrierColor,
+    this.barrierLabel,
+    this.maintainState = true,
+  });
+
+  final WidgetBuilder builder;
+
+  @override
+  final Duration transitionDuration;
+
+  @override
+  final bool opaque;
+
+  @override
+  final bool barrierDismissible;
+
+  @override
+  final Color barrierColor;
+
+  @override
+  final String barrierLabel;
+
+  @override
+  final bool maintainState;
+
+
+
+
+  @override
+  Widget buildPage(BuildContext context, Animation<double> animation,
+      Animation<double> secondaryAnimation) => builder(context);
+
+  @override
+  Widget buildTransitions(BuildContext context, Animation<double> animation,
+      Animation<double> secondaryAnimation, Widget child) {
+     return FadeTransition( 
+       opacity: animation,
+       child: builder(context),
+     );
+  }
 }

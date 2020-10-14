@@ -17,6 +17,9 @@ class CaterGoryPages extends StatefulWidget {
 }
 
 class _CaterGoryPagesState extends State<CaterGoryPages> {
+
+   List<Widget> tabs = [];
+
   @override
   void initState() {
     super.initState();
@@ -24,43 +27,160 @@ class _CaterGoryPagesState extends State<CaterGoryPages> {
         .requestWithMetod(categoryUrl, method: "post")
         .then((data) {
       CategoryModel model = CategoryModel.fromJson(data);
-      Provider.of<CommonProvider>(context, listen: false).savaCategory(model);
+
+        //  print("============model.results ========${model.results} ===========");
+        // List  listWidget = List();
+        // model.results.forEach((results) {
+           
+        //      listWidget.add(Tab(text: results.categoryName));
+        // });
+      
+  //    final List<Tab> titleTabs = <Tab>[
+  //   Tab(
+  //     text: '今日实时榜',
+  //   ),
+  //   Tab(
+  //     text: '昨日排行榜',
+  //   ),
+  //   Tab(
+  //     text: '上周积分榜',
+  //   ),
+  // ];
+
+ 
+
+    final List listWidget = model.results.map((results) {
+      return   
+   
+
+       Tab(child: Text(
+                   
+                      results.categoryName,
+                       
+                      style: TextStyle(
+                          fontSize: ScreenUtil().setSp(32),
+                          fontWeight: FontWeight.w600 ),
+                    ) ,);
+      
+        //  Tab(text: results.categoryName);
+      }).toList(); 
+
+     print("============listWidget ========$listWidget ===========");  
+      setState(() {
+        tabs = listWidget;
+      });
+
+      // Provider.of<CommonProvider>(context, listen: false).savaCategory(model);
     });
   }
 
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Scaffold(
+  //     backgroundColor: ThemeColors.mainBgColor,
+  //     appBar: AppBar(
+  //       backgroundColor: Colors.white,
+  // title: SearchBar(
+  //     bgColor: ThemeColors.mainBgColor,
+  //     isOpenCamera: true,
+  //     onTapSearch: () {
+  //       Routes.navigateTo(context, Routes.search);
+  //     },
+  //     openCamera: () {
+  //       print("openCamera");
+  //     }),
+  //       centerTitle: true, //标题居中显示
+  //       // bottom: TabBar(tabs: [
+  //       //         Tab(icon: Icon(Icons.directions_car)),
+  //       //         Tab(icon: Icon(Icons.directions_transit)),
+  //       //         Tab(icon: Icon(Icons.directions_bike)),
+
+  //       // ]),
+  //     ),
+  //     // body: TabBarView(
+  //     //       children: [
+  //     //         Icon(Icons.directions_car),
+  //     //         Icon(Icons.directions_transit),
+  //     //         Icon(Icons.directions_bike),
+  //     //       ],
+  //     //     ),
+
+  //     // ListView(
+  //     //   children: [
+  //     //     CategoryNavTally(),
+  //     //     CategorGoodsList(),
+  //     //     Container(
+  //     //       margin: EdgeInsets.only(left: 16, right: 16),
+  //     //       alignment: Alignment.center,
+  //     //       padding: EdgeInsets.all(20),
+  //     //       child: Text(
+  //     //         "我到底线了",
+  //     //         style: TextStyle(
+  //     //             color: ThemeColors.titleColor,
+  //     //             fontSize: ScreenUtil().setSp(30)),
+  //     //       ),
+  //     //     )
+  //     //   ],
+  //     // ),
+  //   );
+  // }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: ThemeColors.mainBgColor,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: SearchBar(
-            bgColor: ThemeColors.mainBgColor,
-            isOpenCamera: true,
-            onTapSearch: () {
-              Routes.navigateTo(context, Routes.search);
-            },
-            openCamera: () {
-              print("openCamera");
-            }),
-        centerTitle: true, //标题居中显示
-      ),
-      body: ListView(
-        children: [
-          CategoryNavTally(),
-          CategorGoodsList(),
-          Container(
-            margin: EdgeInsets.only(left: 16, right: 16),
-            alignment: Alignment.center,
-            padding: EdgeInsets.all(20),
-            child: Text(
-              "我到底线了",
-              style: TextStyle(
-                  color: ThemeColors.titleColor,
-                  fontSize: ScreenUtil().setSp(30)),
-            ),
-          )
-        ],
+ 
+
+    return DefaultTabController(
+      length: tabs.length,
+      child: Scaffold(
+        appBar: AppBar(
+              backgroundColor: Colors.white,
+          elevation: 0,
+          bottom: TabBar(
+            // indicator: ColorTabIndicator(Colors.black),//选中时标签颜色
+              indicatorColor: ThemeColors.mainColor,//选中时下划线颜色,如果使用了indicator这里设置无效
+              // controller: _tabController,
+              labelColor: ThemeColors.mainColor,
+              unselectedLabelColor: ThemeColors.titleColor,
+           tabs:tabs,
+           isScrollable: true,
+           labelPadding:EdgeInsets.only(left:15.w,right:15.w),
+        //     tabs: [
+        //   Tab(icon: Icon(Icons.directions_car)),
+        //   Tab(icon: Icon(Icons.directions_transit)),
+        //   Tab(icon: Icon(Icons.directions_bike)),
+        // ],
+          ),
+          title: SearchBar(
+              bgColor: ThemeColors.mainBgColor,
+              isOpenCamera: true,
+              onTapSearch: () {
+                Routes.navigateTo(context, Routes.search);
+              },
+              openCamera: () {
+                print("openCamera");
+              }),
+        ),
+        body: TabBarView(
+          //  children: [
+          //    Tab(icon: Icon(Icons.directions_car)),
+          // Tab(icon: Icon(Icons.directions_transit)),
+          // Tab(icon: Icon(Icons.directions_bike)),
+          //  ],
+           children: [Tab(text: "推荐分类"),
+            Tab(text: "京东超市"),
+             Tab(text: "国际名牌"), 
+             Tab(text: "手机数码"), 
+             Tab(text: "家用电器"), 
+             Tab(text: "男装"), 
+             Tab(text: "女装"), 
+             Tab(text: "华奢侈品"), 
+             Tab(text: "京东国际"), 
+             Tab(text: "唯品会"), 
+             Tab(text: "视频生鲜"),
+              Tab(text: "酒水饮料"),
+               Tab(text: "母婴童装"), 
+               Tab(text: "居家生活")],
+        ),
       ),
     );
   }
