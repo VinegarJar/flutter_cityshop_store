@@ -1,9 +1,8 @@
-import 'package:fluro/fluro.dart';
+
 import "package:flutter/cupertino.dart";
 import 'package:flutter/material.dart';
 import 'package:flutter_cityshop_store/https/httpManager_method.dart';
 import 'package:flutter_cityshop_store/model/goodsinfo.dart';
-import 'package:flutter_cityshop_store/pages/animation/animation_page.dart';
 import 'package:flutter_cityshop_store/provide/common_provider.dart';
 import 'package:flutter_cityshop_store/router/routes.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
@@ -18,36 +17,7 @@ import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 
-Route _createRoute() {
 
- //Duration(milliseconds: 200)
-  return PageRouteBuilder(
-    opaque: false,
-    pageBuilder: (context, animation, secondaryAnimation) => AnimationPages(),
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      var begin = Offset(0.0, 1.0);
-      var end = Offset.zero;
-      // var curve = Curves.ease;
-          var curve  = Curves.linear;
-
-      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-      return SlideTransition(
-        position: animation.drive(tween),
-         child: child,
-        // child: Semantics(
-        //   scopesRoute: true,
-        //   namesRoute: true,
-        //   // label: routeLabel,
-        //   explicitChildNodes: true,
-        //   child: ClipRect(
-        //     child: child,
-        //   ),
-        // ) 
-      );
-    },
-  );
-}
 
 class HomePages extends StatefulWidget {
   HomePages({Key key}) : super(key: key);
@@ -81,36 +51,7 @@ class _HomePagesState extends State<HomePages> {
               curve: Curves.decelerate,
             );
           }
-
-           Navigator.of(context).push(_createRoute());
-
-          // Navigator.push(context, FadeRoute(builder: (context) {
-          //  return AnimationPages();
-          // }));
-
-           
-          // Navigator.of(context).push(
-          //   PageRouteBuilder(
-          //     opaque: false,
-          //     pageBuilder: (context, animation, secondaryAnimation) {
-          //       return Scaffold(
-          //           backgroundColor: Colors.black54,
-          //           body: SafeArea(
-          //             child: Stack(
-          //               children: <Widget>[
-          //                 //...
-          //               ],
-          //             ),
-          //           ));
-          //     }));
-
-        
-
-          // Routes.router.navigateTo(context, Routes.animation,
-          //     transition: TransitionType.cupertinoFullScreenDialog);
-          // Navigator.of(context, rootNavigator: false).push(_ModalBottomSheetRoute<T>(
-
-          //   ));
+   
         },
         foregroundColor: Colors.transparent,
         backgroundColor: Colors.white,
@@ -317,50 +258,3 @@ class _HomePagesState extends State<HomePages> {
 }
 
 
-class FadeRoute extends PageRoute {
-  FadeRoute({
-    @required this.builder,
-    this.transitionDuration = const Duration(milliseconds: 300),
-    this.opaque = false,
-    this.barrierDismissible = false,
-    this.barrierColor,
-    this.barrierLabel,
-    this.maintainState = true,
-  });
-
-  final WidgetBuilder builder;
-
-  @override
-  final Duration transitionDuration;
-
-  @override
-  final bool opaque;
-
-  @override
-  final bool barrierDismissible;
-
-  @override
-  final Color barrierColor;
-
-  @override
-  final String barrierLabel;
-
-  @override
-  final bool maintainState;
-
-
-
-
-  @override
-  Widget buildPage(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation) => builder(context);
-
-  @override
-  Widget buildTransitions(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation, Widget child) {
-     return FadeTransition( 
-       opacity: animation,
-       child: builder(context),
-     );
-  }
-}

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cityshop_store/https/httpmanager_method.dart';
 import 'package:flutter_cityshop_store/model/category.dart';
-import 'package:flutter_cityshop_store/provide/common_provider.dart';
+
 import 'package:flutter_cityshop_store/router/routes.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_cityshop_store/widget/loding.dart';
 import 'package:flutter_cityshop_store/widget/searchbar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
+
 
 class CaterGoryPages extends StatefulWidget {
   CaterGoryPages({Key key}) : super(key: key);
@@ -28,24 +28,7 @@ class _CaterGoryPagesState extends State<CaterGoryPages> {
         .then((data) {
       CategoryModel model = CategoryModel.fromJson(data);
 
-        //  print("============model.results ========${model.results} ===========");
-        // List  listWidget = List();
-        // model.results.forEach((results) {
-           
-        //      listWidget.add(Tab(text: results.categoryName));
-        // });
-      
-  //    final List<Tab> titleTabs = <Tab>[
-  //   Tab(
-  //     text: '今日实时榜',
-  //   ),
-  //   Tab(
-  //     text: '昨日排行榜',
-  //   ),
-  //   Tab(
-  //     text: '上周积分榜',
-  //   ),
-  // ];
+
 
  
 
@@ -74,56 +57,7 @@ class _CaterGoryPagesState extends State<CaterGoryPages> {
     });
   }
 
-  // @override
-  // Widget build(BuildContext context) {
-  //   return Scaffold(
-  //     backgroundColor: ThemeColors.mainBgColor,
-  //     appBar: AppBar(
-  //       backgroundColor: Colors.white,
-  // title: SearchBar(
-  //     bgColor: ThemeColors.mainBgColor,
-  //     isOpenCamera: true,
-  //     onTapSearch: () {
-  //       Routes.navigateTo(context, Routes.search);
-  //     },
-  //     openCamera: () {
-  //       print("openCamera");
-  //     }),
-  //       centerTitle: true, //标题居中显示
-  //       // bottom: TabBar(tabs: [
-  //       //         Tab(icon: Icon(Icons.directions_car)),
-  //       //         Tab(icon: Icon(Icons.directions_transit)),
-  //       //         Tab(icon: Icon(Icons.directions_bike)),
 
-  //       // ]),
-  //     ),
-  //     // body: TabBarView(
-  //     //       children: [
-  //     //         Icon(Icons.directions_car),
-  //     //         Icon(Icons.directions_transit),
-  //     //         Icon(Icons.directions_bike),
-  //     //       ],
-  //     //     ),
-
-  //     // ListView(
-  //     //   children: [
-  //     //     CategoryNavTally(),
-  //     //     CategorGoodsList(),
-  //     //     Container(
-  //     //       margin: EdgeInsets.only(left: 16, right: 16),
-  //     //       alignment: Alignment.center,
-  //     //       padding: EdgeInsets.all(20),
-  //     //       child: Text(
-  //     //         "我到底线了",
-  //     //         style: TextStyle(
-  //     //             color: ThemeColors.titleColor,
-  //     //             fontSize: ScreenUtil().setSp(30)),
-  //     //       ),
-  //     //     )
-  //     //   ],
-  //     // ),
-  //   );
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -204,15 +138,15 @@ class _CategoryNavTallyState extends State<CategoryNavTally> {
 
   @override
   Widget build(BuildContext context) {
-    List<Results> results = Provider.of<CommonProvider>(context).results;
+    // List<Results> results = Provider.of<CommonProvider>(context).results;
 
-    final selectedIndex = Provider.of<CommonProvider>(context).selectedIndex;
+    int selectedIndex ;//= Provider.of<CommonProvider>(context).selectedIndex;
 
     return Container(
         height: ScreenUtil().setHeight(128),
         child: ListView.builder(
             controller: scrollContr,
-            itemCount: results.length,
+            itemCount: [].length,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               bool isSelected = (index == selectedIndex) ? true : false;
@@ -224,15 +158,15 @@ class _CategoryNavTallyState extends State<CategoryNavTally> {
                     //       duration: Duration(milliseconds: 200),
                     //       curve: Curves.ease);
                     // }
-                    Provider.of<CommonProvider>(context, listen: false)
-                        .changeCategoryList(index);
+                    // Provider.of<CommonProvider>(context, listen: false)
+                    //     .changeCategoryList(index);
                   },
                   child: Container(
                     color: Colors.white,
                     alignment: Alignment.center,
                     padding: EdgeInsets.all(10),
                     child: Text(
-                      results[index].categoryName,
+                     " results[index].categoryName",
                       style: TextStyle(
                           fontSize: ScreenUtil().setSp(28),
                           fontWeight:
@@ -255,8 +189,8 @@ class _CategorGoodsListState extends State<CategorGoodsList> {
 
   @override
   Widget build(BuildContext context) {
-    List<ListItem> category = Provider.of<CommonProvider>(context).category;
-
+    // List<ListItem> category = Provider.of<CommonProvider>(context).category;
+        List<ListItem> category = [];
     if (category.length > 0) {
       List goods = category[0].goods;
       return _wrapGoodsList(goods);

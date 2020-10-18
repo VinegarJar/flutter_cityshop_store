@@ -28,7 +28,6 @@ class Routes{
     router.define(search,  handler: searchPagesHandler);
     router.define(cityList,handler:cityListPagesHandler);
     router.define(searchCity,handler:searchCityHandler);
-    router.define(animation,handler:animationRouteHandler);
   }
 
 

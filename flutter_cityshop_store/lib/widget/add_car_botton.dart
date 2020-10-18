@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_cityshop_store/provide/common_provider.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
+
 
 class AddCarBottom extends StatefulWidget {
   AddCarBottom({Key key}) : super(key: key);
@@ -17,8 +16,9 @@ class _AddCarBottomState extends State<AddCarBottom> {
   @override
   Widget build(BuildContext context) {
 
-   final allGoodsCount = Provider.of<CommonProvider>(context).allGoodsCount;   
-   final allPrice = Provider.of<CommonProvider>(context).allPrice;  
+  //  final allGoodsCount = Provider.of<CommonProvider>(context).allGoodsCount;   
+  //  final allPrice = Provider.of<CommonProvider>(context).allPrice;  
+    double allPrice = 0;
     return Container(
         height: 100.w,
         margin: EdgeInsets.only(left: 30.w, right: 30.w, bottom: 30.w),
@@ -57,7 +57,7 @@ class _AddCarBottomState extends State<AddCarBottom> {
                         // border: Border.all(width: 1, color: Colors.white),
                         borderRadius: BorderRadius.circular(12.0)),
                     child: Text(
-                      '$allGoodsCount',
+                      '99',
                       style: TextStyle(
                           color: ThemeColors.mainColor,
                           fontSize: ScreenUtil().setSp(16)),

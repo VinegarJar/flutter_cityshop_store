@@ -57,16 +57,16 @@ class _SearchPagesState extends State<SearchPages> {
             )
           ],
           titleSpacing: 8,
-          // title: SearchBar(
-          //     searchFieldLabel: "千城小店热搜",
-          //     bgColor: ThemeColors.mainBgColor,
-          //     isTextField: true,
-          //     textFieldResults: (String result) {
-          //       setState(() {
-          //         // rebuild ourselves because query changed.
-          //         query = result;
-          //       });
-          //     }),
+          title: SearchBar(
+              searchFieldLabel: "千城小店热搜",
+              bgColor: ThemeColors.mainBgColor,
+              isTextField: true,
+              textFieldResults: (String result) {
+                setState(() {
+                  // rebuild ourselves because query changed.
+                  query = result;
+                });
+              }),
           centerTitle: true, //标题居中显示
         ),
         body: searchlist(result));
@@ -241,12 +241,12 @@ class _SearchPagesState extends State<SearchPages> {
                     child: AddCarCount(
                       addPressed: (int count) {
                     
-                      Provider.of<CommonProvider>(context, listen: false)
-                        .addOrReduceAction(model);
+                      // Provider.of<CommonProvider>(context, listen: false)
+                      //   .addOrReduceAction(model);
                       },
                       reducePressed:(int count){
-                     Provider.of<CommonProvider>(context, listen: false)
-                        .addOrReduceAction(model,add:false);
+                    //  Provider.of<CommonProvider>(context, listen: false)
+                    //     .addOrReduceAction(model,add:false);
                       }
                   ))
                 ],
