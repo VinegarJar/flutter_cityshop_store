@@ -108,8 +108,6 @@ class _SearchPagesState extends State<SearchPages> {
                         left: 0,
                         right: 0,
                         child: AddCarBottom(),
-                        
-                      
                       )
         ],
       );
