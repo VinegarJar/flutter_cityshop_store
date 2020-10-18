@@ -1,3 +1,4 @@
+import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cityshop_store/https/httpmanager_method.dart';
 import 'package:flutter_cityshop_store/model/category.dart';
@@ -86,7 +87,7 @@ class _CaterGoryPagesState extends State<CaterGoryPages> {
                         bgColor: ThemeColors.mainBgColor,
                         isOpenCamera: true,
                         onTapSearch: () {
-                          Routes.navigateTo(context, Routes.search);
+                          Routes.navigateTo(context, Routes.search,transition:TransitionType.cupertinoFullScreenDialog);
                         },
                         openCamera: () {
                           print("openCamera");

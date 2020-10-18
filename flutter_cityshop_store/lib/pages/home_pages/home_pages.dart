@@ -1,4 +1,5 @@
 
+import 'package:fluro/fluro.dart';
 import "package:flutter/cupertino.dart";
 import 'package:flutter/material.dart';
 import 'package:flutter_cityshop_store/https/httpManager_method.dart';
@@ -63,7 +64,7 @@ class _HomePagesState extends State<HomePages> {
             isOpenCamera: true,
             onTapSearch: () {
               print("onTapSearch");
-              Routes.navigateTo(context, Routes.search);
+              Routes.navigateTo(context, Routes.search,transition:TransitionType.cupertinoFullScreenDialog);
             },
             openCamera: () {
               print("openCamera");
@@ -179,7 +180,10 @@ class _HomePagesState extends State<HomePages> {
                             return GestureDetector(
                               behavior: HitTestBehavior.opaque,
                               onTap: () {
-                                print("点击热卖推荐--${item["name"]}");
+                                // print("点击热卖推荐--${item["name"]}");
+
+
+
                               },
                               child: Column(
                                 children: <Widget>[

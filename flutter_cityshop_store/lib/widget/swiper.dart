@@ -7,7 +7,8 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 
 class SwiperDiy extends StatelessWidget {
   final List swiperDataList;
-  SwiperDiy({Key key, this.swiperDataList}) : super(key: key);
+  final bool jump;
+  SwiperDiy({Key key, this.jump = true,this.swiperDataList,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,14 +43,17 @@ class SwiperDiy extends StatelessWidget {
           scale: 0.95, // 两张图片之间的间隔
           onTap: (index) {
             print('点击了第$index个');
-            Routes.navigateTo(
-              context,
-              Routes.webView,
-              params: {
-                'title': swiperDataList[index]['title'],
-                'url': swiperDataList[index]['link'],
-              },
-            );
+            if(jump){
+                Routes.navigateTo(
+                context,
+                Routes.webView,
+                params: {
+                  'title': swiperDataList[index]['title'],
+                  'url': swiperDataList[index]['link'],
+                },
+              );
+            }
+           
           },
           // 展示窗口模式viewportFraction: 0.8,
         ));

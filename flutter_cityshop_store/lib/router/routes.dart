@@ -11,8 +11,9 @@ class Routes{
   static String webView = '/webView'; // 网页加载 
   static String search= '/search'; 
   static String cityList= '/cityList'; 
-  static String searchCity= '/searchCity'; //animationRouteHandler
+  static String searchCity= '/searchCity'; 
   static String animation= '/animation';
+  static String details = '/details';
 
   static void configureRoutes(Router router){
     router.notFoundHandler= Handler(
@@ -28,6 +29,8 @@ class Routes{
     router.define(search,  handler: searchPagesHandler);
     router.define(cityList,handler:cityListPagesHandler);
     router.define(searchCity,handler:searchCityHandler);
+    router.define(details, handler:detailsHandler);
+ 
   }
 
 
@@ -44,7 +47,7 @@ class Routes{
   material,
   materialFullScreenDialog,
   cupertino,
-  cupertinoFullScreenDialog,
+  cupertinoFullScreenDialog,  
    */
 
   // 对参数进行encode，解决参数中有特殊字符，影响fluro路由匹配R
@@ -68,7 +71,7 @@ class Routes{
         index++;
       }
     }
-    print('我是navigateTo传递的参数：$query');
+    // print('我是navigateTo传递的参数：$query');
     path = path + query;
     return router.navigateTo(context, path, transition:transition);
   }

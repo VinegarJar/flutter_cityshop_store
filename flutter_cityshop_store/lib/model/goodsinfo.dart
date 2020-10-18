@@ -113,6 +113,8 @@ class GoodsList {
     nearGroup = json['near_group'] != null ? json['near_group'] : null;
   }
 
+
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['count'] = this.count;
@@ -146,6 +148,7 @@ class GoodsList {
     }
     return data;
   }
+
 }
 
 

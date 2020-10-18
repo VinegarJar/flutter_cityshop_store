@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cityshop_store/model/goodsinfo.dart';
+import 'package:flutter_cityshop_store/provide/car_provider.dart';
 import 'package:flutter_cityshop_store/provide/common_provider.dart';
 import 'package:flutter_cityshop_store/utils/event_bus.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
@@ -239,12 +240,12 @@ class _SearchPagesState extends State<SearchPages> {
                     child: AddCarCount(
                       addPressed: (int count) {
                     
-                      // Provider.of<CommonProvider>(context, listen: false)
-                      //   .addOrReduceAction(model);
+                      Provider.of<CarProvider>(context, listen: false)
+                        .addOrReduceAction(model);
                       },
                       reducePressed:(int count){
-                    //  Provider.of<CommonProvider>(context, listen: false)
-                    //     .addOrReduceAction(model,add:false);
+                     Provider.of<CarProvider>(context, listen: false)
+                        .addOrReduceAction(model,isAdd:false);
                       }
                   ))
                 ],

@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class AddCarCount extends StatefulWidget {
   final Function(int count) addPressed;
   final Function(int count) reducePressed;
-  AddCarCount({Key key, this.addPressed, this.reducePressed}) : super(key: key);
+  AddCarCount({Key key, this.addPressed, this.reducePressed,}) : super(key: key);
 
   @override
   _AddCarCountState createState() => _AddCarCountState();

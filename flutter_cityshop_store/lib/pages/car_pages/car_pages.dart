@@ -1,3 +1,4 @@
+import 'package:fluro/fluro.dart';
 import "package:flutter/cupertino.dart";
 import 'package:flutter/material.dart';
 import 'package:flutter_cityshop_store/https/httpmanager_method.dart';
@@ -131,7 +132,7 @@ class _CarPagesState extends State<CarPages> {
       alignment: Alignment.center,
       child: InkWell(
         onTap: () {
-           Routes.navigateTo(context,Routes.cityList);
+           Routes.navigateTo(context,Routes.cityList,transition:TransitionType.cupertinoFullScreenDialog);
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
