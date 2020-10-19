@@ -102,7 +102,9 @@ class _CaterGoryPagesState extends State<CaterGoryPages> {
   Widget goodsWrap(List hotGoodsList) {
     List<Widget> listWidget = hotGoodsList.map((val) {
       return InkWell(
-          onTap: () {},
+          onTap: () {
+            print("分类列表goodsWrap---$val---");
+          },
           child: Container(
               // 375 默认宽度
               width: 330.w,

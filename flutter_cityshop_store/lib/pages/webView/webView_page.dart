@@ -1,6 +1,6 @@
-import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_cityshop_store/widget/loding.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
@@ -30,12 +30,14 @@ class WebViewUrlPage extends StatelessWidget {
         javascriptChannels: jsChannels,
         mediaPlaybackRequiresUserGesture: false,
         appBar: AppBar(
+          
           leading: IconButton(
               icon:Icon(Icons.arrow_back_ios,size: 18,),
               onPressed: (){Navigator.pop(context);
           }),
           title:Text(title),
-          centerTitle: true, //标题居中显示
+          centerTitle: true,
+           backgroundColor: ThemeColors.mainColor, //标题居中显示
         ),
         withZoom: true,
         withLocalStorage: true,

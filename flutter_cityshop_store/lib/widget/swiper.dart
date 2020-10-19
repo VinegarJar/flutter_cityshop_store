@@ -43,12 +43,13 @@ class SwiperDiy extends StatelessWidget {
           scale: 0.95, // 两张图片之间的间隔
           onTap: (index) {
             print('点击了第$index个');
+              print('点击了第${swiperDataList[index]}');
             if(jump){
                 Routes.navigateTo(
                 context,
                 Routes.webView,
                 params: {
-                  'title': swiperDataList[index]['title'],
+                  'title': "商品详情",
                   'url': swiperDataList[index]['link'],
                 },
               );

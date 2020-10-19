@@ -148,7 +148,7 @@ class _GoodsDetailsPageState extends State<GoodsDetailsPage> {
           bottom: 0,
           left: 0,
           right: 0,
-          child: AddCarBottom(),
+          child: AddCarBottom(goodsDetails:true),
         )
       ]),
     );

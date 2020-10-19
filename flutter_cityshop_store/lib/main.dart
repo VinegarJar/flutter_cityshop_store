@@ -6,9 +6,11 @@ import 'package:flutter_cityshop_store/provide/common_provider.dart';
 import 'package:flutter_cityshop_store/router/routes.dart';
 import 'package:provider/provider.dart';
 
-//
-main() {
+// //
+
+Future<void> main() async {
   runApp(MyApp());
+
   SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(
       //这是设置状态栏的图标和字体的颜色
       statusBarColor: Colors.transparent,
@@ -25,8 +27,8 @@ class MyApp extends StatelessWidget {
 
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider<CommonProvider>.value(value: CommonProvider()),
-          ChangeNotifierProvider<CarProvider>.value(value: CarProvider()),
+          ChangeNotifierProvider(create: (_) => CommonProvider()),
+          ChangeNotifierProvider(create: (_) => CarProvider()),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false, //关闭显示debug模式

@@ -43,8 +43,11 @@ class _CarPagesState extends State<CarPages> {
         goodsListData.addAll(model.goodsList);
         page++;
       });
-      Provider.of<CommonProvider>(context, listen: false)
+      Future.delayed(Duration(milliseconds: 200)).then((e) {
+         Provider.of<CommonProvider>(context, listen: false)
               .savaGoodsCache(model.goodsList);
+    });
+     
     }).catchError((onError) {
        
          print('onError-----$onError');

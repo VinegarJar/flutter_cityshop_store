@@ -1,4 +1,3 @@
-
 import 'package:fluro/fluro.dart';
 import "package:flutter/cupertino.dart";
 import 'package:flutter/material.dart';
@@ -16,9 +15,6 @@ import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
-
-
-
 
 class HomePages extends StatefulWidget {
   HomePages({Key key}) : super(key: key);
@@ -52,7 +48,6 @@ class _HomePagesState extends State<HomePages> {
               curve: Curves.decelerate,
             );
           }
-   
         },
         foregroundColor: Colors.transparent,
         backgroundColor: Colors.white,
@@ -64,7 +59,8 @@ class _HomePagesState extends State<HomePages> {
             isOpenCamera: true,
             onTapSearch: () {
               print("onTapSearch");
-              Routes.navigateTo(context, Routes.search,transition:TransitionType.cupertinoFullScreenDialog);
+              Routes.navigateTo(context, Routes.search,
+                  transition: TransitionType.cupertinoFullScreenDialog);
             },
             openCamera: () {
               print("openCamera");
@@ -81,8 +77,11 @@ class _HomePagesState extends State<HomePages> {
                   (data['ads']['ads_list'] as List).cast();
               List<Map> navigatorList = (data['data']['lists'] as List).cast();
               GoodsInfoModel model = GoodsInfoModel.fromJson(data['goodsInfo']);
-              Provider.of<CommonProvider>(context, listen: false)
-                  .savaGoodsCache(model.goodsList);
+
+              Future.delayed(Duration(milliseconds: 200)).then((e) {
+                Provider.of<CommonProvider>(context, listen: false)
+                    .savaGoodsCache(model.goodsList);
+              });
 
               return EasyRefresh(
                   enableControlFinishRefresh: false,
@@ -181,9 +180,6 @@ class _HomePagesState extends State<HomePages> {
                               behavior: HitTestBehavior.opaque,
                               onTap: () {
                                 // print("点击热卖推荐--${item["name"]}");
-
-
-
                               },
                               child: Column(
                                 children: <Widget>[
@@ -260,5 +256,3 @@ class _HomePagesState extends State<HomePages> {
     super.dispose();
   }
 }
-
-
