@@ -1,2 +1,2 @@
 # flutter_cityshop_store
-更新仓库状态
+一款使用flutter跨平台框架开发的电商app应用,欢迎大家指导,一起学习成长！
