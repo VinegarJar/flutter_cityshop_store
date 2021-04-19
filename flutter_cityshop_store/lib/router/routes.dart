@@ -5,7 +5,7 @@ import './router_handler.dart';
 class Routes{
    
   // 路由管理
-  static Router router;
+  static FluroRouter router;
 
   static String root='/';
   static String webView = '/webView'; // 网页加载 
@@ -15,7 +15,7 @@ class Routes{
   static String animation= '/animation';
   static String details = '/details';
 
-  static void configureRoutes(Router router){
+  static void configureRoutes(FluroRouter router){
     router.notFoundHandler= Handler(
       handlerFunc: (BuildContext context,Map<String,List<String>> params){
         print('ERROR====>ROUTE WAS NOT FONUND!!!');

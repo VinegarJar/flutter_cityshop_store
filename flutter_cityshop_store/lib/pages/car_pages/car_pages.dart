@@ -22,6 +22,7 @@ class _CarPagesState extends State<CarPages> {
   EasyRefreshController _controller = EasyRefreshController();
   ScrollController scrollContr = ScrollController();
 
+  // ignore: deprecated_member_use
   List<GoodsList> goodsListData = new List();
   int page = 1;
   @override
@@ -31,12 +32,13 @@ class _CarPagesState extends State<CarPages> {
   }
 
   void getGoodsListData({int pages = 0}) async {
-    print('onRefresh-----$pages');
+    // print('onRefresh-----$pages');
     await HttpManagerMethod.instance
         .requestWithMetod(goodsList,
             parameters: {'size': '50', 'page': page},
             baseUrl: "http://apiv2.yangkeduo.com/")
         .then((data) {
+             print('data-----$data'); 
       GoodsInfoModel model = GoodsInfoModel.fromJson(data);
 
       setState(() {
@@ -123,7 +125,7 @@ class _CarPagesState extends State<CarPages> {
                     ],
                   ),
                 ),
-                WrapList(hotGoodsList: goodsListData),
+                //WrapList(hotGoodsList: goodsListData),
               ],
             )));
   }

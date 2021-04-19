@@ -45,7 +45,7 @@ class _SearchPagesState extends State<SearchPages> {
     return Scaffold(
        //关闭键盘顶起底部组件
        resizeToAvoidBottomInset: false,
-       resizeToAvoidBottomPadding: false,
+      //  resizeToAvoidBottomPadding: false,
         backgroundColor: ThemeColors.mainBgColor,
         appBar: AppBar(
           automaticallyImplyLeading: false,

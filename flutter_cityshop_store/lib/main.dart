@@ -21,7 +21,7 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final router = Router();
+    final router = FluroRouter();
     Routes.configureRoutes(router);
     Routes.router = router;
 
