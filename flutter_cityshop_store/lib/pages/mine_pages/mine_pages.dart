@@ -71,9 +71,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-// ignore: must_be_immutable
-class InCounter extends StatelessWidget {
 
+class InCounter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -88,11 +87,7 @@ class InCounter extends StatelessWidget {
           ),
           Text(
             '增加编号数据:${state.counter}',
-            style: Theme.of(context).textTheme.headline4,
-            
-          ),
-
-
+            style: Theme.of(context).textTheme.headline4),
         ],
       ));
     });
