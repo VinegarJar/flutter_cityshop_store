@@ -8,9 +8,7 @@ import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_cityshop_store/widget/loding.dart';
 
 import 'package:flutter_cityshop_store/widget/searchbar.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 class CaterGoryPages extends StatefulWidget {
   CaterGoryPages({Key key}) : super(key: key);

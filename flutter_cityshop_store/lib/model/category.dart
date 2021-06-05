@@ -20,13 +20,13 @@ class CategoryModel {
     message = json['message'];
     code = json['code'];
     if (json['category'] != null) {
-      category = new List<Category>();
+      category = [];
       json['category'].forEach((v) {
         category.add(new Category.fromJson(v));
       });
     }
     if (json['items'] != null) {
-      results = new List<Results>();
+      results = [];
       json['items'].forEach((v) {
         results.add(new Results.fromJson(v));
       });
@@ -96,7 +96,7 @@ class Category {
   Category.fromJson(Map<String, dynamic> json) {
     pic = json['pic'].cast<String>();
     if (json['list'] != null) {
-      list = new List<ListItem>();
+      list = [];
       json['list'].forEach((v) {
         list.add(new ListItem.fromJson(v));
       });

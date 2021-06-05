@@ -36,7 +36,7 @@ class Routes{
 
   // cupertino, push效果
   // cupertinoFullScreenDialog, prentViewConter
-  /**
+  /*
    *   native,
   nativeModal,
   inFromLeft,

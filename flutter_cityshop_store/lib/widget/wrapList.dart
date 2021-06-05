@@ -5,19 +5,19 @@ import 'package:flutter_cityshop_store/router/routes.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 class WrapList extends StatelessWidget {
-  final  List<GoodsList> hotGoodsList;
+  final List<GoodsList> hotGoodsList;
   WrapList({this.hotGoodsList});
 
-@override
+  @override
   Widget build(BuildContext context) {
-    return _wrapList(hotGoodsList,context);
+    return _wrapList(hotGoodsList, context);
   }
 
-
-   //火爆专区
-  Widget _wrapList(List<GoodsList> hotGoodsList,BuildContext context) {
+  //火爆专区
+  Widget _wrapList(List<GoodsList> hotGoodsList, BuildContext context) {
+    const url =
+        "http://t00img.yangkeduo.com/goods/images/2021-05-20/919fb6a6d20ccff1b030c5fabbb6be41.jpeg";
 
     if (hotGoodsList.length != 0) {
       List<Widget> listWidget = hotGoodsList.map((val) {
@@ -25,26 +25,23 @@ class WrapList extends StatelessWidget {
             onTap: () {
               print("火爆专区---$val---");
 
-      
-
               // 触摸收起键盘FocusScope.of(context).requestFocus(FocusNode());
               Routes.navigateTo(
-              context,
-              Routes.details,
-              params: {
-                "goodsName":val.goodsName,
-                "shortName":val.shortName,
-                "marketPrice":val.marketPrice.toString(),
-                "price":val.group["price"].toString(),
-                "salesTip":val.salesTip,
-                "imageUrl":val.imageUrl,
-                "thumbUrl":val.thumbUrl,
-                "hdThumbUrl":val.hdThumbUrl,
-                "hdUrl":val.hdUrl,
-              },
-              transition: TransitionType.cupertinoFullScreenDialog,
-            );
-      
+                context,
+                Routes.details,
+                params: {
+                  "goodsName": val.goodsName,
+                  "shortName": val.shortName,
+                  "marketPrice": val.marketPrice.toString(),
+                  "price": val.group["price"].toString(),
+                  "salesTip": val.salesTip,
+                  "imageUrl": val.imageUrl,
+                  "thumbUrl": val.thumbUrl,
+                  "hdThumbUrl": val.hdThumbUrl,
+                  "hdUrl": val.hdUrl,
+                },
+                transition: TransitionType.cupertinoFullScreenDialog,
+              );
             },
             child: Container(
                 width: ScreenUtil().setWidth(330),
@@ -57,12 +54,11 @@ class WrapList extends StatelessWidget {
                     color: Colors.white,
                     borderRadius:
                         BorderRadius.circular(ScreenUtil().setHeight(12))),
-                child: 
-                Column(children: [
+                child: Column(children: [
                   SizedBox(
                     height: 5,
                   ),
-                  Image.network(val.imageUrl,
+                  Image.network(val.thumbUrl ?? url,
                       width: ScreenUtil().setWidth(330),
                       height: ScreenUtil().setWidth(330 * 0.7),
                       fit: BoxFit.contain),
@@ -83,17 +79,17 @@ class WrapList extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Text("￥${val.group["price"].toString().substring(0, 3)}",
+                          Text(
+                              "￥${val.group["price"].toString().substring(0, 2)}",
                               style: TextStyle(
                                   color: Colors.red,
                                   fontWeight: FontWeight.w500,
                                   fontSize: ScreenUtil().setSp(32))),
                           Text(
-                            "￥${val.marketPrice.toString().substring(0, 3)}",
+                            "￥${val.marketPrice.toString().substring(0, 2)}",
                             style: TextStyle(
                                 color: Colors.black26,
                                 fontSize: ScreenUtil().setSp(22),
-                                
                                 decoration:
                                     TextDecoration.lineThrough), //价格横线显示样式
                           )
@@ -121,8 +117,4 @@ class WrapList extends StatelessWidget {
       return Text(' ');
     }
   }
-
 }
-
-
-

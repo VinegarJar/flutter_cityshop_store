@@ -2,12 +2,14 @@
     // 使用 IntelliSense 以得知可用的屬性。
     // 暫留以檢視現有屬性的描述。
     // 如需詳細資訊，請瀏覽: https://go.microsoft.com/fwlink/?linkid=830387
+    // "program": "lib/main.dart" 配置运行文件
     "version": "0.2.0",
     "configurations": [
         {
             "name": "flutter_cityshop_store",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "program": "lib/main.dart"
         }
     ]
 }

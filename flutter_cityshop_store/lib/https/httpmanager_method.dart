@@ -66,7 +66,7 @@ class HttpManagerMethod {
 
   Response response;
   //future里面有几个函数：then：异步操作逻辑在这里写。whenComplete：异步完成时的回调。catchError：捕获异常或者异步出错时的回调。
-  /** 
+  /*
    * Future<Null> future = new Future(() => null);
     await  future.then((_){
       print("then");

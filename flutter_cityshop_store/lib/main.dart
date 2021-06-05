@@ -6,8 +6,6 @@ import 'package:flutter_cityshop_store/provide/common_provider.dart';
 import 'package:flutter_cityshop_store/router/routes.dart';
 import 'package:provider/provider.dart';
 
-// //
-
 Future<void> main() async {
   runApp(MyApp());
 

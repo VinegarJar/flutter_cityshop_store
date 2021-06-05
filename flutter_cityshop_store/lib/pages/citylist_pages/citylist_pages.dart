@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_cityshop_store/model/models.dart';
 import 'package:flutter_cityshop_store/pages/citylist_pages/citysearch.dart';
-import 'package:flutter_cityshop_store/router/routes.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_cityshop_store/utils/utils.dart';
 import 'package:flutter_cityshop_store/widget/buildback.dart';
@@ -23,7 +22,7 @@ class CityListPages extends StatefulWidget {
 }
 
 class _CityListPagesState extends State<CityListPages> {
-  List<CityModel> cityList = List();
+  List<CityModel> cityList = [];
   double susItemHeight = 36;
   String imgFavorite = Utils.getImgPath('ic_favorite');
 
@@ -109,7 +108,7 @@ class _CityListPagesState extends State<CityListPages> {
 
   //火爆专区
   Widget _buildHeader() {
-    List<CityModel> hotCityList = List();
+    List<CityModel> hotCityList = [];
     hotCityList.addAll([
       CityModel(name: "北京市"),
       CityModel(name: "广州市"),

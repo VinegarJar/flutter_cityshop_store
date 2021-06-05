@@ -18,14 +18,15 @@ class _AddCarCountState extends State<AddCarCount> {
   @override
   Widget build(BuildContext context) {
     if (count == 0) {
-      return FlatButton(
-          padding: EdgeInsets.symmetric(horizontal: 5),
-          onPressed: (){
-            setState(() {
+      return  InkWell(
+         onTap: () {
+          setState(() {
              count++;
            });
            widget.addPressed(count);
-          },
+        },
+        child:Container(
+          padding: EdgeInsets.symmetric(horizontal: 5),
           child: Container(
             width: 60.w,
             height: 60.w,
@@ -38,7 +39,9 @@ class _AddCarCountState extends State<AddCarCount> {
                   fontSize: ScreenUtil().setSp(32),
                   color: Colors.white,
                 )),
-          ));
+          ),
+        )
+      );
     } else {
       return Container(
         margin: EdgeInsets.only(left: 20.w),
