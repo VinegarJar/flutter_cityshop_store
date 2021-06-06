@@ -8,6 +8,7 @@ class Utils {
   }
 
   static void showSnackBar(BuildContext context, String msg) {
+    // ignore: deprecated_member_use
     Scaffold.of(context).showSnackBar(
       SnackBar(
         content: Text(msg),

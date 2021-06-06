@@ -4,14 +4,158 @@
 模客后台
 账号： gxcjny74813@chacuo.net
 密码：Test2020
- 
 
 极光：
 账号： any046@aeutlook.com
 密码：Test2020   新密码Test2020121
-
  
+
 iOS开发者账号   打包IDcom.solve.globuleSports
 bianyobeng290229@163.com  邮箱密码re818711 Bonnie123bo 朋友5200，工作5211，父母5222 
 https://106.55.69.56
+
+
+
+
+final 和 const区别
+1.final只能赋值一次
+2.final最重要的是运行时的常量,并且final是惰性初始化,即在运行时第一次使用前初始化
+3.初始化时间DateTime可以使用final进行,final进行调用方法赋值,const调用方法赋值报错
+final timer = DateTime.now();
+const  timers = DateTime.now();
+
+dart的数据类型
+
+String user = "我是字符串,指定数据类型";
+print(user);
+
+int count = 10;
+print("我是init类型--$count");
+
+double count = 10.0;
+print("我是double类型,既可以是整型也可以是浮点类型--$count");
+
+bool flag = true;
+print("我是bool类型,--$flag");
+
+List list = [];
+print("List类型,--$list");
+
+List<String> list = ["222",];
+print("我是List类型指定内部数据类型<String>,--$list");
+
+List list = List.filled(2, "string");
+print("创建指定长度List类型,--$list");
+
+final user = 20(数据存在赋值)??10;
+print("数据存在赋值,--$user");
+
+final user = "";
+if(user.isEmpty){
+   print("user为空");
+}
+  
+final user = 0/0;
+ if(user.isNaN){
+    print("user为sNaN");
+}
+
+final user = 10;
+String string = user.toString();
+print("转换为字符串=$string");
+
+final user = "0";
+var count  = double.parse(user);
+print("转换为浮点类型=$count");
+//判断是否为double关键字用is
+print(count is double);
+
+var count  = 10;
+// var b = count++; 
+//b用(count++) = 10, b用(count+=1) = 11
+var b = count+=1; 
+print("count=$count");
+print("b=$b");
+
+List list = [
+      {
+        "title":"标题"
+      },
+      "我是小明",
+      13528,
+      3.258,
+      null,
+];
+    
+//list通过map转换新对象 
+var dict = list.map((element) =>(element is Map)?element:{"title":element}).toList();
+// dict = [{title: 标题}, {title: 我是小明}, {title: 13528}, {title: 3.258}, {title: null}]
+print(dict);
+
+   
+/*闭包的优点 
+ * 1.常驻内存
+ * 2.不污染全局
+ * */  
+  user () {
+       var count = 100;
+       return(){
+          count++;
+          print("闭包返回数据--$count");
+       };
+    } 
+    
+  var counts = user();
+  //101 102 103
+  counts();
+  counts();
+  counts();
+
+//调用
+Person person = Person(name: '初始化名称');
+print('私有变量访问--${person.getUser()}');  
+print('私有变量通过get方法访问--${person.getUserNames}');
+
+person.setUserName = "改变私有变量名称";
+print('改变后私有变量访问--${person.getUser()}'); 
+
+
+class Person{
+   
+   //声明的属性
+   String name = "章三";
+   
+
+
+   String getUser(){
+     return this.name;
+   }
+
+   get getUserNames{
+     return this.name;
+   }
+
+   //set 赋值
+   set setUserName(String name){
+      this.name = name;
+   }
+
+ 
+
+   //声明方法
+   getUserInfo(){
+     print('声明方法触发--${this.name}');
+   }
+
+   //构造函数,初始化的时候可以对变量赋值
+   Person({@required String name}){
+     print('构造函数默认name--${this.name}');
+     this.name = name;
+     print('构造函数在实立化触发--${this.name}');
+   }
+
+  
+
+
+}
 

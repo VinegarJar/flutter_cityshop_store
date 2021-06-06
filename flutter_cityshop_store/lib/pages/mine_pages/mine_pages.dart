@@ -25,14 +25,6 @@ class _MinePagesState extends State<MinePages> {
 class MyHomePage extends StatefulWidget {
   MyHomePage({this.title});
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   final String title;
 
   @override
@@ -41,10 +33,20 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 1;
+  
+   _MyHomePageState(){
+     print('私有构造函数--${this._counter}');
+   }
+
+   @override
+   void initState() { 
+     super.initState();
+     print('initState--${this._counter}');
+   }
 
   void _incrementCounter() {
-
-      BlocProvider.of<InfoBloc>(context).add(InfoChangeThemeEvent(counter: _counter++));
+       
+    BlocProvider.of<InfoBloc>(context).add(InfoChangeThemeEvent(counter: _counter++));
   }
 
   @override
@@ -92,5 +94,44 @@ class InCounter extends StatelessWidget {
       ));
     });
   }
+}
+
+class Person{
+   
+   //声明的属性
+   String name = "章三";
+   
+
+
+   String getUser(){
+     return this.name;
+   }
+
+   get getUserNames{
+     return this.name;
+   }
+
+   //set 赋值
+   set setUserName(String name){
+      this.name = name;
+   }
+
+ 
+
+   //声明方法
+   getUserInfo(){
+     print('声明方法触发--${this.name}');
+   }
+
+   //构造函数,初始化的时候可以对变量赋值
+   Person({@required String name}){
+     print('构造函数默认name--${this.name}');
+     this.name = name;
+     print('构造函数在实立化触发--${this.name}');
+   }
+
+  
+
+
 }
 

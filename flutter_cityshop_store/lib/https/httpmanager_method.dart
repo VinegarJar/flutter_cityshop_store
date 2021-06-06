@@ -46,7 +46,9 @@ class HttpManagerMethod {
   }
   
   //初始化通用全局单例，第一次使用时初始化
-  HttpManagerMethod._internal();
+  HttpManagerMethod._internal(){
+     print('初始化通用全局单例--我是命名构造函数');
+  }
 
   static Dio createInstance() {
     if (_dio == null) {
