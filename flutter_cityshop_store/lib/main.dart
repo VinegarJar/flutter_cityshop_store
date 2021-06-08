@@ -5,8 +5,10 @@ import 'package:flutter_cityshop_store/provide/car_provider.dart';
 import 'package:flutter_cityshop_store/provide/common_provider.dart';
 import 'package:flutter_cityshop_store/router/routes.dart';
 import 'package:provider/provider.dart';
+import 'dart:io';
 
 Future<void> main() async {
+  HttpOverrides.global = new MyHttpOverrides();
   runApp(MyApp());
 
   SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(
@@ -35,5 +37,15 @@ class MyApp extends StatelessWidget {
           title: '千城小店',
           theme: ThemeData(primaryColor: Colors.white, fontFamily: 'Raleway'),
         ));
+  }
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  //一种跳过SSL认证问题并解决Image.network(url)问题的方法是使用以下代码：
+  @override
+  HttpClient createHttpClient(SecurityContext context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }

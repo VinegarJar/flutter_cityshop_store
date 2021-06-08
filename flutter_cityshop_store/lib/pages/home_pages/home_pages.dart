@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:fluro/fluro.dart';
 import "package:flutter/cupertino.dart";
 import 'package:flutter/material.dart';
@@ -23,7 +26,12 @@ class HomePages extends StatefulWidget {
   _HomePagesState createState() => _HomePagesState();
 }
 
-class _HomePagesState extends State<HomePages> {
+class _HomePagesState extends State<HomePages>
+    with AutomaticKeepAliveClientMixin {
+//保持 保持原页面State 状态 AutomaticKeepAliveClientMixin
+  @override
+  bool get wantKeepAlive => true;
+
   EasyRefreshController _controller = EasyRefreshController();
   ScrollController scrollContr = ScrollController();
 
