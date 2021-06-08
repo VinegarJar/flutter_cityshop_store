@@ -2,20 +2,19 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 
 //flutter clean 清理
-
+/*
 typedef onSuccess = void Function(dynamic data);
 typedef onError = void Function(String error);
-
+*/
 const httpHeaders = {
   'Content-Type': 'application/json',
   'X-LC-Id': 'a4Cj1Hm5aMrdhob6xGw71B5A-gzGzoHsz',
   'X-LC-Key': 'XQaL1tUQC0DCQxBA9fpoR21C',
 };
 
-
 const hotcommendUrl = "App/Api/homeHotCommendGoods"; //首页热卖推荐
-const categoryUrl = "App/Index/shopSecondCategory"; //分类列表数据 
-const goodsList =  "v2/goods";//首页列表数据
+const categoryUrl = "App/Index/shopSecondCategory"; //分类列表数据
+const goodsList = "v2/goods"; //首页列表数据
 
 class HttpManagerMethod {
   static Dio _dio;
@@ -44,10 +43,10 @@ class HttpManagerMethod {
     }
     return _instance;
   }
-  
+
   //初始化通用全局单例，第一次使用时初始化
-  HttpManagerMethod._internal(){
-     print('初始化通用全局单例--我是命名构造函数');
+  HttpManagerMethod._internal() {
+    print('初始化通用全局单例--我是命名构造函数');
   }
 
   static Dio createInstance() {
@@ -78,15 +77,15 @@ class HttpManagerMethod {
       print("catchError");
     });
    */
-  Future  requestWithMetod(api, {parameters, method, String baseUrl}) async {
-    
+  Future requestWithMetod(api, {parameters, method, String baseUrl}) async {
     Options options = Options(method: method);
     options.headers = httpHeaders;
     Dio dio = createInstance();
 
-    if (baseUrl!= null) {//重定向baseUrl 用于指定特定域名
-         dio.options.baseUrl = baseUrl;
-     } 
+    if (baseUrl != null) {
+      //重定向baseUrl 用于指定特定域名
+      dio.options.baseUrl = baseUrl;
+    }
     parameters = parameters ?? {};
     method = method ?? GET;
 
@@ -100,9 +99,11 @@ class HttpManagerMethod {
     /// 打印:请求地址-请求方式-请求参数
 
     print('请求地址-请求参数-请求方式\n【' +
-        api +"\n"+
-        parameters.toString()+"\n"+
-        method+
+        api +
+        "\n" +
+        parameters.toString() +
+        "\n" +
+        method +
         '】');
     var result;
     try {
@@ -110,13 +111,13 @@ class HttpManagerMethod {
           await dio.request(api, data: parameters, options: options);
       //print('响应数据：' + response.data);
       if (response.statusCode == 200) {
-           result = json.decode(response.data.toString());
-          // result = response.data;
+        result = json.decode(response.data.toString());
+        // result = response.data;
       } else {
-          throw Exception('statusCode:${response.statusCode}-请检测代码和服务器情况..');
+        throw Exception('statusCode:${response.statusCode}-请检测代码和服务器情况..');
       }
     } on DioError catch (e) {
-        throw Exception('请求出错:${e.toString()}');
+      throw Exception('请求出错:${e.toString()}');
       // print('请求出错：' + e.toString());
     }
     return result;

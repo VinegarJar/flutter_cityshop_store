@@ -1,6 +1,3 @@
-import 'dart:io';
-
-import 'package:dio/dio.dart';
 import 'package:fluro/fluro.dart';
 import "package:flutter/cupertino.dart";
 import 'package:flutter/material.dart';
@@ -42,6 +39,7 @@ class _HomePagesState extends State<HomePages>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       backgroundColor: ThemeColors.mainBgColor,
       floatingActionButton: FloatingActionButton(
