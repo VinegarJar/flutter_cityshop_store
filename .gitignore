@@ -62,3 +62,4 @@ Pods/
 # ModuleNotFoundError: No module named 'chardet' 未安装 
 # pip3 list 是否安装
 # sudo pip3 install chardet 安装
+report.xml
