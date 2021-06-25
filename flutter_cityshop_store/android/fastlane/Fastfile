@@ -13,8 +13,10 @@
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 ##在项目文件android目录下执行命令fastlane uploadFir生成IPA文件,并且会自动上传到Fir,发送到钉钉群通知
-#'/Users/a888/Documents/flutter_cityshop_store/flutter_cityshop_store/build/app/outputs/flutter-apk/app-release.apk'    使用flutter打包命令 flutter build apk
-# 安装插件fastlane add_plugin fir_cli
+#使用flutter打包命令 flutter build apk
+# 安装插件fastlane add_plugin fir_cli  fastlane add_plugin ding_talk_msg_push
+# 下载链接http://d.7short.com/5a1s https://oapi.dingtalk.com/robot/send?access_token=3a01c05738abaaeaf5c5e17d80d4cc5870410387126c5a5e2fbf0095a79977ef
+
 
 default_platform(:android)
 
@@ -22,8 +24,13 @@ platform :android do
   desc "Fir测试版本apk"
   lane :uploadFir do
     gradle(task: "clean assembleRelease")
-    fir_cli api_token:"d2f653948d859d2f06f88eb4d1d39e8f", specify_file_path:"/Users/a888/Documents/flutter_cityshop_store/flutter_cityshop_store/build/app/outputs/flutter-apk/app-release.apk"
+    fir_cli api_token:"d2f653948d859d2f06f88eb4d1d39e8f", specify_file_path:"../build/app/outputs/flutter-apk/app-release.apk"
     puts "============================上传android测试版到Fir成功============================\n"
+    ding_talk_msg_push(
+        token:"3a01c05738abaaeaf5c5e17d80d4cc5870410387126c5a5e2fbf0095a79977ef", 
+        text:"钉钉群通知,apk包更新,下载地址:http://d.7short.com/5a1s", 
+        at_all: true
+      )
   end
 
   desc "Submit a new Beta Build to Crashlytics Beta"

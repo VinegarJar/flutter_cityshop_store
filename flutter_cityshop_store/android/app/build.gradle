@@ -26,6 +26,7 @@ apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 def keystorePropertiesFile = rootProject.file("key.properties")
+def jksProperFile = rootProject.file("cityshop_store.jks")
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
@@ -51,11 +52,19 @@ android {
     
         
     //秘钥 keytool -genkey -alias react -keyalg RSA -validity 3650 -keystore react.keystore
-    ////秘钥 keytool -genkey -alias com.cityshop -keyalg RSA -validity 3650 -keystore cityshop_store.jks
-   //签名配置
+    /**
+    * 制作秘钥的命令 keytool -genkey -alias com.cityshop -keyalg RSA -validity 3650 -keystore cityshop_store.jks
+    * 创建了一个名为cityshop_store.jks的别名为com.cityshop的采用RSA加密算法的有效期为10年的证书文件
+    * @genkey 生成文件
+    * @alias 别名
+    * @keyalg 加密算法
+    * @validity 有效期
+    * @keystore 文件名
+    */
+    //签名配置
     signingConfigs {
         release {
-            storeFile file("/Users/a888/Documents/flutter_cityshop_store/flutter_cityshop_store/android/cityshop_store.jks")
+            storeFile file(jksProperFile)
             storePassword "cityshops"
             keyAlias "com.cityshop"
             keyPassword "cityshops"
@@ -70,8 +79,6 @@ android {
             signingConfig signingConfigs.release//签名配置
         }
     }
-
-
 
     compileOptions {
         sourceCompatibility = 1.8
