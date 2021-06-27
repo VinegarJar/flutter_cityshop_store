@@ -21,6 +21,11 @@ or alternatively using `brew install fastlane`
 fastlane ios uploadFir
 ```
 打包iOS安装包上传到fir
+### ios set_build_number
+```
+fastlane ios set_build_number
+```
+更新工程build版本号
 
 ----
 
