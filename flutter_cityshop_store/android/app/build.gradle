@@ -50,7 +50,7 @@ android {
         versionName flutterVersionName
     }
     
-        
+    //flutter打包配置  https://blog.csdn.net/huanglei201502/article/details/88533134   
     //秘钥 keytool -genkey -alias react -keyalg RSA -validity 3650 -keystore react.keystore
     /**
     * 制作秘钥的命令 keytool -genkey -alias com.cityshop -keyalg RSA -validity 3650 -keystore cityshop_store.jks
