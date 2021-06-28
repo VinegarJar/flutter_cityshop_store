@@ -30,6 +30,9 @@ def jksProperFile = rootProject.file("cityshop_store.jks")
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
+def enableSeparateBuildPerCPUArchitecture = true
+def enableProguardInReleaseBuilds = true //开启混淆
+
 android {
     compileSdkVersion 30
 
@@ -47,7 +50,15 @@ android {
         minSdkVersion 16
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
+        versionName flutterVersionName + "_"+new Date().format("yyyy-MM-dd HH:mm:ss") 
+        //另外如果你的应用不需要支持国际化，那么可以设置 resConfigs 为 "zh","en"，即只支持中英文
+        resConfigs "zh","en"
+
+         ndk {
+            // 设置支持的SO库架构 剔除多余的abi支持可以减少比较客观的apk大小
+            //abiFilters 'armeabi' //打包关闭, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+            abiFilters 'armeabi' , 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a' //模拟器开启
+        }
     }
     
     //flutter打包配置  https://blog.csdn.net/huanglei201502/article/details/88533134   
@@ -69,14 +80,40 @@ android {
             keyAlias "com.cityshop"
             keyPassword "cityshops"
         }
+       
+        debug {
+            storeFile file(jksProperFile)
+            storePassword "cityshops"
+            keyAlias "com.cityshop"
+            keyPassword "cityshops"
+        }
     }
 
-    def enableProguardInReleaseBuilds = true//混淆开关
+    //Android可以针对设备定制APK，即利用不同的资源文件编译出mdpi APK、hdpi APK等。这就是Apk Splits（APK分包）机制
+    splits {
+        abi {
+            reset()
+            enable enableSeparateBuildPerCPUArchitecture
+            universalApk true  // If true, also generate a universal APK
+            include "armeabi-v7a", "x86", "arm64-v8a", "x86-64"
+        }
+    }
+
     buildTypes {
        release {
-            minifyEnabled enableProguardInReleaseBuilds
+            minifyEnabled enableProguardInReleaseBuilds //属性为 true，会告诉 proguard 删除所有未使用的方法和指令,进一步的减少 .dex 文件的大小。
+            //proguard 配置,包括和proguard-android.txt 相同的ProGuard规则,但还包括其他在字节码一级（方法内和方法间）执行分析的优化，以进一步减小 APK 大小和帮助提高其运行速度。
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             signingConfig signingConfigs.release//签名配置
+            //设置 shrinkResources 属性为 true，这会在打包时删除未使用的资源
+            shrinkResources true
+        }
+
+        debug {
+            minifyEnabled enableProguardInReleaseBuilds
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.debug//签名配置
+            shrinkResources true
         }
     }
 

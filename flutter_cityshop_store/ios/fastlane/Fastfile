@@ -25,6 +25,7 @@ platform :ios do
      workspace: "Runner.xcworkspace", #如果项目使用CocoaPods需要加上
      configuration: "Release",
      output_directory: "./fastlane",
+     xcargs: "-allowProvisioningUpdates",#证书模式
      silent: true,# 隐藏不必要信息
      clean: true,# 打包前是否 clean 项目
      export_options: { method: "development"}
@@ -45,14 +46,17 @@ platform :ios do
     # add actions here: https://docs.fastlane.tools/actions
 
     time = Time.new.strftime("%Y%m%d") #获取时间格式
-    version = increment_build_number_in_plist(
-       plist_build_setting_support:true,
-       xcodeproj: 'Runner.xcodeproj',
-       target:'Runner',
-       buid_number:time
-
-    )#获取版本号
-
+    enable_automatic_code_signing(path: "Runner.xcodeproj")
+    increment_build_number_in_plist(xcodeproj: "Runner.xcodeproj",target:'Runner')
+    # version = increment_build_number_in_plist(
+    #    plist_build_setting_support:true,
+    #    xcodeproj: 'Runner.xcodeproj',
+    #    target:'Runner',
+    #    buid_number:time
+    # )#获取版本号
+   version = get_version_number_from_plist(xcodeproj: "Runner.xcodeproj",target: 'Runner')
+   buildVersion = get_build_number_from_plist(xcodeproj: "Runner.xcodeproj", target: 'Runner',buid_number:time)
+   puts "\n\n============================\n app版本号"+version+" \(Build "+buildVersion+"\)正式版本============================\n"
 
   end
 end
