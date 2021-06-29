@@ -34,6 +34,7 @@ def enableSeparateBuildPerCPUArchitecture = true
 def enableProguardInReleaseBuilds = true //开启混淆
 
 android {
+    //用于指定项目的编译版本,这里指定成30表示使用Android 11.0系统的SDK编译
     compileSdkVersion 30
 
     sourceSets {
@@ -44,6 +45,14 @@ android {
         disable 'InvalidPackage'
     }
 
+    /*@defaultConfig闭包中可以对项目的更多细节进行配置
+    * @applicationId 用于指定项目的包名
+    * @minSdkVersion 用于指定项目最低兼容的Android系统版本,这里指定成15表示最低兼容到Android 4.3系统
+    * @targetSdkVersion 指定的值表示你在该目标版本上已经做过了充分的测试 
+    * @clean  该任务继承自Delete,删除根目录中的build目录,targetSdkVersion指定成30,那么就说明你的程序最高只在Android 11.0系统   
+    * @versionCode 用于指定项目的版本号
+    * @versionName 用于指定项目的版本名
+    */
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.cityshop.cityshop_store"
@@ -62,7 +71,6 @@ android {
     }
     
     //flutter打包配置  https://blog.csdn.net/huanglei201502/article/details/88533134   
-    //秘钥 keytool -genkey -alias react -keyalg RSA -validity 3650 -keystore react.keystore
     /**
     * 制作秘钥的命令 keytool -genkey -alias com.cityshop -keyalg RSA -validity 3650 -keystore cityshop_store.jks
     * 创建了一个名为cityshop_store.jks的别名为com.cityshop的采用RSA加密算法的有效期为10年的证书文件
