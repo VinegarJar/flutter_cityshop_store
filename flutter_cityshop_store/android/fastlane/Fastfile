@@ -16,7 +16,7 @@
 #使用flutter打包命令 flutter build apk
 # 安装插件fastlane add_plugin fir_cli  fastlane add_plugin ding_talk_msg_push
 # 下载链接http://d.7short.com/5a1s https://oapi.dingtalk.com/robot/send?access_token=3a01c05738abaaeaf5c5e17d80d4cc5870410387126c5a5e2fbf0095a79977ef
-
+# 更快的启动速度执行打包命令bundle exec fastlane uploadFir 
 
 default_platform(:android)
 
