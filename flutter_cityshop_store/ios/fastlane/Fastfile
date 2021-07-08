@@ -20,6 +20,7 @@ platform :ios do
   desc "打包iOS安装包上传到fir"
   lane :uploadFir do
     # add actions here: https://docs.fastlane.tools/actions
+    enable_automatic_code_signing(path: "Runner.xcodeproj")
     gym(
      scheme: "Runner", #改为你项目的scheme
      workspace: "Runner.xcworkspace", #如果项目使用CocoaPods需要加上
@@ -30,33 +31,18 @@ platform :ios do
      clean: true,# 打包前是否 clean 项目
      export_options: { method: "development"}
    )
+   version = get_version_number_from_plist(xcodeproj: "Runner.xcodeproj",target: 'Runner')
+   buildVersion = get_build_number_from_plist(xcodeproj: "Runner.xcodeproj", target: 'Runner')
+
    fir_cli api_token:"d2f653948d859d2f06f88eb4d1d39e8f"
-    puts "============================上传ios测试版到Fir成功============================\n"
-    ding_talk_msg_push(
+   puts "============================上传ios测试版到Fir成功============================\n"
+   puts "\n\n============================\n app版本号"+version+" \(Build "+buildVersion+"\)测试版============================\n"
+   ding_talk_msg_push(
         token:"3a01c05738abaaeaf5c5e17d80d4cc5870410387126c5a5e2fbf0095a79977ef", 
         text: "########## 钉钉群通知,千城小店App,更新ios版本安装包啦!!
               \n千城小店App更新ios安装包已经上传到fir,请更新下载最新版本App进行测试!
               \n##########😁😁😁😁😁😁 下载地址:http://d.7short.com/bqsr ##########\n",
         at_all: true
       )
-  end
-
-  desc "更新工程build版本号"
-  lane :set_build_number do
-    # add actions here: https://docs.fastlane.tools/actions
-
-    time = Time.new.strftime("%Y%m%d") #获取时间格式
-    enable_automatic_code_signing(path: "Runner.xcodeproj")
-    increment_build_number_in_plist(xcodeproj: "Runner.xcodeproj",target:'Runner')
-    # version = increment_build_number_in_plist(
-    #    plist_build_setting_support:true,
-    #    xcodeproj: 'Runner.xcodeproj',
-    #    target:'Runner',
-    #    buid_number:time
-    # )#获取版本号
-   version = get_version_number_from_plist(xcodeproj: "Runner.xcodeproj",target: 'Runner')
-   buildVersion = get_build_number_from_plist(xcodeproj: "Runner.xcodeproj", target: 'Runner',buid_number:time)
-   puts "\n\n============================\n app版本号"+version+" \(Build "+buildVersion+"\)正式版本============================\n"
-
   end
 end
