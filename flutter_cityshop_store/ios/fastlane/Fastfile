@@ -44,5 +44,7 @@ platform :ios do
               \n##########😁😁😁😁😁😁 下载地址:http://d.7short.com/bqsr ##########\n",
         at_all: true
       )
+  time = Time.new.strftime("%Y年%m月%d日/%H时%M分%S秒")
+  puts "app版本号"+time+"============================"   
   end
 end
