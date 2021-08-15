@@ -65,8 +65,8 @@ android {
 
          ndk {
             // 设置支持的SO库架构 剔除多余的abi支持可以减少比较客观的apk大小
-            //abiFilters 'armeabi' //打包关闭, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
-            abiFilters 'armeabi' , 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a' //模拟器开启
+            abiFilters 'armeabi' //打包关闭, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+            //abiFilters 'armeabi' , 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a' //模拟器开启
         }
     }
     
