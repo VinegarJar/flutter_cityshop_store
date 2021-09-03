@@ -1,3 +1,5 @@
 {
-    "tinypng.apiKey": "gyc5XQ6NfXGhd1YpQpgq7MHNjJhDjfHq"
+    "js/ts.implicitProjectConfig.experimentalDecorators": true,
+    "editor.find.globalFindClipboard": true,
+    "tinypng.apiKey": "S6dPLm9zP7ZZSX4KvH8W7MkQPHWBPQyb"
 }
