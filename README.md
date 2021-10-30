@@ -1,6 +1,10 @@
 # flutter_cityshop_store
 一款使用flutter跨平台框架开发的电商app应用,欢迎大家指导,一起学习成长！
 
+* 移动端开发新趋势Flutter [https://www.jianshu.com/p/1a90adc09e99]
+* 深入理解Flutter多线程 [https://www.jianshu.com/p/54da18ed1a9e]
+* Flutter移动端实战手册[https://www.jianshu.com/u/2de707c93dc4]
+
 
 # Flutter代码(闲鱼Flutter团队在基础代码规范方面所做的一些实践)
 Native开发同学都知道Android/iOS都有配套的Linter检查机制。开发者可以通过Linter检查，统一代码风格，检查代码中的明显缺陷。Flutter同样具备这样的能力。通过Linter检查机制，是统一代码风格最简单高效的方式。
