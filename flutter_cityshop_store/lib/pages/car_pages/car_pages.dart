@@ -34,11 +34,11 @@ class _CarPagesState extends State<CarPages> {
   void getGoodsListData({int pages = 0}) async {
     // print('onRefresh-----$pages');
     await HttpManagerMethod.instance
-        .requestWithMetod(goodsList,
+        .requestWithMetod(goodsListUrl,
             parameters: {'size': '50', 'page': page},
             baseUrl: "http://apiv2.yangkeduo.com/")
         .then((data) {
-             print('data-----$data'); 
+      print('data-----$data');
       GoodsInfoModel model = GoodsInfoModel.fromJson(data);
 
       setState(() {
@@ -46,13 +46,11 @@ class _CarPagesState extends State<CarPages> {
         page++;
       });
       Future.delayed(Duration(milliseconds: 200)).then((e) {
-         Provider.of<CommonProvider>(context, listen: false)
-              .savaGoodsCache(model.goodsList);
-    });
-     
+        Provider.of<CommonProvider>(context, listen: false)
+            .savaGoodsCache(model.goodsList);
+      });
     }).catchError((onError) {
-       
-         print('onError-----$onError');
+      print('onError-----$onError');
     });
   }
 
@@ -136,29 +134,28 @@ class _CarPagesState extends State<CarPages> {
       padding: EdgeInsets.all(5),
       alignment: Alignment.center,
       child: InkWell(
-        onTap: () {
-           Routes.navigateTo(context,Routes.cityList,transition:TransitionType.cupertinoFullScreenDialog);
-        },
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text("购物车",
+          onTap: () {
+            Routes.navigateTo(context, Routes.cityList,
+                transition: TransitionType.cupertinoFullScreenDialog);
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("购物车",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600,
+                      fontSize: ScreenUtil().setSp(36))),
+              SizedBox(width: ScreenUtil().setWidth(10)),
+              Icon(CupertinoIcons.location_solid,
+                  size: 18, color: Colors.white),
+              Text(
+                "北京",
                 style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w600, 
-                    fontSize: ScreenUtil().setSp(36))),
-            SizedBox(width: ScreenUtil().setWidth(10)),
-            Icon(CupertinoIcons.location_solid,
-                          size: 18, color: Colors.white),
-                      Text(
-                        "北京",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: ScreenUtil().setSp(20)),
-                      ),
-          ],
-        )
-      ),
+                    color: Colors.white, fontSize: ScreenUtil().setSp(20)),
+              ),
+            ],
+          )),
     );
   }
 }

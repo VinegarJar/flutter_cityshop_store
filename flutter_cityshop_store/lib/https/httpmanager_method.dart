@@ -14,13 +14,13 @@ const httpHeaders = {
 
 const hotcommendUrl = "App/Api/homeHotCommendGoods"; //首页热卖推荐
 const categoryUrl = "App/Index/shopSecondCategory"; //分类列表数据
-const goodsList = "v2/goods"; //首页列表数据
+const goodsListUrl = "v2/goods"; //购物车推荐列表数据
 
 class HttpManagerMethod {
   static Dio _dio;
 
   /// default options
-  static const String BASE_URL = 'http://mock-api.com/Rz3ambnM.mock/';
+  static const String BASE_URL = 'http://mock-api.com/3gldJ1gO.mock/';
 
   static const int CONNECT_TIMEOUT = 10000;
   static const int RECEIVE_TIMEOUT = 30000;
@@ -109,7 +109,7 @@ class HttpManagerMethod {
     try {
       Response response =
           await dio.request(api, data: parameters, options: options);
-      //print('响应数据：' + response.data);
+      print('响应数据：' + response.data);
       if (response.statusCode == 200) {
         result = json.decode(response.data.toString());
         // result = response.data;
