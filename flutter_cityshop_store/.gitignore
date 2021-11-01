@@ -42,3 +42,7 @@ app.*.map.json
 
 # Exceptions to above rules.
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
+#flutter动画实现
+https://github.com/designDo/flutter-checkio
+#GSYTech开源项目
+https://github.com/CarGuo/gsy_github_app_flutter
