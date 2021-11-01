@@ -109,7 +109,7 @@ class HttpManagerMethod {
     try {
       Response response =
           await dio.request(api, data: parameters, options: options);
-      print('响应数据：' + response.data);
+      //print('响应数据：' + response.data);
       if (response.statusCode == 200) {
         result = json.decode(response.data.toString());
         // result = response.data;
@@ -123,4 +123,3 @@ class HttpManagerMethod {
     return result;
   }
 }
-
