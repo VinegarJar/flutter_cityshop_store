@@ -1,5 +1,7 @@
 # flutter_cityshop_store
 一款使用flutter跨平台框架开发的电商app应用,欢迎大家指导,一起学习成长！
+#Mac上解压Assets.car文件的小工具
+https://github.com/yuedong56/Assets.carTool
 
 * 移动端开发新趋势Flutter [https://www.jianshu.com/p/1a90adc09e99]
 * 深入理解Flutter多线程 [https://www.jianshu.com/p/54da18ed1a9e]
