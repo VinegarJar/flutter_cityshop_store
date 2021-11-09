@@ -3,6 +3,12 @@
 #Mac上解压Assets.car文件的小工具
 https://github.com/yuedong56/Assets.carTool
 
+#mac 获取(下载) appstore ipa包的2种方法
+AppleConfig2是苹果官方的软件,可以在苹果商店搜索apple-configurator 下载
+// 如果第一次下载ipa,是不会有TemporaryItems及以下子目录的 下载完就会有
+~/Library/Group Containers/K36BKF7T3D.group.com.apple.configurator/Library/Caches/Assets/TemporaryItems/MobileApps
+https://www.jianshu.com/p/81ab20f4c318
+
 * 移动端开发新趋势Flutter [https://www.jianshu.com/p/1a90adc09e99]
 * 深入理解Flutter多线程 [https://www.jianshu.com/p/54da18ed1a9e]
 * Flutter移动端实战手册[https://www.jianshu.com/u/2de707c93dc4]
