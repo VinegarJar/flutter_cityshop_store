@@ -12,6 +12,8 @@
 代码仓库 账号：2966497308@qq.com 
 github  gitee  coding(密码后面+@) 
 
+钉钉中设置代码提交提醒--Github机器人（转）
+https://www.cnblogs.com/muxi0407/p/11984151.html
 
 
 iOS开发者账号   打包IDcom.solve.globuleSports
