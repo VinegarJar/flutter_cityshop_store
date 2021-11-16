@@ -1,0 +1,51 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+##在项目文件android目录下执行命令fastlane uploadFir生成IPA文件,并且会自动上传到Fir,发送到钉钉群通知
+#使用flutter打包命令 flutter build apk
+# 安装插件fastlane add_plugin fir_cli  fastlane add_plugin ding_talk_msg_push
+# 下载链接http://d.7short.com/5a1s https://oapi.dingtalk.com/robot/send?access_token=3a01c05738abaaeaf5c5e17d80d4cc5870410387126c5a5e2fbf0095a79977ef
+# 更快的启动速度执行打包命令bundle exec fastlane uploadFir 
+#命令一、flutter build apk --release
+#命令二、flutter build apk --target-platform android-arm64(打包出的安装包(apk)安装后闪退，那请使用命令二打包)
+
+
+# Uncomment the line if you want fastlane to automatically update itself
+# 安装插件 (bundle exec fastlane add_plugin fir_cli)  (bundle exec fastlane add_plugin ding_talk_msg_push)
+# 执行打包命令 fastlane uploadFir
+default_platform(:android)
+
+platform :android do
+  desc "Fir测试版本ap"
+  lane :uploadFir do
+
+    # gradle(task: "clean assembleRelease", project_dir: 'android/')
+    gradle(task: "clean assembleRelease")
+    fir_cli api_token:"d2f653948d859d2f06f88eb4d1d39e8f", specify_file_path:"../build/app/outputs/flutter-apk/app-release.apk",need_release_id:true,dingtalk_access_token:"3a01c05738abaaeaf5c5e17d80d4cc5870410387126c5a5e2fbf0095a79977ef",dingtalk_custom_message:"钉钉群通知,千城小店App,更新android版本安装包啦!!",dingtalk_at_all:"true"
+  end
+
+  desc "Submit a new Beta Build to Crashlytics Beta"
+  lane :beta do
+    gradle(task: "clean assembleRelease")
+    crashlytics
+  
+    # sh "your_script.sh"
+    # You can also use other beta testing services here
+  end
+
+  desc "Deploy a new version to the Google Play"
+  lane :deploy do
+    gradle(task: "clean assembleRelease")
+    upload_to_play_store
+  end
+end
