@@ -22,7 +22,7 @@
 
 # Uncomment the line if you want fastlane to automatically update itself
 # 安装插件 (bundle exec fastlane add_plugin fir_cli)  (bundle exec fastlane add_plugin ding_talk_msg_push)
-# 执行打包命令 fastlane uploadFir
+# 执行打包命令 fastlane uploadFir     fastlane debugUploadFir
 default_platform(:android)
 
 platform :android do
@@ -35,12 +35,10 @@ platform :android do
     puts "============================上传android测试版到Fir成功============================\n" 
   end
 
-  desc "Submit a new Beta Build to Crashlytics Beta"
-  lane :beta do
-    gradle(task: "clean assembleRelease")
-    crashlytics
-    # sh "your_script.sh"
-    # You can also use other beta testing services here
+  desc "打包DBUG版本安卓包"
+  lane :debugUploadFir do
+    sh("flutter", "build", "apk", "--debug")
+    fir_cli api_token:"d2f653948d859d2f06f88eb4d1d39e8f", specify_file_path:"../build/app/outputs/apk/release/app-armeabi-v7a-release.apk",need_release_id:true,dingtalk_access_token:"3a01c05738abaaeaf5c5e17d80d4cc5870410387126c5a5e2fbf0095a79977ef",dingtalk_custom_message:"钉钉群通知,千城小店App,更新android版本安装包啦!!",dingtalk_at_all:"true"
   end
 
   desc "Deploy a new version to the Google Play"

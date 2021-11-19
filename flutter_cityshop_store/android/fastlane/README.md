@@ -21,11 +21,11 @@ or alternatively using `brew install fastlane`
 fastlane android uploadFir
 ```
 Fir测试版本ap
-### android beta
+### android debugUploadFir
 ```
-fastlane android beta
+fastlane android debugUploadFir
 ```
-Submit a new Beta Build to Crashlytics Beta
+打包DBUG版本安卓包
 ### android deploy
 ```
 fastlane android deploy
