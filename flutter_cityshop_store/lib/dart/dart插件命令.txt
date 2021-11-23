@@ -1,0 +1,20 @@
+一行命令，将Json文件转为Dart model类。
+
+安装插件
+json_model: ^1.0.0
+json_serializable: ^5.0.0
+
+安装插件命令
+dart pub add json_model
+dart pub add json_serializable
+dart pub add build_runner
+dart pub add json_annotation
+
+1.在工程根目录下创建一个名为 "jsons" 的目录;
+2.创建或拷贝Json文件到"jsons" 目录中 ;
+3.运行 pub run json_model (Dart VM工程)or
+flutter packages pub run json_model(Flutter中) 命令生成Dart model类，生成的文件默认在"lib/models"目录下
+4.默认的生成的字段都不是可空类型，我们可以通过设置--nullable参数来切换生成的类型为可空类型
+flutter packages pub run json_model 
+
+flutter packages pub run build_runner build
