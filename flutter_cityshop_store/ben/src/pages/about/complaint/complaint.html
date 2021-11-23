@@ -1,0 +1,17 @@
+<ion-header mode="ios">
+  <!-- <ion-toolbar color="navbar" mode="ios">  
+    <button ion-button clear small navPop style="padding: 0;">  
+      <img src="assets/imgs/back2.png" style="margin-left:-28px;" />
+    </button>  
+    <ion-title mode="ios">建议与投诉</ion-title>  
+  </ion-toolbar> -->
+  <ion-navbar mode="ios">
+    <ion-title mode="ios">建议与投诉</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content style="background:rgb(249,249,249);">
+  <ion-textarea type="text" class="text-box" rows="8" placeholder="填写更多信息以便我们更快帮您处理（必填）" [(ngModel)]="remarks"></ion-textarea>
+  <button ion-button class="btn" color="navbar" block (click)="submit()">
+    <span class="btn-text">提交</span>
+  </button>
+</ion-content>

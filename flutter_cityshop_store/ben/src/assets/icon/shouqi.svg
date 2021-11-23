@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="95px" height="55px" viewBox="0 0 95 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>Group 8</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-2.8%" y="-22.3%" width="105.6%" height="144.7%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.845731431   0 0 0 0 0.845731431   0 0 0 0 0.845731431  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="DC罗盘" transform="translate(0.000000, -555.000000)">
+            <g id="Group-7" filter="url(#filter-1)" transform="translate(0.000000, 558.000000)">
+                <g id="Group-8">
+                    <rect id="Rectangle" fill="#E83331" x="0" y="0" width="91" height="47"></rect>
+                    <text id="手气速报" font-family="JLinXin, 迷你简菱心" font-size="16" font-weight="normal" fill="#FFFFFF">
+                        <tspan x="16" y="28">手气速报</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

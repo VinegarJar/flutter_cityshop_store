@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="113px" height="30px" viewBox="0 0 113 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>Group 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M3.41060513e-13,0 L105,0 C109.418278,-8.11624501e-16 113,3.581722 113,8 L113,30.0000038 L21.1591054,29.9999986 C17.5442331,29.9999984 14.2801429,27.8371887 12.8710387,24.5082659 C6.72160935,9.98061354 3.40908753,2.42187337 2.93347326,1.83204535 C2.4011698,1.17191484 1.42334538,0.561233054 3.41060513e-13,0 Z" id="path-1"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="DC首页" transform="translate(-249.000000, -159.000000)">
+            <g id="Group-2" transform="translate(249.000000, 159.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="Rectangle" fill="#FD6967" xlink:href="#path-1"></use>
+                <g id="Group" mask="url(#mask-2)" fill="#FF3735">
+                    <g transform="translate(-2.000000, 3.000000)" id="Rectangle">
+                        <path d="M6,0 L106,8.8817842e-16 C109.313708,2.79460044e-16 112,2.6862915 112,6 L112,27.3529412 L60.4562352,27.3529412 L6,27.3529412 C2.6862915,27.3529412 4.05812251e-16,24.6666497 0,21.3529412 L-8.8817842e-16,6 C-1.29399067e-15,2.6862915 2.6862915,1.4968968e-15 6,8.8817842e-16 Z"></path>
+                    </g>
+                </g>
+                <text id="今日推荐" mask="url(#mask-2)" font-family="PingFangSC-Medium, PingFang SC" font-size="14" font-weight="400" fill="#FFFFFF">
+                    <tspan x="33" y="21">今日推荐</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

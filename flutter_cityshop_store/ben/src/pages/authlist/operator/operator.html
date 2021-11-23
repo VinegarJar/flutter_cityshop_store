@@ -1,0 +1,61 @@
+<!--
+  Generated template for the EditAccountPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar color="navbar">
+      <ion-title>运营商认证</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+  <ion-content>
+   <div *ngIf="fuwuye">
+    <ion-item>
+      <!-- <ion-label><span style="color:#f00;margin-right:3px;">*</span>手机号</ion-label> -->
+      <ion-input type="text" placeholder="请输入手机号" [(ngModel)]="telephoneNum" clearInput></ion-input>
+    </ion-item>
+    <ion-item>
+      <!-- <ion-label><span style="color:#f00;margin-right:3px;">*</span>验证码</ion-label> -->
+      <ion-input type="password" placeholder="请输入服务密码" [(ngModel)]="password"></ion-input>
+    </ion-item>
+    <ion-row style="padding:5px 0 0 15px;">
+      <ion-col>
+        <input type="checkbox" style="width:16px;height:16px;vertical-align: top;" name="check2" checked>
+        <span style="font-size:12px;color: #666;">同意《用户使用协议》</span>
+      </ion-col>
+    </ion-row>
+    <div padding>
+      <button ion-button block style="border-radius:10px;width:95%;margin: 0 auto;" (click)="getSmsCode()"><span style="font-size: 16px;">确认</span></button>
+    </div>
+    <div padding>
+      <p style="font-size: 14px;color: #888888;">温馨提示：</p>
+      <p style="font-size: 14px;color: #888888;">你稍后会收到多条运营商官网下发的提醒短信，属正常情况</p>
+    </div>
+    <div style="position:absolute;bottom:10px;left:50%;margin-left:-79px;">
+      <p style="color: #888888;font-size: 14px;">我们坚决保护您的信息安全</p>
+    </div>
+   </div>
+   <div *ngIf="!fuwuye">
+    <div style="position: relative;">
+        <div style="opacity: .5;width:100%;height:35px;line-height: 35px;padding-left:16px;background:#99CCFF;color:#0099FF;font-size: 12px;">短信验证码已发送，10分钟内有效，请注意查收</div>
+        <ion-item>
+          <p style="font-size:12px;">请输入由<span style="color:#0099FF;">运营商</span>发送至<span style="color:#0099FF;">{{this.telephoneNum}}</span>的短信验证码</p>
+        </ion-item>
+        <ion-item>
+          <ion-label><span style="color:#f00;margin-right:3px;">*</span>短信验证码</ion-label>
+          <ion-input type="text" placeholder="请输入短信验证码" [(ngModel)]="smsCode"></ion-input>
+        </ion-item>
+        <button ion-button block (click)="getSmsCode()" *ngIf="smsBtn" style="position: absolute;width:20%;height:25px;line-height:25px;right:10px;bottom:10px;z-index: 100;">获取</button>
+        <button ion-button block *ngIf="!smsBtn" disabled="true" style="position: absolute;width:20%;height:25px;line-height:25px;right:10px;bottom:10px;z-index: 100;">{{ time + 's重发' }}</button>
+    </div>
+    <div padding>
+      <button ion-button block style="border-radius:10px;width:95%;margin: 0 auto;" (click)="submitClick()"><span style="font-size: 16px;">同意并授权</span></button>
+    </div>
+    <div style="position:absolute;bottom:10px;left:50%;margin-left:-79px;">
+      <p style="color: #888888;font-size: 14px;">我们坚决保护您的信息安全</p>
+    </div>
+   </div>
+  </ion-content>
+    

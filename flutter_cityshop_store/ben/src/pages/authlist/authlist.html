@@ -1,0 +1,51 @@
+<!--
+  Generated template for the EditAccountPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      认证
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div style="width: 80%;height:18px;background:burlywood;border-radius:5px;font-size:13px;color: cornsilk;text-align:center;margin: 5% auto 0;line-height: 18px;"> 资料填写完整，可立即下款！</div>      
+  <ion-card style="width:91%;border-radius:10px;margin: 25px auto 30px;box-shadow:0 4px 16px rgba(0,0,0,.12);">   
+    <ion-item style="overflow: hidden;" (click)="pushAuthPage()">
+      <ion-icon name="star" style="color: #3880ff;font-size:25px; width: 25px;text-align: center;"></ion-icon>
+      <p style="font-size: 16px; color:#000;display: inline-block;vertical-align: bottom;margin-left: 10px;">身份认证</p>
+      <div style="float: right;line-height:25px;">
+        <span style="color: brown;font-size:12px;">{{ realNameVerify }}</span>
+        <ion-icon name="arrow-dropright" style="color: #3880ff; margin-left:10px;" size="small"></ion-icon>
+      </div>
+    </ion-item>
+    <ion-item style="overflow: hidden;" (click)="pushOperatorPage()">
+      <ion-icon name="phone-portrait" style="color: #3880ff;font-size:25px;width: 25px;text-align: center;"></ion-icon>
+      <p style="font-size: 16px; color:#000;display: inline-block;vertical-align: bottom;margin-left: 10px;">运营商认证</p>
+      <div style="float: right;line-height:25px;">
+        <span style="color: brown;font-size:12px;">{{ yysVerify }}</span>
+        <ion-icon name="arrow-dropright" style="color: #3880ff; margin-left:10px;" size="small"></ion-icon>
+      </div>
+    </ion-item>
+    <ion-item style="overflow: hidden;" (click)="pushBasicinfoPage()">
+      <ion-icon name="person" style="color: #3880ff;font-size:25px;width: 25px;text-align: center;"></ion-icon>
+      <p style="font-size: 16px; color:#000;display: inline-block;vertical-align: bottom;margin-left: 10px;">个人信息认证</p>
+      <div style="float: right;line-height:25px;">
+        <span style="color: brown;font-size:12px;">{{ basicInfoVerify }}</span>
+        <ion-icon name="arrow-dropright" style="color: #3880ff; margin-left:10px;" size="small"></ion-icon>
+      </div>
+    </ion-item>
+    <ion-item style="overflow: hidden;" (click)="pushBankinfoPage()">
+      <ion-icon name="card" style="color: #3880ff;font-size:25px;width: 25px;text-align: center;"></ion-icon>
+      <p style="font-size: 16px; color:#000;display: inline-block;vertical-align: bottom;margin-left: 10px;">绑定银行卡</p>
+      <div style="float: right;line-height:25px;">
+        <span style="color: brown;font-size:12px;">{{ bankVerify }}</span>
+        <ion-icon name="arrow-dropright" style="color: #3880ff; margin-left:10px;" size="small"></ion-icon>
+      </div>
+    </ion-item>
+  </ion-card>
+</ion-content>

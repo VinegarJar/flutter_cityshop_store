@@ -1,0 +1,195 @@
+<ion-header mode="ios" style="padding-bottom: 10px;">
+  <ion-navbar mode="ios">
+    <ion-title mode="ios">
+      维维钱包
+    </ion-title>
+  </ion-navbar>
+  <div style="width: calc(100% - 24px);
+        height: 70px;
+        border-radius: 10px;
+        box-shadow:0 0 10px rgba(0,0,0,.12);
+        margin: 10px auto;
+        padding: 5px 16px;
+        background: #fff;
+        display:flex;
+        flex-direction: row;
+        align-items: center;">
+        <img src="../../../assets/icon/fail.svg" style="width:45px;height:45px;margin-right:20px;" alt="">
+        <div>
+          <p style="color:#000;font-size:18px;font-weight:600;vertical-align:center;">审核失败</p>
+          <p style="color:#999;font-size:12px;">已为您匹配更多平台</p>
+        </div>
+  </div>
+  <div style="font-size:15px;width: calc(100% - 28px);margin: 20px auto 4px;font-weight:600;">根据您的信用评级，为您推荐以下产品</div>
+  <p style="color:#999;font-size:12px;width: calc(100% - 28px);margin: 0 auto;">
+    <img src="../../../assets/icon/guangbo.svg" style="width:15px;height:15px;vertical-align:bottom;margin-right:5px;" alt="">
+    建议同时申请3-5款产品，通过率翻三倍
+  </p>
+</ion-header>
+
+<ion-content class="content">
+  <!-- <div class="layer" *ngIf="layer"></div>
+  <div class="dialog" *ngIf="layer">
+    <p class="dialog-title">贷款金额</p>
+    <div class="slider">
+      <div class="label">{{saturation}}<span style="font-size: 13px;">元</span></div>
+      <ion-item>
+        <ion-range mode="ios" min="1000" max="10000" [(ngModel)]="saturation" color="navbar" step="1000" (ionChange)="ionChange()">
+        </ion-range>
+      </ion-item>
+      <div class="minPrice">1000</div>
+      <div class="maxPrice">10000</div>
+    </div>
+    <div class="radio">
+      <div class="radio-item active">3个月</div>
+      <div class="radio-item">6个月</div>
+      <div class="radio-item">12个月</div>
+    </div>
+    <div class="intro">
+      <div class="intro-item"><img src="../../../assets/icon/qian.svg" alt="">大额低息</div>
+      <div class="intro-item"><img src="../../../assets/icon/xiakuan.svg" alt="">通过率高</div>
+      <div class="intro-item"><img src="../../../assets/icon/shandian.svg" class="shandian" alt="">闪电贷款</div>
+    </div>
+    <div class="loan-btn" tappable (click)="loanClick()">立即借款</div>
+    <div class="close-btn" tappable (click)="closeLayer()">
+      <img src="../../../assets/imgs/imgs/close.png" alt="">
+    </div>
+  </div> -->
+   <!--下拉刷新-->
+  <ion-refresher (ionRefresh)="doRefresh($event)" style="margin:0;padding:0;">
+    <ion-refresher-content pullingIcon="refresh"  pullingText="下拉刷新"  refreshingSpinner="circles"  refreshingText="">
+    </ion-refresher-content>
+  </ion-refresher>
+  <!-- <div style="width:95%;margin:10px auto 5px;height:30px;background:rgb(255,250,247);position:relative;border-radius:20px;" class="paoma">
+    <span style="position: absolute;left:10px;width:30px;height:30px;background:url('../../../assets/icon/guangbo.svg') no-repeat center;background-size:15px 15px;"></span>
+    <ion-slides autoplay="3000" loop="true" direction="vertical" autoplayDisableOnInteration="true" *ngIf="paomaSliders.length>0">
+      <ion-slide *ngFor="let item of paomaSliders" (click)="paomaClick(item)" style="width:100%;height:100%;" tappable>
+        <p style="font-size: 13px;text-align: left;padding-left: 50px;">{{item.message}}</p>
+        <p style="font-size: 13px;text-align: left;padding-left: 50px;">{{item.phone}}在<code style="color: orange;">{{item.productName}}</code>成功借款了<code style="color: red;">{{item.amount}}元</code></p>
+      </ion-slide>
+    </ion-slides>
+    <span style="position:absolute;width:30px;height:30px;line-height:30px;right:-10px;top:0;color:#999;">></span>
+  </div> -->
+  <!-- <div class="soon">
+    <ul class="race" *ngIf="line_1">
+      <li class="pr" tappable (click)="productSoonItemSelected(productSoonUrl1, 0)">
+        <div class="img"><img src="../../../assets/imgs/imgs/shandian.png" alt="无" onerror="this.src='../../../assets/imgs/imgs/defaultImg.png';this.onerror=null"></div>
+        <span class="pr-name">{{'闪电下款'}}</span>
+      </li>
+      <li class="pr" tappable (click)="productSoonItemSelected(productSoonUrl2, 1)">
+        <div class="img"><img src="../../../assets/imgs/imgs/zhima.png" alt="无" onerror="this.src='../../../assets/imgs/imgs/defaultImg.png';this.onerror=null"></div>
+        <span class="pr-name">{{'芝麻分贷'}}</span>
+      </li>
+      <li class="pr" tappable (click)="productSoonItemSelected(productSoonUrl3, 2)">
+        <div class="img"><img src="../../../assets/imgs/imgs/bucha.png" alt="无" onerror="this.src='../../../assets/imgs/imgs/defaultImg.png';this.onerror=null"></div>
+        <span class="pr-name">{{'不查征信'}}</span>
+      </li>
+      <li class="pr" tappable (click)="productSoonItemSelected(productSoonUrl4, 3)">
+        <div class="img"><img src="../../../assets/imgs/imgs/miaopi.png" alt="无" onerror="this.src='../../../assets/imgs/imgs/defaultImg.png';this.onerror=null"></div>
+        <span class="pr-name">{{'秒批口子'}}</span>
+      </li>
+    </ul>
+    <ul class="race" *ngIf="line_2">
+        <li class="pr" tappable (click)="productSoonItemSelected(productSoonUrl5, 4)">
+          <div class="img"><img src="../../../assets/imgs/imgs/Group.png" alt="无" onerror="this.src='../../../assets/imgs/imgs/defaultImg.png';this.onerror=null"></div>
+          <span class="pr-name">{{'小额快贷'}}</span>
+        </li>
+        <li class="pr" tappable (click)="productSoonItemSelected(productSoonUrl6, 5)">
+          <div class="img"><img src="../../../assets/imgs/imgs/Group2.png" alt="无" onerror="this.src='../../../assets/imgs/imgs/defaultImg.png';this.onerror=null"></div>
+          <span class="pr-name">{{'大额低息'}}</span>
+        </li>
+        <li class="pr" tappable (click)="productSoonItemSelected(productSoonUrl7, 6)">
+          <div class="img"><img src="../../../assets/imgs/imgs/Group3.png" alt="无" onerror="this.src='../../../assets/imgs/imgs/defaultImg.png';this.onerror=null"></div>
+          <span class="pr-name">{{'高通过率'}}</span>
+        </li>
+        <li class="pr" tappable (click)="productSoonItemSelected(productSoonUrl8, 7)">
+          <div class="img"><img src="../../../assets/imgs/imgs/Group4.png" alt="无" onerror="this.src='../../../assets/imgs/imgs/defaultImg.png';this.onerror=null"></div>
+          <span class="pr-name">{{'每日一款'}}</span>
+        </li>
+      </ul>
+  </div> -->
+  <dialog-prd #child1 *ngIf="dialogS" (out)='outpust($event)' class="dialog-s"></dialog-prd>
+  <div class="today-recommend-wrap">
+    <ion-slides pager speed="800" autoplayDisableOnInteration="true" autoplay="4000">
+      <ion-slide>
+        <div class="today-recommend">
+          <div class="card" style="position: relative;" tappable (click)="productItemSelected()">
+            <!-- <img src="../../../assets/icon/todayrecom.svg" style="position: absolute;top:0;right: 0;width:113px;height:30px;" alt=""> -->
+            <div style="display:flex;">
+              <p style="font-size:16px;color:#fff;">{{todayRec.productName}}</p>
+              <p style="margin: 2px 5px;" *ngIf="todayRec.shortContent">|</p>
+              <p style="color: #fff;font-size:12px;position: relative;bottom: -4px;"> {{ todayRec.shortContent }}</p>
+            </div>
+            <div style="display: flex;margin-top:15px;justify-content: space-between;">
+              <div>
+                <div style="font-size:20px;color: rgb(254, 95, 15);font-weight: 900;">{{ toCurrencyString(todayRec.loanUpper) }}</div>
+                <p style="color:#fff;font-size:12px;margin-top:5px;font-weight:900;">最高借款额度(元)</p>
+              </div>
+              <div style="text-align:center;">
+                <div style="width: 90px;height:25px;background:url('../../../assets/icon/shenqing.svg') no-repeat center;"></div>
+                <p style="color:#fff;font-size:12px;margin-top:5px;">{{ todayRec.applyNum }}人已申请</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-slide>
+      <ion-slide *ngFor="let item of slideArr" tappable (click)="slideItemClick(item)">
+        <div class="today-recommend">
+          <div class="img">
+            <img src="{{item.bannerImgUrl}}" alt="">
+          </div>
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </div>
+  <div class="hh"></div>
+  <div class="product-recommend">
+    <div class="product-recommend-title">
+        <div style="border-left:3px solid #FC7028;height:14px;margin-top:4px;"></div>
+        <span class="text">{{'特别推荐'}}</span>
+        <span class="text2">{{'同时申请五款产品以上，成功率更高哦。'}}</span>
+    </div>
+    <ul class="all-product">
+      <li class="ion-item" *ngFor="let item of productArr index as i" tappable (click)="itemSelected(item, i)">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-12 style="position: relative;">
+              <div class="img"style="display:inline-block;"><img src="{{item.productImgUrl}}" alt="无" onerror="this.src='../../../assets/icon/quesheng.svg';this.onerror=null"></div>
+              <div class="name" style="display: inline-block;">
+                <p>
+                  <span style="font-size:15px;">{{ item.productName }}</span>
+                  <span style="color:rgb(72,138,255);display:inline-block;padding:0 10px;font-size:12px;height:16px;text-align:center;line-height:16px;border:1px solid rgb(72,138,255);border-radius:15px;">{{item.shortContent}}</span>
+                </p>
+                <p *ngIf="item.longContent" style="color:#999999;">{{item.longContent}}</p>
+              </div>
+              <div style="position:absolute;right:16px;top:5px;">
+                <div style="width:90px;height:25px;background:url('../../../assets/icon/shenqing.svg') no-repeat center;"></div>
+                <div style="font-size:12px;margin-top:5px;width:90px;text-align:center;" *ngIf="item.miScoreSwitch">领 <span style="color:#FC7028;">{{item.miScore}}</span> 米分</div>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-6>
+              <p class="edu" *ngIf="item.loanUpper">
+                <span style="font-size:12px;color:#000000;">最高额度</span>
+                <span class="text">{{item.loanUpper}}</span>
+                <span style="font-size:12px;color:#000000;">元</span>
+              </p>
+              <p style="padding-left:16px;color:#999;font-size:12px;">最快{{item.loanSpeed}}放款</p>
+            </ion-col>
+            <ion-col col-6>
+              <p style="padding:6px 0;text-align:left;color:#000;font-size:12px;"><span style="font-size:17px;margin-right:2px;">{{ item.applyNum }}</span>人成功申请</p>
+              <p style="color:#999;font-size:12px;" *ngIf="item.loanPeriodLower || item.loanPeriodUpper">期限{{item.loanPeriodLower}}-{{item.loanPeriodUpper}}天</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </li>  
+    </ul>
+    <!-- <div class="check-all">
+      <span tappable (click)="checkAllProd()">
+        <span class="all">{{bottomText}} -></span>
+      </span>
+    </div> -->
+  </div>
+    <!-- <p class="banben-text">版权所有@上海安刚网络科技有限公司</p> -->
+</ion-content>

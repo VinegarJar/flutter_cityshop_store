@@ -1,0 +1,74 @@
+<!--
+  Generated template for the EditAccountPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+  <ion-header>
+    <ion-toolbar mode="ios">  
+    <button ion-button clear small navPop style="padding: 0;">  
+      <!-- <img src="assets/imgs/back.png" style="margin-left:-28px;" /> -->
+    </button>  
+    <ion-title mode="ios">审核结果</ion-title>  
+  </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <!--下拉刷新-->
+    <ion-refresher *ngIf="status === '2'" (ionRefresh)="doRefresh($event)" style="margin:0;padding:0;">
+      <ion-refresher-content pullingIcon="refresh"  pullingText="下拉刷新"  refreshingSpinner="circles"  refreshingText="">
+      </ion-refresher-content>
+    </ion-refresher>
+    <dialog-prd #child1 *ngIf="(dialogS && userAppType === '1') || (dialogS && userAppType === '2' && status === '0')" (out)='outpust($event)' class="dialog-s"></dialog-prd>
+    <img src="../../../assets/imgs/shenhe.svg" alt="" style="margin:0 auto;width:50px;height:50px;margin-top:50px;display: block;">
+    <p *ngIf="userAppType === '2' && status === '0'" style="text-align:center;font-size:30px;margin-top:5px;">系统审核中</p>
+    <p *ngIf="userAppType === '2' && status === '0'" style="text-align:center;color:#999;margin-top:5px;">额度计算大约需要2-6小时，请耐心等待</p>
+    <p *ngIf="userAppType === '2' && status === '1'" style="text-align:center;font-size:30px;margin-top:5px;">审核失败</p>
+    <p *ngIf="userAppType === '2' && status === '1'" style="text-align:center;color:#999;margin-top:5px;">请30天后再来申请</p>
+    <p *ngIf="userAppType === '1'"style="text-align:center;font-size:30px;margin-top:5px;">系统审核中</p>
+    <p *ngIf="userAppType === '1'"style="text-align:center;color:#999;margin-top:5px;">额度计算大约需要2-6小时，请耐心等待</p>
+    <!-- <ion-row style="margin:0 auto;width:80%;margin-top:150px;">
+      <ion-col>
+        <button ion-button block style="border-radius:10px;" (click)="shenqing()"><span style="font-size: 16px;">{{ '申请其他产品' }}</span></button>
+      </ion-col>
+    </ion-row> -->
+    <!-- <p *ngIf="status === '2'" style="text-align:center;font-size:30px;margin-top:5px;">审 核 成 功</p> -->
+    <ul *ngIf="userAppType === '1'" class="all-product">
+      <p class="tuijian">为您推荐以下产品,申请3款以上,下款率翻倍</p>
+      <li class="ion-item" *ngFor="let item of productArr index as i" tappable (click)="itemSelected(item, i)">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-12 style="position: relative;">
+              <div class="img"style="display:inline-block;"><img src="{{item.productImgUrl}}" alt="无" onerror="this.src='../../assets/icon/quesheng.svg';this.onerror=null"></div>
+              <div class="name" style="display: inline-block;">
+                <p>
+                  <span style="font-size:15px;">{{ item.productName }}</span>
+                  <span style="color:rgb(72,138,255);display:inline-block;padding:0 10px;font-size:12px;height:16px;text-align:center;line-height:16px;border:1px solid rgb(72,138,255);border-radius:15px;">{{item.shortContent}}</span>
+                </p>
+                <p *ngIf="item.longContent" style="color:#999999;">{{item.longContent}}</p>
+              </div>
+              <div style="position:absolute;right:16px;top:5px;">
+                <div style="width:90px;height:25px;background:url('../../assets/icon/shenqing.svg') no-repeat center;"></div>
+                <div style="font-size:12px;margin-top:5px;width:90px;text-align:center;" *ngIf="item.miScoreSwitch">领 <span style="color:#FC7028;">{{item.miScore}}</span> 米分</div>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-6>
+              <p class="edu" *ngIf="item.loanUpper">
+                <span style="font-size:12px;color:#000000;">最高额度</span>
+                <span class="text">{{item.loanUpper}}</span>
+                <span style="font-size:12px;color:#000000;">元</span>
+              </p>
+              <p style="padding-left:16px;color:#999;font-size:12px;">最快{{item.loanSpeed}}放款</p>
+            </ion-col>
+            <ion-col col-6>
+              <p style="padding:6px 0;text-align:left;color:#000;font-size:12px;"><span style="font-size:17px;margin-right:2px;">{{ item.applyNum }}</span>人成功申请</p>
+              <p style="color:#999;font-size:12px;" *ngIf="item.loanPeriodLower || item.loanPeriodUpper">期限{{item.loanPeriodLower}}-{{item.loanPeriodUpper}}天</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </li>  
+    </ul>
+  </ion-content>
+    

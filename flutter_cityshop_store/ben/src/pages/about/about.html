@@ -1,0 +1,44 @@
+<ion-header mode="ios">
+  <ion-navbar color="navbar" mode="ios">
+    <ion-title mode="ios">
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content style="background:rgb(249,249,249);position: relative;">
+  <div class="wrap">
+    <div class="imgs">
+      <div class="header-icon"></div>
+      <p class="text">ID: {{miId}}</p>
+    </div>
+    <ion-card style="width:90%;margin:25px auto 30px;box-shadow:none;" mode="android">
+      <!-- <ion-item>
+        <p style="display:inline-block;width:16px;height:19px;background:url('../../assets/imgs/mifen.png') no-repeat center center;background-size:14px 14px;"></p>
+        <p style="font-size:14px;color:#000;display:inline-block;margin-left:5px;">我的米分</p>
+        <p style="float:right;color:rgb(255, 55, 53);">{{mifenScore}}</p>
+      </ion-item> -->
+      <ion-item tappable (click)="kefuhaoma()">
+        <p style="display:inline-block;width:16px;height:19px;background:url('../../assets/imgs/help.png') no-repeat center center;background-size:14px 14px;"></p>
+        <p style="font-size:14px;color:#000;display:inline-block;margin-left:5px;">关于我们</p>
+        <p style="float:right;width:16px;height:19px;background:url('../../assets/imgs/right.png') no-repeat center center;background-size:14px 14px;"></p>
+      </ion-item>
+      <ion-item tappable (click)="pushComplaint()">
+        <p style="display:inline-block;width:16px;height:19px;background:url('../../assets/imgs/jianyi.png') no-repeat center center;background-size:14px 14px;"></p>
+        <p style="font-size:14px;color:#000;display:inline-block;margin-left:5px;">建议与投诉</p>
+        <p style="float:right;width:16px;height:19px;background:url('../../assets/imgs/right.png') no-repeat center center;background-size:14px 14px;"></p>
+      </ion-item>
+      <ion-item tappable (click)="kefuhaoma2()">
+        <p style="display:inline-block;width:16px;height:19px;background:url('../../assets/imgs/mifen.png') no-repeat center center;background-size:14px 14px;"></p>
+        <p style="font-size:14px;color:#000;display:inline-block;margin-left:5px;">联系客服</p>
+        <p style="float:right;width:16px;height:19px;background:url('../../assets/imgs/right.png') no-repeat center center;background-size:14px 14px;"></p>
+      </ion-item>
+      <ion-item tappable (click)="pushSetting()">
+        <p style="display:inline-block;width:16px;height:19px;background:url('../../assets/imgs/shezhi.png') no-repeat center center;background-size:14px 14px;"></p>
+        <p style="font-size:14px;color:#000;display:inline-block;margin-left:5px;">设置</p>
+        <p style="float:right;width:16px;height:19px;background:url('../../assets/imgs/right.png') no-repeat center center;background-size:14px 14px;"></p>
+      </ion-item>
+    </ion-card>
+    <!-- <div class="banben-box">
+      <p class="banben-text">当前版本: {{version}}</p>
+    </div> -->
+  </div>
+</ion-content>

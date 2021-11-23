@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar mode="ios">
+    <ion-title mode="ios">
+      登录
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content style="position: relative;background-color:#fff;">
+  <img src="../../assets/imgs/icon.png" class="logo" alt="">
+  <div class="input-group">
+    <p class="login-text"></p>
+    <div class="inputgroup2">
+      <ion-item>
+        <ion-label style="color:#999;font-size:14px;">手机号</ion-label>
+        <ion-input type="text" value="" placeholder="请输入手机号" [(ngModel)]="telephone" class="input"></ion-input>
+      </ion-item>
+      <!-- <ion-item class="input2">
+        <ion-label style="color:#999;font-size:14px;">验证码</ion-label>
+        <ion-input type="text" placeholder="请输入验证码" [(ngModel)]="smsCode" class="input" :maxlength="4"></ion-input>
+      </ion-item> -->
+      <!-- <button class="smscode" *ngIf="smsBtn" (click)="getSmsCode()">获取验证码</button> -->
+      <!-- <button class="resmscode" *ngIf="!smsBtn" disabled="true">{{ '重新获取(' + time + 'S)' }}</button> -->
+    </div>
+  </div>
+  <p style="color:#666;font-size:12px;margin-top:5px;padding-left:30px;">点击上方按钮，即表示同意<span (click)="pushXieyi()" style="color: #FC7028;">《注册服务协议》</span></p>
+  <button ion-button (click)="login()" class="btn"><span class="ft">马上申请</span></button>
+  <p style="color:#666;font-size:12px;margin-top:5px;text-align:center;">*首次登录即为注册</p>
+  <!-- <div style="width: 60%;margin:20px auto;">
+    <div style="height:30px;line-height:30px;background-color:#FF0000;text-align: center;color: #fff;font-size: 14px;border-radius: 5px 5px 0 0;">
+      <img src="../../assets/icon/policy.svg" style="width:16px;height:16px;vertical-align: middle;" alt="">
+      温馨提示
+    </div>
+    <div style="padding: 10px;background-color:#EEEEEE;border-radius: 0 0 5px 5px;">
+      <p style="font-size:12px;text-align: justify;">本平台不会以任何名义要求添加微信，QQ，支付宝。<em style="color: #f00;">不会要求任何缴纳解冻费，质保金等贷前收费</em>，请大家务必警惕诈骗！</p>
+    </div>
+  </div> -->
+</ion-content>

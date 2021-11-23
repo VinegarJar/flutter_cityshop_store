@@ -1,0 +1,12 @@
+<!-- Generated template for the DialogPrdComponent component -->
+<div class="box">
+  <span class="icon" tappable (click)="closeS()">X</span>
+  <div class="box-m">
+    <img src="{{productImgUrl}}" alt="" class="img" alt="无" onerror="this.src='../../assets/icon/quesheng.svg';this.onerror=null">
+    <p class="prd-name">{{ productName }}</p>
+    <p class="tip">该产品与您的资料匹配度较高</p>
+    <p class="prd-edu">最高额度：<span style="color:rgb(254, 95, 15);font-size:20px;">{{ loanUpper }}</span> 元</p>
+    <p class="prd-edu">{{ shortContent }}</p>
+  </div>
+  <p class="btn" tappable (click)="productSelected()">立即申请</p>
+</div>

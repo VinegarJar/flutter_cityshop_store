@@ -1,0 +1,34 @@
+<!--
+  Generated template for the EditAccountPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar mode="ios">
+    <ion-title mode="ios">身份认证</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <dialog-prd #child1 *ngIf="dialogS" (out)='outpust($event)' class="dialog-s"></dialog-prd>
+    <ion-grid>
+      <ion-row class="pt20">
+        <ion-col>
+          <div class="img-tip">身份证人像面</div>
+          <img src={{idFrontImg}} alt="" class="id-img" (click)="openCamera('front')"/>
+        </ion-col>
+      </ion-row>
+      <ion-row class="pt20">
+        <ion-col>
+          <div class="img-tip">身份证国徽面</div>
+          <img src={{idBackImg}} alt="" class="id-img" (click)="openCamera('back')"/>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <div padding>
+      <button ion-button block style="border-radius:10px;width:90%;margin: 0 auto;" (click)="realnameAuth()"><span style="font-size: 16px;">下一步</span></button>
+    </div>
+</ion-content>
