@@ -1,26 +1,20 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:flutter_cityshop_store/common/config/config.dart';
 
-//flutter clean 清理
-/*
-typedef onSuccess = void Function(dynamic data);
-typedef onError = void Function(String error);
-*/
+
 const httpHeaders = {
-  'Content-Type': 'application/json',
-  'X-LC-Id': 'a4Cj1Hm5aMrdhob6xGw71B5A-gzGzoHsz',
-  'X-LC-Key': 'XQaL1tUQC0DCQxBA9fpoR21C',
+    'Content-Type': 'application/json', 
+    'Accept': 'application/json',
+    'app_token': 'token'
 };
 
-const hotcommendUrl = "App/Api/homeHotCommendGoods"; //首页热卖推荐
-const categoryUrl = "App/Index/shopSecondCategory"; //分类列表数据
-const goodsListUrl = "v2/goods"; //购物车推荐列表数据
 
 class HttpRequestMethod {
+
   static Dio _dio;
 
-  /// default options
-  static const String BASE_URL = 'http://mock-api.com/3gldJ1gO.mock/';
+
 
   static const int CONNECT_TIMEOUT = 10000;
   static const int RECEIVE_TIMEOUT = 30000;
@@ -52,10 +46,11 @@ class HttpRequestMethod {
   static Dio createInstance() {
     if (_dio == null) {
       _dio = new Dio(new BaseOptions(
-        baseUrl: BASE_URL,
+        baseUrl: Config.baseURL,
         connectTimeout: CONNECT_TIMEOUT,
         receiveTimeout: RECEIVE_TIMEOUT, // 响应流上前后两次接受到数据的间隔，单位为毫秒。
         responseType: ResponseType.plain,
+        headers:httpHeaders,
         validateStatus: (status) {
           // 不使用http状态码判断状态，使用AdapterInterceptor来处理（适用于标准REST风格）
           return true;
