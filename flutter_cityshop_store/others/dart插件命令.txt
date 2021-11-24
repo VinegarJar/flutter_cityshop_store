@@ -18,3 +18,6 @@ flutter packages pub run json_model(Flutter中) 命令生成Dart model类，生�
 flutter packages pub run json_model 
 
 flutter packages pub run build_runner build
+
+typedef onSuccess = void Function(dynamic data);
+typedef onError = void Function(String error);

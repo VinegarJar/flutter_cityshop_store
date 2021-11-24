@@ -1,12 +1,13 @@
 import "package:flutter/cupertino.dart";
 import 'package:flutter/material.dart';
-import 'package:flutter_cityshop_store/pages/catergory_pages/catergory_pages.dart';
-import 'package:flutter_cityshop_store/pages/home_pages/home_pages.dart';
-import 'package:flutter_cityshop_store/pages/mine_pages/mine_pages.dart';
 import 'package:flutter_cityshop_store/provide/common_provider.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+
+import 'catergory/catergory_pages.dart';
+import 'home/home_pages.dart';
+import 'mine/mine_pages.dart';
 
 class IndexPages extends StatelessWidget {
   final List<BottomNavigationBarItem> bottomTabs = [

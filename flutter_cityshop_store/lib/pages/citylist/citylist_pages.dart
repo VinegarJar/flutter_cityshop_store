@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_cityshop_store/model/models.dart';
-import 'package:flutter_cityshop_store/pages/citylist_pages/citysearch.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_cityshop_store/utils/utils.dart';
 import 'package:flutter_cityshop_store/widget/buildback.dart';
@@ -13,6 +12,8 @@ import 'package:flutter_cityshop_store/widget/loding.dart';
 import 'package:flutter_cityshop_store/widget/searchbar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lpinyin/lpinyin.dart';
+
+import 'citysearch.dart';
 
 class CityListPages extends StatefulWidget {
   CityListPages({Key key}) : super(key: key);
@@ -156,7 +157,7 @@ class _CityListPagesState extends State<CityListPages> {
               print("onTapSearch");
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) =>  CitySearchResult(cityList:cityList),
+                  builder: (context) => CitySearchResult(cityList: cityList),
                 ),
               );
             },

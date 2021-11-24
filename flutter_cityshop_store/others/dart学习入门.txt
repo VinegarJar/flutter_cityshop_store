@@ -15,6 +15,9 @@ github  gitee  coding(密码后面+@)
 钉钉中设置代码提交提醒--Github机器人通知
 https://www.cnblogs.com/muxi0407/p/11984151.html
 
+一款跨平台的开源Github客户端App,地址
+https://github.com/CarGuo/gsy_github_app_flutter
+
 
 iOS开发者账号   打包IDcom.solve.globuleSports
 bianyobeng290229@163.com  邮箱密码re818711 Bonnie123bo 朋友5200，工作5211，父母5222 

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_cityshop_store/utils/event_bus.dart';
+import 'package:flutter_cityshop_store/common/event/event_bus.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -36,9 +36,6 @@ class SearchBar extends StatefulWidget {
 }
 
 class _SearchBarState extends State<SearchBar> {
-
-  
-
   final TextEditingController _queryTextController = TextEditingController();
 
   FocusNode focusNode = FocusNode();
@@ -47,15 +44,12 @@ class _SearchBarState extends State<SearchBar> {
   void initState() {
     super.initState();
     _queryTextController.addListener(_onQueryChanged);
-     eventBus.on<UserTextFieldInEvent>().listen((event){
-      
-       print("----获取监听数据,----${event.text}");
-  
-       _queryTextController.text = event.text;
-   });
+    eventBus.on<UserTextFieldInEvent>().listen((event) {
+      print("----获取监听数据,----${event.text}");
 
+      _queryTextController.text = event.text;
+    });
   }
- 
 
   @override
   void dispose() {
@@ -77,11 +71,8 @@ class _SearchBarState extends State<SearchBar> {
     widget.textFieldResults(_queryTextController.text);
   }
 
-
-
   @override
   Widget build(BuildContext context) {
-
     return Container(
         alignment: Alignment.center,
         margin: EdgeInsets.only(left: 0, right: 0),
@@ -128,7 +119,8 @@ class _SearchBarState extends State<SearchBar> {
                                     fontSize: ScreenUtil().setSp(26),
                                   ),
                                   suffixIcon: _queryTextController.text.isEmpty
-                                      ? null:IconButton(
+                                      ? null
+                                      : IconButton(
                                           onPressed: () {
                                             _queryTextController.clear();
                                           },
@@ -153,5 +145,4 @@ class _SearchBarState extends State<SearchBar> {
                   : Container()
             ]));
   }
-
 }

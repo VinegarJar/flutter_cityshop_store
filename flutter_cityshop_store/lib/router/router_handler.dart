@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart';
-import 'package:flutter_cityshop_store/pages/citylist_pages/citylist_pages.dart';
-import 'package:flutter_cityshop_store/pages/citylist_pages/citysearch.dart';
-import 'package:flutter_cityshop_store/pages/details_page/details_page.dart';
+import 'package:flutter_cityshop_store/pages/citylist/citylist_pages.dart';
+import 'package:flutter_cityshop_store/pages/citylist/citysearch.dart';
+import 'package:flutter_cityshop_store/pages/details/details_page.dart';
 import 'package:flutter_cityshop_store/pages/index_page.dart';
 import 'package:flutter_cityshop_store/pages/webView/webView_page.dart';
 

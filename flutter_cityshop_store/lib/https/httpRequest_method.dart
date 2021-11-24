@@ -16,7 +16,7 @@ const hotcommendUrl = "App/Api/homeHotCommendGoods"; //首页热卖推荐
 const categoryUrl = "App/Index/shopSecondCategory"; //分类列表数据
 const goodsListUrl = "v2/goods"; //购物车推荐列表数据
 
-class HttpManagerMethod {
+class HttpRequestMethod {
   static Dio _dio;
 
   /// default options
@@ -29,23 +29,23 @@ class HttpManagerMethod {
   static const String GET = 'get';
 
   // 静态变量_instance，存储唯一对象
-  static HttpManagerMethod _instance;
+  static HttpRequestMethod _instance;
 
   // 工厂模式 单例
-  factory HttpManagerMethod() => _getInstance();
+  factory HttpRequestMethod() => _getInstance();
 
   //获取单利
-  static HttpManagerMethod get instance => _getInstance();
+  static HttpRequestMethod get instance => _getInstance();
 
-  static HttpManagerMethod _getInstance() {
+  static HttpRequestMethod _getInstance() {
     if (_instance == null) {
-      _instance = new HttpManagerMethod._internal();
+      _instance = new HttpRequestMethod._internal();
     }
     return _instance;
   }
 
   //初始化通用全局单例，第一次使用时初始化
-  HttpManagerMethod._internal() {
+  HttpRequestMethod._internal() {
     print('初始化通用全局单例--我是命名构造函数');
   }
 
