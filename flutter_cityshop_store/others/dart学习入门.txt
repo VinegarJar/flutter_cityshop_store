@@ -18,6 +18,9 @@ https://www.cnblogs.com/muxi0407/p/11984151.html
 一款跨平台的开源Github客户端App,地址
 https://github.com/CarGuo/gsy_github_app_flutter
 
+在线生成icon
+https://icon.wuruihong.com/icon?utm_source=3JBPiJAV#/android
+https://appicon.co/#app-icon
 
 iOS开发者账号   打包IDcom.solve.globuleSports
 bianyobeng290229@163.com  邮箱密码re818711 Bonnie123bo 朋友5200，工作5211，父母5222 

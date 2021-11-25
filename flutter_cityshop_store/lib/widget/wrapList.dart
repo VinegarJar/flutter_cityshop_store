@@ -1,7 +1,5 @@
-import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cityshop_store/model/goodsinfo.dart';
-import 'package:flutter_cityshop_store/router/routes.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -26,22 +24,22 @@ class WrapList extends StatelessWidget {
               print("火爆专区---$val---");
 
               // 触摸收起键盘FocusScope.of(context).requestFocus(FocusNode());
-              Routes.navigateTo(
-                context,
-                Routes.details,
-                params: {
-                  "goodsName": val.goodsName,
-                  "shortName": val.shortName,
-                  "marketPrice": val.marketPrice.toString(),
-                  "price": val.group["price"].toString(),
-                  "salesTip": val.salesTip,
-                  "imageUrl": val.imageUrl,
-                  "thumbUrl": val.thumbUrl,
-                  "hdThumbUrl": val.hdThumbUrl,
-                  "hdUrl": val.hdUrl,
-                },
-                transition: TransitionType.cupertinoFullScreenDialog,
-              );
+              // Routes.navigateTo(
+              //   context,
+              //   Routes.details,
+              //   params: {
+              //     "goodsName": val.goodsName,
+              //     "shortName": val.shortName,
+              //     "marketPrice": val.marketPrice.toString(),
+              //     "price": val.group["price"].toString(),
+              //     "salesTip": val.salesTip,
+              //     "imageUrl": val.imageUrl,
+              //     "thumbUrl": val.thumbUrl,
+              //     "hdThumbUrl": val.hdThumbUrl,
+              //     "hdUrl": val.hdUrl,
+              //   },
+              //   transition: TransitionType.cupertinoFullScreenDialog,
+              // );
             },
             child: Container(
                 width: ScreenUtil().setWidth(330),

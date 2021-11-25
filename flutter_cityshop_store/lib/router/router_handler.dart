@@ -4,6 +4,7 @@ import 'package:flutter_cityshop_store/pages/citylist/citylist_pages.dart';
 import 'package:flutter_cityshop_store/pages/citylist/citysearch.dart';
 import 'package:flutter_cityshop_store/pages/details/details_page.dart';
 import 'package:flutter_cityshop_store/pages/index_page.dart';
+import 'package:flutter_cityshop_store/pages/login/login_page.dart';
 import 'package:flutter_cityshop_store/pages/webView/webView_page.dart';
 
 Handler detailsHandler = Handler(
@@ -11,6 +12,11 @@ Handler detailsHandler = Handler(
   Map dict = getJsonParamsHandler(params);
   // print(' dict ===传递的参数：$dict');
   return GoodsDetailsPage(dict: dict);
+});
+
+Handler loginHandler = Handler(
+    handlerFunc: (BuildContext context, Map params) {
+  return LoginPage();
 });
 
 Handler rootRouteHandler = Handler(

@@ -9,6 +9,7 @@ import 'dart:io';
 
 Future<void> main() async {
   HttpOverrides.global = new MyHttpOverrides();
+
   runApp(MyApp());
 
   SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(
@@ -26,8 +27,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final router = FluroRouter();
-    Routes.configureRoutes(router);
+    Routes.setupRouter(router);
     Routes.router = router;
+
+    // Routes.setupRouter(FluroRouter());
 
     return MultiProvider(
         providers: [
@@ -38,8 +41,8 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false, //关闭显示debug模式
           initialRoute: '/', //配置路由
           onGenerateRoute: Routes.router.generator, //配置路由引用
-          title: '借呗',
-          theme: ThemeData(primaryColor: Colors.white, fontFamily: 'Raleway'),
+          // title: '借呗',
+          // theme: ThemeData(primaryColor: Colors.white, fontFamily: 'Raleway'),
         ));
   }
 }
