@@ -17,11 +17,6 @@ class _HomePagesState extends State<HomePages>
   bool get wantKeepAlive => true;
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(

@@ -9,7 +9,14 @@ import 'catergory/catergory_pages.dart';
 import 'home/home_pages.dart';
 import 'mine/mine_pages.dart';
 
-class IndexPages extends StatelessWidget {
+class IndexPages extends StatefulWidget {
+  IndexPages({Key key}) : super(key: key);
+
+  @override
+  _IndexPagesState createState() => _IndexPagesState();
+}
+
+class _IndexPagesState extends State<IndexPages> {
   final List<BottomNavigationBarItem> bottomTabs = [
     BottomNavigationBarItem(icon: Icon(CupertinoIcons.home), label: '首页'),
     BottomNavigationBarItem(
@@ -29,7 +36,6 @@ class IndexPages extends StatelessWidget {
     //初始化屏幕适配组件
     ScreenUtil.init(context, width: 750, height: 1334, allowFontScaling: false);
     int currentIndex = Provider.of<CommonProvider>(context).currentIndex;
-
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,

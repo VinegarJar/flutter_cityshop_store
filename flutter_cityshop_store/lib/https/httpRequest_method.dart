@@ -1,27 +1,25 @@
-import 'dart:convert';
-import 'package:dio/dio.dart';
-import 'package:flutter_cityshop_store/common/config/config.dart';
+import 'dart:collection';
 
+import 'package:dio/dio.dart';
+import 'package:flutter_cityshop_store/https/code.dart';
+import 'package:flutter_cityshop_store/https/interceptors/error_interceptor.dart';
+import 'package:flutter_cityshop_store/https/interceptors/header_interceptor.dart';
+import 'package:flutter_cityshop_store/https/interceptors/log_interceptor.dart';
+import 'package:flutter_cityshop_store/https/interceptors/response_interceptor.dart';
+import 'package:flutter_cityshop_store/https/interceptors/token_interceptor.dart';
+import 'package:flutter_cityshop_store/https/result_data.dart';
 
 const httpHeaders = {
-    'Content-Type': 'application/json', 
-    'Accept': 'application/json',
-    'app_token': 'token'
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'app_token': 'token'
 };
 
-
 class HttpRequestMethod {
-
-  static Dio _dio;
-
-
-
-  static const int CONNECT_TIMEOUT = 10000;
-  static const int RECEIVE_TIMEOUT = 30000;
+  static Dio _dio = new Dio(); // 使用默认配置
 
   //http request methods
   static const String GET = 'get';
-
   // 静态变量_instance，存储唯一对象
   static HttpRequestMethod _instance;
 
@@ -38,83 +36,86 @@ class HttpRequestMethod {
     return _instance;
   }
 
+  final TokenInterceptors _tokenInterceptors = new TokenInterceptors();
+
   //初始化通用全局单例，第一次使用时初始化
   HttpRequestMethod._internal() {
     print('初始化通用全局单例--我是命名构造函数');
+    _dio.interceptors.add(new HeaderInterceptors());
+    _dio.interceptors.add(_tokenInterceptors);
+    _dio.interceptors.add(new LogsInterceptors());
+    _dio.interceptors.add(new ErrorInterceptors());
+    _dio.interceptors.add(new ResponseInterceptors());
   }
 
-  static Dio createInstance() {
-    if (_dio == null) {
-      _dio = new Dio(new BaseOptions(
-        baseUrl: Config.baseURL,
-        connectTimeout: CONNECT_TIMEOUT,
-        receiveTimeout: RECEIVE_TIMEOUT, // 响应流上前后两次接受到数据的间隔，单位为毫秒。
-        responseType: ResponseType.plain,
-        headers:httpHeaders,
-        validateStatus: (status) {
-          // 不使用http状态码判断状态，使用AdapterInterceptor来处理（适用于标准REST风格）
-          return true;
-        },
-      ));
+  Future requestWithMetod(
+      url, params, Map<String, dynamic> header, Options option,
+      {noTip = false}) async {
+    Map<String, dynamic> headers = new HashMap();
+    if (header != null) {
+      headers.addAll(header);
     }
-    return _dio;
-  }
 
-  Response response;
-  //future里面有几个函数：then：异步操作逻辑在这里写。whenComplete：异步完成时的回调。catchError：捕获异常或者异步出错时的回调。
-  /*
-   * Future<Null> future = new Future(() => null);
-    await  future.then((_){
-      print("then");
-    }).then((){
-      print("whenComplete");
-    }).catchError((_){
-      print("catchError");
-    });
-   */
-  Future requestWithMetod(api, {parameters, method, String baseUrl}) async {
-    Options options = Options(method: method);
-    options.headers = httpHeaders;
-    Dio dio = createInstance();
-
-    if (baseUrl != null) {
-      //重定向baseUrl 用于指定特定域名
-      dio.options.baseUrl = baseUrl;
+    if (option != null) {
+      option.headers = headers;
+    } else {
+      option = new Options(method: "get");
+      option.headers = headers;
     }
-    parameters = parameters ?? {};
-    method = method ?? GET;
 
-    /// 请求处理
-    parameters.forEach((key, value) {
-      if (api.indexOf(key) != -1) {
-        api = api.replaceAll(':$key', value.toString());
-      }
-    });
-
-    /// 打印:请求地址-请求方式-请求参数
-
-    print('请求地址-请求参数-请求方式\n【' +
-        api +
-        "\n" +
-        parameters.toString() +
-        "\n" +
-        method +
-        '】');
-    var result;
-    try {
-      Response response =
-          await dio.request(api, data: parameters, options: options);
-      //print('响应数据：' + response.data);
-      if (response.statusCode == 200) {
-        result = json.decode(response.data.toString());
-        // result = response.data;
+    /// 请求处理Error信息
+    resultError(DioError e) {
+      Response errorResponse;
+      if (e.response != null) {
+        errorResponse = e.response;
       } else {
-        throw Exception('statusCode:${response.statusCode}-请检测代码和服务器情况..');
+        errorResponse = new Response(
+            statusCode: 666, requestOptions: RequestOptions(path: url));
       }
-    } on DioError catch (e) {
-      throw Exception('请求出错:${e.toString()}');
-      // print('请求出错：' + e.toString());
+      if (e.type == DioErrorType.connectTimeout ||
+          e.type == DioErrorType.receiveTimeout) {
+        errorResponse.statusCode = Code.NETWORK_TIMEOUT;
+      }
+      return new ResultData(
+          Code.errorHandleFunction(errorResponse.statusCode, e.message, noTip),
+          false,
+          errorResponse.statusCode);
     }
-    return result;
+
+    Response response;
+    try {
+      response = await _dio.request(url, data: params, options: option);
+    } on DioError catch (e) {
+      return resultError(e);
+    }
+    if (response.data is DioError) {
+      return resultError(response.data);
+    }
+    return response.data;
+  }
+
+  ///清除授权
+  clearAuthorization() {
+    _tokenInterceptors.clearAuthorization();
+  }
+
+  ///获取授权token
+  getAuthorization() async {
+    return _tokenInterceptors.getAuthorization();
   }
 }
+
+
+  // static addIssueCommentDao(userName, repository, number, comment) async {
+  //   String url = Address.addIssueComment(userName, repository, number);
+  //   var res = await httpManager.netFetch(
+  //       url,
+  //       {"body": comment},
+  //       {"Accept": 'application/vnd.github.VERSION.full+json'},
+  //       new Options(method: 'POST'));
+  //   if (res != null && res.result) {
+  //     return new DataResult(res.data, true);
+  //   } else {
+  //     return new DataResult(null, false);
+  //   }
+  // }

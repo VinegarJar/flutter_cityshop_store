@@ -1,5 +1,6 @@
 class Config {
-
+  // ignore: non_constant_identifier_names
+  static bool DEBUG = true;
 
   static const PAGE_SIZE = 20;
 
@@ -16,12 +17,9 @@ class Config {
   static const THEME_COLOR = "theme-color";
   static const LOCALE = "locale";
 
-
-
-
   //api请求地址
-  static const String debugbaseURL = "http://localhost:8080";//测试环境IP
-  static const String baseURL =  "http://47.96.155.48:4001"; //生产环境IP
+  static const String debugbaseURL = "http://localhost:8080"; //测试环境IP
+  static const String baseURL = "http://47.96.155.48:4001"; //生产环境IP
   // 上传图片--需要
   static const String uploadFileToOssFront =
       "/wwqbAdmin/base/idcardCheck"; //正面--需要
