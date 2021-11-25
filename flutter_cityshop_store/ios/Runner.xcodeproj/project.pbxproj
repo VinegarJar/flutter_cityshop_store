@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -386,7 +386,7 @@
 					"$(PROJECT_DIR)/Flutter",
 				);
 				OTHER_CFLAGS = "-fno-exceptions";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cityshopstore.seven;
+				PRODUCT_BUNDLE_IDENTIFIER = com.store.applyslug;
 				PRODUCT_NAME = "城市商店";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -523,7 +523,7 @@
 					"$(PROJECT_DIR)/Flutter",
 				);
 				OTHER_CFLAGS = "-fno-exceptions";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cityshopstore.seven;
+				PRODUCT_BUNDLE_IDENTIFIER = com.store.applyslug;
 				PRODUCT_NAME = "城市商店";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -558,7 +558,7 @@
 					"$(PROJECT_DIR)/Flutter",
 				);
 				OTHER_CFLAGS = "-fno-exceptions";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cityshopstore.seven;
+				PRODUCT_BUNDLE_IDENTIFIER = com.store.applyslug;
 				PRODUCT_NAME = "城市商店";
 				VERSIONING_SYSTEM = "apple-generic";
 			};

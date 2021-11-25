@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 class NeverOverScrollIndicator extends StatelessWidget {
   final bool needOverload;
 
-  final Widget? child;
+  final Widget child;
 
   NeverOverScrollIndicator({this.child, this.needOverload = true});
 
   @override
   Widget build(BuildContext context) {
     return ScrollConfiguration(
-      child: child!,
+      child: child,
       behavior: NeverOverScrollBehavior(needOverload: needOverload),
     );
   }
