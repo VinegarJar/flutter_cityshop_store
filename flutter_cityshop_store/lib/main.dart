@@ -21,16 +21,18 @@ Future<void> main() async {
   //asyncFibonacci函数里会创建一个isolate，并返回运行结果
   // print(await asyncFibonacci(20));
   // sendPortIsolate();
+
 }
 
 class MyApp extends StatelessWidget {
+
+
   @override
   Widget build(BuildContext context) {
-    final router = FluroRouter();
-    Routes.setupRouter(router);
-    Routes.router = router;
 
-    // Routes.setupRouter(FluroRouter());
+  final router = FluroRouter();
+  Routes.setupRouter(router);
+  Routes.router = router;
 
     return MultiProvider(
         providers: [
