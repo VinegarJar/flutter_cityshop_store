@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+
 class LoginPage extends StatelessWidget {
+  LoginPage() {
+    print("LoginPage-构造函数被调用");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,4 +23,3 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
-
