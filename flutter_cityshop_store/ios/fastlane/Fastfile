@@ -32,12 +32,11 @@ platform :ios do
      clean: true,# 打包前是否 clean 项目
      export_options: { method: "development"}
    )
-   version = get_version_number_from_plist(xcodeproj: "Runner.xcodeproj",target: 'Runner')
-   buildVersion = get_build_number_from_plist(xcodeproj: "Runner.xcodeproj", target: 'Runner')
 
-   fir_cli api_token:"d2f653948d859d2f06f88eb4d1d39e8f", specify_file_path:"./fastlane/Runner.ipa",need_release_id:true,dingtalk_access_token:"3a01c05738abaaeaf5c5e17d80d4cc5870410387126c5a5e2fbf0095a79977ef",dingtalk_custom_message:"钉钉群通知,用呗App,更新android版本安装包啦!!",dingtalk_at_all:"true"
+
+   fir_cli api_token:"d2f653948d859d2f06f88eb4d1d39e8f", specify_file_path:"./fastlane/用呗.ipa",need_release_id:true,dingtalk_access_token:"3a01c05738abaaeaf5c5e17d80d4cc5870410387126c5a5e2fbf0095a79977ef",dingtalk_custom_message:"钉钉群通知,用呗App,更新android版本安装包啦!!",dingtalk_at_all:"true"
    #fir_cli api_token:"d2f653948d859d2f06f88eb4d1d39e8f"
-   puts "上传ios测试版到Fir成功===== app版本号"+version+" \(Build "+buildVersion+"\)测试版=============\n"
+   puts "上传ios测试版到Fir成功===== 测试版=============\n"
   #  ding_talk_msg_push(
   #       token:"3a01c05738abaaeaf5c5e17d80d4cc5870410387126c5a5e2fbf0095a79977ef", 
   #       text: "########## 钉钉群通知,用呗App,更新ios版本安装包啦!!
