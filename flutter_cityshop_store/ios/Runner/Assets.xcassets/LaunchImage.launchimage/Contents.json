@@ -89,34 +89,6 @@
     },
     {
       "extent" : "full-screen",
-      "idiom" : "ipad",
-      "minimum-system-version" : "7.0",
-      "orientation" : "portrait",
-      "scale" : "1x"
-    },
-    {
-      "extent" : "full-screen",
-      "idiom" : "ipad",
-      "minimum-system-version" : "7.0",
-      "orientation" : "landscape",
-      "scale" : "1x"
-    },
-    {
-      "extent" : "full-screen",
-      "idiom" : "ipad",
-      "minimum-system-version" : "7.0",
-      "orientation" : "portrait",
-      "scale" : "2x"
-    },
-    {
-      "extent" : "full-screen",
-      "idiom" : "ipad",
-      "minimum-system-version" : "7.0",
-      "orientation" : "landscape",
-      "scale" : "2x"
-    },
-    {
-      "extent" : "full-screen",
       "idiom" : "iphone",
       "orientation" : "portrait",
       "scale" : "1x"
@@ -133,54 +105,6 @@
       "orientation" : "portrait",
       "scale" : "2x",
       "subtype" : "retina4"
-    },
-    {
-      "extent" : "to-status-bar",
-      "idiom" : "ipad",
-      "orientation" : "portrait",
-      "scale" : "1x"
-    },
-    {
-      "extent" : "full-screen",
-      "idiom" : "ipad",
-      "orientation" : "portrait",
-      "scale" : "1x"
-    },
-    {
-      "extent" : "to-status-bar",
-      "idiom" : "ipad",
-      "orientation" : "landscape",
-      "scale" : "1x"
-    },
-    {
-      "extent" : "full-screen",
-      "idiom" : "ipad",
-      "orientation" : "landscape",
-      "scale" : "1x"
-    },
-    {
-      "extent" : "to-status-bar",
-      "idiom" : "ipad",
-      "orientation" : "portrait",
-      "scale" : "2x"
-    },
-    {
-      "extent" : "full-screen",
-      "idiom" : "ipad",
-      "orientation" : "portrait",
-      "scale" : "2x"
-    },
-    {
-      "extent" : "to-status-bar",
-      "idiom" : "ipad",
-      "orientation" : "landscape",
-      "scale" : "2x"
-    },
-    {
-      "extent" : "full-screen",
-      "idiom" : "ipad",
-      "orientation" : "landscape",
-      "scale" : "2x"
     }
   ],
   "info" : {
