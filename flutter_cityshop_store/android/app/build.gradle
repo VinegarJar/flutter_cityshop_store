@@ -38,7 +38,7 @@ android {
     compileSdkVersion 30
 
     sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
+        main.java.srcDirs += 'src/main/java'
     }
 
     lintOptions {
@@ -140,6 +140,7 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    //友盟 第三方引入implementation files('libs/umeng-common-2.0.1.jar')
     //解决Android报错引用
     // implementation "com.android.support:support-annotations:28.0.0"
     // implementation 'com.android.support:appcompat-v7:28.0.0'

@@ -10,31 +10,14 @@ import 'package:flutter_cityshop_store/pages/webView/webView_page.dart';
 import 'package:flutter_cityshop_store/widget/never_overscroll_indicator.dart';
 
 class NavigatorUtils {
-  ///替换
-  static pushReplacementNamed(BuildContext context, String routeName) {
-    Navigator.pushReplacementNamed(context, routeName);
-//    if (navigator == null) {
-//      try {
-//        navigator = Navigator.of(context);
-//      } catch (e) {
-//        error = true;
-//      }
-//    }
-//
-//    if (replace) {
-//      ///如果可以返回，清空开始，然后塞入
-//      if (!error && navigator.canPop()) {
-//        navigator.pushAndRemoveUntil(
-//          router,
-//          ModalRoute.withName('/'),
-//        );
-//      } else {
-//        ///如果不可返回，直接替换当前
-//        navigator.pushReplacement(router);
-//      }
-//    } else {
-//      navigator.push(router);
-//    }
+  ///主页(路由替换)
+  static goHome(BuildContext context) {
+    Navigator.pushReplacementNamed(context, 'index');
+  }
+
+  ///登录页(路由替换)
+  static goLogin(BuildContext context) {
+    Navigator.pushReplacementNamed(context, "/");
   }
 
   ///切换无参数页面
@@ -42,15 +25,9 @@ class NavigatorUtils {
     Navigator.pushNamed(context, routeName);
   }
 
-  ///主页
-  static goHome(BuildContext context) {
-    Navigator.pushReplacementNamed(context, "HomePages.sName");
-  }
-
-  ///登录页
-  static goLogin(BuildContext context) {
-    Navigator.pushReplacementNamed(context, "LoginPage.sName");
-  }
+  ////////////////////////////////////调试代码///////////////////////////////
+  ////////////////////////////////////调试代码///////////////////////////////
+  ////////////////////////////////////调试代码///////////////////////////////
 
   ///图片预览
   static gotoPhotoViewPage(BuildContext context, String url) {

@@ -17,22 +17,26 @@ Future<void> main() async {
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark);
   SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
-
-  //asyncFibonacci函数里会创建一个isolate，并返回运行结果
-  // print(await asyncFibonacci(20));
-  // sendPortIsolate();
-
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  MyApp({Key key}) : super(key: key);
 
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-
-  final router = FluroRouter();
-  Routes.setupRouter(router);
-  Routes.router = router;
+    final router = FluroRouter();
+    Routes.setupRouter(router);
+    Routes.router = router;
 
     return MultiProvider(
         providers: [
@@ -43,8 +47,6 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false, //关闭显示debug模式
           initialRoute: '/', //配置路由
           onGenerateRoute: Routes.router.generator, //配置路由引用
-          // title: '借呗',
-          // theme: ThemeData(primaryColor: Colors.white, fontFamily: 'Raleway'),
         ));
   }
 }

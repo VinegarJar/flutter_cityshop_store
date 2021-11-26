@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_cityshop_store/router/navigator_utils.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage() {
@@ -17,7 +18,8 @@ class LoginPage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.exit_to_app),
         onPressed: () {
-          Navigator.pushReplacementNamed(context, 'index');
+          //Navigator.pushReplacementNamed(context, 'index');
+          NavigatorUtils.goHome(context);
         },
       ),
     );

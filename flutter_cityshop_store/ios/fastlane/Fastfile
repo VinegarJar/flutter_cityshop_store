@@ -14,6 +14,7 @@
 # update_fastlane
 ##在项目文件android目录下执行命令fastlane uploadFir生成IPA文件,并且会自动上传到Fir,发送到钉钉群通知
 #使用flutter打包命令 flutter build ios --release
+# 应用名称：用呗App 友盟AppKey 61a07941e014255fcb8d32ac
 default_platform(:ios)
 
 platform :ios do
