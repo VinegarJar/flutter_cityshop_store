@@ -19,7 +19,7 @@ class LogsInterceptors extends InterceptorsWrapper {
 
   @override
   onRequest(RequestOptions options, handler) async {
-    if (Config.DEBUG) {
+    if (!Config.DEBUG) {
       print("请求url：${options.path} ${options.method}");
       options.headers.forEach((k, v) => options.headers[k] = v ?? "");
       print('请求头: ' + options.headers.toString());
@@ -50,7 +50,7 @@ class LogsInterceptors extends InterceptorsWrapper {
 
   @override
   onResponse(Response response, handler) async {
-    if (Config.DEBUG) {
+    if (!Config.DEBUG) {
       print('返回参数: ' + response.toString());
     }
     if (response.data is Map || response.data is List) {
@@ -85,7 +85,7 @@ class LogsInterceptors extends InterceptorsWrapper {
 
   @override
   onError(DioError err, handler) async {
-    if (Config.DEBUG) {
+    if (!Config.DEBUG) {
       print('请求异常: ' + err.toString());
       print('请求异常信息: ' + (err.response?.toString() ?? ""));
     }

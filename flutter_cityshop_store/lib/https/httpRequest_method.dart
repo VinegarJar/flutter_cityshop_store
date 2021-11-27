@@ -1,5 +1,4 @@
 import 'dart:collection';
-
 import 'package:dio/dio.dart';
 import 'package:flutter_cityshop_store/https/code.dart';
 import 'package:flutter_cityshop_store/https/interceptors/error_interceptor.dart';
@@ -48,9 +47,8 @@ class HttpRequestMethod {
     _dio.interceptors.add(new ResponseInterceptors());
   }
 
-  Future requestWithMetod(
-      url, params, Map<String, dynamic> header, Options option,
-      {noTip = false}) async {
+  Future requestWithMetod(url, params,
+      {Map<String, dynamic> header, Options option, noTip = false}) async {
     Map<String, dynamic> headers = new HashMap();
     if (header != null) {
       headers.addAll(header);
@@ -59,8 +57,7 @@ class HttpRequestMethod {
     if (option != null) {
       option.headers = headers;
     } else {
-      option = new Options(method: "get");
-      option.headers = headers;
+      option = new Options(method: "post");
     }
 
     /// 请求处理Error信息
