@@ -42,3 +42,6 @@ flutter create --template=plugin xxapp_plugin
 4. Flutter Package
 Flutter纯Dart插件工程，仅包含Dart层的实现，往往定义一些公共Widget
 flutter create --template=package xxapp_package
+
+iOS创建自己的pod库
+https://www.jianshu.com/p/1dabeb10c33a
