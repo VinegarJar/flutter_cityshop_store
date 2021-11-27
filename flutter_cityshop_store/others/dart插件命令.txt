@@ -23,3 +23,22 @@ flutter packages pub run build_runner build
 
 typedef onSuccess = void Function(dynamic data);
 typedef onError = void Function(String error);
+
+
+1. Flutter Application (全新的APP)
+flutter create xxapp
+//默认Android使用Java，iOS使用Objective-C。
+flutter create -i objc -a java flutter_hello 
+//如果要指定语言，比如安卓使用Kotlin，iOS使用Swift
+flutter create -i swift -a kotlin xxapp
+
+2. Flutter Module (混编到已有的安卓/iOS工程内)
+flutter create -t module xxapp_module
+
+3. Flutter Plugin
+Flutter平台插件工程，包含Dart层与Native平台层的实现
+flutter create --template=plugin xxapp_plugin
+
+4. Flutter Package
+Flutter纯Dart插件工程，仅包含Dart层的实现，往往定义一些公共Widget
+flutter create --template=package xxapp_package
