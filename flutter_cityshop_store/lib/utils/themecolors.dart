@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 class ThemeColors {
   static Color mainColor = Color.fromRGBO(30, 81, 240, 0.65);
 
-
+  static Color loginBgColor = Color.fromRGBO(83, 135, 225, 1);
   static Color mainBgColor = Color.fromRGBO(245, 245, 245, 1);
+ 
+
   static Color whiteColor = Color.fromRGBO(248, 248, 248, 0.8);
   ///正文，副标题以及可点击区域的主要文字和图标
   static Color titleColor = Color.fromARGB(255, 102, 102, 102);
