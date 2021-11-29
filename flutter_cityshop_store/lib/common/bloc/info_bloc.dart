@@ -10,10 +10,8 @@ class InfoBloc extends Bloc<InfoEvent, InfoState> {
   Stream<InfoState> mapEventToState(
     InfoEvent event,
   ) async* {
-     if (event is InfoChangeThemeEvent) {
-         yield state.copyWith(counter: event.counter); 
-     
-     } 
-     
+    if (event is InfoChangeThemeEvent) {
+      yield state.copyWith(counter: event.counter);
+    }
   }
 }

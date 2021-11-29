@@ -4,6 +4,6 @@ abstract class LoginEvent {}
 
 class LoginChangeEvent extends LoginEvent {
   //event获取值
-  final int counter;
-  LoginChangeEvent({this.counter});
+  final String name;
+  LoginChangeEvent({this.name});
 }

@@ -4,14 +4,14 @@ part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  LoginBloc() : super(LoginState(counter: 0));
+  LoginBloc() : super(LoginState(name: ""));
 
   @override
   Stream<LoginState> mapEventToState(
     LoginEvent event,
   ) async* {
     if (event is LoginChangeEvent) {
-      yield state.copyWith(counter: event.counter);
+      yield state.copyWith(name: event.name);
     }
   }
 }
