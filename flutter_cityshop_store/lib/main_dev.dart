@@ -1,8 +1,10 @@
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_cityshop_store/common/config/config.dart';
 import 'package:flutter_cityshop_store/https/httpRequest_method.dart';
+import 'package:image_picker/image_picker.dart';
 
 void main() {
   runApp(StoreApp());
@@ -124,10 +126,77 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () {
+          _showSelectionDialog(context);
+        },
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+
+  Future getImage(ImageSource source) async {
+    final width = window.physicalSize.width;
+    final height = window.physicalSize.height;
+    var image = await ImagePicker().pickImage(
+        source: source, maxWidth: width, maxHeight: height, imageQuality: 1);
+    print("获取图片资源${image.path}");
+  }
+
+  /// 底部弹窗
+  void _showSelectionDialog(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (ctx) {
+        return Container(
+          color: Colors.white,
+          height: 170,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              GestureDetector(
+                child: _itemCreat(context, '相机'),
+                onTap: () {
+                  Navigator.pop(context);
+                  getImage(ImageSource.camera);
+                },
+              ),
+              GestureDetector(
+                child: _itemCreat(context, '相册'),
+                onTap: () {
+                  Navigator.pop(context);
+                  getImage(ImageSource.gallery);
+                },
+              ),
+              GestureDetector(
+                child: Padding(
+                  padding: EdgeInsets.only(top: 10),
+                  child: _itemCreat(context, '取消'),
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              )
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _itemCreat(BuildContext context, String title) {
+    return Container(
+      color: Colors.white,
+      height: 50,
+      width: MediaQuery.of(context).size.width,
+      child: Center(
+        child: Text(
+          title,
+          style: TextStyle(fontSize: 16, color: Colors.black),
+          textAlign: TextAlign.center,
+        ),
+      ),
     );
   }
 }
