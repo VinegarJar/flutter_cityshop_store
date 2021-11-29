@@ -3,8 +3,6 @@ import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginInput extends StatefulWidget {
-
-
   final String hintText;
 
   final ValueChanged<String> onChanged;
@@ -12,13 +10,7 @@ class LoginInput extends StatefulWidget {
   final TextStyle textStyle;
 
   final TextEditingController controller;
-  LoginInput(
-      {Key key,
-      this.hintText,
-      this.onChanged,
-      this.textStyle,
-      this.controller})
-      : super(key: key);
+  LoginInput({this.hintText, this.onChanged, this.textStyle, this.controller});
 
   @override
   _LoginInputState createState() => _LoginInputState();
@@ -30,7 +22,14 @@ class _LoginInputState extends State<LoginInput> {
     return TextField(
       controller: widget.controller,
       onChanged: widget.onChanged,
-      obscureText: widget.obscureText,
+      textInputAction: TextInputAction.done,
+      keyboardType: TextInputType.text,
+      autocorrect: true, //是否自动更正
+      autofocus: true, //是否自动对焦
+      obscureText: false, //是否是密码
+      textAlign: TextAlign.left, //文本对齐方式
+      style: TextStyle(
+          fontSize: ScreenUtil().setSp(32), color: Colors.black), //输入文本的样式
       decoration: InputDecoration(
           border: InputBorder.none,
           hintText: widget.hintText,
