@@ -55,13 +55,21 @@
             android:value="Umeng"/>
 
     </application>
-    <!-- 第4处修改，添加安卓权限-->
+    <!-- 第4处修改,深圳安卓访问权限-->
+    <!-- 获取访问网络连接-->
     <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- 获取网络信息状态,如当前的网络连接是否有效-->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!-- 获取当前WiFi接入的状态以及WLAN热点的信息-->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <!--访问电话状态 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <!-- 通过WiFi或移动基站的方式获取用户错略的经纬度信息,定位精度大概误差在30~1500米-->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <!-- 改变WiFi多播状态-->
     <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"/>
+    <!-- 允许程序写入外部存储,如SD卡上写文件-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!-- -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 </manifest>
