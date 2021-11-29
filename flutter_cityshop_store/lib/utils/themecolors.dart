@@ -5,7 +5,8 @@ class ThemeColors {
 
   static Color loginBgColor = Color.fromRGBO(83, 135, 225, 1);
   static Color mainBgColor = Color.fromRGBO(245, 245, 245, 1);
- 
+  static Color deleteColor = Color.fromRGBO(190, 190, 190, 0.5);
+
 
   static Color whiteColor = Color.fromRGBO(248, 248, 248, 0.8);
   ///正文，副标题以及可点击区域的主要文字和图标
@@ -34,6 +35,6 @@ class ThemeColors {
   static Color colorWhite = Color.fromARGB(255, 255, 255, 255);
 
   ///纯黑色
-  // static Color colorBlack = Color.fromARGB(255, 0, 0, 0);
-  static Color colorBlack = Color.fromRGBO(255, 0, 0, 0);
+  static Color colorBlack = Color.fromARGB(0, 0, 0, 0);
+  //static Color colorBlack = Color.fromRGBO(255, 0, 0, 0);
 }

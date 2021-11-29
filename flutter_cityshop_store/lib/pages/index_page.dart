@@ -2,9 +2,7 @@ import "package:flutter/cupertino.dart";
 import 'package:flutter/material.dart';
 import 'package:flutter_cityshop_store/provide/common_provider.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-
 import 'catergory/catergory_pages.dart';
 import 'home/home_pages.dart';
 import 'mine/mine_pages.dart';
@@ -34,7 +32,7 @@ class _IndexPagesState extends State<IndexPages> {
   @override
   Widget build(BuildContext context) {
     //初始化屏幕适配组件
-    ScreenUtil.init(context, width: 750, height: 1334, allowFontScaling: false);
+    // ScreenUtil.init(context, width: 750, height: 1334, allowFontScaling: false);
     int currentIndex = Provider.of<CommonProvider>(context).currentIndex;
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(

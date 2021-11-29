@@ -44,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
     print('initState--${this._counter}');
   }
 
-  void _incrementCounter() {
+  void incrementCounter() {
     BlocProvider.of<InfoBloc>(context)
         .add(InfoChangeThemeEvent(counter: _counter++));
   }

@@ -54,7 +54,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  void _incrementCounter() async {
+  void incrementCounter() async {
     var params = {"phoneNum": "15268117440", "smsCode": " "};
     if (Platform.isIOS) {
       params['iosVisited'] = "1";
