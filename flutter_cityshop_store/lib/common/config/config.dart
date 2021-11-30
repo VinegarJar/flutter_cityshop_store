@@ -1,34 +1,21 @@
 class Config {
-  // ignore: non_constant_identifier_names
-  static bool DEBUG = false;
-
+  static const bool DEBUG = true;
   static const PAGE_SIZE = 20;
-
-  /// //////////////////////////////////////常量////////////////////////////////////// ///
-  static const API_TOKEN = "4d65e2a5626103f92a71867d7b49fea0";
   static const TOKEN_KEY = "token";
-  static const USER_NAME_KEY = "user-name";
-  static const PW_KEY = "user-pw";
-  static const USER_BASIC_CODE = "user-basic-code";
-  static const USER_INFO = "user-info";
-  static const LANGUAGE_SELECT = "language-select";
-  static const LANGUAGE_SELECT_NAME = "language-select-name";
-  static const REFRESH_LANGUAGE = "refreshLanguageApp";
-  static const THEME_COLOR = "theme-color";
-  static const LOCALE = "locale";
 
   //api请求地址
-  static const String debugbaseURL = "http://localhost:8080"; //测试环境IP
-  static const String baseURL = "http://121.40.252.174:6001"; //生产环境IP
+  static const String baseURL = "http://121.40.252.174:6002";
+
+  //埋点
+  static const String addEventUrl = "/record/event/addEvent";
+  // 登录
+  static const String loginUrl = "/ww/app/appuser/loginBySmsCode";
+
   // 上传图片--需要
   static const String uploadFileToOssFront =
       "/wwqbAdmin/base/idcardCheck"; //正面--需要
   static const String uploadFileToOssBack =
       "/wwqbAdmin/base/uploadFileToOss"; //背面--需要
-
-  //埋点--需要
-  //public addEventUrl = "http://localhost:8088/record/event/addEvent";//测试环境IP
-  static const String addEventUrl = "/wwqbRecord/event/addEvent"; //生产环境
 
   //现金贷接口路径
   // 银行认证
@@ -47,9 +34,7 @@ class Config {
   // 上传实名认证信息
   static const String xjdSaveRealInfoUrl =
       "/wwqbAdmin/app/appuser/saveRealInfo"; //需要
-  // 登录
-  static const String xjdLoginBySmsCodeUrl =
-      "/wwqbAdmin/app/appuser/loginBySmsCode"; //需要
+
   // 获取用户信息
   static const String userinfo = "/wwqbAdmin/app/appuser/getAppUserInfo"; //需要
   // 获取用户借款记录

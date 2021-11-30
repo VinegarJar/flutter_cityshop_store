@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_cityshop_store/common/config/config.dart';
 import 'package:flutter_cityshop_store/https/httpRequest_method.dart';
+import 'package:flutter_cityshop_store/utils/deviceInfo.dart';
 import 'package:image_picker/image_picker.dart';
 
 void main() {
@@ -54,31 +55,19 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  void incrementCounter() async {
-    var params = {"phoneNum": "15268117440", "smsCode": " "};
-    if (Platform.isIOS) {
-      params['iosVisited'] = "1";
-      params['androidVisited'] = "0";
-    }
-
+  void _incrementCounter() async {
+    var channelId = await DeviceInfo.instance.getplatformName();
+    var params = {"phoneNum": "15268117440", "channelId": channelId};
     if (Platform.isAndroid) {
       params['androidVisited'] = "1";
-      params['iosVisited'] = "0";
+    } else {
+      params['iosVisited'] = "1";
     }
 
-    var res = await HttpRequestMethod()
-        .requestWithMetod(Config.xjdLoginBySmsCodeUrl, params);
+    var res =
+        await HttpRequestMethod().requestWithMetod(Config.loginUrl, params);
 
     print("获取数据-----$res");
-
-    // setState(() {
-    //   // This call to setState tells the Flutter framework that something has
-    //   // changed in this State, which causes it to rerun the build method below
-    //   // so that the display can reflect the updated values. If we changed
-    //   // _counter without calling setState(), then the build method would not be
-    //   // called again, and so nothing would appear to happen.
-    //   _counter++;
-    // });
   }
 
   @override
@@ -127,7 +116,8 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _showSelectionDialog(context);
+          _incrementCounter();
+          // _showSelectionDialog(context);
         },
         tooltip: 'Increment',
         child: Icon(Icons.add),
@@ -144,7 +134,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   /// 底部弹窗
-  void _showSelectionDialog(BuildContext context) {
+  void showSelectionDialog(BuildContext context) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,

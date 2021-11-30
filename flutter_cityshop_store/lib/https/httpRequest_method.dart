@@ -103,16 +103,3 @@ class HttpRequestMethod {
 }
 
 
-  // static addIssueCommentDao(userName, repository, number, comment) async {
-  //   String url = Address.addIssueComment(userName, repository, number);
-  //   var res = await httpManager.netFetch(
-  //       url,
-  //       {"body": comment},
-  //       {"Accept": 'application/vnd.github.VERSION.full+json'},
-  //       new Options(method: 'POST'));
-  //   if (res != null && res.result) {
-  //     return new DataResult(res.data, true);
-  //   } else {
-  //     return new DataResult(null, false);
-  //   }
-  // }

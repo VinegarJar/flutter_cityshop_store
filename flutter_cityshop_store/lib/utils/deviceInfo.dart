@@ -20,7 +20,7 @@ class DeviceInfo {
 
   //初始化通用全局单例，第一次使用时初始化
   DeviceInfo._internal() {
-    print('初始化通用全局单例--我是命名构造函数');
+    print('初始化通用全局单例--我是DeviceInfo命名构造函数');
   }
 
   /*
@@ -31,19 +31,19 @@ class DeviceInfo {
     DeviceInfoPlugin deviceInfo = new DeviceInfoPlugin();
     var dataInfo;
     if (Platform.isIOS) {
-      print('IOS设备：');
       IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
       dataInfo = iosInfo;
+      print('IOS设备--${iosInfo.name}');
     } else if (Platform.isAndroid) {
-      print('Android设备');
       AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
       dataInfo = androidInfo;
+      print('Android设备--${androidInfo.device}');
     }
     return dataInfo;
   }
 
   // 获取设备的唯一标识 uuid
-  static Future<String> get platformUid async {
+  Future<String> getplatformUid() async {
     var res;
     var data = await DeviceInfo.instance.getDeviceInfo();
     if (Platform.isIOS) {
@@ -55,7 +55,7 @@ class DeviceInfo {
   }
 
   //  获取设备name
-  static Future<String> get platformName async {
+  Future<String> getplatformName() async {
     var res;
     var data = await DeviceInfo.instance.getDeviceInfo();
     if (Platform.isIOS) {
@@ -67,7 +67,7 @@ class DeviceInfo {
   }
 
   // 获取设备的model
-  static Future<String> get platformModel async {
+  Future<String> getplatformModel() async {
     var res;
     var data = await DeviceInfo.instance.getDeviceInfo();
     if (Platform.isIOS) {
