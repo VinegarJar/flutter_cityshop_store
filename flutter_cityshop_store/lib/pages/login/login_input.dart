@@ -9,7 +9,10 @@ class LoginInput extends StatefulWidget {
   final ValueChanged<String> onChanged;
 
   final TextEditingController controller;
-  LoginInput({@required this.hintText,@required this.controller, @required this.onChanged});
+  LoginInput(
+      {@required this.hintText,
+      @required this.controller,
+      @required this.onChanged});
 
   @override
   _LoginInputState createState() => _LoginInputState();
@@ -49,15 +52,17 @@ class _LoginInputState extends State<LoginInput> {
                     color: ThemeColors.titleColor,
                     fontSize: ScreenUtil().setSp(28),
                   ),
-                  suffixIcon: IconButton(
-                      onPressed: () {
-                        widget.controller.clear();
-                      },
-                      icon: Icon(
-                        Icons.cancel,
-                        color: ThemeColors.deleteColor,
-                        size: ScreenUtil().setSp(28),
-                      ))),
+                  suffixIcon: widget.controller.text.isEmpty
+                      ? null
+                      : IconButton(
+                          onPressed: () {
+                            widget.controller.clear();
+                          },
+                          icon: Icon(
+                            Icons.cancel,
+                            color: ThemeColors.deleteColor,
+                            size: ScreenUtil().setSp(28),
+                          ))),
             )));
   }
 }

@@ -3,11 +3,11 @@ part of 'login_bloc.dart';
 abstract class AppState {}
 
 class LoginState extends AppState {
-  final String name;
-  LoginState({this.name});
+  final String phoneNum;
+  LoginState({this.phoneNum});
 
-  LoginState copyWith({String name}) {
-    print("----copyWith方法传递过来的值---$name");
-    return LoginState(name: name);
+  LoginState copyWith({String phoneNum}) {
+    print("----copyWith方法传递过来的值---$phoneNum");
+    return LoginState(phoneNum:phoneNum);
   }
 }
