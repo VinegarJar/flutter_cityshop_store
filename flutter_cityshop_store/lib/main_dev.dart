@@ -69,7 +69,8 @@ class _MyHomePageState extends State<MyHomePage> {
     ResultData res = await HttpRequestMethod.instance
         .requestWithMetod(Config.loginUrl, params);
 
-    print("获取数据-----${res.data}");
+    Map<String, dynamic> data = new Map<String, dynamic>.from(res.data);
+    print(data["result"]);
   }
 
   @override

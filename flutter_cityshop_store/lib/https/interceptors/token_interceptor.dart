@@ -38,7 +38,7 @@ class TokenInterceptors extends InterceptorsWrapper {
       if (response.statusCode == 200) {
         // var result = json.decode(response.data.toString());
 
-        print("Token拦截器---------");
+        print("Token拦截器---------${responseJson.code}");
       }
 
       if (response.statusCode == 201 && responseJson["token"] != null) {
