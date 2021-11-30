@@ -3,10 +3,9 @@ import 'package:flutter_cityshop_store/common/config/config.dart';
 import 'package:flutter_cityshop_store/common/local/local_storage.dart';
 
 /*
- * Token拦截器
- * Created by guoshuyu
- * on 2019/3/23.
- */
+* @TokenInterceptors:  Token拦截器
+* @return {token} token信息
+*/
 class TokenInterceptors extends InterceptorsWrapper {
   String _token;
 
@@ -28,10 +27,12 @@ class TokenInterceptors extends InterceptorsWrapper {
   @override
   onResponse(Response response, handler) async {
     try {
+      print("Token拦截器----${response.data}");
+
       var responseJson = response.data;
       if (response.statusCode == 201 && responseJson["token"] != null) {
-        _token = 'token ' + responseJson["token"];
-        await LocalStorage.save(Config.TOKEN_KEY, _token);
+        // _token = 'token ' + responseJson["token"];
+        // await LocalStorage.save(Config.TOKEN_KEY, _token);
       }
     } catch (e) {
       print(e);

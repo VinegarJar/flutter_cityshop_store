@@ -64,8 +64,8 @@ class _MyHomePageState extends State<MyHomePage> {
       params['iosVisited'] = "1";
     }
 
-    var res =
-        await HttpRequestMethod().requestWithMetod(Config.loginUrl, params);
+    var res = await HttpRequestMethod.instance
+        .requestWithMetod(Config.loginUrl, params);
 
     print("获取数据-----$res");
   }

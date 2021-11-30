@@ -9,7 +9,7 @@ class Config {
   //埋点
   static const String addEventUrl = "/record/event/addEvent";
   // 登录
-  static const String loginUrl = "/ww/app/appuser/loginBySmsCode";
+  static const String loginUrl = "/szgjadmin/app/appuser/loginNoRegister";
 
   // 上传图片--需要
   static const String uploadFileToOssFront =
