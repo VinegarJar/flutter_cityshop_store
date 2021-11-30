@@ -13,6 +13,10 @@ dart pub add fluttertoast
 dart pub add umeng_common_sdk
 dart pub add image_picker
 dart pub add path_provider file存储使用
+dart pub add device_info_plus flutter 获取设备信息
+
+
+
 1.在工程根目录下创建一个名为 "jsons" 的目录;
 2.创建或拷贝Json文件到"jsons" 目录中 ;
 3.运行 pub run json_model (Dart VM工程)or
