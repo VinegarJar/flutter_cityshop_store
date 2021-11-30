@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_cityshop_store/common/config/config.dart';
 import 'package:flutter_cityshop_store/https/httpRequest_method.dart';
+import 'package:flutter_cityshop_store/https/result_data.dart';
 import 'package:flutter_cityshop_store/utils/deviceInfo.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -57,17 +58,18 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _incrementCounter() async {
     var channelId = await DeviceInfo.instance.getplatformName();
-    var params = {"phoneNum": "15268117440", "channelId": channelId};
+    print("获取设备名称----$channelId");
+    var params = {"phoneNum": "15268117440", "channelId": "vivo"};
     if (Platform.isAndroid) {
       params['androidVisited'] = "1";
     } else {
       params['iosVisited'] = "1";
     }
 
-    var res = await HttpRequestMethod.instance
+    ResultData res = await HttpRequestMethod.instance
         .requestWithMetod(Config.loginUrl, params);
 
-    print("获取数据-----$res");
+    print("获取数据-----${res.data}");
   }
 
   @override

@@ -7,6 +7,7 @@ class HeaderInterceptors extends InterceptorsWrapper {
     ///超时
     options.connectTimeout = 30000;
     options.receiveTimeout = 30000;
+    options.baseUrl = Config.baseURL;
     return super.onRequest(options, handler);
   }
 }

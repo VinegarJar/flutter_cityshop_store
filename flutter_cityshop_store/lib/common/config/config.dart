@@ -4,7 +4,7 @@ class Config {
   static const TOKEN_KEY = "token";
 
   //api请求地址
-  static const String baseURL = "http://121.40.252.174:6002";
+  static const String baseURL = "http://121.40.252.174:6001";
 
   //埋点
   static const String addEventUrl = "/record/event/addEvent";

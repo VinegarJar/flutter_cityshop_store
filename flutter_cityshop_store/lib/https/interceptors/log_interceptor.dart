@@ -51,7 +51,7 @@ class LogsInterceptors extends InterceptorsWrapper {
   @override
   onResponse(Response response, handler) async {
     if (Config.DEBUG) {
-      print('返回参数: ' + response.toString());
+      // print('Responseq请求返回数据: ' + response.toString());
     }
     if (response.data is Map || response.data is List) {
       try {

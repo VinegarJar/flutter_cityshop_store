@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_cityshop_store/common/config/config.dart';
 import 'package:flutter_cityshop_store/common/local/local_storage.dart';
@@ -11,6 +13,9 @@ class TokenInterceptors extends InterceptorsWrapper {
 
   @override
   onRequest(RequestOptions options, handler) async {
+    // print("授权码拦截器----${options.path}");
+    // print('授权码拦截器请求头: ${options.headers}');
+
     //授权码
     if (_token == null) {
       var authorizationCode = await getAuthorization();
@@ -27,9 +32,15 @@ class TokenInterceptors extends InterceptorsWrapper {
   @override
   onResponse(Response response, handler) async {
     try {
-      print("Token拦截器----${response.data}");
-
       var responseJson = response.data;
+      // var responseJson = new Map<String, dynamic>.from(response.data);
+
+      if (response.statusCode == 200) {
+        // var result = json.decode(response.data.toString());
+
+        print("Token拦截器---------");
+      }
+
       if (response.statusCode == 201 && responseJson["token"] != null) {
         // _token = 'token ' + responseJson["token"];
         // await LocalStorage.save(Config.TOKEN_KEY, _token);

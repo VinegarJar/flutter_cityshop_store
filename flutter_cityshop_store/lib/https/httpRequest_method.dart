@@ -1,6 +1,5 @@
 import 'dart:collection';
 import 'package:dio/dio.dart';
-import 'package:flutter_cityshop_store/common/config/config.dart';
 import 'package:flutter_cityshop_store/https/code.dart';
 import 'package:flutter_cityshop_store/https/interceptors/error_interceptor.dart';
 import 'package:flutter_cityshop_store/https/interceptors/header_interceptor.dart';
@@ -81,9 +80,8 @@ class HttpRequestMethod {
     }
 
     Response response;
-    var requestUrl = Config.baseURL + url;
     try {
-      response = await _dio.request(requestUrl, data: params, options: option);
+      response = await _dio.request(url, data: params, options: option);
     } on DioError catch (e) {
       return resultError(e);
     }
