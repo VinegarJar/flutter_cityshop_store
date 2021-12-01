@@ -93,7 +93,7 @@ mixin HttpErrorListener on State<StoreApp> {
         showToast("API异常");
         break;
       default:
-        showToast(" 错误信息" +message);
+        showToast(message);
         break;
     }
   }

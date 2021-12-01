@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cityshop_store/common/bloc/login%20/login_bloc.dart';
 import 'package:flutter_cityshop_store/common/config/config.dart';
+import 'package:flutter_cityshop_store/common/event/http_error_event.dart';
 import 'package:flutter_cityshop_store/common/local/local_storage.dart';
 import 'package:flutter_cityshop_store/https/httpRequest_method.dart';
 import 'package:flutter_cityshop_store/https/result_data.dart';
@@ -14,7 +15,6 @@ import 'package:flutter_cityshop_store/pages/login/login_logo.dart';
 import 'package:flutter_cityshop_store/router/navigator_utils.dart';
 import 'package:flutter_cityshop_store/utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
@@ -114,40 +114,43 @@ class _LoginHomePageState extends State<LoginHomePage> {
                 print('LoginBotton----');
                 _loginRequest();
               }),
-                  SizedBox(height: ScreenUtil().setWidth(35)),
-             LoginAgree(),
-              
-               
+              SizedBox(height: ScreenUtil().setWidth(35)),
+              LoginAgree(),
             ]),
       ))),
     );
   }
 
   void _loginRequest() async {
-    var params = {"phoneNum": _phoneNum, "channelId": "vivo"};
-    if (Platform.isAndroid) {
-      params['androidVisited'] = "1";
-    } else {
-      params['iosVisited'] = "1";
-    }
-
-    ResultData res = await HttpRequestMethod.instance
-        .requestWithMetod(Config.loginUrl, params);
-    if (res.result) {
-      var dict = res.data;
-      String token = dict["phoneNum"].toString();
-      if(token !=null){
-             _saveToken(token);
+    RegExp exp = RegExp(
+        r'^((13[0-9])|(14[0-9])|(15[0-9])|(16[0-9])|(17[0-9])|(18[0-9])|(19[0-9]))\d{8}$');
+    bool matched = exp.hasMatch(_phoneNum);
+    if (matched) {
+      var params = {"phoneNum": _phoneNum, "channelId": "vivo"};
+      if (Platform.isAndroid) {
+        params['androidVisited'] = "1";
+      } else {
+        params['iosVisited'] = "1";
       }
-      print("获取tock---$token");
-         NavigatorUtils.goHome(context);
+
+      ResultData res = await HttpRequestMethod.instance
+          .requestWithMetod(Config.loginUrl, params);
+      if (res.result) {
+        var dict = res.data;
+        String token = dict["phoneNum"].toString();
+        if (token != null) {
+          _saveToken(token);
+        }
+        print("获取tock---$token");
+        NavigatorUtils.goHome(context);
         _inputChanged("");
-  
+      }
+    }else{
+       eventBus.fire(new HttpErrorEvent(99, "输入手机号有误,请重新输入!"));
     }
   }
 
   void _saveToken(token) async {
     await LocalStorage.save(Config.TOKEN_KEY, token);
- 
   }
 }
