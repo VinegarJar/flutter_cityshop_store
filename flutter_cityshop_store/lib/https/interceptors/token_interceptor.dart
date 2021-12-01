@@ -15,12 +15,11 @@ class TokenInterceptors extends InterceptorsWrapper {
   onRequest(RequestOptions options, handler) async {
     // print("授权码拦截器----${options.path}");
     // print('授权码拦截器请求头: ${options.headers}');
-
     //授权码
     if (_token == null) {
       var authorizationCode = await getAuthorization();
       if (authorizationCode != null) {
-        _token = authorizationCode;
+         _token = authorizationCode;
       }
     }
     if (_token != null) {
@@ -31,23 +30,6 @@ class TokenInterceptors extends InterceptorsWrapper {
 
   @override
   onResponse(Response response, handler) async {
-    try {
-      var responseJson = response.data;
-      // var responseJson = new Map<String, dynamic>.from(response.data);
-
-      if (response.statusCode == 200) {
-        // var result = json.decode(response.data.toString());
-
-        print("Token拦截器---------${responseJson.code}");
-      }
-
-      if (response.statusCode == 201 && responseJson["token"] != null) {
-        // _token = 'token ' + responseJson["token"];
-        // await LocalStorage.save(Config.TOKEN_KEY, _token);
-      }
-    } catch (e) {
-      print(e);
-    }
     return super.onResponse(response, handler);
   }
 
@@ -60,11 +42,6 @@ class TokenInterceptors extends InterceptorsWrapper {
   ///获取授权token
   getAuthorization() async {
     String token = await LocalStorage.get(Config.TOKEN_KEY);
-    if (token == null) {
-      //读取
-    } else {
-      this._token = token;
-      return token;
-    }
+    return token;
   }
 }

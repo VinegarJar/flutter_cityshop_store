@@ -1,54 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluro/fluro.dart';
-import 'package:flutter_cityshop_store/provide/car_provider.dart';
-import 'package:flutter_cityshop_store/provide/common_provider.dart';
-import 'package:flutter_cityshop_store/router/routes.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_cityshop_store/store_app.dart';
 import 'dart:io';
 
 Future<void> main() async {
   HttpOverrides.global = new MyHttpOverrides();
-
-  runApp(MyApp());
-
+  runApp(StoreApp());
   SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(
       //这是设置状态栏的图标和字体的颜色
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark);
   SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
-}
-
-class MyApp extends StatefulWidget {
-  MyApp({Key key}) : super(key: key);
-
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final router = FluroRouter();
-    Routes.setupRouter(router);
-    Routes.router = router;
-
-    return MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (_) => CommonProvider()),
-          ChangeNotifierProvider(create: (_) => CarProvider()),
-        ],
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false, //关闭显示debug模式
-          initialRoute: '/', //配置路由
-          onGenerateRoute: Routes.router.generator, //配置路由引用
-        ));
-  }
 }
 
 class MyHttpOverrides extends HttpOverrides {

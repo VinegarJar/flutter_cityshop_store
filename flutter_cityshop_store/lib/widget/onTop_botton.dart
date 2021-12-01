@@ -21,9 +21,9 @@ class OnTopBotton extends StatelessWidget {
         child: widget,
         onTap: () {
           callBack?.call();
-          if (title.isNotEmpty) {
-            // _uploadFile();
-          }
+          // if (title.isNotEmpty) {
+          //   _uploadFile();
+          // }
         });
   }
 
@@ -41,7 +41,7 @@ class OnTopBotton extends StatelessWidget {
       "phoneNum": token,
       "event": 'APP_PPV',
       "extraParam2": eventId,
-      "extraParam1": productId
+      "extraParam1": (productId == null) ? "1" : productId
     };
 
     var res =

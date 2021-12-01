@@ -12,12 +12,15 @@ import 'package:flutter_cityshop_store/widget/never_overscroll_indicator.dart';
 class NavigatorUtils {
   ///主页(路由替换)
   static goHome(BuildContext context) {
-    Navigator.pushReplacementNamed(context, 'index');
+    // Navigator.pushReplacementNamed(context, 'index');
+    Navigator.pushNamedAndRemoveUntil(context, 'index', (route) => false);
   }
+
 
   ///登录页(路由替换)
   static goLogin(BuildContext context) {
-    Navigator.pushReplacementNamed(context, "/");
+     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+    // Navigator.pushReplacementNamed(context, "/");
   }
 
   ///切换无参数页面

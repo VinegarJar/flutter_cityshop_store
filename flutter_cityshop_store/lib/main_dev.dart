@@ -9,10 +9,10 @@ import 'package:flutter_cityshop_store/utils/deviceInfo.dart';
 import 'package:image_picker/image_picker.dart';
 
 void main() {
-  runApp(StoreApp());
+  runApp(MyApp());
 }
 
-class StoreApp extends StatelessWidget {
+class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {

@@ -1,9 +1,16 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cityshop_store/common/bloc/login%20/login_bloc.dart';
+import 'package:flutter_cityshop_store/common/config/config.dart';
+import 'package:flutter_cityshop_store/common/local/local_storage.dart';
+import 'package:flutter_cityshop_store/https/httpRequest_method.dart';
+import 'package:flutter_cityshop_store/https/result_data.dart';
 import 'package:flutter_cityshop_store/pages/login/login_botton.dart';
 import 'package:flutter_cityshop_store/pages/login/login_input.dart';
 import 'package:flutter_cityshop_store/pages/login/login_logo.dart';
+import 'package:flutter_cityshop_store/router/navigator_utils.dart';
 import 'package:flutter_cityshop_store/utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 // import 'package:flutter_cityshop_store/router/navigator_utils.dart';
@@ -102,15 +109,42 @@ class _LoginHomePageState extends State<LoginHomePage> {
                 controller: _editTextController,
                 onChanged: (String value) {
                   _inputChanged(value);
-          
                 },
               ),
               SizedBox(height: ScreenUtil().setWidth(35)),
-              LoginBotton(onPressed: () {
+              LoginBotton(onPressed: () async {
                 print('LoginBotton----');
+                _loginRequest();
               })
             ]),
       ))),
     );
+  }
+
+  void _loginRequest() async {
+    var params = {"phoneNum": _phoneNum, "channelId": "vivo"};
+    if (Platform.isAndroid) {
+      params['androidVisited'] = "1";
+    } else {
+      params['iosVisited'] = "1";
+    }
+
+    ResultData res = await HttpRequestMethod.instance
+        .requestWithMetod(Config.loginUrl, params);
+    if (res.result) {
+      var dict = res.data;
+      var token;
+      if (dict["phoneNum"] != null) {
+        token = dict["phoneNum"];
+      }
+      print("获取tock---$token");
+      _inputChanged("");
+      _saveToken(token);
+    }
+  }
+
+  void _saveToken(token) async {
+    await LocalStorage.save(Config.TOKEN_KEY, token);
+    NavigatorUtils.goHome(context);
   }
 }
