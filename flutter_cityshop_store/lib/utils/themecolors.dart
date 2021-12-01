@@ -7,6 +7,8 @@ class ThemeColors {
   static Color mainBgColor = Color.fromRGBO(245, 245, 245, 1);
   static Color deleteColor = Color.fromRGBO(190, 190, 190, 0.5);
   static Color defaultColor = Color.fromRGBO(240,131,45,0.8);
+  static Color agreeColor = Color.fromRGBO(213,213,213,1);
+
 
   static Color whiteColor = Color.fromRGBO(248, 248, 248, 0.8);
   ///正文，副标题以及可点击区域的主要文字和图标

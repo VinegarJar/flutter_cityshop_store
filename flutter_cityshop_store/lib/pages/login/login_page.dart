@@ -7,16 +7,14 @@ import 'package:flutter_cityshop_store/common/config/config.dart';
 import 'package:flutter_cityshop_store/common/local/local_storage.dart';
 import 'package:flutter_cityshop_store/https/httpRequest_method.dart';
 import 'package:flutter_cityshop_store/https/result_data.dart';
+import 'package:flutter_cityshop_store/pages/login/login_agree.dart';
 import 'package:flutter_cityshop_store/pages/login/login_botton.dart';
 import 'package:flutter_cityshop_store/pages/login/login_input.dart';
 import 'package:flutter_cityshop_store/pages/login/login_logo.dart';
 import 'package:flutter_cityshop_store/router/navigator_utils.dart';
 import 'package:flutter_cityshop_store/utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:flutter_cityshop_store/router/navigator_utils.dart';
-// import 'package:flutter_cityshop_store/utils/themecolors.dart';
-// import 'package:flutter_cityshop_store/pages/login/login_botton.dart';
-// import 'dart:ui';
+
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
@@ -115,7 +113,11 @@ class _LoginHomePageState extends State<LoginHomePage> {
               LoginBotton(onPressed: () async {
                 print('LoginBotton----');
                 _loginRequest();
-              })
+              }),
+                  SizedBox(height: ScreenUtil().setWidth(35)),
+             LoginAgree(),
+              
+               
             ]),
       ))),
     );
@@ -133,18 +135,19 @@ class _LoginHomePageState extends State<LoginHomePage> {
         .requestWithMetod(Config.loginUrl, params);
     if (res.result) {
       var dict = res.data;
-      var token;
-      if (dict["phoneNum"] != null) {
-        token = dict["phoneNum"];
+      String token = dict["phoneNum"].toString();
+      if(token !=null){
+             _saveToken(token);
       }
       print("获取tock---$token");
-      _inputChanged("");
-      _saveToken(token);
+         NavigatorUtils.goHome(context);
+        _inputChanged("");
+  
     }
   }
 
   void _saveToken(token) async {
     await LocalStorage.save(Config.TOKEN_KEY, token);
-    NavigatorUtils.goHome(context);
+ 
   }
 }
