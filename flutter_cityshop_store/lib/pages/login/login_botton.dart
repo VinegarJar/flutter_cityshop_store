@@ -16,43 +16,25 @@ class LoginBotton extends StatelessWidget {
     return BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
       return Center(
           child: OnTopBotton(
-        callBack: state.phoneNum.isEmpty ? null : onPressed,
+        callBack: onPressed,
+        // callBack: ((state.phoneNum.length == 11) && state.phoneNum != "")?onPressed:null,
         title: title,
         widget: Container(
           alignment: Alignment.center,
-          width: ScreenUtil().setWidth(660),
+          width: ScreenUtil().setWidth(600),
           height: ScreenUtil().setWidth(88),
           decoration: BoxDecoration(
-              color: state.phoneNum.isEmpty
+              color: (state.phoneNum != "")
                   ? ThemeColors.mainColor
-                  : Colors.orange,
-              borderRadius: BorderRadius.circular(ScreenUtil().setWidth(44))),
+                  : ThemeColors.defaultColor,
+              borderRadius: BorderRadius.circular(ScreenUtil().setWidth(10))),
           child: Text(title,
               style: TextStyle(
-                fontSize: ScreenUtil().setSp(28),
-                color: Colors.black,
+                fontSize: ScreenUtil().setSp(32),
+                color: Colors.white,
               )),
         ),
-      )
-          //   child: InkWell(
-          //   onTap: state.phoneNum.isEmpty ? null : onPressed,
-          //   child: Container(
-          //     alignment: Alignment.center,
-          //     width: ScreenUtil().setWidth(660),
-          //     height: ScreenUtil().setWidth(88),
-          //     decoration: BoxDecoration(
-          //         color: state.phoneNum.isEmpty
-          //             ? ThemeColors.mainColor
-          //             : Colors.orange,
-          //         borderRadius: BorderRadius.circular(ScreenUtil().setWidth(44))),
-          //     child: Text('一键登录',
-          //         style: TextStyle(
-          //           fontSize: ScreenUtil().setSp(28),
-          //           color: Colors.black,
-          //         )),
-          //   ),
-          // )
-          );
+      ));
     });
   }
 }

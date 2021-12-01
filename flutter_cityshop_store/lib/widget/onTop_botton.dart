@@ -22,13 +22,13 @@ class OnTopBotton extends StatelessWidget {
         onTap: () {
           callBack?.call();
           if (title.isNotEmpty) {
-            _uploadFile();
+            // _uploadFile();
           }
         });
   }
 
   //上传事件名称
-  void _uploadFile() {
+  void uploadFile() {
     Future.delayed(const Duration(milliseconds: 500), () {
       this.eventId(title);
     });
