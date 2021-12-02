@@ -14,6 +14,7 @@ dart pub add umeng_common_sdk
 dart pub add image_picker
 dart pub add path_provider file存储使用
 dart pub add device_info_plus flutter 获取设备信息
+dart pub add flutter_easyloading
 
 
 

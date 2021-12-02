@@ -1,15 +1,33 @@
-import 'dart:io';
-import 'dart:ui';
+import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_cityshop_store/common/config/config.dart';
-import 'package:flutter_cityshop_store/https/httpRequest_method.dart';
-import 'package:flutter_cityshop_store/https/result_data.dart';
-import 'package:flutter_cityshop_store/utils/deviceInfo.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+
+// import './custom_animation.dart';
+
+// import './test.dart';
 
 void main() {
   runApp(MyApp());
+  configLoading();
+}
+
+void configLoading() {
+  EasyLoading.instance
+    ..displayDuration = const Duration(milliseconds: 2000)
+    ..indicatorType = EasyLoadingIndicatorType.fadingCircle
+    ..loadingStyle = EasyLoadingStyle.dark
+    ..indicatorSize = 45.0
+    ..radius = 10.0
+    ..progressColor = Colors.yellow
+    ..backgroundColor = Colors.green
+    ..indicatorColor = Colors.yellow
+    ..textColor = Colors.yellow
+    ..maskColor = Colors.blue.withOpacity(0.5)
+    ..userInteractions = true
+    ..dismissOnTap = false;
+  // ..customAnimation = CustomAnimation();
 }
 
 class MyApp extends StatelessWidget {
@@ -17,35 +35,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter EasyLoading',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Flutter EasyLoading'),
+      builder: EasyLoading.init(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, @required this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
+  MyHomePage({Key key, this.title}) : super(key: key);
 
   final String title;
 
@@ -54,140 +55,305 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  Timer _timer;
+  double _progress;
 
-  void _incrementCounter() async {
-    var channelId = await DeviceInfo.instance.getplatformName();
-    print("获取设备名称----$channelId");
-    var params = {"phoneNum": "15268117440", "channelId": "vivo"};
-    if (Platform.isAndroid) {
-      params['androidVisited'] = "1";
-    } else {
-      params['iosVisited'] = "1";
-    }
-
-    ResultData res = await HttpRequestMethod.instance
-        .requestWithMetod(Config.loginUrl, params);
-
-    Map<String, dynamic> data = new Map<String, dynamic>.from(res.data);
-    print(data["result"]);
+  @override
+  void initState() {
+    super.initState();
+    EasyLoading.addStatusCallback((status) {
+      print('EasyLoading Status $status');
+      if (status == EasyLoadingStatus.dismiss) {
+        _timer?.cancel();
+      }
+    });
+    EasyLoading.showSuccess('Use in initState---');
+    // EasyLoading.removeCallbacks();
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: Text(widget.title ?? ''),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _incrementCounter();
-          // _showSelectionDialog(context);
-        },
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
-  }
-
-  Future getImage(ImageSource source) async {
-    final width = window.physicalSize.width;
-    final height = window.physicalSize.height;
-    var image = await ImagePicker().pickImage(
-        source: source, maxWidth: width, maxHeight: height, imageQuality: 1);
-    print("获取图片资源${image.path}");
-  }
-
-  /// 底部弹窗
-  void showSelectionDialog(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (ctx) {
-        return Container(
-          color: Colors.white,
-          height: 170,
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              GestureDetector(
-                child: _itemCreat(context, '相机'),
-                onTap: () {
-                  Navigator.pop(context);
-                  getImage(ImageSource.camera);
-                },
+              TextField(),
+              Wrap(
+                runAlignment: WrapAlignment.center,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: <Widget>[
+                  TextButton(
+                    child: Text('open test page'),
+                    onPressed: () {
+                      _timer?.cancel();
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (BuildContext context) => TestPage(),
+                      //   ),
+                      // );
+                    },
+                  ),
+                  TextButton(
+                    child: Text('dismiss'),
+                    onPressed: () async {
+                      _timer?.cancel();
+                      await EasyLoading.dismiss();
+                      print('EasyLoading dismiss');
+                    },
+                  ),
+                  TextButton(
+                    child: Text('show'),
+                    onPressed: () async {
+                      _timer?.cancel();
+                      await EasyLoading.show(
+                        status: '加载中...',
+                        maskType: EasyLoadingMaskType.black,
+                      );
+                      print('EasyLoading show');
+                    },
+                  ),
+                  TextButton(
+                    child: Text('showToast'),
+                    onPressed: () {
+                      _timer?.cancel();
+                      EasyLoading.showToast(
+                        'Toast',
+                      );
+                    },
+                  ),
+                  TextButton(
+                    child: Text('showSuccess'),
+                    onPressed: () async {
+                      _timer?.cancel();
+                      await EasyLoading.showSuccess('Great Success!');
+                      print('EasyLoading showSuccess');
+                    },
+                  ),
+                  TextButton(
+                    child: Text('showError'),
+                    onPressed: () {
+                      _timer?.cancel();
+                      EasyLoading.showError('Failed with Error');
+                    },
+                  ),
+                  TextButton(
+                    child: Text('showInfo'),
+                    onPressed: () {
+                      _timer?.cancel();
+                      EasyLoading.showInfo('Useful Information.');
+                    },
+                  ),
+                  TextButton(
+                    child: Text('showProgress'),
+                    onPressed: () {
+                      _progress = 0;
+                      _timer?.cancel();
+                      _timer = Timer.periodic(const Duration(milliseconds: 100),
+                          (Timer timer) {
+                        EasyLoading.showProgress(_progress,
+                            status: '${(_progress * 100).toStringAsFixed(0)}%');
+                        _progress += 0.03;
+
+                        if (_progress >= 1) {
+                          _timer?.cancel();
+                          EasyLoading.dismiss();
+                        }
+                      });
+                    },
+                  ),
+                ],
               ),
-              GestureDetector(
-                child: _itemCreat(context, '相册'),
-                onTap: () {
-                  Navigator.pop(context);
-                  getImage(ImageSource.gallery);
-                },
-              ),
-              GestureDetector(
-                child: Padding(
-                  padding: EdgeInsets.only(top: 10),
-                  child: _itemCreat(context, '取消'),
+              Padding(
+                padding: EdgeInsets.only(top: 20.0),
+                child: Column(
+                  children: <Widget>[
+                    Text('Style'),
+                    Padding(
+                      padding: EdgeInsets.only(top: 10.0),
+                      child: CupertinoSegmentedControl<EasyLoadingStyle>(
+                        selectedColor: Colors.blue,
+                        children: {
+                          EasyLoadingStyle.dark: Padding(
+                            padding: EdgeInsets.all(5.0),
+                            child: Text('dark'),
+                          ),
+                          EasyLoadingStyle.light: Padding(
+                            padding: EdgeInsets.all(5.0),
+                            child: Text('light'),
+                          ),
+                          EasyLoadingStyle.custom: Padding(
+                            padding: EdgeInsets.all(5.0),
+                            child: Text('custom'),
+                          ),
+                        },
+                        onValueChanged: (value) {
+                          EasyLoading.instance.loadingStyle = value;
+                        },
+                      ),
+                    ),
+                  ],
                 ),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              )
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 20.0),
+                child: Column(
+                  children: <Widget>[
+                    Text('MaskType'),
+                    Padding(
+                      padding: EdgeInsets.only(top: 10.0),
+                      child: CupertinoSegmentedControl<EasyLoadingMaskType>(
+                        selectedColor: Colors.blue,
+                        children: {
+                          EasyLoadingMaskType.none: Padding(
+                            padding: EdgeInsets.all(5.0),
+                            child: Text('none'),
+                          ),
+                          EasyLoadingMaskType.clear: Padding(
+                            padding: EdgeInsets.all(5.0),
+                            child: Text('clear'),
+                          ),
+                          EasyLoadingMaskType.black: Padding(
+                            padding: EdgeInsets.all(5.0),
+                            child: Text('black'),
+                          ),
+                          EasyLoadingMaskType.custom: Padding(
+                            padding: EdgeInsets.all(5.0),
+                            child: Text('custom'),
+                          ),
+                        },
+                        onValueChanged: (value) {
+                          EasyLoading.instance.maskType = value;
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 20.0),
+                child: Column(
+                  children: <Widget>[
+                    Text('Toast Positon'),
+                    Padding(
+                      padding: EdgeInsets.only(top: 10.0),
+                      child:
+                          CupertinoSegmentedControl<EasyLoadingToastPosition>(
+                        selectedColor: Colors.blue,
+                        children: {
+                          EasyLoadingToastPosition.top: Padding(
+                            padding: EdgeInsets.all(5.0),
+                            child: Text('top'),
+                          ),
+                          EasyLoadingToastPosition.center: Padding(
+                            padding: EdgeInsets.all(5.0),
+                            child: Text('center'),
+                          ),
+                          EasyLoadingToastPosition.bottom: Padding(
+                            padding: EdgeInsets.all(5.0),
+                            child: Text('bottom'),
+                          ),
+                        },
+                        onValueChanged: (value) {
+                          EasyLoading.instance.toastPosition = value;
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 20.0),
+                child: Column(
+                  children: <Widget>[
+                    Text('Animation Style'),
+                    Padding(
+                      padding: EdgeInsets.only(top: 10.0),
+                      child:
+                          CupertinoSegmentedControl<EasyLoadingAnimationStyle>(
+                        selectedColor: Colors.blue,
+                        children: {
+                          EasyLoadingAnimationStyle.opacity: Padding(
+                            padding: EdgeInsets.all(5.0),
+                            child: Text('opacity'),
+                          ),
+                          EasyLoadingAnimationStyle.offset: Padding(
+                            padding: EdgeInsets.all(5.0),
+                            child: Text('offset'),
+                          ),
+                          EasyLoadingAnimationStyle.scale: Padding(
+                            padding: EdgeInsets.all(5.0),
+                            child: Text('scale'),
+                          ),
+                          EasyLoadingAnimationStyle.custom: Padding(
+                            padding: EdgeInsets.all(5.0),
+                            child: Text('custom'),
+                          ),
+                        },
+                        onValueChanged: (value) {
+                          EasyLoading.instance.animationStyle = value;
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                  top: 20.0,
+                  bottom: 50.0,
+                ),
+                child: Column(
+                  children: <Widget>[
+                    Text('IndicatorType(total: 23)'),
+                    Padding(
+                      padding: EdgeInsets.only(top: 10.0),
+                      child:
+                          CupertinoSegmentedControl<EasyLoadingIndicatorType>(
+                        selectedColor: Colors.blue,
+                        children: {
+                          EasyLoadingIndicatorType.circle: Padding(
+                            padding: EdgeInsets.all(5.0),
+                            child: Text('circle'),
+                          ),
+                          EasyLoadingIndicatorType.wave: Padding(
+                            padding: EdgeInsets.all(5.0),
+                            child: Text('wave'),
+                          ),
+                          EasyLoadingIndicatorType.ring: Padding(
+                            padding: EdgeInsets.all(5.0),
+                            child: Text('ring'),
+                          ),
+                          EasyLoadingIndicatorType.pulse: Padding(
+                            padding: EdgeInsets.all(5.0),
+                            child: Text('pulse'),
+                          ),
+                          EasyLoadingIndicatorType.cubeGrid: Padding(
+                            padding: EdgeInsets.all(5.0),
+                            child: Text('cubeGrid'),
+                          ),
+                          EasyLoadingIndicatorType.threeBounce: Padding(
+                            padding: EdgeInsets.all(5.0),
+                            child: Text('threeBounce'),
+                          ),
+                        },
+                        onValueChanged: (value) {
+                          EasyLoading.instance.indicatorType = value;
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
-        );
-      },
-    );
-  }
-
-  Widget _itemCreat(BuildContext context, String title) {
-    return Container(
-      color: Colors.white,
-      height: 50,
-      width: MediaQuery.of(context).size.width,
-      child: Center(
-        child: Text(
-          title,
-          style: TextStyle(fontSize: 16, color: Colors.black),
-          textAlign: TextAlign.center,
         ),
       ),
     );

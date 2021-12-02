@@ -9,6 +9,7 @@
             "name": "flutter_cityshop_store",
             "request": "launch",
             "type": "dart",
+            "program": "lib/main_dev.dart"
         }
     ]
 }
