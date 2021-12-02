@@ -14,6 +14,7 @@ import 'package:flutter_cityshop_store/pages/login/login_input.dart';
 import 'package:flutter_cityshop_store/pages/login/login_logo.dart';
 import 'package:flutter_cityshop_store/router/navigator_utils.dart';
 import 'package:flutter_cityshop_store/utils/utils.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginPage extends StatefulWidget {
@@ -44,6 +45,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
   final TextEditingController _editTextController = TextEditingController();
   // ignore: unused_field
   String _phoneNum = "";
+  bool _checked = false;
 
   @override
   void initState() {
@@ -115,17 +117,29 @@ class _LoginHomePageState extends State<LoginHomePage> {
                 _loginRequest();
               }),
               SizedBox(height: ScreenUtil().setWidth(35)),
-              LoginAgree(),
+              LoginAgree(
+                onProtocol: (bool checked) {
+                  print('是否勾选----$checked');
+                  _checked = checked;
+                },
+              ),
             ]),
       ))),
     );
   }
 
   void _loginRequest() async {
+    if (!_checked) {
+      return eventBus.fire(new HttpErrorEvent(99, "请勾选我已阅读并同意接受协议"));
+    }
     RegExp exp = RegExp(
         r'^((13[0-9])|(14[0-9])|(15[0-9])|(16[0-9])|(17[0-9])|(18[0-9])|(19[0-9]))\d{8}$');
     bool matched = exp.hasMatch(_phoneNum);
     if (matched) {
+      await EasyLoading.show(
+        status: '登陆中...',
+        maskType: EasyLoadingMaskType.black,
+      );
       var params = {"phoneNum": _phoneNum, "channelId": "vivo"};
       if (Platform.isAndroid) {
         params['androidVisited'] = "1";
@@ -136,6 +150,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
       ResultData res = await HttpRequestMethod.instance
           .requestWithMetod(Config.loginUrl, params);
       if (res.result) {
+        EasyLoading.dismiss();
         var dict = res.data;
         String token = dict["phoneNum"].toString();
         if (token != null) {
@@ -145,8 +160,8 @@ class _LoginHomePageState extends State<LoginHomePage> {
         NavigatorUtils.goHome(context);
         _inputChanged("");
       }
-    }else{
-       eventBus.fire(new HttpErrorEvent(99, "输入手机号有误,请重新输入!"));
+    } else {
+      eventBus.fire(new HttpErrorEvent(99, "输入手机号有误,请重新输入!"));
     }
   }
 

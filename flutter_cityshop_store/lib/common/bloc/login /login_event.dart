@@ -7,3 +7,8 @@ class LoginChangeEvent extends LoginEvent {
   final String phoneNum;
   LoginChangeEvent({@required this.phoneNum});
 }
+
+class LoginCheckedEvent extends LoginEvent {
+  final bool checked;
+  LoginCheckedEvent({@required this.checked});
+}

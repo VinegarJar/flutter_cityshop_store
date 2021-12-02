@@ -36,8 +36,8 @@ class _LoginInputState extends State<LoginInput> {
               onChanged: widget.onChanged,
               textInputAction: TextInputAction.done,
               keyboardType: TextInputType.number,
-              autocorrect: true, //是否自动更正
-              autofocus: false, //是否自动对焦
+              // autocorrect: true, //是否自动更正
+              // autofocus: false, //是否自动对焦
               obscureText: false, //是否是密码
               textAlign: TextAlign.center, //文本对齐方式
               style: TextStyle(

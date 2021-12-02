@@ -1,13 +1,23 @@
 part of 'login_bloc.dart';
 
-abstract class AppState {}
+abstract class LoginState {
+  const LoginState();
 
-class LoginState extends AppState {
-  final String phoneNum ;
-  LoginState({this.phoneNum});
+  List<Object> get props => [];
+}
 
-  LoginState copyWith({String phoneNum}) {
-    // print("----copyWith方法传递过来的值---$phoneNum");
-    return LoginState(phoneNum:phoneNum);
-  }
+class LoginSuccess extends LoginState {
+  final String phoneNum;
+  const LoginSuccess({this.phoneNum});
+
+  @override
+  List<Object> get props => [phoneNum];
+}
+
+class LoginChecked extends LoginState {
+  final bool checked;
+  LoginChecked({this.checked = false});
+
+  @override
+  List<Object> get props => [checked];
 }

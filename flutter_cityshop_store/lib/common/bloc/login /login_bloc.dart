@@ -5,14 +5,16 @@ part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  LoginBloc() : super(LoginState(phoneNum:""));
+  LoginBloc() : super(LoginSuccess());
 
   @override
   Stream<LoginState> mapEventToState(
     LoginEvent event,
   ) async* {
     if (event is LoginChangeEvent) {
-      yield state.copyWith(phoneNum: event.phoneNum);
+      yield LoginSuccess(phoneNum: event.phoneNum);
+    } else if (event is LoginCheckedEvent) {
+      yield LoginChecked(checked: event.checked);
     }
   }
 }
