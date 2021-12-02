@@ -2,6 +2,8 @@ import "package:flutter/cupertino.dart";
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cityshop_store/common/bloc/info_bloc.dart';
+import 'package:flutter_cityshop_store/common/config/config.dart';
+import 'package:flutter_cityshop_store/common/local/local_storage.dart';
 import 'package:flutter_cityshop_store/router/navigator_utils.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
 
@@ -65,9 +67,10 @@ class _MyHomePageState extends State<MyHomePage> {
         child: InCounter(),
       ),
       floatingActionButton: FloatingActionButton(
-         onPressed: () {
+         onPressed: () async {
           //Navigator.pushReplacementNamed(context, 'index');
           NavigatorUtils.goLogin(context);
+         await LocalStorage.remove(Config.TOKEN_KEY);
         },
         tooltip: 'Increment',
         child: Icon(Icons.add),

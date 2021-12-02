@@ -8,7 +8,4 @@ class LoginChangeEvent extends LoginEvent {
   LoginChangeEvent({@required this.phoneNum});
 }
 
-class LoginCheckedEvent extends LoginEvent {
-  final bool checked;
-  LoginCheckedEvent({@required this.checked});
-}
+

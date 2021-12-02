@@ -1,5 +1,10 @@
+import 'dart:io';
+
 import "package:flutter/cupertino.dart";
 import 'package:flutter/material.dart';
+import 'package:flutter_cityshop_store/common/config/config.dart';
+import 'package:flutter_cityshop_store/https/httpRequest_method.dart';
+import 'package:flutter_cityshop_store/https/result_data.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -15,6 +20,24 @@ class _HomePagesState extends State<HomePages>
 //保持 保持原页面State 状态 AutomaticKeepAliveClientMixin
   @override
   bool get wantKeepAlive => true;
+
+  @override
+  void initState() async {
+    super.initState();
+    var params = {};
+    if (Platform.isAndroid) {
+      params['isAndroid'] = "1";
+    } else {
+      params['isIos'] = "1";
+    }
+
+    ResultData res = await HttpRequestMethod.instance
+        .requestWithMetod(Config.homeBankUrl, params);
+    if (res.result) {
+      print("获取首页贷款列表-特别推荐---");
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {

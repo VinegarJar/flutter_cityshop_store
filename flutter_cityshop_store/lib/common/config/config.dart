@@ -10,6 +10,9 @@ class Config {
   static const String addEventUrl = "/record/event/addEvent";
   // 登录
   static const String loginUrl = "/szgjadmin/app/appuser/loginNoRegister";
+  //首页贷款列表-特别推荐
+  static const String homeBankUrl = "/szgjadmin/app/product/getRecommed";
+
 
   // 上传图片--需要
   static const String uploadFileToOssFront =
@@ -18,8 +21,7 @@ class Config {
       "/wwqbAdmin/base/uploadFileToOss"; //背面--需要
 
   //现金贷接口路径
-  // 银行认证
-  static const String bankAuthUrl = "/wwqbAdmin/loanapp/user/bankVerity";
+
   // 基本信息认证
   static const String basicInfoUrl = "/wwqbAdmin/loanapp/user/basicInfoVerify";
   // 获得用户验证信息

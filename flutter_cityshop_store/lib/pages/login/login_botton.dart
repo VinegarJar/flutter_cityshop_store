@@ -16,14 +16,14 @@ class LoginBotton extends StatelessWidget {
     return BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
       return Center(
         child: OnTopBotton(
-        callBack:(state is LoginSuccess && state.phoneNum == "") ? null : onPressed,
+        callBack:( state.phoneNum == "") ? null : onPressed,
         title: title,
         widget: Container(
           alignment: Alignment.center,
           width: ScreenUtil().setWidth(600),
           height: ScreenUtil().setWidth(88),
           decoration: BoxDecoration(
-              color: (state is LoginSuccess && state.phoneNum == "")
+              color: (state.phoneNum == "")
                   ? ThemeColors.defaultColor
                   : ThemeColors.mainColor,
               borderRadius: BorderRadius.circular(ScreenUtil().setWidth(10))),
