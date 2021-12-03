@@ -5,6 +5,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cityshop_store/pages/home/home_pages.dart';
+import 'package:flutter_cityshop_store/pages/index_page.dart';
+import 'package:flutter_cityshop_store/pages/login/login_page.dart';
 import 'package:flutter_cityshop_store/pages/mine/mine_pages.dart';
 import 'package:flutter_cityshop_store/pages/webView/webView_page.dart';
 import 'package:flutter_cityshop_store/widget/never_overscroll_indicator.dart';
@@ -12,15 +14,14 @@ import 'package:flutter_cityshop_store/widget/never_overscroll_indicator.dart';
 class NavigatorUtils {
   ///主页(路由替换)
   static goHome(BuildContext context) {
-    // Navigator.pushReplacementNamed(context, 'index');
-    Navigator.pushNamedAndRemoveUntil(context, 'index', (route) => false);
+    Navigator.pushNamedAndRemoveUntil(
+        context, IndexPages.name, (route) => false);
   }
-
 
   ///登录页(路由替换)
   static goLogin(BuildContext context) {
-     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
-    // Navigator.pushReplacementNamed(context, "/");
+    Navigator.pushNamedAndRemoveUntil(
+        context, LoginPage.name, (route) => false);
   }
 
   ///切换无参数页面
