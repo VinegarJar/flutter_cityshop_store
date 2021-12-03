@@ -1,12 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:fluro/fluro.dart';
 import 'package:flutter_cityshop_store/common/event/http_error_event.dart';
 import 'package:flutter_cityshop_store/https/code.dart';
 import 'package:flutter_cityshop_store/provide/car_provider.dart';
 import 'package:flutter_cityshop_store/provide/common_provider.dart';
-import 'package:flutter_cityshop_store/router/routes.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
@@ -26,10 +24,6 @@ class _StoreAppState extends State<StoreApp> with HttpErrorListener {
 
   @override
   Widget build(BuildContext context) {
-    final router = FluroRouter();
-    Routes.setupRouter(router);
-    Routes.router = router;
-
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => CommonProvider()),
@@ -37,8 +31,6 @@ class _StoreAppState extends State<StoreApp> with HttpErrorListener {
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false, //关闭显示debug模式
-          initialRoute: '/', //配置路由
-          onGenerateRoute: Routes.router.generator,
           builder: EasyLoading.init(), //全局初始化
         ));
   }

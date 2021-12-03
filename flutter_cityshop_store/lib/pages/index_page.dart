@@ -8,6 +8,7 @@ import 'home/home_pages.dart';
 import 'mine/mine_pages.dart';
 
 class IndexPages extends StatefulWidget {
+  static final String name = "tabpages";
   IndexPages({Key key}) : super(key: key);
 
   @override

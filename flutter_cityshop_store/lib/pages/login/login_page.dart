@@ -18,6 +18,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginPage extends StatefulWidget {
+  static final String name = "login";
   LoginPage({Key key}) : super(key: key);
 
   @override
