@@ -3,8 +3,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_cityshop_store/common/event/http_error_event.dart';
 import 'package:flutter_cityshop_store/https/code.dart';
+import 'package:flutter_cityshop_store/pages/index_page.dart';
+import 'package:flutter_cityshop_store/pages/login/login_page.dart';
+import 'package:flutter_cityshop_store/pages/welcome/welcome_page.dart';
 import 'package:flutter_cityshop_store/provide/car_provider.dart';
 import 'package:flutter_cityshop_store/provide/common_provider.dart';
+import 'package:flutter_cityshop_store/router/navigator_utils.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
@@ -30,9 +34,19 @@ class _StoreAppState extends State<StoreApp> with HttpErrorListener {
           ChangeNotifierProvider(create: (_) => CarProvider()),
         ],
         child: MaterialApp(
-          debugShowCheckedModeBanner: false, //关闭显示debug模式
-          builder: EasyLoading.init(), //全局初始化
-        ));
+            debugShowCheckedModeBanner: false, //关闭显示debug模式
+            builder: EasyLoading.init(), //全局初始化
+            routes: {
+              WelcomePage.name: (context) {
+                return WelcomePage();
+              },
+              IndexPages.name: (context) {
+                return NavigatorUtils.pageContainer(new IndexPages(), context);
+              },
+              LoginPage.name: (context) {
+                return NavigatorUtils.pageContainer(new LoginPage(), context);
+              },
+            }));
   }
 }
 

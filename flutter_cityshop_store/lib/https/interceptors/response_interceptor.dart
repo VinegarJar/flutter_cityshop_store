@@ -13,14 +13,12 @@ class ResponseInterceptors extends InterceptorsWrapper {
     RequestOptions option = response.requestOptions;
     var value;
     try {
-      Map<String, dynamic> data = new Map<String, dynamic>.from(response.data);
-
       var header = response.headers[Headers.contentTypeHeader];
       if ((header != null && header.toString().contains("text"))) {
-        value = new ResultData(data["result"], true, Code.SUCCESS);
+             value = new ResultData(response.data, true, Code.SUCCESS);
       } else if (response.statusCode >= 200 && response.statusCode < 300) {
-        value =
-            new ResultData(data["result"], true, Code.SUCCESS, headers: response.headers);
+         value = new ResultData(response.data, true, Code.SUCCESS,
+            headers: response.headers);
       }
     } catch (e) {
       print("ResponseInterceptor" + e.toString() + option.path);

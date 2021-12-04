@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter_cityshop_store/common/config/config.dart';
 
@@ -8,15 +7,7 @@ import 'package:flutter_cityshop_store/common/config/config.dart';
  */
 
 class LogsInterceptors extends InterceptorsWrapper {
-  static List<Map> sHttpResponses = [];
-  static List<String> sResponsesHttpUrl = [];
-
-  static List<Map<String, dynamic>> sHttpRequest = [];
-  static List<String> sRequestHttpUrl = [];
-
-  static List<Map<String, dynamic>> sHttpError = [];
-  static List<String> sHttpErrorUrl = [];
-
+  
   @override
   onRequest(RequestOptions options, handler) async {
     if (Config.DEBUG) {
@@ -28,7 +19,6 @@ class LogsInterceptors extends InterceptorsWrapper {
       }
     }
     try {
-      addLogic(sRequestHttpUrl, options.path);
       var data;
       if (options.data is Map) {
         data = options.data;
@@ -41,45 +31,16 @@ class LogsInterceptors extends InterceptorsWrapper {
       if (options.method == "POST") {
         map["data"] = data;
       }
-      addLogic(sHttpRequest, map);
+      print('Log拦截器请求成功：' + options.data.toString());
     } catch (e) {
-      print(e);
+      print('Log拦截器请求出错：' + e.toString());
     }
     return super.onRequest(options, handler);
   }
 
+
   @override
   onResponse(Response response, handler) async {
-    if (Config.DEBUG) {
-      // print('Responseq请求返回数据: ' + response.toString());
-    }
-    if (response.data is Map || response.data is List) {
-      try {
-        var data = Map<String, dynamic>();
-        data["data"] = response.data;
-        addLogic(sResponsesHttpUrl, response.requestOptions.uri.toString());
-        addLogic(sHttpResponses, data);
-      } catch (e) {
-        print(e);
-      }
-    } else if (response.data is String) {
-      try {
-        var data = Map<String, dynamic>();
-        data["data"] = response.data;
-        addLogic(sResponsesHttpUrl, response.requestOptions.uri.toString());
-        addLogic(sHttpResponses, data);
-      } catch (e) {
-        print(e);
-      }
-    } else if (response.data != null) {
-      try {
-        String data = response.data.toJson();
-        addLogic(sResponsesHttpUrl, response.requestOptions.uri.toString());
-        addLogic(sHttpResponses, json.decode(data));
-      } catch (e) {
-        print(e);
-      }
-    }
     return super.onResponse(response, handler);
   }
 
@@ -89,21 +50,7 @@ class LogsInterceptors extends InterceptorsWrapper {
       print('请求异常: ' + err.toString());
       print('请求异常信息: ' + (err.response?.toString() ?? ""));
     }
-    try {
-      addLogic(sHttpErrorUrl, err.requestOptions.path);
-      var errors = Map<String, dynamic>();
-      errors["error"] = err.message;
-      addLogic(sHttpError, errors);
-    } catch (e) {
-      print(e);
-    }
     return super.onError(err, handler);
   }
 
-  static addLogic(List list, data) {
-    if (list.length > 20) {
-      list.removeAt(0);
-    }
-    list.add(data);
-  }
 }

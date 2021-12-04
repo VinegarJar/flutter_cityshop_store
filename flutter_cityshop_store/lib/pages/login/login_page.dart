@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -7,7 +8,7 @@ import 'package:flutter_cityshop_store/common/config/config.dart';
 import 'package:flutter_cityshop_store/common/event/http_error_event.dart';
 import 'package:flutter_cityshop_store/common/local/local_storage.dart';
 import 'package:flutter_cityshop_store/https/httpRequest_method.dart';
-import 'package:flutter_cityshop_store/https/result_data.dart';
+import 'package:flutter_cityshop_store/model/userinfo.dart';
 import 'package:flutter_cityshop_store/pages/login/login_agree.dart';
 import 'package:flutter_cityshop_store/pages/login/login_botton.dart';
 import 'package:flutter_cityshop_store/pages/login/login_input.dart';
@@ -80,8 +81,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context, width: 750, height: 1334, allowFontScaling: false);
-
+   
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: () {
@@ -100,31 +100,28 @@ class _LoginHomePageState extends State<LoginHomePage> {
             fit: BoxFit.cover,
           ),
         ),
-        child: Column(
-            // mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              LoginLogo(),
-              LoginInput(
-                hintText: "请输入手机号",
-                controller: _editTextController,
-                onChanged: (String value) {
-                  _inputChanged(value);
-                },
-              ),
-              SizedBox(height: ScreenUtil().setWidth(35)),
-              LoginBotton(onPressed: () async {
-                print('LoginBotton----');
-                _loginRequest();
-              }),
-              SizedBox(height: ScreenUtil().setWidth(35)),
-              LoginAgree(
-                onProtocol: (bool checked) {
-                  print('是否勾选----$checked');
-                  _checked = checked;
-                },
-              ),
-            ]),
+        child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+          LoginLogo(),
+          LoginInput(
+            hintText: "请输入手机号",
+            controller: _editTextController,
+            onChanged: (String value) {
+              _inputChanged(value);
+            },
+          ),
+          SizedBox(height: ScreenUtil().setWidth(35)),
+          LoginBotton(onPressed: () async {
+            print('LoginBotton----');
+            _loginRequest();
+          }),
+          SizedBox(height: ScreenUtil().setWidth(35)),
+          LoginAgree(
+            onProtocol: (bool checked) {
+              print('是否勾选----$checked');
+              _checked = checked;
+            },
+          ),
+        ]),
       ))),
     );
   }
@@ -148,25 +145,21 @@ class _LoginHomePageState extends State<LoginHomePage> {
         params['iosVisited'] = "1";
       }
 
-      ResultData res = await HttpRequestMethod.instance
+      var res = await HttpRequestMethod.instance
           .requestWithMetod(Config.loginUrl, params);
       if (res.result) {
-        EasyLoading.dismiss();
-        var dict = res.data;
-        String token = dict["phoneNum"].toString();
-        if (token != null) {
-          _saveToken(token);
-        }
-        print("获取tock---$token");
-        NavigatorUtils.goHome(context);
-        _inputChanged("");
+          _inputChanged("");
+          EasyLoading.dismiss();
+          UserInfo user = UserInfo.fromJson(res.data["result"]);
+          LocalStorage.save(Config.USER_INFO, json.encode(user.toJson()));
+          LocalStorage.save(Config.TOKEN_KEY, user.phoneNum);
+          print("获取tock---${user.phoneNum}");
+          NavigatorUtils.goHome(context);
       }
     } else {
       eventBus.fire(new HttpErrorEvent(99, "输入手机号有误,请重新输入!"));
     }
   }
 
-  void _saveToken(token) async {
-    await LocalStorage.save(Config.TOKEN_KEY, token);
-  }
+
 }

@@ -50,6 +50,8 @@ class HttpRequestMethod {
   Future requestWithMetod(url, params,
       {Map<String, dynamic> header, Options option, noTip = false}) async {
     Map<String, dynamic> headers = new HashMap();
+    Map dict=  Map<String, dynamic>.from(params); 
+
     if (header != null) {
       headers.addAll(header);
     }
@@ -81,7 +83,7 @@ class HttpRequestMethod {
 
     Response response;
     try {
-      response = await _dio.request(url, data: params, options: option);
+      response = await _dio.request(url, data: dict, options: option);
     } on DioError catch (e) {
       return resultError(e);
     }

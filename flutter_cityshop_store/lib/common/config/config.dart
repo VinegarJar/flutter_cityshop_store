@@ -2,7 +2,8 @@ class Config {
   static const bool DEBUG = true;
   static const PAGE_SIZE = 20;
   static const TOKEN_KEY = "token";
-
+  static const USER_INFO = "userInfo";
+  
   //api请求地址
   static const String baseURL = "http://121.40.252.174:6001";
 

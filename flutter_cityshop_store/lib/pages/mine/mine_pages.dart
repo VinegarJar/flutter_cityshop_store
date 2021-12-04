@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cityshop_store/common/bloc/info_bloc.dart';
 import 'package:flutter_cityshop_store/common/config/config.dart';
+import 'package:flutter_cityshop_store/common/event/http_error_event.dart';
 import 'package:flutter_cityshop_store/common/local/local_storage.dart';
 import 'package:flutter_cityshop_store/router/navigator_utils.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
+import 'package:flutter_cityshop_store/widget/alert.dart';
 
 class MinePages extends StatefulWidget {
   MinePages({Key key}) : super(key: key);
@@ -67,15 +69,28 @@ class _MyHomePageState extends State<MyHomePage> {
         child: InCounter(),
       ),
       floatingActionButton: FloatingActionButton(
-         onPressed: () async {
-          //Navigator.pushReplacementNamed(context, 'index');
-          NavigatorUtils.goLogin(context);
-         await LocalStorage.remove(Config.TOKEN_KEY);
+        onPressed: () {
+          Alert.showAlert(
+              widgetContext: context,
+              title: "温馨提示",
+              confirm: "退出",
+              cancel: "取消",
+              content: "您确定要退出吗？",
+              onPressed: () {
+                logOutAction();
+                eventBus.fire(new HttpErrorEvent(99, "退出成功"));
+              });
         },
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  void logOutAction() async {
+    NavigatorUtils.goLogin(context);
+    await LocalStorage.remove(Config.TOKEN_KEY);
+    await LocalStorage.remove(Config.USER_INFO);
   }
 }
 
