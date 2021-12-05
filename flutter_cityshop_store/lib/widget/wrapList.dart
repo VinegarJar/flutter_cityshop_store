@@ -22,24 +22,6 @@ class WrapList extends StatelessWidget {
         return InkWell(
             onTap: () {
               print("火爆专区---$val---");
-
-              // 触摸收起键盘FocusScope.of(context).requestFocus(FocusNode());
-              // Routes.navigateTo(
-              //   context,
-              //   Routes.details,
-              //   params: {
-              //     "goodsName": val.goodsName,
-              //     "shortName": val.shortName,
-              //     "marketPrice": val.marketPrice.toString(),
-              //     "price": val.group["price"].toString(),
-              //     "salesTip": val.salesTip,
-              //     "imageUrl": val.imageUrl,
-              //     "thumbUrl": val.thumbUrl,
-              //     "hdThumbUrl": val.hdThumbUrl,
-              //     "hdUrl": val.hdUrl,
-              //   },
-              //   transition: TransitionType.cupertinoFullScreenDialog,
-              // );
             },
             child: Container(
                 width: ScreenUtil().setWidth(330),

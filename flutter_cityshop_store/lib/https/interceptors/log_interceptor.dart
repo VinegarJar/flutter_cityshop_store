@@ -7,7 +7,6 @@ import 'package:flutter_cityshop_store/common/config/config.dart';
  */
 
 class LogsInterceptors extends InterceptorsWrapper {
-  
   @override
   onRequest(RequestOptions options, handler) async {
     if (Config.DEBUG) {
@@ -38,7 +37,6 @@ class LogsInterceptors extends InterceptorsWrapper {
     return super.onRequest(options, handler);
   }
 
-
   @override
   onResponse(Response response, handler) async {
     return super.onResponse(response, handler);
@@ -47,10 +45,13 @@ class LogsInterceptors extends InterceptorsWrapper {
   @override
   onError(DioError err, handler) async {
     if (Config.DEBUG) {
-      print('请求异常: ' + err.toString());
-      print('请求异常信息: ' + (err.response?.toString() ?? ""));
+      try {
+        print('请求异常: ' + err.toString());
+        print('请求异常信息: ' + (err.response?.toString() ?? ""));
+      } catch (e) {
+        print('Log拦截器请求出错：' + e.toString());
+      }
     }
     return super.onError(err, handler);
   }
-
 }

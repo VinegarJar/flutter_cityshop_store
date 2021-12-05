@@ -18,7 +18,7 @@ class HomeRecommed {
   String loanSpeed;
   String rate;
   int applyNum;
-  Null productUrl;
+  String productUrl;
   Null productShortUrl;
   Null settlementType;
   Null settlementPrice;
