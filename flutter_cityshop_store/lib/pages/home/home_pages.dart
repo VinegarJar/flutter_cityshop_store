@@ -7,9 +7,11 @@ import 'package:flutter_cityshop_store/https/httpRequest_method.dart';
 import 'package:flutter_cityshop_store/model/advert.dart';
 import 'package:flutter_cityshop_store/model/homerecommed.dart';
 import 'package:flutter_cityshop_store/pages/home/home_list_page.dart';
+import 'package:flutter_cityshop_store/pages/home/home_title.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_cityshop_store/widget/home_banner.dart';
 import 'package:flutter_cityshop_store/widget/placeitem.dart';
+import 'package:flutter_cityshop_store/widget/tag.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -62,33 +64,9 @@ class _HomePagesState extends State<HomePages>
     return Scaffold(
       backgroundColor: ThemeColors.mainBgColor,
       appBar: AppBar(
-        elevation: 0, // 隐藏阴影
-        backgroundColor: ThemeColors.homemainColor,
-        title: Column(
-          children: [
-            Container(
-              width: ScreenUtil().setWidth(245),
-              child: Text(
-                "分期借",
-                style: TextStyle(
-                    color: ThemeColors.titlesColor,
-                    fontWeight: FontWeight.w600,
-                    fontSize: ScreenUtil().setSp(38)),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(vertical: ScreenUtil().setWidth(10)),
-              width: ScreenUtil().setWidth(245),
-              child: Text(
-                "专业贷款 审核更快",
-                style: TextStyle(
-                    color: ThemeColors.titlesColor,
-                    fontSize: ScreenUtil().setSp(28)),
-              ),
-            )
-          ],
-        ),
-      ),
+          elevation: 0, // 隐藏阴影
+          backgroundColor: ThemeColors.homemainColor,
+          title: HomeTitle()),
       body: FutureBuilder(
         future: HttpRequestMethod.instance
             .requestWithMetod(Config.homeBankUrl, params),
@@ -121,6 +99,7 @@ class _HomePagesState extends State<HomePages>
                 child: ListView(
                   children: [
                     HomeBanner(bannner: banner),
+                    Tage(titel: "特别推荐"),
                     HomeListPage(dataSource: dataSource)
                   ],
                 ));

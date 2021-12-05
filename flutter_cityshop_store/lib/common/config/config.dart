@@ -3,6 +3,7 @@ class Config {
   static const PAGE_SIZE = 20;
   static const TOKEN_KEY = "token";
   static const USER_INFO = "userInfo";
+  static const USER_VIP = "vipLevel";
   
   //api请求地址
   static const String baseURL = "http://121.40.252.174:6001";
@@ -16,7 +17,7 @@ class Config {
   //首页今日推荐
   static const String todayRecommed ="/szgjadmin/app/product/getNewTodayRecommed";
   //新口子推荐
-  static const String productRecommed ="szgjadmin/app/product/getRecommed";
+  static const String productRecommed ="/szgjadmin/app/product/getRecommed";
 
   // 上传图片--需要
   static const String uploadFileToOssFront =

@@ -152,7 +152,8 @@ class _LoginHomePageState extends State<LoginHomePage> {
           EasyLoading.dismiss();
           UserInfo user = UserInfo.fromJson(res.data["result"]);
           LocalStorage.save(Config.USER_INFO, json.encode(user.toJson()));
-          LocalStorage.save(Config.TOKEN_KEY, user.phoneNum);
+          LocalStorage.save(Config.TOKEN_KEY, user.phoneNum); 
+          LocalStorage.save(Config.USER_VIP, user.vipLevel.toString());
           print("获取tock---${user.phoneNum}");
           NavigatorUtils.goHome(context);
       }
