@@ -13,7 +13,6 @@ import 'package:flutter_cityshop_store/widget/home_banner.dart';
 import 'package:flutter_cityshop_store/widget/placeitem.dart';
 import 'package:flutter_cityshop_store/widget/tag.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomePages extends StatefulWidget {
   HomePages({Key key}) : super(key: key);
