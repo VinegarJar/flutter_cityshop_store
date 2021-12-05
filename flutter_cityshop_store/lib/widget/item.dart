@@ -24,64 +24,75 @@ class Item extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(ScreenUtil().setWidth(10))),
       child: Column(
-        crossAxisAlignment:CrossAxisAlignment.start ,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                width: ScreenUtil().setWidth(50),
-                height: ScreenUtil().setHeight(50),
-                decoration: BoxDecoration(
-                    color: ThemeColors.mainBgColor,
-                    borderRadius:
-                        BorderRadius.circular(ScreenUtil().setWidth(5))),
-                child: (model?.productImgUrl != null)
-                    ? FadeInImage.memoryNetwork(
-                        placeholder: kTransparentImage,
-                        image: model.productImgUrl,
-                        fit: BoxFit.fill)
-                    : Container(),
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(
-                    horizontal: ScreenUtil().setHeight(10)),
-                child: Text(
-                  model?.productName ?? "",
-                  style: TextStyle(
-                    fontSize: ScreenUtil().setSp(32),
-                    fontWeight: FontWeight.w600,
+              Row(
+                children: [
+                  Container(
+                    width: ScreenUtil().setWidth(50),
+                    height: ScreenUtil().setHeight(50),
+                    decoration: BoxDecoration(
+                        color: ThemeColors.mainBgColor,
+                        borderRadius:
+                            BorderRadius.circular(ScreenUtil().setWidth(5))),
+                    child: (model?.productImgUrl != null)
+                        ? FadeInImage.memoryNetwork(
+                            placeholder: kTransparentImage,
+                            image: model.productImgUrl,
+                            fit: BoxFit.fill)
+                        : Container(),
                   ),
-                ),
+                  Container(
+                    margin: EdgeInsets.symmetric(
+                        horizontal: ScreenUtil().setHeight(10)),
+                    child: Text(
+                      model?.productName ?? "",
+                      style: TextStyle(
+                        fontSize: ScreenUtil().setSp(32),
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.symmetric(
+                        horizontal: ScreenUtil().setHeight(5)),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: ScreenUtil().setHeight(5)),
+                    decoration: BoxDecoration(
+                        color: ThemeColors.homeColor,
+                        borderRadius:
+                            BorderRadius.circular(ScreenUtil().setWidth(5))),
+                    child: Text(
+                      model?.longContent ?? "审核快",
+                      style: TextStyle(
+                          fontSize: ScreenUtil().setSp(23),
+                          color: ThemeColors.subtitlesColor),
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: ScreenUtil().setHeight(5)),
+                    decoration: BoxDecoration(
+                        color: ThemeColors.brandColor,
+                        borderRadius:
+                            BorderRadius.circular(ScreenUtil().setWidth(5))),
+                    child: Text(
+                      model?.shortContent ?? "品牌",
+                      style: TextStyle(
+                          fontSize: ScreenUtil().setSp(23),
+                          color: ThemeColors.brandtitleColor),
+                    ),
+                  ),
+                ],
               ),
-              Container(
-                margin:
-                    EdgeInsets.symmetric(horizontal: ScreenUtil().setHeight(5)),
-                padding:
-                    EdgeInsets.symmetric(horizontal: ScreenUtil().setHeight(5)),
-                decoration: BoxDecoration(
-                    color: ThemeColors.homeColor,
-                    borderRadius:
-                        BorderRadius.circular(ScreenUtil().setWidth(5))),
-                child: Text(
-                  model?.longContent ?? "审核快",
-                  style: TextStyle(
-                      fontSize: ScreenUtil().setSp(23),
-                      color: ThemeColors.subtitlesColor),
-                ),
-              ),
-              Container(
-                padding:
-                    EdgeInsets.symmetric(horizontal: ScreenUtil().setHeight(5)),
-                decoration: BoxDecoration(
-                    color: ThemeColors.brandColor,
-                    borderRadius:
-                        BorderRadius.circular(ScreenUtil().setWidth(5))),
-                child: Text(
-                  model?.shortContent ?? "品牌",
-                  style: TextStyle(
-                      fontSize: ScreenUtil().setSp(23),
-                      color: ThemeColors.brandtitleColor),
-                ),
+              Text(
+                computedownload(model?.applyNum),
+                style: TextStyle(
+                    fontSize: ScreenUtil().setSp(28),
+                    color: ThemeColors.titleColor),
               ),
             ],
           ),
@@ -120,25 +131,25 @@ class Item extends StatelessWidget {
                           horizontal: ScreenUtil().setWidth(30)),
                       height: ScreenUtil().setWidth(60),
                       decoration: BoxDecoration(
-                          color: ThemeColors.mainColor,
+                          color: ThemeColors.homemainColor,
                           borderRadius:
                               BorderRadius.circular(ScreenUtil().setWidth(30))),
                       child: Text("立即申请",
                           style: TextStyle(
                             fontSize: ScreenUtil().setSp(32),
-                            color: Colors.white,
+                            color: ThemeColors.appliedColor, //35,17,0
                           )),
                     ),
                   )
                 ],
               )),
           Container(
-           child: Text(model?.loanSpeed??"",
-                          style: TextStyle(
-                            fontSize: ScreenUtil().setSp(32),
-                            color: ThemeColors.titleColor,
-                          )),
-         )
+            child: Text(model?.loanSpeed ?? "",
+                style: TextStyle(
+                  fontSize: ScreenUtil().setSp(32),
+                  color: ThemeColors.titleColor,
+                )),
+          )
         ],
       ),
     );
@@ -146,14 +157,14 @@ class Item extends StatelessWidget {
 
   computeLongContent(var minimum, var maximum) {
     String min;
-    if (minimum!=null&& minimum>= 10000) {
-      min = (minimum / 10000).toString() + "万";
+    if (minimum != null && minimum > 10000) {
+      min = (minimum / 10000).truncate().toString() + "万";
     } else {
       min = minimum?.toString() ?? "0";
     }
     String max;
-    if (maximum!=null&&maximum > 10000) {
-      max = (maximum / 10000).toString() + "万";
+    if (maximum != null && maximum > 10000) {
+      max = (maximum / 10000).truncate().toString() + "万";
     } else {
       max = maximum?.toString() ?? "0";
     }
@@ -163,5 +174,9 @@ class Item extends StatelessWidget {
   timerContent(var loanPeriodLower, var loanPeriodUpper) {
     return ("3" + "~" + "12月");
     // return (loanPeriodLower.toString() + "~" + loanPeriodUpper.toString());
+  }
+
+  computedownload(var applyNum) {
+    return (applyNum?.toString() ?? "0") + "人已下载";
   }
 }

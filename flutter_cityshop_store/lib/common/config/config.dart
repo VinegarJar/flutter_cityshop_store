@@ -13,7 +13,10 @@ class Config {
   static const String loginUrl = "/szgjadmin/app/appuser/loginNoRegister";
   //首页贷款列表-特别推荐
   static const String homeBankUrl = "/szgjadmin/app/product/getRecommed";
-
+  //首页今日推荐
+  static const String todayRecommed ="/szgjadmin/app/product/getNewTodayRecommed";
+  //新口子推荐
+  static const String productRecommed ="szgjadmin/app/product/getRecommed";
 
   // 上传图片--需要
   static const String uploadFileToOssFront =

@@ -8,7 +8,7 @@
      <!--第1处修改，重定向App启动入口类-->  
     <application
         android:name=".MainApplication" 
-        android:label="用呗"
+        android:label="分期借"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true">
 

@@ -12,7 +12,7 @@ class _CaterGoryPagesState extends State<CaterGoryPages> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ThemeColors.mainBgColor,
+      backgroundColor: ThemeColors.homemainColor,
       appBar: AppBar(
         backgroundColor: ThemeColors.mainColor,
         // Here we take the value from the MyHomePage object that was created by
@@ -22,7 +22,7 @@ class _CaterGoryPagesState extends State<CaterGoryPages> {
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: Text("借款列表"),
+        child: Text(""),
       ),
     );
   }

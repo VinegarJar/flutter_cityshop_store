@@ -1,11 +1,16 @@
+import 'dart:io';
+
 import "package:flutter/cupertino.dart";
 import 'package:flutter/material.dart';
 import 'package:flutter_cityshop_store/common/config/config.dart';
 import 'package:flutter_cityshop_store/https/httpRequest_method.dart';
+import 'package:flutter_cityshop_store/model/advert.dart';
 import 'package:flutter_cityshop_store/model/homerecommed.dart';
+import 'package:flutter_cityshop_store/pages/home/home_list_page.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
-import 'package:flutter_cityshop_store/widget/item.dart';
+import 'package:flutter_cityshop_store/widget/home_banner.dart';
 import 'package:flutter_cityshop_store/widget/placeitem.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomePages extends StatefulWidget {
@@ -20,17 +25,35 @@ class _HomePagesState extends State<HomePages>
 //保持 保持原页面State 状态 AutomaticKeepAliveClientMixin
   @override
   bool get wantKeepAlive => true;
+
+  EasyRefreshController _controller = EasyRefreshController();
+  ScrollController scrollContr = ScrollController();
   var params = {};
+  List<Advert> banner = [];
 
   @override
   void initState() {
     super.initState();
+    if (Platform.isAndroid) {
+      params['isAndroid'] = "1";
+    } else {
+      params['isIos'] = "1";
+    }
 
-    // if (Platform.isAndroid) {
-    //   params['isAndroid'] = "1";
-    // } else {
-    //   params['isIos'] = "1";
-    // }
+    requstAdvert();
+  }
+
+  void requstAdvert() async {
+    HttpRequestMethod.instance
+        .requestWithMetod(Config.todayRecommed, params)
+        .then((res) {
+      List<Map> list = (res.data as List).cast();
+      final List dataSource =
+          list.map((data) => Advert.fromJson(data)).toList();
+      setState(() {
+        banner = dataSource;
+      });
+    });
   }
 
   @override
@@ -39,7 +62,8 @@ class _HomePagesState extends State<HomePages>
     return Scaffold(
       backgroundColor: ThemeColors.mainBgColor,
       appBar: AppBar(
-        backgroundColor: ThemeColors.mainColor,
+        elevation: 0, // 隐藏阴影
+        backgroundColor: ThemeColors.homemainColor,
         title: Column(
           children: [
             Container(
@@ -69,57 +93,47 @@ class _HomePagesState extends State<HomePages>
         future: HttpRequestMethod.instance
             .requestWithMetod(Config.homeBankUrl, params),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-          
           if (snapshot.hasData) {
             var res = snapshot.data;
-           List<Map> list = (res.data as List).cast();
-           List<HomeRecommed>dataSource = [];
-          list.forEach((data) => dataSource.add(HomeRecommed.fromJson(data)));
+            List<Map> list = (res.data as List).cast();
+            final List dataSource =
+                list.map((data) => HomeRecommed.fromJson(data)).toList();
+            return EasyRefresh(
+                enableControlFinishRefresh: false,
+                enableControlFinishLoad: true,
+                controller: _controller,
+                header: ClassicalHeader(
+                  refreshText: "松手刷新",
+                  refreshReadyText: "松手刷新",
+                  refreshingText: "更新中",
+                  refreshedText: "更新成功",
+                  refreshFailedText: "更新失败",
+                  infoText: "",
+                  textColor: ThemeColors.homemainColor,
+                ),
+                onRefresh: () async {
+                  await Future.delayed(Duration(seconds: 2), () {
+                    print('onRefresh');
+                    setState(() {});
+                    _controller.resetLoadState();
+                  });
+                },
+                child: ListView(
+                  children: [
+                    HomeBanner(bannner: banner),
+                    HomeListPage(dataSource: dataSource)
+                  ],
+                ));
+          } else {
             return ListView.builder(
-              itemCount: dataSource.length,
+              itemCount: 5,
               itemBuilder: (BuildContext context, int index) {
-                HomeRecommed model = dataSource [index];
-                
-                return Item(model: model);
+                return PlaceItem();
               },
             );
-          } else {
-                   return PlaceItem();
           }
         },
       ),
-      // body: Container(
-      //     // margin: EdgeInsets.only(left: 16, right: 16),
-      //     alignment: Alignment.center,
-      //     // padding: EdgeInsets.all(20),
-      //     child: Column(
-      //       children: [
-      //         SizedBox(height: 20),
-      //         Item(),
-
-      //         InkWell(
-      //           child: Text(
-      //             "我是有底线滴",
-      //             style:
-      //                 TextStyle(color: ThemeColors.titleColor, fontSize: 26),
-      //           ),
-      //           onTap: () async {
-      // var params = {};
-      // if (Platform.isAndroid) {
-      //   params['isAndroid'] = "1";
-      // } else {
-      //   params['isIos'] = "1";
-      // }
-
-      //             var res = await HttpRequestMethod.instance
-      //                 .requestWithMetod(Config.homeBankUrl, params);
-      // if (res.result) {
-      //   print("获取首页贷款列表-特别推荐----${res.data}");
-      // }
-      //           },
-      //         ),
-      //       ],
-      //     ))
     );
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ThemeColors {
   static Color mainColor = Color.fromRGBO(249, 162, 48, 1);
-  static Color homemainColor = Color.fromRGBO(254, 239, 176, 1);
+  static Color homemainColor = Color.fromRGBO(253, 199, 78, 1);
   static Color loginBgColor = Color.fromRGBO(83, 135, 225, 1);
   static Color mainBgColor = Color.fromRGBO(245, 245, 245, 1);
   static Color deleteColor = Color.fromRGBO(190, 190, 190, 0.5);
@@ -14,8 +14,10 @@ class ThemeColors {
   static Color brandColor = Color.fromRGBO(238,219,254,1);
   static Color brandtitleColor = Color.fromRGBO(125,92,153,1);
   static Color loanUpperColor = Color.fromRGBO(217,78,70,1);
-
-  static Color whiteColor = Color.fromRGBO(248, 248, 248, 0.8);
+  static Color appliedColor = Color.fromRGBO(0,0,0,0.9);
+  static Color banertagBgColor = Color.fromRGBO(227,249,255,1);
+  static Color banertagColor = Color.fromRGBO(112,130,171,1);
+  static Color whiteColor = Color.fromRGBO(248, 248, 253, 0.8);
 
   ///正文，副标题以及可点击区域的主要文字和图标
   static Color titleColor = Color.fromARGB(255, 102, 102, 102);

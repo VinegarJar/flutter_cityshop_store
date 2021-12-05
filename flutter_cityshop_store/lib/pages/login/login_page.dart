@@ -88,8 +88,8 @@ class _LoginHomePageState extends State<LoginHomePage> {
         FocusScope.of(context).requestFocus(new FocusNode());
       },
       child: Scaffold(
-          body: SingleChildScrollView(
-              child: Container(
+        body: SingleChildScrollView(
+        child: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
