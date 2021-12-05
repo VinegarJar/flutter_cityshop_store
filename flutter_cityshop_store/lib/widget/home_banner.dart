@@ -18,7 +18,7 @@ class HomeBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: ScreenUtil().setHeight(365),
+        height: ScreenUtil().setHeight(465),
         width: ScreenUtil().setWidth(750),
         margin: EdgeInsets.symmetric( horizontal: ScreenUtil().setWidth(15),vertical: ScreenUtil().setWidth(20)),
         child: Swiper(
