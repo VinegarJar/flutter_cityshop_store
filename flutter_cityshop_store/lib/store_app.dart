@@ -6,7 +6,7 @@ import 'package:flutter_cityshop_store/https/code.dart';
 import 'package:flutter_cityshop_store/pages/index_page.dart';
 import 'package:flutter_cityshop_store/pages/login/login_page.dart';
 import 'package:flutter_cityshop_store/pages/welcome/welcome_page.dart';
-import 'package:flutter_cityshop_store/provide/car_provider.dart';
+import 'package:flutter_cityshop_store/provide/user_provider.dart';
 import 'package:flutter_cityshop_store/provide/common_provider.dart';
 import 'package:flutter_cityshop_store/router/navigator_utils.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -31,7 +31,7 @@ class _StoreAppState extends State<StoreApp> with HttpErrorListener {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => CommonProvider()),
-          ChangeNotifierProvider(create: (_) => CarProvider()),
+          ChangeNotifierProvider(create: (_) => UserProvider()),
         ],
         child: MaterialApp(
             debugShowCheckedModeBanner: false, //关闭显示debug模式

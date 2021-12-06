@@ -2,9 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_cityshop_store/https/user_dao.dart';
+import 'package:flutter_cityshop_store/provide/user_provider.dart';
 import 'package:flutter_cityshop_store/router/navigator_utils.dart';
 import 'package:flutter_cityshop_store/utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 class WelcomePage extends StatefulWidget {
   static final String name = "/";
@@ -23,6 +25,8 @@ class _WelcomePageState extends State<WelcomePage> {
     new Future.delayed(const Duration(seconds: 2, milliseconds: 500), () {
       UserDao.initUserInfo().then((res) {
         if (res != null && res.result) {
+          Provider.of<UserProvider>(context, listen: false)
+            .savaUserInfoCache(res.data);
           NavigatorUtils.goHome(context);
         } else {
           NavigatorUtils.goLogin(context);
