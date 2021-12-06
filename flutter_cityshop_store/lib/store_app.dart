@@ -97,7 +97,7 @@ mixin HttpErrorListener on State<StoreApp> {
         break;
       case Code.GITHUB_API_REFUSED:
         //Github API 异常
-        showToast("API异常");
+        showToast("网络请求异常,请检查网络!");
         break;
       default:
         showToast(message);
@@ -106,6 +106,7 @@ mixin HttpErrorListener on State<StoreApp> {
   }
 
   showToast(String message) {
+    EasyLoading.dismiss();
     Fluttertoast.showToast(
         msg: message,
         gravity: ToastGravity.CENTER,

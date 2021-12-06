@@ -48,6 +48,7 @@ class LogsInterceptors extends InterceptorsWrapper {
       try {
         print('请求异常: ' + err.toString());
         print('请求异常信息: ' + (err.response?.toString() ?? ""));
+        throw Exception('请求出错:${(err.response?.toString() ?? "")}');
       } catch (e) {
         print('Log拦截器请求出错：' + e.toString());
       }
