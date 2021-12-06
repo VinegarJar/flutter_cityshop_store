@@ -23,7 +23,7 @@ class _LoginAgreeState extends State<LoginAgree> {
           width: ScreenUtil().setWidth(600),
           child: Text.rich(TextSpan(children: [
             WidgetSpan(
-              child: InkWell(
+                child: InkWell(
               onTap: () {
                 this.setState(() {
                   checked = !checked;
@@ -35,7 +35,7 @@ class _LoginAgreeState extends State<LoginAgree> {
                     ? Icons.check_box_outlined
                     : Icons.check_box_outline_blank,
                 size: ScreenUtil().setSp(38),
-                color: checked?ThemeColors.mainColor: Colors.white,
+                color: checked ? ThemeColors.mainColor : Colors.white,
               ),
             )),
             TextSpan(
@@ -43,7 +43,7 @@ class _LoginAgreeState extends State<LoginAgree> {
                 style: TextStyle(
                     color: Colors.white, fontSize: ScreenUtil().setSp(30))),
             TextSpan(
-              text: "《分期借贷用户注册协议》",
+              text: "《用呗用户注册协议》",
               style: TextStyle(
                   color: ThemeColors.loginBgColor,
                   fontSize: ScreenUtil().setSp(30)),
@@ -57,13 +57,13 @@ class _LoginAgreeState extends State<LoginAgree> {
                 style: TextStyle(
                     color: Colors.white, fontSize: ScreenUtil().setSp(30))),
             TextSpan(
-              text: "《分期借贷隐私政策》",
+              text: "《用呗隐私政策》",
               style: TextStyle(
                   color: ThemeColors.loginBgColor,
                   fontSize: ScreenUtil().setSp(30)),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
-                  print("分期借贷隐私政策点击事件---");
+                  print("用呗隐私政策点击事件---");
                 },
             ),
           ]))),
