@@ -14,17 +14,14 @@ class MineHeadGround extends StatefulWidget {
 }
 
 class _MineHeadGroundState extends State<MineHeadGround> {
-
   
-  
-  mobile(phoneNumber){
+  mobile(phoneNumber) {
     return phoneNumber.replaceFirst(new RegExp(r'\d{4}'), '****', 3);
   }
 
-
   @override
   Widget build(BuildContext context) {
-  UserInfo userInfo = Provider.of<UserProvider>(context).userInfo;
+    UserInfo userInfo = Provider.of<UserProvider>(context).userInfo;
     return Container(
       height: ScreenUtil().setWidth(325),
       color: ThemeColors.homemainColor,
@@ -53,18 +50,17 @@ class _MineHeadGroundState extends State<MineHeadGround> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                 userInfo?.nickName?? "未实名认证",
+                  userInfo?.nickName ?? "未实名认证",
                   style: TextStyle(
                       color: ThemeColors.titlesColor,
                       fontSize: ScreenUtil().setSp(32)),
                 ),
-           
-                 Text(
+                Text(
                   mobile(userInfo.phoneNum),
                   style: TextStyle(
                       color: ThemeColors.titlesColor,
                       fontSize: ScreenUtil().setSp(30)),
-                ), 
+                ),
               ],
             ),
           ),
