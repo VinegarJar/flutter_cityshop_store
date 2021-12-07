@@ -18,8 +18,11 @@ class ThemeColors {
   static Color banertagBgColor = Color.fromRGBO(227,249,255,1);
   static Color banertagColor = Color.fromRGBO(112,130,171,1);
   static Color whiteColor = Color.fromRGBO(248, 248, 253, 0.8);
+  static Color vipBgColor = Color.fromRGBO(36,40,52,1);
+  static Color viptitleColor = Color.fromRGBO(246,222,181,1);
+  static Color vipsubtitleColor = Color.fromRGBO(103,105,118,1);
 
-  ///正文，副标题以及可点击区域的主要文字和图标
+  ///正文，副标题以及可点击区域的主要文字和图标 
   static Color titleColor = Color.fromARGB(255, 102, 102, 102);
 
   ///功能性较强的文字，内页标题等

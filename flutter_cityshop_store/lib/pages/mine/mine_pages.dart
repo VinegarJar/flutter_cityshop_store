@@ -21,19 +21,21 @@ class _MinePagesState extends State<MinePages> {
     return Scaffold(
       backgroundColor: ThemeColors.mainBgColor,
       body: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min, 
-          children: <Widget>[
-            MineHeadGround(),
-            Text("万的页面"),
-          ]),
+        child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+          MineHeadGround(),
+          // InkWell(
+          //     onTap: () {},
+          //     //System
+          //     child: Icon(
+          //       Icons.settings,
+          //       size: ScreenUtil().setSp(50),
+          //       color: ThemeColors.titleColor,
+          //     )),
+             
+          
+        ]),
       ),
 
-      // Center(
-      //   // Center is a layout widget. It takes a single child and positions it
-      //   // in the middle of the parent.
-      //   child: Text("万的页面"),
-      // ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Alert.showAlert(

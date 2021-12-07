@@ -55,7 +55,7 @@ class HomeBanner extends StatelessWidget {
                   ),
                   OnTopBotton(
                     callBack: () {},
-                    title: "一键申请",
+                    title: "立即激活",
                     widget: Container(
                       alignment: Alignment.center,
                       margin: EdgeInsets.symmetric(horizontal:ScreenUtil().setWidth(40), ),
@@ -64,7 +64,7 @@ class HomeBanner extends StatelessWidget {
                           color: ThemeColors.homemainColor,
                           borderRadius:
                               BorderRadius.circular(ScreenUtil().setWidth(44))),
-                      child: Text("一键申请",
+                      child: Text("立即激活",
                           style: TextStyle(
                             fontSize: ScreenUtil().setSp(32),
                             color: ThemeColors.appliedColor, //35,17,0

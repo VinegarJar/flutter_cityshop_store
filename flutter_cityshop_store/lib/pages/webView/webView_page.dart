@@ -1,3 +1,4 @@
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
@@ -12,41 +13,47 @@ final Set<JavascriptChannel> jsChannels = [
       onMessageReceived: (JavascriptMessage message) {
         print("-----------------" + message.message);
       }),
-].toSet(); 
-
-
+].toSet();
 
 class WebViewUrlPage extends StatelessWidget {
- 
- final String title;
   final String url;
+  final String title;
 
-  const WebViewUrlPage({Key key, this.title, this.url}) : super(key: key);
+  const WebViewUrlPage({Key key, @required this.url, @required this.title})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return WebviewScaffold(
-        url:url,
+        withJavascript: true,
+        appCacheEnabled: true,
+        withLocalUrl: true,
+        hidden: true,
+        allowFileURLs: true,
+        withZoom: true,
+        withLocalStorage: true,
+        url: Uri.dataFromString(url, mimeType: 'text/html',encoding: Encoding.getByName('utf-8')).toString(),
+        //new Uri.dataFromString(snapshot.data, mimeType: 'text/html', encoding: Encoding.getByName('utf-8')).toString(),
         javascriptChannels: jsChannels,
         mediaPlaybackRequiresUserGesture: false,
         appBar: AppBar(
-          
           leading: IconButton(
-              icon:Icon(Icons.arrow_back_ios,size: 18,),
-              onPressed: (){Navigator.pop(context);
-          }),
-          title:Text(title),
+              icon: Icon(
+                Icons.arrow_back_ios,
+                size: 18,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              }),
+          title: Text(title),
           centerTitle: true,
-           backgroundColor: ThemeColors.mainColor, //标题居中显示
+          backgroundColor: ThemeColors.mainColor, //标题居中显示
         ),
-        withZoom: true,
-        withLocalStorage: true,
-        hidden: true,
+  
+
         initialChild: Container(
           color: Colors.white,
           child: Center(child: LoadingWidget()),
-        )
-    );
-    
+        ));
   }
 }

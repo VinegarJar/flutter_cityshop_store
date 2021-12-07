@@ -1,5 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_cityshop_store/router/navigator_utils.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -48,8 +50,10 @@ class _LoginAgreeState extends State<LoginAgree> {
                   color: ThemeColors.loginBgColor,
                   fontSize: ScreenUtil().setSp(30)),
               recognizer: TapGestureRecognizer()
-                ..onTap = () {
-                  print("点击事件---");
+                ..onTap = () async {
+                String fileUrl = await rootBundle.loadString('assets/agreement.html');
+                  // print("点击事件---$fileUrl");
+                  NavigatorUtils.goWebView(context, fileUrl, "用呗用户注册协议");
                 },
             ),
             TextSpan(
