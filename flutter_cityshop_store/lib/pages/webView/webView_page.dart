@@ -47,7 +47,7 @@ class WebViewUrlPage extends StatelessWidget {
               }),
           title: Text(title),
           centerTitle: true,
-          backgroundColor: ThemeColors.mainColor, //标题居中显示
+          backgroundColor: ThemeColors.homemainColor, //标题居中显示
         ),
   
 
