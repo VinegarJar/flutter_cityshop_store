@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_cityshop_store/router/navigator_utils.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
+import 'package:flutter_cityshop_store/utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 typedef CheckedProtocol = void Function(bool checked);
@@ -51,8 +52,7 @@ class _LoginAgreeState extends State<LoginAgree> {
                   fontSize: ScreenUtil().setSp(30)),
               recognizer: TapGestureRecognizer()
                 ..onTap = () async {
-                String fileUrl = await rootBundle.loadString('assets/agreement.html');
-                  // print("点击事件---$fileUrl");
+                  String fileUrl = await rootBundle.loadString(Utils.getHtmlPath('agreement'));
                   NavigatorUtils.goWebView(context, fileUrl, "用呗用户注册协议");
                 },
             ),

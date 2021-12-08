@@ -1,10 +1,13 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_cityshop_store/model/models.dart';
 
 class Utils {
   static String getImgPath(String name, {String format: 'png'}) {
     return 'assets/images/$name.$format';
+  }
+
+  static String getHtmlPath(String name, {String format: 'html'}) {
+    return 'assets/html/$name.$format';
   }
 
   static void showSnackBar(BuildContext context, String msg) {

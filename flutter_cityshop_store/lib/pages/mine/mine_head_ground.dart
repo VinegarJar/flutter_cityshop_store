@@ -60,7 +60,7 @@ class _MineHeadGroundState extends State<MineHeadGround> {
     );
   }
 
-  // 33,36,46,1 246,222,181,1
+  
   Widget _userInfoVIP(UserInfo userInfo) {
     var radius = ScreenUtil().setWidth(25);
     return Container(
