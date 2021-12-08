@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cityshop_store/common/config/config.dart';
 import 'package:flutter_cityshop_store/common/event/http_error_event.dart';
 import 'package:flutter_cityshop_store/common/local/local_storage.dart';
+import 'package:flutter_cityshop_store/pages/mine/mine_banner.dart';
 import 'package:flutter_cityshop_store/pages/mine/mine_head_ground.dart';
+import 'package:flutter_cityshop_store/pages/mine/mine_serve.dart';
 import 'package:flutter_cityshop_store/router/navigator_utils.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_cityshop_store/widget/alert.dart';
+
 
 class MinePages extends StatefulWidget {
   MinePages({Key key}) : super(key: key);
@@ -21,18 +24,12 @@ class _MinePagesState extends State<MinePages> {
     return Scaffold(
       backgroundColor: ThemeColors.mainBgColor,
       body: SingleChildScrollView(
-        child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+        child: Column(
+          mainAxisSize: MainAxisSize.min, 
+          children: <Widget>[
           MineHeadGround(),
-          // InkWell(
-          //     onTap: () {},
-          //     //System
-          //     child: Icon(
-          //       Icons.settings,
-          //       size: ScreenUtil().setSp(50),
-          //       color: ThemeColors.titleColor,
-          //     )),
-             
-          
+          MineServe(),
+          MineBanner(),        
         ]),
       ),
 
