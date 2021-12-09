@@ -66,8 +66,10 @@ class _LoginAgreeState extends State<LoginAgree> {
                   color: ThemeColors.loginBgColor,
                   fontSize: ScreenUtil().setSp(30)),
               recognizer: TapGestureRecognizer()
-                ..onTap = () {
+                ..onTap = () async{
                   print("用呗隐私政策点击事件---");
+                  String fileUrl = await rootBundle.loadString(Utils.getHtmlPath('privacy'));
+                  NavigatorUtils.goWebView(context, fileUrl, "用呗隐私政策");
                 },
             ),
           ]))),

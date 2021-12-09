@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cityshop_store/pages/index_page.dart';
 import 'package:flutter_cityshop_store/pages/login/login_page.dart';
+import 'package:flutter_cityshop_store/pages/mine/system/system_page.dart';
 import 'package:flutter_cityshop_store/pages/webView/webView_page.dart';
 import 'package:flutter_cityshop_store/widget/never_overscroll_indicator.dart';
 
@@ -40,6 +41,11 @@ class NavigatorUtils {
 
    static Future goWebView(BuildContext context, String url, String title) {
     return NavigatorUtils.NavigatorRouter(context, WebViewUrlPage(url: url, title: title,));
+  }
+
+   ///用户配置
+  static gotoUserSystem(BuildContext context) {
+    NavigatorRouter(context, SystemPage());
   }
 
   // ignore: non_constant_identifier_names

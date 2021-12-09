@@ -4,8 +4,13 @@ import 'package:flutter_cityshop_store/utils/utils.dart';
 import 'package:flutter_cityshop_store/widget/tag.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+typedef OnPressedResults = void Function(dynamic result);
+
 class MineServe extends StatefulWidget {
-  MineServe({Key key}) : super(key: key);
+
+  final OnPressedResults onPressed;
+
+  MineServe({Key key, @required this.onPressed}) : super(key: key);
 
   @override
   _MineServeState createState() => _MineServeState();
@@ -45,12 +50,14 @@ class _MineServeState extends State<MineServe> {
       List<Widget> listWidget = dataSource.map((val) {
         return InkWell(
             onTap: () {
-              print("火爆专区---$val---");
+              print("专属服务专区---$val---");
+              widget.onPressed(val["index"]);
             },
             child: Container(
                 width: MediaQuery.of(context).size.width / 4,
                 margin: EdgeInsets.only(bottom: ScreenUtil().setWidth(40)),
-                child: Column(children: [
+                child: Column(
+                  children: [
                   Image(
                       width: ScreenUtil().setWidth(50),
                       height: ScreenUtil().setWidth(50),
@@ -73,7 +80,8 @@ class _MineServeState extends State<MineServe> {
       }).toList();
 
       return Wrap(
-        // spacing: 7.5, //左右
+         
+        //spacing: 5, //左右
         runSpacing: ScreenUtil().setWidth(10), //上下
         children: listWidget, //加载子组件
       );

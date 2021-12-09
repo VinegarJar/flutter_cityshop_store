@@ -25,17 +25,10 @@ class WebViewUrlPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WebviewScaffold(
-        withJavascript: true,
-        appCacheEnabled: true,
-        withLocalUrl: true,
+
         hidden: true,
-        allowFileURLs: true,
         withZoom: true,
-        withLocalStorage: true,
         url: Uri.dataFromString(url, mimeType: 'text/html',encoding: Encoding.getByName('utf-8')).toString(),
-        //new Uri.dataFromString(snapshot.data, mimeType: 'text/html', encoding: Encoding.getByName('utf-8')).toString(),
-        javascriptChannels: jsChannels,
-        mediaPlaybackRequiresUserGesture: false,
         appBar: AppBar(
           leading: IconButton(
               icon: Icon(
@@ -49,11 +42,11 @@ class WebViewUrlPage extends StatelessWidget {
           centerTitle: true,
           backgroundColor: ThemeColors.homemainColor, //标题居中显示
         ),
-  
 
         initialChild: Container(
           color: Colors.white,
           child: Center(child: LoadingWidget()),
-        ));
+        )
+        );
   }
 }
