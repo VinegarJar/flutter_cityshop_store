@@ -11,7 +11,7 @@ class OnTopBotton extends StatelessWidget {
 
   const OnTopBotton(
       {@required this.callBack,
-      @required this.title,
+      this.title,
       @required this.widget,
       this.productId});
 

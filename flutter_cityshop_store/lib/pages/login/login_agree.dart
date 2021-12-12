@@ -53,7 +53,7 @@ class _LoginAgreeState extends State<LoginAgree> {
               recognizer: TapGestureRecognizer()
                 ..onTap = () async {
                   String fileUrl = await rootBundle.loadString(Utils.getHtmlPath('agreement'));
-                  NavigatorUtils.goWebView(context, fileUrl, "用呗用户注册协议");
+                  NavigatorUtils.goToHtmlWebView(context, fileUrl, "用呗用户注册协议");
                 },
             ),
             TextSpan(
@@ -69,7 +69,7 @@ class _LoginAgreeState extends State<LoginAgree> {
                 ..onTap = () async{
                   print("用呗隐私政策点击事件---");
                   String fileUrl = await rootBundle.loadString(Utils.getHtmlPath('privacy'));
-                  NavigatorUtils.goWebView(context, fileUrl, "用呗隐私政策");
+                  NavigatorUtils.goToHtmlWebView(context, fileUrl, "用呗隐私政策");
                 },
             ),
           ]))),

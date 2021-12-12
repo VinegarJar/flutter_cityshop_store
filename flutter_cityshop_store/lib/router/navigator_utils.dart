@@ -31,6 +31,7 @@ class NavigatorUtils {
   ///Page页面的容器，做一次通用自定义
   static Widget pageContainer(widget, BuildContext context) {
     return MediaQuery(
+
         ///不受系统字体缩放影响
         data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
         child: NeverOverScrollIndicator(
@@ -39,11 +40,21 @@ class NavigatorUtils {
         ));
   }
 
-   static Future goWebView(BuildContext context, String url, String title) {
-    return NavigatorUtils.NavigatorRouter(context, WebViewUrlPage(url: url, title: title,));
+  static Future goWebView(BuildContext context, String url, String title) {
+    return NavigatorUtils.NavigatorRouter(
+        context, WebViewUrlPage(url: url, title: title, isHtml: false));
   }
 
-   ///用户配置
+ 
+  static Future goToHtmlWebView(BuildContext context, String url, String title) {
+    return NavigatorUtils.NavigatorRouter(
+        context, WebViewUrlPage(url: url, title: title, isHtml: true));
+  }
+
+  
+
+
+  ///用户配置
   static gotoUserSystem(BuildContext context) {
     NavigatorRouter(context, SystemPage());
   }

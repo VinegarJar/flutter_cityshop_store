@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class Alert {
   static showAlert({
@@ -35,4 +36,38 @@ class Alert {
       },
     );
   }
+
+   static modalButtomSheet({
+     @required BuildContext context,
+   }) async {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Container(
+            height: 200,
+            child: Column(
+              children: <Widget>[
+                ListTile(
+                  leading: Icon(Icons.settings),
+                  title: Text("设置"),
+                  onTap: () => Navigator.pop(context),
+                ),
+                ListTile(
+                  leading: Icon(Icons.home),
+                  title: Text("主页"),
+                  onTap: () => Navigator.pop(context),
+                ),
+                ListTile(
+                  leading: Icon(Icons.message),
+                  title: Text("信息"),
+                  onTap: () => Navigator.pop(context),
+                ),
+              ],
+            ),
+          );
+        });
+  }
+
+
+  
 }

@@ -8,11 +8,15 @@ import 'package:flutter_cityshop_store/model/advert.dart';
 import 'package:flutter_cityshop_store/model/homerecommed.dart';
 import 'package:flutter_cityshop_store/pages/home/home_list_page.dart';
 import 'package:flutter_cityshop_store/pages/home/home_title.dart';
+import 'package:flutter_cityshop_store/provide/user_provider.dart';
+import 'package:flutter_cityshop_store/router/navigator_utils.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
+import 'package:flutter_cityshop_store/widget/alert.dart';
 import 'package:flutter_cityshop_store/widget/home_banner.dart';
 import 'package:flutter_cityshop_store/widget/placeitem.dart';
 import 'package:flutter_cityshop_store/widget/tag.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:provider/provider.dart';
 
 class HomePages extends StatefulWidget {
   HomePages({Key key}) : super(key: key);
@@ -97,7 +101,11 @@ class _HomePagesState extends State<HomePages>
                 },
                 child: ListView(
                   children: [
-                    HomeBanner(bannner: banner),
+                    HomeBanner(
+                        bannner: banner,
+                        callBack: () {
+                          jumpToRealName(context);
+                        }),
                     Tage(titel: "特别推荐"),
                     HomeListPage(dataSource: dataSource)
                   ],
@@ -113,5 +121,23 @@ class _HomePagesState extends State<HomePages>
         },
       ),
     );
+  }
+
+  void jumpToRealName(BuildContext context) async {
+    bool isReal = Provider.of<UserProvider>(context, listen: false).isReal;
+    if (isReal) {
+      NavigatorUtils.goWebView(
+        context,
+        "http://www.baidu.com",
+        "百度",
+      );
+      Alert.modalButtomSheet(context: context);
+    } else {
+         NavigatorUtils.goWebView(
+        context,
+        "http://www.baidu.com",
+        "百度",
+      );
+    }
   }
 }

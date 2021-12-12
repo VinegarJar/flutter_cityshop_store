@@ -18,6 +18,9 @@ class Config {
   static const String todayRecommed ="/szgjadmin/app/product/getNewTodayRecommed";
   //新口子推荐
   static const String productRecommed ="/szgjadmin/app/product/getRecommed";
+  //用户信息
+   static const String userInfo ="/szgjadmin/app/appuser/getAppUserInfo";
+
 
   // 上传图片--需要
   static const String uploadFileToOssFront =

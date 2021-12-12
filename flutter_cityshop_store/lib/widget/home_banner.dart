@@ -10,9 +10,11 @@ import 'package:transparent_image/transparent_image.dart';
 class HomeBanner extends StatelessWidget {
   final List bannner;
   final bool jump;
+  final VoidCallback callBack;
   HomeBanner({
     @required this.bannner,
     this.jump = true,
+    this.callBack,
   });
 
   @override
@@ -20,7 +22,9 @@ class HomeBanner extends StatelessWidget {
     return Container(
         height: ScreenUtil().setHeight(465),
         width: ScreenUtil().setWidth(750),
-        margin: EdgeInsets.symmetric( horizontal: ScreenUtil().setWidth(15),vertical: ScreenUtil().setWidth(20)),
+        margin: EdgeInsets.symmetric(
+            horizontal: ScreenUtil().setWidth(15),
+            vertical: ScreenUtil().setWidth(20)),
         child: Swiper(
           itemBuilder: (BuildContext context, int index) {
             Advert model = bannner[index];
@@ -44,7 +48,9 @@ class HomeBanner extends StatelessWidget {
                         )),
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(15),vertical: ScreenUtil().setWidth(20)),
+                    margin: EdgeInsets.symmetric(
+                        horizontal: ScreenUtil().setWidth(15),
+                        vertical: ScreenUtil().setWidth(20)),
                     child: Text(
                       computeLongContent(model?.loanLower, model?.loanUpper),
                       style: TextStyle(
@@ -54,11 +60,13 @@ class HomeBanner extends StatelessWidget {
                     ),
                   ),
                   OnTopBotton(
-                    callBack: () {},
+                    callBack: callBack,
                     title: "立即激活",
                     widget: Container(
                       alignment: Alignment.center,
-                      margin: EdgeInsets.symmetric(horizontal:ScreenUtil().setWidth(40), ),
+                      margin: EdgeInsets.symmetric(
+                        horizontal: ScreenUtil().setWidth(40),
+                      ),
                       height: ScreenUtil().setWidth(88),
                       decoration: BoxDecoration(
                           color: ThemeColors.homemainColor,

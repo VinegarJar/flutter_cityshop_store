@@ -149,19 +149,24 @@ class _LoginHomePageState extends State<LoginHomePage> {
       var res = await HttpRequestMethod.instance
           .requestWithMetod(Config.loginUrl, params);
       if (res.result) {
+        getUserInfo();
         _inputChanged("");
-        EasyLoading.dismiss();
-        UserInfo user = UserInfo.fromJson(res.data["result"]);
-        Provider.of<UserProvider>(context, listen: false)
-            .savaUserInfoCache(user);
-        LocalStorage.save(Config.USER_INFO, json.encode(user.toJson()));
-        LocalStorage.save(Config.TOKEN_KEY, user.phoneNum);
-        LocalStorage.save(Config.USER_VIP, user.vipLevel.toString());
-        print("获取tock---${user.phoneNum}");
-        NavigatorUtils.goHome(context);
       }
     } else {
       eventBus.fire(new HttpErrorEvent(99, "输入手机号有误,请重新输入!"));
     }
+  }
+
+  getUserInfo() async {
+    var params = {"phoneNum": _phoneNum};
+    var res = await HttpRequestMethod.instance
+        .requestWithMetod(Config.userInfo, params);
+    UserInfo user = UserInfo.fromJson(res.data);
+    Provider.of<UserProvider>(context, listen: false).savaUserInfoCache(user);
+    LocalStorage.save(Config.USER_INFO, json.encode(user.toJson()));
+    LocalStorage.save(Config.TOKEN_KEY, user.phoneNum);
+    LocalStorage.save(Config.USER_VIP, user.vipLevel.toString());
+    EasyLoading.dismiss();
+    NavigatorUtils.goHome(context);
   }
 }
