@@ -8,7 +8,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 class MineHeadGround extends StatefulWidget {
-  MineHeadGround({Key key}) : super(key: key);
+  final VoidCallback callBack;
+  MineHeadGround({Key key,this.callBack, }) : super(key: key);
 
   @override
   _MineHeadGroundState createState() => _MineHeadGroundState();
@@ -62,6 +63,7 @@ class _MineHeadGroundState extends State<MineHeadGround> {
 
   
   Widget _userInfoVIP(UserInfo userInfo) {
+     bool isVIP  = Provider.of<UserProvider>(context,listen:false).isVIP;
     var radius = ScreenUtil().setWidth(25);
     return Container(
       margin: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(32)),
@@ -97,9 +99,7 @@ class _MineHeadGroundState extends State<MineHeadGround> {
           ),
          
           OnTopBotton(
-            callBack: () {
-              print("立即加入");
-            },
+            callBack: widget.callBack,
             title: "立即加入",
             widget: Container(
               alignment: Alignment.center,
@@ -110,7 +110,7 @@ class _MineHeadGroundState extends State<MineHeadGround> {
                   color: ThemeColors.homemainColor,
                   borderRadius:
                       BorderRadius.circular(ScreenUtil().setWidth(44))),
-              child: Text( (userInfo.vipLevel>0)? "我的会员":"立即加入",
+              child: Text(isVIP? "我的会员":"立即加入",
                   style: TextStyle(
                     fontSize: ScreenUtil().setSp(28),
                     color: ThemeColors.appliedColor, 
@@ -125,6 +125,7 @@ class _MineHeadGroundState extends State<MineHeadGround> {
   @override
   Widget build(BuildContext context) {
     UserInfo userInfo = Provider.of<UserProvider>(context).userInfo;
+    
     return Container(
       height: ScreenUtil().setWidth(365),
       color: ThemeColors.homemainColor,
