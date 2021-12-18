@@ -13,7 +13,6 @@ import 'package:flutter_cityshop_store/widget/associator.dart';
 import 'package:flutter_cityshop_store/widget/tag.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 class AssociatorPages extends StatefulWidget {
   AssociatorPages({Key key}) : super(key: key);
@@ -145,9 +144,7 @@ class _AssociatorPagesState extends State<AssociatorPages> {
                                 Radius.circular(ScreenUtil().setHeight(20)))),
                       ),
                       Container(
-                        margin: EdgeInsets.symmetric(
-                            vertical: ScreenUtil().setWidth(30)),
-                        // width: ScreenUtil().setWidth(100),
+                        margin: EdgeInsets.symmetric(vertical: ScreenUtil().setWidth(30)),
                         height: ScreenUtil().setHeight(100),
                         child: Column(
                           mainAxisAlignment :MainAxisAlignment.spaceBetween,
@@ -158,7 +155,6 @@ class _AssociatorPagesState extends State<AssociatorPages> {
                               style: TextStyle(
                                 fontSize: ScreenUtil().setSp(36),
                                 color: ThemeColors.titlesColor,
-                                // fontWeight: FontWeight.w600,
                               ),
                             ),
                             Text(

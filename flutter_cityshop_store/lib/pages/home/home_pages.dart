@@ -133,11 +133,9 @@ class _HomePagesState extends State<HomePages>
       );
       Alert.modalButtomSheet(context: context);
     } else {
-         NavigatorUtils.goWebView(
-        context,
-        "http://www.baidu.com",
-        "百度",
-      );
+        Alert.showDialogSheet(context: context, onPressed: (Map<String, dynamic> result) { 
+              print("弹框关闭 $result");
+         });
     }
   }
 }
