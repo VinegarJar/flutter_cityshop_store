@@ -30,6 +30,7 @@ class _MinePagesState extends State<MinePages> {
                 NavigatorUtils.gotoAssociatorPages(context);
              }else{
                print("为加入会员---");
+                NavigatorUtils.gotoAssociatorPages(context);
              }
             
           }),
