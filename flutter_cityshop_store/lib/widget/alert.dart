@@ -50,12 +50,12 @@ class Alert {
       builder: (context) {
         return AlertDialog(
           contentPadding: EdgeInsets.zero,
+          shape: RoundedRectangleBorder(
+              borderRadius:
+                  BorderRadius.all(Radius.circular(ScreenUtil().setWidth(20)))),
           content: Container(
             width: ScreenUtil().setWidth(600),
             height: ScreenUtil().setWidth(580),
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(ScreenUtil().setWidth(40))),
             child: Column(
               children: [
                 Container(
@@ -188,8 +188,6 @@ class Alert {
                         callBack: () {},
                         widget: Container(
                           alignment: Alignment.center,
-                         
-                         
                           margin: EdgeInsets.symmetric(
                             horizontal: ScreenUtil().setWidth(20),
                           ),
