@@ -9,6 +9,7 @@ import 'package:flutter_cityshop_store/pages/index_page.dart';
 import 'package:flutter_cityshop_store/pages/login/login_page.dart';
 import 'package:flutter_cityshop_store/pages/mine/system/system_page.dart';
 import 'package:flutter_cityshop_store/pages/vip/vip_page.dart';
+import 'package:flutter_cityshop_store/pages/vip/vip_pay_page.dart';
 import 'package:flutter_cityshop_store/pages/webView/webView_page.dart';
 import 'package:flutter_cityshop_store/widget/never_overscroll_indicator.dart';
 
@@ -41,6 +42,12 @@ class NavigatorUtils {
      return NavigatorUtils.NavigatorRouter(
         context, VipPages());
   }
+  //去支付
+  static gotoPayVip(BuildContext context) {
+     return NavigatorUtils.NavigatorRouter(
+        context, VipPayPages());
+  }
+
 
 
   ///Page页面的容器，做一次通用自定义

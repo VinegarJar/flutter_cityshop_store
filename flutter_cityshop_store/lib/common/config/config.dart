@@ -25,7 +25,7 @@ class Config {
   static const String userRealCheck = "/szgjadmin/app/appuser/userRealCheck";
   //支付 
   static const String payVip = "szgjadmin//app/appuser/payVip" ;
-  
+  // 支付的-appid2021002194675872
 
   // 上传图片--需要
   static const String uploadFileToOssFront =

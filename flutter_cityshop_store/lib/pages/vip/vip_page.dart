@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_cityshop_store/router/navigator_utils.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_cityshop_store/utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -104,6 +105,7 @@ class _VipPagesState extends State<VipPages> {
     return InkWell(
         onTap: () {
           print("即刻加入");
+            NavigatorUtils.gotoPayVip(context);
         },
         child: Container(
             alignment: Alignment.center,
@@ -167,6 +169,8 @@ class _VipPagesState extends State<VipPages> {
           InkWell(
               onTap: () {
                 print("----$titel----");
+               
+                 NavigatorUtils.gotoPayVip(context);
               },
               child: Container(
                   alignment: Alignment.center,

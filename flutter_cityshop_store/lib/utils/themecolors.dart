@@ -26,7 +26,8 @@ class ThemeColors {
   static Color titleColor = Color.fromARGB(255, 102, 102, 102);
   static Color jionColor = Color.fromRGBO(47, 44, 44, 1);
   static Color jionTextColor = Color.fromRGBO(231, 215, 215, 1);
-
+  static Color payColor = Color.fromRGBO(228,117,34,0.8);
+  static Color payTextColor = Color.fromRGBO(146,136,138,1);
   ///功能性较强的文字，内页标题等
   static Color color333333 = Color.fromARGB(255, 51, 51, 51);
   static Color colorTool = Color.fromARGB(162, 162, 162, 1);
