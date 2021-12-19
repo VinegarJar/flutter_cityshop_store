@@ -23,7 +23,9 @@ class Config {
   static const String userInfo = "/szgjadmin/app/appuser/getAppUserInfo";
   // 实名制信息认证
   static const String userRealCheck = "/szgjadmin/app/appuser/userRealCheck";
-
+  //支付 
+  static const String payVip = "szgjadmin//app/appuser/payVip" ;
+  
 
   // 上传图片--需要
   static const String uploadFileToOssFront =

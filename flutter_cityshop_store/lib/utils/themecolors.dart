@@ -24,6 +24,8 @@ class ThemeColors {
   static Color toastColor = Color.fromRGBO(0,0,0,0.5);
   ///正文，副标题以及可点击区域的主要文字和图标 
   static Color titleColor = Color.fromARGB(255, 102, 102, 102);
+  static Color jionColor = Color.fromRGBO(47, 44, 44, 1);
+  static Color jionTextColor = Color.fromRGBO(231, 215, 215, 1);
 
   ///功能性较强的文字，内页标题等
   static Color color333333 = Color.fromARGB(255, 51, 51, 51);
