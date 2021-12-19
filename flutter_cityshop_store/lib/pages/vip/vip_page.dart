@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_cityshop_store/common/event/http_error_event.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -16,7 +15,6 @@ class _VipPagesState extends State<VipPages> {
  
  @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     Fluttertoast.showToast(
         msg: "该产品为会员专属产品,开通后即可解锁",
