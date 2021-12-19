@@ -12,6 +12,10 @@ class VipPages extends StatefulWidget {
 }
 
 class _VipPagesState extends State<VipPages> {
+  
+
+
+
   List dataSource = [
     {"name": "privilege_check", "title": "黑名单检测", "text": "会员免费 原价39.9元"},
     {"name": "privilege_risk", "title": "网袋风险检测", "text": "会员免费 原价59.9元"},
@@ -64,6 +68,7 @@ class _VipPagesState extends State<VipPages> {
                     fit: BoxFit.cover),
                 _privilege(name: 'privilege_1', titel: '借款特权'),
                 _vipOnly(
+                  context,
                   name: 'privilege_money',
                   titel: '拒就赔',
                   text: '最高可领100元(限指定产品)',
@@ -72,17 +77,18 @@ class _VipPagesState extends State<VipPages> {
                 _privilege(name: 'privilege_2', titel: '会员专属产品'),
                 _vipOnlyPrivilege(),
                 _privilege(name: 'privilege_3', titel: '下载工具'),
-                _toolList(),
+                _toolList(context),
               ],
             )),
-            _vipJoin()
+            _vipJoin(context)
           ],
         ));
   }
 
-  Widget _toolList() {
+  Widget _toolList(BuildContext context) {
     List<Widget> listWidget = dataSource.map((val) {
       return _vipOnly(
+        context,
         name: val["name"],
         titel: val["title"],
         text: val["text"],
@@ -94,7 +100,7 @@ class _VipPagesState extends State<VipPages> {
     );
   }
 
-  Widget _vipJoin() {
+  Widget _vipJoin(BuildContext context) {
     return InkWell(
         onTap: () {
           print("即刻加入");
@@ -118,6 +124,7 @@ class _VipPagesState extends State<VipPages> {
   }
 
   Widget _vipOnly(
+      BuildContext context,
       {@required String name,
       @required String titel,
       @required String text,
@@ -147,15 +154,11 @@ class _VipPagesState extends State<VipPages> {
                 children: [
                   Text(
                     titel ?? "",
-                    style: TextStyle(
-                        // color: ThemeColors.banertagBgColor,
-                        fontSize: ScreenUtil().setSp(21)),
+                    style: TextStyle(fontSize: ScreenUtil().setSp(21)),
                   ),
                   Text(
                     text ?? "",
-                    style: TextStyle(
-                        // color: ThemeColors.banertagBgColor,
-                        fontSize: ScreenUtil().setSp(18)),
+                    style: TextStyle(fontSize: ScreenUtil().setSp(18)),
                   )
                 ],
               )
