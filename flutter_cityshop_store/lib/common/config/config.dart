@@ -4,7 +4,7 @@ class Config {
   static const TOKEN_KEY = "token";
   static const USER_INFO = "userInfo";
   static const USER_VIP = "vipLevel";
-  
+
   //api请求地址
   static const String baseURL = "http://121.40.252.174:6001";
 
@@ -15,11 +15,14 @@ class Config {
   //首页贷款列表-特别推荐
   static const String homeBankUrl = "/szgjadmin/app/product/getRecommed";
   //首页今日推荐
-  static const String todayRecommed ="/szgjadmin/app/product/getNewTodayRecommed";
+  static const String todayRecommed =
+      "/szgjadmin/app/product/getNewTodayRecommed";
   //新口子推荐
-  static const String productRecommed ="/szgjadmin/app/product/getRecommed";
+  static const String productRecommed = "/szgjadmin/app/product/getRecommed";
   //用户信息
-   static const String userInfo ="/szgjadmin/app/appuser/getAppUserInfo";
+  static const String userInfo = "/szgjadmin/app/appuser/getAppUserInfo";
+  // 实名制信息认证
+  static const String userRealCheck = "/szgjadmin/app/appuser/userRealCheck";
 
 
   // 上传图片--需要
@@ -29,7 +32,6 @@ class Config {
       "/wwqbAdmin/base/uploadFileToOss"; //背面--需要
 
   //现金贷接口路径
-
   // 基本信息认证
   static const String basicInfoUrl = "/wwqbAdmin/loanapp/user/basicInfoVerify";
   // 获得用户验证信息

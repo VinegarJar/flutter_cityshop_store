@@ -161,7 +161,11 @@ class _LoginHomePageState extends State<LoginHomePage> {
     var params = {"phoneNum": _phoneNum};
     var res = await HttpRequestMethod.instance
         .requestWithMetod(Config.userInfo, params);
+    //  print('获取用户信息----res----${res.data}');
+ 
     UserInfo user = UserInfo.fromJson(res.data);
+        print('获取用户信息----user----${user.realNameVerify}');
+        print('获取用户nickName----user----${user.nickName}');
     Provider.of<UserProvider>(context, listen: false).savaUserInfoCache(user);
     LocalStorage.save(Config.USER_INFO, json.encode(user.toJson()));
     LocalStorage.save(Config.TOKEN_KEY, user.phoneNum);

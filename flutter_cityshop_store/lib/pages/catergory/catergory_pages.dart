@@ -55,7 +55,8 @@ class _CaterGoryPagesState extends State<CaterGoryPages> {
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.hasData) {
             var res = snapshot.data;
-            List<Map> list = (res.data as List).cast();
+              // print('获取CaterGoryPages信息----res----${res.data}');
+            List<Map> list = (res.data as List).cast<Map>();
             final List dataSource =
                 list.map((data) => HomeRecommed.fromJson(data)).toList();
             return EasyRefresh(

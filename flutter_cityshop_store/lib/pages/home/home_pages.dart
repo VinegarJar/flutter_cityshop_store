@@ -76,7 +76,8 @@ class _HomePagesState extends State<HomePages>
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.hasData) {
             var res = snapshot.data;
-            List<Map> list = (res.data as List).cast();
+            //  print('获取首页信息----res----${res.data}');
+            List<Map> list = (res.data as List).cast<Map>();
             final List dataSource =
                 list.map((data) => HomeRecommed.fromJson(data)).toList();
             return EasyRefresh(
@@ -125,13 +126,14 @@ class _HomePagesState extends State<HomePages>
 
   void jumpToRealName(BuildContext context) async {
     bool isReal = Provider.of<UserProvider>(context, listen: false).isReal;
+
     if (isReal) {
       NavigatorUtils.goWebView(
         context,
         "http://www.baidu.com",
         "百度",
       );
-      Alert.modalButtomSheet(context: context);
+      // Alert.modalButtomSheet(context: context);
     } else {
         Alert.showDialogSheet(context: context, onPressed: (Map<String, dynamic> result) { 
               print("弹框关闭 $result");

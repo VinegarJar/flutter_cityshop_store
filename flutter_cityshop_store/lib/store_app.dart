@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_cityshop_store/common/config/config.dart';
 import 'package:flutter_cityshop_store/common/event/http_error_event.dart';
+import 'package:flutter_cityshop_store/common/local/local_storage.dart';
 import 'package:flutter_cityshop_store/https/code.dart';
 import 'package:flutter_cityshop_store/pages/index_page.dart';
 import 'package:flutter_cityshop_store/pages/login/login_page.dart';
@@ -72,6 +74,12 @@ mixin HttpErrorListener on State<StoreApp> {
     }
   }
 
+  void logOutAction() async {
+    NavigatorUtils.goLogin(context);
+    await LocalStorage.remove(Config.TOKEN_KEY);
+    await LocalStorage.remove(Config.USER_INFO);
+  }
+
   ///网络错误提醒
   errorHandleFunction(int code, message) {
     switch (code) {
@@ -80,6 +88,7 @@ mixin HttpErrorListener on State<StoreApp> {
         break;
       case 401:
         showToast("网络错误401");
+        // logOutAction();
         break;
       case 403:
         showToast("网络错误403");
@@ -109,7 +118,7 @@ mixin HttpErrorListener on State<StoreApp> {
     EasyLoading.dismiss();
     Fluttertoast.showToast(
         msg: message,
-        gravity: ToastGravity.CENTER,
+        gravity: ToastGravity.TOP,
         toastLength: Toast.LENGTH_LONG);
   }
 }

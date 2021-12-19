@@ -4,12 +4,15 @@ import 'package:flutter/services.dart';
 import 'package:flutter_cityshop_store/common/config/config.dart';
 import 'package:flutter_cityshop_store/common/event/http_error_event.dart';
 import 'package:flutter_cityshop_store/common/local/local_storage.dart';
+import 'package:flutter_cityshop_store/https/httpRequest_method.dart';
+import 'package:flutter_cityshop_store/provide/user_provider.dart';
 import 'package:flutter_cityshop_store/router/navigator_utils.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_cityshop_store/utils/utils.dart';
 import 'package:flutter_cityshop_store/widget/alert.dart';
 import 'package:flutter_cityshop_store/widget/onTop_botton.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 class SystemPage extends StatelessWidget {
   const SystemPage({Key key}) : super(key: key);
@@ -120,7 +123,9 @@ class SystemPage extends StatelessWidget {
   }
 
   void logOutAction(context) async {
+    Provider.of<UserProvider>(context, listen: false).cleanUserInfoCache();
     NavigatorUtils.goLogin(context);
+    await HttpRequestMethod.instance.clearAuthorization();
     await LocalStorage.remove(Config.TOKEN_KEY);
     await LocalStorage.remove(Config.USER_INFO);
   }

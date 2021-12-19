@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_cityshop_store/common/event/http_error_event.dart';
+import 'package:flutter_cityshop_store/https/user_dao.dart';
+import 'package:flutter_cityshop_store/utils/checkoutils.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_cityshop_store/utils/utils.dart';
 import 'package:flutter_cityshop_store/widget/onTop_botton.dart';
@@ -43,8 +47,10 @@ class Alert {
 
   static showDialogSheet({
     @required BuildContext context,
-    @required Function(Map<String, dynamic> result) onPressed,
+    Function(Map<String, dynamic> result) onPressed,
   }) async {
+    String _names = "";
+    String _idNum = "";
     await showDialog<bool>(
       context: context,
       builder: (context) {
@@ -100,6 +106,9 @@ class Alert {
                           ),
                           Expanded(
                               child: TextField(
+                                  inputFormatters: <TextInputFormatter>[
+                                LengthLimitingTextInputFormatter(11),
+                              ],
                                   cursorColor: ThemeColors.homemainColor,
                                   textInputAction: TextInputAction.done,
                                   keyboardType: TextInputType.text,
@@ -110,8 +119,11 @@ class Alert {
                                   style: TextStyle(
                                       fontSize: ScreenUtil().setSp(28),
                                       color: Colors.black), //输入文本的样式
+                                  onChanged: (result) {
+                                    _names = result;
+                                  },
                                   onSubmitted: (String result) {
-                                    // widget.textFieldResults(result);
+                                    _names = result;
                                   },
                                   decoration: InputDecoration(
                                     enabledBorder: UnderlineInputBorder(
@@ -151,6 +163,9 @@ class Alert {
                           ),
                           Expanded(
                               child: TextField(
+                                  inputFormatters: <TextInputFormatter>[
+                                LengthLimitingTextInputFormatter(30),
+                              ],
                                   cursorColor: ThemeColors.homemainColor,
                                   textInputAction: TextInputAction.done,
                                   keyboardType: TextInputType.text,
@@ -161,8 +176,11 @@ class Alert {
                                   style: TextStyle(
                                       fontSize: ScreenUtil().setSp(28),
                                       color: Colors.black), //输入文本的样式
+                                  onChanged: (result) {
+                                    _idNum = result;
+                                  },
                                   onSubmitted: (String result) {
-                                    // widget.textFieldResults(result);
+                                    _idNum = result;
                                   },
                                   decoration: InputDecoration(
                                     enabledBorder: UnderlineInputBorder(
@@ -185,7 +203,30 @@ class Alert {
                       ),
                       SizedBox(height: ScreenUtil().setWidth(70)),
                       OnTopBotton(
-                        callBack: () {},
+                        callBack: () async {
+                          if (_names.isEmpty) {
+                            return eventBus
+                                .fire(new HttpErrorEvent(99, "请输入姓名"));
+                          } 
+                          if (_idNum.isEmpty) {
+                            return eventBus
+                                .fire(new HttpErrorEvent(99, "请输身份证号码"));
+                          } 
+                          var params = {
+                              "names": _names,
+                              "idNum": _idNum, //身份证号码
+                          }; 
+                           UserDao.usercheck(params, context); 
+                          // bool checkCard = CheckOutils.checkCard(_idNum);
+                          // if (checkCard) {
+                    
+
+                          //    UserDao.usercheck(params, context);
+                          // } else {
+                          //   eventBus.fire(
+                          //       new HttpErrorEvent(99, "输入身份证号码有误,请重新输入!"));
+                          // }
+                        },
                         widget: Container(
                           alignment: Alignment.center,
                           margin: EdgeInsets.symmetric(

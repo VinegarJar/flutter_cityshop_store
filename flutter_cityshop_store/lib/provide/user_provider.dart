@@ -23,4 +23,12 @@ class UserProvider with ChangeNotifier {
     }
     notifyListeners();
   }
+
+  cleanUserInfoCache(){
+     userInfo = null;
+     isReal = false;
+     isVIP = false;
+  }
+   
+
 }

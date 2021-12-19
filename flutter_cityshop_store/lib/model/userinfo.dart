@@ -4,10 +4,10 @@ class UserInfo {
   Null uuid;
   String smsCode;
   int smsCodeTime;
-  Null nickName;
+  String nickName;
   Null wechatNum;
   Null qqNum;
-  Null idNum;
+  String idNum;
   Null phoneNumVerify;
   int realNameVerify;
   int realNameNeed;

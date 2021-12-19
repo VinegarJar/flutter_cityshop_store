@@ -6,8 +6,8 @@ import 'package:flutter_cityshop_store/pages/mine/comoment/mine_serve.dart';
 import 'package:flutter_cityshop_store/provide/user_provider.dart';
 import 'package:flutter_cityshop_store/router/navigator_utils.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
+import 'package:flutter_cityshop_store/widget/alert.dart';
 import 'package:provider/provider.dart';
-
 
 class MinePages extends StatefulWidget {
   MinePages({Key key}) : super(key: key);
@@ -19,25 +19,30 @@ class MinePages extends StatefulWidget {
 class _MinePagesState extends State<MinePages> {
   @override
   Widget build(BuildContext context) {
-    //  bool isReal = Provider.of<UserProvider>(context).isReal;
-     bool isVIP  = Provider.of<UserProvider>(context).isVIP;
+    bool isReal = Provider.of<UserProvider>(context).isReal;
+    bool isVIP = Provider.of<UserProvider>(context).isVIP;
     return Scaffold(
       backgroundColor: ThemeColors.mainBgColor,
       body: SingleChildScrollView(
         child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-          MineHeadGround(callBack:(){
-             if(isVIP){
-                NavigatorUtils.gotoAssociatorPages(context);
-             }else{
-               print("为加入会员---");
-                NavigatorUtils.gotoAssociatorPages(context);
-             }
-            
+          MineHeadGround(callBack: () {
+            if (isVIP) {
+              NavigatorUtils.gotoAssociatorPages(context);
+            } else {
+              print("为加入会员---");
+              // NavigatorUtils.gotoAssociatorPages(context);
+              if (isReal) {
+                NavigatorUtils.goWebView(
+                  context,
+                  "http://www.baidu.com",
+                  "百度",
+                );
+              } else {
+                Alert.showDialogSheet(context: context);
+              }
+            }
           }),
           MineServe(onPressed: (result) {
-          
-    
-
             switch (result) {
               case 4:
                 {

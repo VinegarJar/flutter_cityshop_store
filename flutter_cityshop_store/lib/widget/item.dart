@@ -1,9 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cityshop_store/model/homerecommed.dart';
+import 'package:flutter_cityshop_store/provide/user_provider.dart';
+import 'package:flutter_cityshop_store/router/navigator_utils.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
+import 'package:flutter_cityshop_store/widget/alert.dart';
 import 'package:flutter_cityshop_store/widget/onTop_botton.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class Item extends StatelessWidget {
@@ -123,7 +127,21 @@ class Item extends StatelessWidget {
                     ),
                   ),
                   OnTopBotton(
-                    callBack: () {},
+                    callBack: () {
+                      bool isReal =
+                          Provider.of<UserProvider>(context, listen: false)
+                              .isReal;
+
+                      if (isReal) {
+                        NavigatorUtils.goWebView(
+                          context,
+                          "http://www.baidu.com",
+                          "百度",
+                        );
+                      } else {
+                        Alert.showDialogSheet(context: context);
+                      }
+                    },
                     title: "立即申请",
                     widget: Container(
                       alignment: Alignment.center,
