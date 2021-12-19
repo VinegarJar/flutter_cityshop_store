@@ -48,6 +48,7 @@ dependencies:
   device_info_plus: ^3.1.1
   flutter_easyloading: ^3.0.3
   intl: ^0.17.0
+  sy_flutter_alipay: ^0.2.1
 
 
 dev_dependencies:

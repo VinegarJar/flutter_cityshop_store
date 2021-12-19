@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_cityshop_store/common/config/config.dart';
+import 'package:flutter_cityshop_store/common/local/local_storage.dart';
+import 'package:flutter_cityshop_store/https/httpRequest_method.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_cityshop_store/utils/utils.dart';
 import 'package:flutter_cityshop_store/widget/onTop_botton.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sy_flutter_alipay/sy_flutter_alipay.dart';
 
 class VipPayPages extends StatefulWidget {
   VipPayPages({Key key}) : super(key: key);
@@ -16,6 +21,7 @@ class _VipPayPagesState extends State<VipPayPages> {
   bool silver = true;
 
   String pay = '19.9';
+  String vipLevel = "1";
   List dataSource = [
     {"title": "有效时间", "silver": "1个月", "gold": "3个月"},
     {"title": "黑名单检测", "silver": "¥29.9", "gold": "¥39.9"},
@@ -160,13 +166,15 @@ class _VipPayPagesState extends State<VipPayPages> {
         if (!select) {
           var payNum;
           print("选择---$tag-$select");
-          if (tagVip  == "silver") {
-              payNum = "19.9";
+          if (tagVip == "silver") {
+            payNum = "19.9";
+            vipLevel = "1";
           } else {
-             payNum = "39.9";
+            payNum = "39.9";
+            vipLevel = "3";
           }
 
-         this.setState(() {
+          this.setState(() {
             silver = !silver;
             pay = payNum;
           });
@@ -197,9 +205,26 @@ class _VipPayPagesState extends State<VipPayPages> {
           )),
     );
   }
+
   Widget _toPayVip() {
     return OnTopBotton(
-      callBack: () {},
+      callBack: () async {
+        await EasyLoading.show(
+          maskType: EasyLoadingMaskType.black,
+        );
+        var _phoneNum = await LocalStorage.get(Config.TOKEN_KEY);
+        var params = {
+          "phoneNum": _phoneNum,
+          "payAmt": "0.01",
+          "vipLevel": vipLevel
+        };
+
+        var res = await HttpRequestMethod.instance
+            .requestWithMetod(Config.payVip, params);
+        print("-----请求支付后台----${res.data}");
+        EasyLoading.dismiss();
+        alpayVip(res.data["msg"]); 
+      },
       widget: Container(
         margin: EdgeInsets.only(top: 30),
         alignment: Alignment.center,
@@ -242,5 +267,11 @@ class _VipPayPagesState extends State<VipPayPages> {
         ],
       ),
     );
+  }
+
+  void alpayVip(payInfo) async {
+    var result = await SyFlutterAlipay.pay(payInfo,
+        urlScheme: 'alipay2021002194675872', isSandbox: true);
+    print("-----请求支付宝result----$result");
   }
 }
