@@ -26,20 +26,15 @@ class _MinePagesState extends State<MinePages> {
       body: SingleChildScrollView(
         child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
           MineHeadGround(callBack: () {
-            if (isVIP) {
-              NavigatorUtils.gotoAssociatorPages(context);
-            } else {
-              print("为加入会员---");
-              // NavigatorUtils.gotoAssociatorPages(context);
-              if (isReal) {
-                NavigatorUtils.goWebView(
-                  context,
-                  "http://www.baidu.com",
-                  "百度",
-                );
+            if (isReal) {
+              if (isVIP) {
+                NavigatorUtils.gotoAssociatorPages(context);
               } else {
-                Alert.showDialogSheet(context: context);
+                print("点击跳转vip购买---");
+                NavigatorUtils.gotoVipPages(context);
               }
+            } else {
+              Alert.showDialogSheet(context: context);
             }
           }),
           MineServe(onPressed: (result) {

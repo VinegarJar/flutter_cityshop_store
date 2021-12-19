@@ -129,6 +129,7 @@ class Associator extends StatelessWidget {
       } else {
         //跳转vip购买
         print("点击跳转vip购买---");
+         NavigatorUtils.gotoVipPages(context);
       }
     } else {
       Alert.showDialogSheet(context: context);

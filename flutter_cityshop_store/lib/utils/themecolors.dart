@@ -21,7 +21,7 @@ class ThemeColors {
   static Color vipBgColor = Color.fromRGBO(36,40,52,1);
   static Color viptitleColor = Color.fromRGBO(246,222,181,1);
   static Color vipsubtitleColor = Color.fromRGBO(103,105,118,1);
-
+  static Color toastColor = Color.fromRGBO(0,0,0,0.5);
   ///正文，副标题以及可点击区域的主要文字和图标 
   static Color titleColor = Color.fromARGB(255, 102, 102, 102);
 
