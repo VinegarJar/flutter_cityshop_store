@@ -7,7 +7,7 @@ import 'package:flutter_cityshop_store/utils/utils.dart';
 import 'package:flutter_cityshop_store/widget/onTop_botton.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sy_flutter_alipay/sy_flutter_alipay.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class VipPayPages extends StatefulWidget {
   VipPayPages({Key key}) : super(key: key);
@@ -270,8 +270,27 @@ class _VipPayPagesState extends State<VipPayPages> {
   }
 
   void alpayVip(payInfo) async {
-    var result = await SyFlutterAlipay.pay(payInfo,
-        urlScheme: 'alipay2021002194675872', isSandbox: true);
-    print("-----请求支付宝result----$result");
+    // var payResult = await SyFlutterAlipay.pay(payInfo,
+    //     urlScheme: 'alipay2021002194675872', isSandbox: true);
+    // print("-----请求支付宝result----$payResult");
+
+    // if (payResult['result'] != null) {
+    //     if (payResult['resultStatus'] == 9000) {
+    //       // ToastUtil.toast("支付宝支付成功");
+    //       shwomessage("支付宝支付支付宝支付成功");
+    //       Navigator.of(context).pop();
+    //     } else {
+    //       // ToastUtil.toast("支付宝支付失败");
+    //       shwomessage("支付宝支付失败");
+    //     }
+    //   }
   }
+
+  shwomessage(message){
+      Fluttertoast.showToast(
+        msg: message,
+        gravity: ToastGravity.TOP,
+        toastLength: Toast.LENGTH_LONG);
+  }
+
 }

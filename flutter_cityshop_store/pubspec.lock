@@ -490,13 +490,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.1.0"
-  sy_flutter_alipay:
-    dependency: "direct main"
-    description:
-      name: sy_flutter_alipay
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.2.1"
   term_glyph:
     dependency: transitive
     description:
