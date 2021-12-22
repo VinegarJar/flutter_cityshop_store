@@ -84,7 +84,7 @@ class PlaceItem extends StatelessWidget {
                   ),
                   Container(
                     height: ScreenUtil().setWidth(60),
-                    width: ScreenUtil().setWidth(180),
+                    width: ScreenUtil().setWidth(160),
                     decoration: BoxDecoration(
                         color: ThemeColors.mainBgColor,
                         borderRadius:
@@ -93,7 +93,7 @@ class PlaceItem extends StatelessWidget {
                 ],
               )),
           Container(
-            width: ScreenUtil().setWidth(80),
+            width: ScreenUtil().setWidth(60),
             height: ScreenUtil().setHeight(35),
             color: ThemeColors.mainBgColor,
           ),

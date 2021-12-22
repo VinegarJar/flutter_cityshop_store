@@ -87,7 +87,7 @@ class _AssociatorPagesState extends State<AssociatorPages> {
                           color: ThemeColors.titlesColor,
                           fontSize: ScreenUtil().setSp(32)),
                       textAlign: TextAlign.left),
-                  Text("有效期至:2021-12-13",
+                  Text("有效期:" + userInfo?.vipLevel.toString() + "个月",
                       style: TextStyle(
                           color: ThemeColors.titlesColor,
                           fontSize: ScreenUtil().setSp(30)),
@@ -144,11 +144,12 @@ class _AssociatorPagesState extends State<AssociatorPages> {
                                 Radius.circular(ScreenUtil().setHeight(20)))),
                       ),
                       Container(
-                        margin: EdgeInsets.symmetric(vertical: ScreenUtil().setWidth(30)),
+                        margin: EdgeInsets.symmetric(
+                            vertical: ScreenUtil().setWidth(30)),
                         height: ScreenUtil().setHeight(100),
                         child: Column(
-                          mainAxisAlignment :MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment : CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               model?.productName ?? "",

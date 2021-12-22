@@ -18,17 +18,15 @@ class UserProvider with ChangeNotifier {
     if (userInfo.realNameVerify == 1) {
       isReal = true;
     }
-    if (userInfo.vipLevel == 1) {
+    if (userInfo.vipLevel != 0) {
       isVIP = true;
     }
     notifyListeners();
   }
 
-  cleanUserInfoCache(){
-     userInfo = null;
-     isReal = false;
-     isVIP = false;
+  cleanUserInfoCache() {
+    userInfo = null;
+    isReal = false;
+    isVIP = false;
   }
-   
-
 }

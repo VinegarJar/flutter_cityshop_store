@@ -9,7 +9,10 @@ import 'package:provider/provider.dart';
 
 class MineHeadGround extends StatefulWidget {
   final VoidCallback callBack;
-  MineHeadGround({Key key,this.callBack, }) : super(key: key);
+  MineHeadGround({
+    Key key,
+    this.callBack,
+  }) : super(key: key);
 
   @override
   _MineHeadGroundState createState() => _MineHeadGroundState();
@@ -41,6 +44,7 @@ class _MineHeadGroundState extends State<MineHeadGround> {
           margin: EdgeInsets.only(bottom: ScreenUtil().setWidth(35)),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 userInfo?.nickName ?? "未实名认证",
@@ -61,9 +65,8 @@ class _MineHeadGroundState extends State<MineHeadGround> {
     );
   }
 
-  
   Widget _userInfoVIP(UserInfo userInfo) {
-     bool isVIP  = Provider.of<UserProvider>(context,listen:false).isVIP;
+    bool isVIP = Provider.of<UserProvider>(context, listen: false).isVIP;
     var radius = ScreenUtil().setWidth(25);
     return Container(
       margin: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(32)),
@@ -78,42 +81,41 @@ class _MineHeadGroundState extends State<MineHeadGround> {
         children: [
           Container(
             margin: EdgeInsets.only(left: radius),
-            child:  Row(
-            children: [
-              Text(
-                "VIP会员",
-                style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    color: ThemeColors.viptitleColor,
-                    fontSize: ScreenUtil().setSp(36)),
-              ),
-              SizedBox(width:radius),
-              Text(
-                "尊享拒就赔特权",//
-                style: TextStyle(
-                    color: ThemeColors.vipsubtitleColor,
-                    fontSize: ScreenUtil().setSp(30)),
-              ),
-            ],
+            child: Row(
+              children: [
+                Text(
+                  "VIP会员",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      color: ThemeColors.viptitleColor,
+                      fontSize: ScreenUtil().setSp(36)),
+                ),
+                SizedBox(width: radius),
+                Text(
+                  "尊享拒就赔特权", //
+                  style: TextStyle(
+                      color: ThemeColors.vipsubtitleColor,
+                      fontSize: ScreenUtil().setSp(30)),
+                ),
+              ],
+            ),
           ),
-          ),
-         
           OnTopBotton(
             callBack: widget.callBack,
             title: "立即加入",
             widget: Container(
               alignment: Alignment.center,
-               margin: EdgeInsets.only(right: radius),
-               padding: EdgeInsets.symmetric(horizontal: radius),
+              margin: EdgeInsets.only(right: radius),
+              padding: EdgeInsets.symmetric(horizontal: radius),
               height: ScreenUtil().setWidth(66),
               decoration: BoxDecoration(
                   color: ThemeColors.homemainColor,
                   borderRadius:
                       BorderRadius.circular(ScreenUtil().setWidth(44))),
-              child: Text(isVIP? "我的会员":"立即加入",
+              child: Text(isVIP ? "我的会员" : "立即加入",
                   style: TextStyle(
                     fontSize: ScreenUtil().setSp(28),
-                    color: ThemeColors.appliedColor, 
+                    color: ThemeColors.appliedColor,
                   )),
             ),
           )
@@ -125,7 +127,7 @@ class _MineHeadGroundState extends State<MineHeadGround> {
   @override
   Widget build(BuildContext context) {
     UserInfo userInfo = Provider.of<UserProvider>(context).userInfo;
-    
+
     return Container(
       height: ScreenUtil().setWidth(365),
       color: ThemeColors.homemainColor,

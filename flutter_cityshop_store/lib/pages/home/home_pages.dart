@@ -135,9 +135,11 @@ class _HomePagesState extends State<HomePages>
       );
       // Alert.modalButtomSheet(context: context);
     } else {
-        Alert.showDialogSheet(context: context, onPressed: (Map<String, dynamic> result) { 
-              print("弹框关闭 $result");
-         });
+      Alert.showDialogSheet(
+          context: context,
+          onPressed: (Map<String, dynamic> result) {
+            print("弹框关闭 $result");
+          });
     }
   }
 }
