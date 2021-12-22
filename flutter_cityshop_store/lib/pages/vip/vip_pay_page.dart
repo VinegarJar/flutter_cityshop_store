@@ -303,7 +303,7 @@ class _VipPayPagesState extends State<VipPayPages> {
       print("-----请求支付宝result----$payResult");
       if (payResult['result'] != null) {
         if (payResult['resultStatus'] == "9000") {
-          shwomessage("支付宝支付成功");
+          shwomessage("购买VIP支付成功");
           print("支付宝支付成功");
           Navigator.of(context).pop();
           UserDao.updateUserInfo(context);
