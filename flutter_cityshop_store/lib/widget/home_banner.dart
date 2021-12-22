@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_cityshop_store/https/user_dao.dart';
 import 'package:flutter_cityshop_store/model/advert.dart';
+import 'package:flutter_cityshop_store/provide/user_provider.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_cityshop_store/utils/utils.dart';
+import 'package:flutter_cityshop_store/widget/alert.dart';
 import 'package:flutter_cityshop_store/widget/onTop_botton.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class HomeBanner extends StatelessWidget {
@@ -16,6 +20,20 @@ class HomeBanner extends StatelessWidget {
     this.jump = true,
     this.callBack,
   });
+
+ void jumpToRealName(BuildContext context,var  productId) async {
+    bool isReal = Provider.of<UserProvider>(context, listen: false).isReal;
+
+    if (isReal) {
+            UserDao.jumpWebView(context,productId);
+    } else {
+      Alert.showDialogSheet(
+          context: context,
+          onPressed: (Map<String, dynamic> result) {
+            print("弹框关闭 $result");
+          });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +78,10 @@ class HomeBanner extends StatelessWidget {
                     ),
                   ),
                   OnTopBotton(
-                    callBack: callBack,
+                    callBack: (){
+                        
+                       jumpToRealName(context,model.productId);
+                    },
                     title: "立即激活",
                     widget: Container(
                       alignment: Alignment.center,

@@ -23,6 +23,10 @@ class Config {
   static const String userInfo = "/szgjadmin/app/appuser/getAppUserInfo";
   // 实名制信息认证
   static const String userRealCheck = "/szgjadmin/app/appuser/userRealCheck";
+
+  //获取产品地址
+  static const String productUr =  "/szgjadmin/app/product/getProductUrlById";
+
   //支付 
   static const String payVip = "/szgjadmin//app/appuser/payVip" ;
   // 支付的-appid2021002194675872

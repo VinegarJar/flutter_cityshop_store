@@ -10,6 +10,7 @@ import 'package:flutter_cityshop_store/pages/login/login_page.dart';
 import 'package:flutter_cityshop_store/pages/mine/system/system_page.dart';
 import 'package:flutter_cityshop_store/pages/vip/vip_page.dart';
 import 'package:flutter_cityshop_store/pages/vip/vip_pay_page.dart';
+import 'package:flutter_cityshop_store/pages/webView/flutter_web_page.dart';
 import 'package:flutter_cityshop_store/pages/webView/webView_page.dart';
 import 'package:flutter_cityshop_store/widget/never_overscroll_indicator.dart';
 
@@ -62,18 +63,23 @@ class NavigatorUtils {
         ));
   }
 
-  static Future goWebView(BuildContext context, String url, String title) {
-    return NavigatorUtils.NavigatorRouter(
-        context, WebViewUrlPage(url: url, title: title, isHtml: false));
+
+  static goProductWebView(BuildContext context, String resultUrl, String title) {
+   return  Navigator.of(context,rootNavigator: true).push(new MaterialPageRoute(
+          builder: (BuildContext context) => FlutterWebPage(resultUrl: resultUrl, title: title)));
   }
 
+  static goWebView(BuildContext context, String url, String title) {
+    return NavigatorUtils.NavigatorRouter(
+        context, WebViewUrlPage(url: url, title: title,isHtml: false));
+  }
  
   static Future goToHtmlWebView(BuildContext context, String url, String title) {
     return NavigatorUtils.NavigatorRouter(
         context, WebViewUrlPage(url: url, title: title, isHtml: true));
   }
 
-  
+ 
 
 
   ///用户配置
@@ -84,8 +90,7 @@ class NavigatorUtils {
   // ignore: non_constant_identifier_names
   static NavigatorRouter(BuildContext context, Widget widget) {
     return Navigator.push(
-        context,
-        new CupertinoPageRoute(
+        context, CupertinoPageRoute(
             builder: (context) => pageContainer(widget, context)));
   }
 }

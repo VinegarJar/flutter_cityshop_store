@@ -4,6 +4,7 @@ import "package:flutter/cupertino.dart";
 import 'package:flutter/material.dart';
 import 'package:flutter_cityshop_store/common/config/config.dart';
 import 'package:flutter_cityshop_store/https/httpRequest_method.dart';
+import 'package:flutter_cityshop_store/https/user_dao.dart';
 import 'package:flutter_cityshop_store/model/homerecommed.dart';
 import 'package:flutter_cityshop_store/model/userinfo.dart';
 import 'package:flutter_cityshop_store/provide/user_provider.dart';
@@ -122,7 +123,8 @@ class _AssociatorPagesState extends State<AssociatorPages> {
         HomeRecommed model = val;
         return InkWell(
             onTap: () {
-              print("会员精选专区---$val---");
+              print("会员精选专区---$model---");
+              UserDao.jumpWebView(context,model.productId);
             },
             child: Column(
               children: [

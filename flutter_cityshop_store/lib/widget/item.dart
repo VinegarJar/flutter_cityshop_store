@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cityshop_store/https/user_dao.dart';
 import 'package:flutter_cityshop_store/model/homerecommed.dart';
 import 'package:flutter_cityshop_store/provide/user_provider.dart';
-import 'package:flutter_cityshop_store/router/navigator_utils.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_cityshop_store/widget/alert.dart';
 import 'package:flutter_cityshop_store/widget/onTop_botton.dart';
@@ -17,6 +17,7 @@ class Item extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isReal = Provider.of<UserProvider>(context, listen: false).isReal;
     return Container(
       margin: EdgeInsets.symmetric(
           horizontal: ScreenUtil().setWidth(15),
@@ -128,16 +129,8 @@ class Item extends StatelessWidget {
                   ),
                   OnTopBotton(
                     callBack: () {
-                      bool isReal =
-                          Provider.of<UserProvider>(context, listen: false)
-                              .isReal;
-
                       if (isReal) {
-                        NavigatorUtils.goWebView(
-                          context,
-                          "http://www.baidu.com",
-                          "百度",
-                        );
+                        jumpWebView(context);
                       } else {
                         Alert.showDialogSheet(context: context);
                       }
@@ -196,5 +189,12 @@ class Item extends StatelessWidget {
 
   computedownload(var applyNum) {
     return (applyNum?.toString() ?? "0") + "人已下载";
+  }
+
+  void jumpWebView(BuildContext context) async {
+     
+     print("----${model.productId}");
+      UserDao.jumpWebView(context,model.productId);
+   
   }
 }

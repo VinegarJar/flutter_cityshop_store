@@ -217,7 +217,7 @@ class _VipPayPagesState extends State<VipPayPages> {
         var _phoneNum = await LocalStorage.get(Config.TOKEN_KEY);
         var params = {
           "phoneNum": _phoneNum,
-          "payAmt": "0.01",
+          "payAmt": pay ?? "0.01",
           "vipLevel": vipLevel
         };
 
