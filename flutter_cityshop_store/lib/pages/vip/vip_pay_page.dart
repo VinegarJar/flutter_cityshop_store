@@ -10,6 +10,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tobias/tobias.dart' as tobias;
+
 class VipPayPages extends StatefulWidget {
   VipPayPages({Key key}) : super(key: key);
 
@@ -224,8 +225,8 @@ class _VipPayPagesState extends State<VipPayPages> {
             .requestWithMetod(Config.payVip, params);
         print("-----请求支付后台----${res.data}");
         EasyLoading.dismiss();
-        // alpayVip(res.data["msg"]); 
-        toAlipay(res.data["result"],context);
+        // alpayVip(res.data["msg"]);
+        toAlipay(res.data["result"], context);
       },
       widget: Container(
         margin: EdgeInsets.only(top: 30),
@@ -286,16 +287,14 @@ class _VipPayPagesState extends State<VipPayPages> {
     //       shwomessage("支付宝支付失败");
     //     }
     //   }
-
-
   }
 
-void toAlipay(payInfo,BuildContext context) async {
+  void toAlipay(payInfo, BuildContext context) async {
     //检测是否安装支付宝
     var result = await tobias.isAliPayInstalled();
     if (!result) {
-        print("请先安装支付宝");
-        return shwomessage("请先安装支付宝");
+      print("请先安装支付宝");
+      return shwomessage("请先安装支付宝");
     }
 
     if (result) {
@@ -303,25 +302,23 @@ void toAlipay(payInfo,BuildContext context) async {
       var payResult = await tobias.aliPay(payInfo);
       print("-----请求支付宝result----$payResult");
       if (payResult['result'] != null) {
-        if (payResult['resultStatus'] == 9000) {
-            shwomessage("支付宝支付成功");
-            print("支付宝支付成功");
-            Navigator.of(context).pop();
-            UserDao.updateUserInfo(context);
+        if (payResult['resultStatus'] == "9000") {
+          shwomessage("支付宝支付成功");
+          print("支付宝支付成功");
+          Navigator.of(context).pop();
+          UserDao.updateUserInfo(context);
         } else {
-             shwomessage("支付宝支付失败");
-             print("支付宝支付失败");
+          shwomessage("支付宝支付失败");
+          print("支付宝支付失败");
         }
       }
     }
   }
 
-
-  shwomessage(message){
-      Fluttertoast.showToast(
+  shwomessage(message) {
+    Fluttertoast.showToast(
         msg: message,
         gravity: ToastGravity.TOP,
         toastLength: Toast.LENGTH_LONG);
   }
-
 }
