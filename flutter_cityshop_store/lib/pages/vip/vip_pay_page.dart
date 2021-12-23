@@ -173,7 +173,7 @@ class _VipPayPagesState extends State<VipPayPages> {
             vipLevel = "1";
           } else {
             payNum = "39.9";
-            vipLevel = "3";
+            vipLevel = "2";
           }
 
           this.setState(() {
