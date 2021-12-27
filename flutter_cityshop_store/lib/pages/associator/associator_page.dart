@@ -124,7 +124,7 @@ class _AssociatorPagesState extends State<AssociatorPages> {
         return InkWell(
             onTap: () {
               print("会员精选专区---$model---");
-              UserDao.jumpWebView(context,model.productId);
+              UserDao.jumpWebView(context, model.productId);
             },
             child: Column(
               children: [
@@ -164,7 +164,7 @@ class _AssociatorPagesState extends State<AssociatorPages> {
                               computeLongContent(
                                   model?.loanLower, model?.loanUpper),
                               style: TextStyle(
-                                  fontSize: ScreenUtil().setSp(38),
+                                  fontSize: ScreenUtil().setSp(34),
                                   fontWeight: FontWeight.w600,
                                   color: ThemeColors.loanUpperColor),
                             ),

@@ -46,12 +46,12 @@ class UserInfo {
   Null cash;
   String miId;
   int miScore;
-  Null appVersion;
-  Null url;
+  String appVersion;
+  String url;
   int status;
   int preSwitch;
   int vipLevel;
-  Null validDate;
+  String validDate;
 
   UserInfo(
       {this.id,
