@@ -15,6 +15,9 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
+//Flutter获取全局context
+final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
+
 class StoreApp extends StatefulWidget {
   StoreApp({Key key}) : super(key: key);
 
@@ -36,6 +39,7 @@ class _StoreAppState extends State<StoreApp> with HttpErrorListener {
           ChangeNotifierProvider(create: (_) => UserProvider()),
         ],
         child: MaterialApp(
+            navigatorKey: navigatorKey,
             debugShowCheckedModeBanner: false, //关闭显示debug模式
             builder: EasyLoading.init(), //全局初始化
             routes: {
@@ -75,7 +79,11 @@ mixin HttpErrorListener on State<StoreApp> {
   }
 
   void logOutAction() async {
-    NavigatorUtils.goLogin(context);
+    Future.delayed(Duration(seconds: 0)).then((onValue) {
+      BuildContext context = navigatorKey.currentState.overlay.context;
+      NavigatorUtils.goLogin(context);
+    });
+
     await LocalStorage.remove(Config.TOKEN_KEY);
     await LocalStorage.remove(Config.USER_INFO);
   }
@@ -88,17 +96,18 @@ mixin HttpErrorListener on State<StoreApp> {
         break;
       case 401:
         showToast("网络错误401");
-        // logOutAction();
+        logOutAction();
         break;
       case 403:
         showToast("网络错误403");
         break;
       case 404:
         showToast("网络错误404");
+        logOutAction();
         break;
       case 422:
         showToast("网络错误422");
-
+        logOutAction();
         break;
       case Code.NETWORK_TIMEOUT:
         //超时

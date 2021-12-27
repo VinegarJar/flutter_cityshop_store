@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_cityshop_store/common/config/config.dart';
 import 'package:flutter_cityshop_store/common/event/http_error_event.dart';
@@ -78,25 +77,22 @@ class UserDao {
       result,
       "产品详情",
     );
-     
-    //  analysisHandle(productId);
+    analysisHandle(productId);
   }
 
- static analysisHandle(var productId) async {
+  static analysisHandle(var productId) async {
     var _phoneNum = await LocalStorage.get(Config.TOKEN_KEY);
     var params = {
       "phoneNum": _phoneNum,
       "event": "APP_PPV",
-      "extraParam1":productId,//产品id
-      "extraParam2":"首页推荐" 
+      "extraParam1": productId, //产品id
+      "extraParam2": "推荐产品"
     };
 
-    var res = await HttpRequestMethod.instance
-        .requestWithMetod(Config.addEventUrl, params);
+    var res = await HttpRequestMethod.instance.requestWithMetod(
+        Config.addEventUrl, params,
+        header: null, option: null, baseUrl: "http://121.40.252.174:6002");
 
-      print("埋点上传----${res.data}");
+    print("埋点上传----${res.data}");
   }
-
-
-
 }

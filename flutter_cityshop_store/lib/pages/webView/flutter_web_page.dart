@@ -1,8 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_cityshop_store/widget/loding.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 class FlutterWebPage extends StatefulWidget {
@@ -16,13 +14,9 @@ class FlutterWebPage extends StatefulWidget {
 }
 
 class _FlutterWebPageState extends State<FlutterWebPage> {
-
-
-
   @override
   Widget build(BuildContext context) {
-    return (
-      WebviewScaffold(
+    return (WebviewScaffold(
         mediaPlaybackRequiresUserGesture: true,
         url: widget.resultUrl,
         appBar: AppBar(
@@ -31,21 +25,19 @@ class _FlutterWebPageState extends State<FlutterWebPage> {
               onPressed: () {
                 Navigator.pop(context);
               }),
-          title: Text(
-            "产品详情",
-            style: TextStyle(
-                color: ThemeColors.titlesColor,
-                fontWeight: FontWeight.w600,
-                fontSize: ScreenUtil().setSp(38)),
-          ),
           centerTitle: true,
           backgroundColor: ThemeColors.homemainColor, //标题居中显示
         ),
         initialChild: Container(
           color: Colors.white,
           child: Center(child: LoadingWidget()),
-        ))
-    );
+        )));
   }
 
+  @override
+  void dispose() {
+    // 回收相关资源
+    // Every listener should be canceled, the same should be done with this stream.
+    super.dispose();
+  }
 }

@@ -7,6 +7,7 @@ import 'package:flutter_cityshop_store/https/interceptors/log_interceptor.dart';
 import 'package:flutter_cityshop_store/https/interceptors/response_interceptor.dart';
 import 'package:flutter_cityshop_store/https/interceptors/token_interceptor.dart';
 import 'package:flutter_cityshop_store/https/result_data.dart';
+import 'package:flutter_cityshop_store/common/config/config.dart';
 
 const httpHeaders = {
   'Content-Type': 'application/json',
@@ -48,9 +49,15 @@ class HttpRequestMethod {
   }
 
   Future requestWithMetod(url, params,
-      {Map<String, dynamic> header, Options option, noTip = false}) async {
+      {Map<String, dynamic> header, Options option, String baseUrl}) async {
     Map<String, dynamic> headers = new HashMap();
-    Map dict=  Map<String, dynamic>.from(params); 
+    Map dict = Map<String, dynamic>.from(params);
+    if (baseUrl != null) {
+      //重定向baseUrl 用于指定特定域名
+      _dio.options.baseUrl = baseUrl;
+    } else {
+      _dio.options.baseUrl = Config.baseURL;
+    }
 
     if (header != null) {
       headers.addAll(header);
@@ -76,7 +83,7 @@ class HttpRequestMethod {
         errorResponse.statusCode = Code.NETWORK_TIMEOUT;
       }
       return new ResultData(
-          Code.errorHandleFunction(errorResponse.statusCode, e.message, noTip),
+          Code.errorHandleFunction(errorResponse.statusCode, e.message, false),
           false,
           errorResponse.statusCode);
     }
