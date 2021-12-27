@@ -14,7 +14,6 @@ import 'package:flutter_cityshop_store/widget/placeitem.dart';
 import 'package:flutter_cityshop_store/widget/tag.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 
-
 class HomePages extends StatefulWidget {
   HomePages({Key key}) : super(key: key);
 
@@ -73,8 +72,11 @@ class _HomePagesState extends State<HomePages>
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.hasData) {
             var res = snapshot.data;
+            List<Map> list = [];
+            if ((res.data is List)) {
+              list = (res.data as List).cast<Map>();
+            }
             //  print('获取首页信息----res----${res.data}');
-            List<Map> list = (res.data as List).cast<Map>();
             final List dataSource =
                 list.map((data) => HomeRecommed.fromJson(data)).toList();
             return EasyRefresh(
@@ -99,11 +101,7 @@ class _HomePagesState extends State<HomePages>
                 },
                 child: ListView(
                   children: [
-                    HomeBanner(
-                        bannner: banner,
-                        callBack: () {
-                      
-                        }),
+                    HomeBanner(bannner: banner, callBack: () {}),
                     Tage(titel: "特别推荐"),
                     HomeListPage(dataSource: dataSource)
                   ],
@@ -120,6 +118,4 @@ class _HomePagesState extends State<HomePages>
       ),
     );
   }
-
-  
 }

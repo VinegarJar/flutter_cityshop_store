@@ -55,8 +55,11 @@ class _CaterGoryPagesState extends State<CaterGoryPages> {
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.hasData) {
             var res = snapshot.data;
-              // print('获取CaterGoryPages信息----res----${res.data}');
-            List<Map> list = (res.data as List).cast<Map>();
+            // print('获取CaterGoryPages信息----res----${res.data}');
+            List<Map> list = [];
+            if ((res.data is List)) {
+              list = (res.data as List).cast<Map>();
+            }
             final List dataSource =
                 list.map((data) => HomeRecommed.fromJson(data)).toList();
             return EasyRefresh(
@@ -80,7 +83,11 @@ class _CaterGoryPagesState extends State<CaterGoryPages> {
                   });
                 },
                 child: ListView(
-                  children: [Associator(),Tage(), HomeListPage(dataSource: dataSource)],
+                  children: [
+                    Associator(),
+                    Tage(),
+                    HomeListPage(dataSource: dataSource)
+                  ],
                 ));
           } else {
             return ListView.builder(

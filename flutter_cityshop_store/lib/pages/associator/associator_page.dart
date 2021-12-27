@@ -46,7 +46,7 @@ class _AssociatorPagesState extends State<AssociatorPages> {
 
     List goodsList = [];
 
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < source.length; i++) {
       source.forEach((element) {
         goodsList.add(element);
       });
