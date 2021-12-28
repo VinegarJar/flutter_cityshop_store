@@ -77,20 +77,22 @@ class Item extends StatelessWidget {
                           color: ThemeColors.subtitlesColor),
                     ),
                   ),
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: ScreenUtil().setHeight(5)),
-                    decoration: BoxDecoration(
-                        color: ThemeColors.brandColor,
-                        borderRadius:
-                            BorderRadius.circular(ScreenUtil().setWidth(5))),
-                    child: Text(
-                      model?.shortContent ?? "品牌",
-                      style: TextStyle(
-                          fontSize: ScreenUtil().setSp(23),
-                          color: ThemeColors.brandtitleColor),
-                    ),
-                  ),
+                  (model?.shortContent != "")
+                      ? Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: ScreenUtil().setHeight(5)),
+                          decoration: BoxDecoration(
+                              color: ThemeColors.brandColor,
+                              borderRadius: BorderRadius.circular(
+                                  ScreenUtil().setWidth(5))),
+                          child: Text(
+                            model?.shortContent ?? "品牌",
+                            style: TextStyle(
+                                fontSize: ScreenUtil().setSp(23),
+                                color: ThemeColors.brandtitleColor),
+                          ),
+                        )
+                      : Container(),
                 ],
               ),
               Text(
@@ -192,9 +194,7 @@ class Item extends StatelessWidget {
   }
 
   void jumpWebView(BuildContext context) async {
-     
-     print("----${model.productId}");
-      UserDao.jumpWebView(context,model.productId);
-   
+    print("----${model.productId}");
+    UserDao.jumpWebView(context, model.productId);
   }
 }

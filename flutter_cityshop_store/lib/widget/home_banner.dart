@@ -21,11 +21,11 @@ class HomeBanner extends StatelessWidget {
     this.callBack,
   });
 
- void jumpToRealName(BuildContext context,var  productId) async {
+  void jumpToRealName(BuildContext context, var productId) async {
     bool isReal = Provider.of<UserProvider>(context, listen: false).isReal;
 
     if (isReal) {
-            UserDao.jumpWebView(context,productId);
+      UserDao.jumpWebView(context, productId);
     } else {
       Alert.showDialogSheet(
           context: context,
@@ -78,9 +78,8 @@ class HomeBanner extends StatelessWidget {
                     ),
                   ),
                   OnTopBotton(
-                    callBack: (){
-                        
-                       jumpToRealName(context,model.productId);
+                    callBack: () {
+                      jumpToRealName(context, model.productId);
                     },
                     title: "立即激活",
                     widget: Container(
@@ -141,19 +140,19 @@ class HomeBanner extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            width: ScreenUtil().setWidth(50),
-            height: ScreenUtil().setHeight(50),
-            decoration: BoxDecoration(
-                color: ThemeColors.mainBgColor,
-                borderRadius: BorderRadius.circular(ScreenUtil().setWidth(5))),
-            child: (model?.productUrl != null)
-                ? FadeInImage.memoryNetwork(
-                    placeholder: kTransparentImage,
-                    image: model.productUrl,
-                    fit: BoxFit.fill)
-                : Container(),
-          ),
+          (model?.productUrl != null)
+              ? Container(
+                  width: ScreenUtil().setWidth(50),
+                  height: ScreenUtil().setHeight(50),
+                  decoration: BoxDecoration(
+                      color: ThemeColors.mainBgColor,
+                      borderRadius:
+                          BorderRadius.circular(ScreenUtil().setWidth(5))),
+                  child: FadeInImage.memoryNetwork(
+                      placeholder: kTransparentImage,
+                      image: model?.productUrl,
+                      fit: BoxFit.fill))
+              : Container(),
           Container(
             margin:
                 EdgeInsets.symmetric(horizontal: ScreenUtil().setHeight(20)),
