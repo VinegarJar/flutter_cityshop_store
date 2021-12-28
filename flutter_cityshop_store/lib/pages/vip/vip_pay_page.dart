@@ -9,7 +9,8 @@ import 'package:flutter_cityshop_store/widget/onTop_botton.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:tobias/tobias.dart' as tobias;
+// import 'package:tobias/tobias.dart' as tobias;
+import 'package:flutter_alipay/flutter_alipay.dart';
 
 class VipPayPages extends StatefulWidget {
   VipPayPages({Key key}) : super(key: key);
@@ -272,47 +273,45 @@ class _VipPayPagesState extends State<VipPayPages> {
     );
   }
 
-  void alpayVip(payInfo) async {
-    // var payResult = await SyFlutterAlipay.pay(payInfo,
-    //     urlScheme: 'alipay2021002194675872', isSandbox: true);
-    // print("-----请求支付宝result----$payResult");
-
-    // if (payResult['result'] != null) {
-    //     if (payResult['resultStatus'] == 9000) {
-    //       // ToastUtil.toast("支付宝支付成功");
-    //       shwomessage("支付宝支付支付宝支付成功");
-    //       Navigator.of(context).pop();
-    //     } else {
-    //       // ToastUtil.toast("支付宝支付失败");
-    //       shwomessage("支付宝支付失败");
-    //     }
-    //   }
+  void alpayVip(payInfo, BuildContext context) async {
+    var payResult = await FlutterAlipay.pay(payInfo);
+    print("-----请求支付宝result----$payResult");
+    if (payResult.result != null && payResult.resultStatus == "9000") {
+      shwomessage("购买VIP支付成功");
+      Navigator.of(context).pop();
+      UserDao.updateUserInfo(context);
+    } else {
+      shwomessage("支付宝支付失败");
+    }
   }
 
   void toAlipay(payInfo, BuildContext context) async {
-    //检测是否安装支付宝
-    var result = await tobias.isAliPayInstalled();
-    if (!result) {
-      print("请先安装支付宝");
-      return shwomessage("请先安装支付宝");
-    }
+    this.alpayVip(payInfo, context);
 
-    if (result) {
-      //去支付
-      var payResult = await tobias.aliPay(payInfo);
-      print("-----请求支付宝result----$payResult");
-      if (payResult['result'] != null) {
-        if (payResult['resultStatus'] == "9000") {
-          shwomessage("购买VIP支付成功");
-          print("支付宝支付成功");
-          Navigator.of(context).pop();
-          UserDao.updateUserInfo(context);
-        } else {
-          shwomessage("支付宝支付失败");
-          print("支付宝支付失败");
-        }
-      }
-    }
+    // //检测是否安装支付宝
+    // var result = await tobias.isAliPayInstalled();
+    // if (!result) {
+    //   print("请先安装支付宝");
+    //   this.alpayVip(payInfo, context);
+    //   //return shwomessage("请先安装支付宝");
+    // }
+
+    // if (result) {
+    //   //去支付
+    //   var payResult = await tobias.aliPay(payInfo);
+    //   print("-----请求支付宝result----$payResult");
+    //   if (payResult['result'] != null) {
+    //     if (payResult['resultStatus'] == "9000") {
+    //       shwomessage("购买VIP支付成功");
+    //       print("支付宝支付成功");
+    //       Navigator.of(context).pop();
+    //       UserDao.updateUserInfo(context);
+    //     } else {
+    //       shwomessage("支付宝支付失败");
+    //       print("支付宝支付失败");
+    //     }
+    //   }
+    // }
   }
 
   shwomessage(message) {

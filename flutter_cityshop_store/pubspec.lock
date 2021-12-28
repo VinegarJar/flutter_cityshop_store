@@ -167,6 +167,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_alipay:
+    dependency: "direct main"
+    description:
+      name: flutter_alipay
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.0"
   flutter_bloc:
     dependency: "direct main"
     description:
@@ -455,13 +462,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.3.0"
-  tobias:
-    dependency: "direct main"
-    description:
-      name: tobias
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "1.2.0"
   transformer_page_view:
     dependency: transitive
     description:
