@@ -25,11 +25,19 @@ class Config {
   static const String userRealCheck = "/szgjadmin/app/appuser/userRealCheck";
 
   //获取产品地址
-  static const String productUr =  "/szgjadmin/app/product/getProductUrlById";
+  static const String productUr = "/szgjadmin/app/product/getProductUrlById";
 
-  //支付 
-  static const String payVip = "/szgjadmin//app/appuser/payVip" ;
+  //支付
+  static const String payVip = "/szgjadmin//app/appuser/payVip";
   // 支付的-appid2021002194675872
+
+  //获取权益
+  static const String getAppShowConfig =
+      "/szgjadmin/app/appconfig/getAppShowConfig";
+
+  //获取会员专享
+  static const String getVipProductList =
+      "/szgjadmin/app/product/getVipProductList";
 
   // 上传图片--需要
   static const String uploadFileToOssFront =
