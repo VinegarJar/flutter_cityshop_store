@@ -12,6 +12,9 @@
 代码仓库 账号：2966497308@qq.com 
 github  gitee  coding(密码后面+@) 
 
+leancloud网络存储,个人开发者福利。快速入门
+https://www.leancloud.cn/
+
 钉钉中设置代码提交提醒--Github机器人通知
 https://www.cnblogs.com/muxi0407/p/11984151.html
 
