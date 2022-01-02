@@ -31,25 +31,21 @@ class NavigatorUtils {
   static pushNamed(BuildContext context, String routeName) {
     Navigator.pushNamed(context, routeName);
   }
- 
-    ///我的会员
+
+  ///我的会员
   static gotoAssociatorPages(BuildContext context) {
-     return NavigatorUtils.NavigatorRouter(
-        context, AssociatorPages());
+    return NavigatorUtils.NavigatorRouter(context, AssociatorPages());
   }
 
   // 去购买VipPages
-    static gotoVipPages(BuildContext context) {
-     return NavigatorUtils.NavigatorRouter(
-        context, VipPages());
+  static gotoVipPages(BuildContext context) {
+    return NavigatorUtils.NavigatorRouter(context, VipPages());
   }
+
   //去支付
   static gotoPayVip(BuildContext context) {
-     return NavigatorUtils.NavigatorRouter(
-        context, VipPayPages());
+    return NavigatorUtils.NavigatorRouter(context, VipPayPages());
   }
-
-
 
   ///Page页面的容器，做一次通用自定义
   static Widget pageContainer(widget, BuildContext context) {
@@ -63,24 +59,24 @@ class NavigatorUtils {
         ));
   }
 
-
-  static goProductWebView(BuildContext context, String resultUrl, String title) {
-   return  Navigator.of(context,rootNavigator: true).push(new MaterialPageRoute(
-          builder: (BuildContext context) => FlutterWebPage(resultUrl: resultUrl, title: title)));
+  static goProductWebView(
+      BuildContext context, String resultUrl, String title) {
+    return Navigator.of(context, rootNavigator: true).push(
+        new MaterialPageRoute(
+            builder: (BuildContext context) =>
+                FlutterWebPage(resultUrl: resultUrl, title: title)));
   }
 
   static goWebView(BuildContext context, String url, String title) {
     return NavigatorUtils.NavigatorRouter(
-        context, WebViewUrlPage(url: url, title: title,isHtml: false));
+        context, WebViewUrlPage(url: url, title: title , isHtml: false));
   }
- 
-  static Future goToHtmlWebView(BuildContext context, String url, String title) {
+
+  static Future goToHtmlWebView(
+      BuildContext context, String url, String title) {
     return NavigatorUtils.NavigatorRouter(
         context, WebViewUrlPage(url: url, title: title, isHtml: true));
   }
-
- 
-
 
   ///用户配置
   static gotoUserSystem(BuildContext context) {
@@ -90,7 +86,8 @@ class NavigatorUtils {
   // ignore: non_constant_identifier_names
   static NavigatorRouter(BuildContext context, Widget widget) {
     return Navigator.push(
-        context, CupertinoPageRoute(
+        context,
+        CupertinoPageRoute(
             builder: (context) => pageContainer(widget, context)));
   }
 }

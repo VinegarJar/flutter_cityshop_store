@@ -51,7 +51,7 @@ class HttpRequestMethod {
   Future requestWithMetod(url, params,
       {Map<String, dynamic> header, Options option, String baseUrl}) async {
     Map<String, dynamic> headers = new HashMap();
-    Map dict = Map<String, dynamic>.from(params);
+    Map dict = Map<String, dynamic>.from(params??{});
     if (baseUrl != null) {
       //重定向baseUrl 用于指定特定域名
       _dio.options.baseUrl = baseUrl;
