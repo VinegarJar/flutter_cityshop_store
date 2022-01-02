@@ -42,7 +42,7 @@ class _AssociatorState extends State<Associator> {
       List<Map> list = (res.data as List).cast();
       final List dataSource =
           list.map((data) => AppConfig.fromJson(data)).toList();
-      print("----获取权益请求$dataSource");
+      // print("----获取权益请求$dataSource");
 
       setState(() {
         dataConfig = dataSource;
@@ -120,8 +120,8 @@ class _AssociatorState extends State<Associator> {
               margin: EdgeInsets.only(bottom: ScreenUtil().setWidth(20)),
               child: Column(children: [
                 Image(
-                    width:ScreenUtil().setWidth(100) ,
-                    height:ScreenUtil().setWidth(100) ,
+                    width: ScreenUtil().setWidth(100),
+                    height: ScreenUtil().setWidth(100),
                     image: AssetImage(
                       val["url"],
                     ),
@@ -158,7 +158,6 @@ class _AssociatorState extends State<Associator> {
   }
 
   void getJumpUrl(context, title) {
-    
     Iterable<AppConfig> dataSource = dataConfig
         .where((model) => model.showAreaName.contains(title))
         .toList();
@@ -166,14 +165,11 @@ class _AssociatorState extends State<Associator> {
       AppConfig model = dataSource.first;
       print("-------获取地址----$dataSource");
       print("-------获取地址----${model.showArea}");
-      NavigatorUtils.goWebView(
-        context,
-        model.showArea,
-        model.showAreaName
-      );
+      NavigatorUtils.goWebView(context, model.showArea, model.showAreaName);
     } else {
-   
+      NavigatorUtils.goVipAssociator(
+        context,
+      );
     }
   }
-
 }

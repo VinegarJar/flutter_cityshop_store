@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cityshop_store/https/user_dao.dart';
@@ -57,7 +59,7 @@ class Item extends StatelessWidget {
                       model?.productName ?? "",
                       style: TextStyle(
                         fontSize: ScreenUtil().setSp(32),
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
@@ -65,30 +67,30 @@ class Item extends StatelessWidget {
                     margin: EdgeInsets.symmetric(
                         horizontal: ScreenUtil().setHeight(5)),
                     padding: EdgeInsets.symmetric(
-                        horizontal: ScreenUtil().setHeight(5)),
+                        horizontal: ScreenUtil().setHeight(8)),
                     decoration: BoxDecoration(
                         color: ThemeColors.homeColor,
                         borderRadius:
-                            BorderRadius.circular(ScreenUtil().setWidth(5))),
+                            BorderRadius.circular(ScreenUtil().setWidth(6))),
                     child: Text(
                       model?.longContent ?? "审核快",
                       style: TextStyle(
-                          fontSize: ScreenUtil().setSp(23),
+                          fontSize: ScreenUtil().setSp(22),
                           color: ThemeColors.subtitlesColor),
                     ),
                   ),
                   (model?.shortContent != "")
                       ? Container(
                           padding: EdgeInsets.symmetric(
-                              horizontal: ScreenUtil().setHeight(5)),
+                              horizontal: ScreenUtil().setHeight(8)),
                           decoration: BoxDecoration(
                               color: ThemeColors.brandColor,
                               borderRadius: BorderRadius.circular(
-                                  ScreenUtil().setWidth(5))),
+                                  ScreenUtil().setWidth(6))),
                           child: Text(
                             model?.shortContent ?? "品牌",
                             style: TextStyle(
-                                fontSize: ScreenUtil().setSp(23),
+                                fontSize: ScreenUtil().setSp(22),
                                 color: ThemeColors.brandtitleColor),
                           ),
                         )
@@ -98,7 +100,7 @@ class Item extends StatelessWidget {
               Text(
                 computedownload(model?.applyNum),
                 style: TextStyle(
-                    fontSize: ScreenUtil().setSp(28),
+                    fontSize: ScreenUtil().setSp(29),
                     color: ThemeColors.titleColor),
               ),
             ],
@@ -112,8 +114,8 @@ class Item extends StatelessWidget {
                     child: Text(
                       computeLongContent(model?.loanLower, model?.loanUpper),
                       style: TextStyle(
-                          fontSize: ScreenUtil().setSp(40),
-                          fontWeight: FontWeight.w600,
+                          fontSize: ScreenUtil().setSp(38),
+                          fontWeight: FontWeight.w500,
                           color: ThemeColors.loanUpperColor),
                     ),
                   ),
@@ -123,9 +125,10 @@ class Item extends StatelessWidget {
                     child: Text(
                       timerContent(
                           model?.loanPeriodLower, model?.loanPeriodUpper),
+                      overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                          fontSize: ScreenUtil().setSp(40),
-                          fontWeight: FontWeight.w600,
+                          fontSize: ScreenUtil().setSp(38),
+                          fontWeight: FontWeight.w400,
                           color: Colors.black),
                     ),
                   ),
@@ -141,16 +144,16 @@ class Item extends StatelessWidget {
                     widget: Container(
                       alignment: Alignment.center,
                       padding: EdgeInsets.symmetric(
-                          horizontal: ScreenUtil().setWidth(30)),
+                          horizontal: ScreenUtil().setWidth(35)),
                       height: ScreenUtil().setWidth(60),
                       decoration: BoxDecoration(
                           color: ThemeColors.homemainColor,
                           borderRadius:
-                              BorderRadius.circular(ScreenUtil().setWidth(30))),
+                              BorderRadius.circular(ScreenUtil().setWidth(28))),
                       child: Text("立即申请",
                           style: TextStyle(
-                            fontSize: ScreenUtil().setSp(32),
-                            color: ThemeColors.appliedColor, //35,17,0
+                            fontSize: ScreenUtil().setSp(30),
+                            color: ThemeColors.whiteColor, //35,17,0
                           )),
                     ),
                   )
@@ -185,8 +188,13 @@ class Item extends StatelessWidget {
   }
 
   timerContent(var loanPeriodLower, var loanPeriodUpper) {
-    return ("3" + "~" + "12月");
-    // return (loanPeriodLower.toString() + "~" + loanPeriodUpper.toString());
+    if (loanPeriodLower.toString().length > 3) {
+      return ("3" + "~" + "12月");
+    }
+    return (loanPeriodLower.toString() +
+        "~" +
+        loanPeriodUpper.toString() +
+        "月");
   }
 
   computedownload(var applyNum) {
@@ -194,7 +202,7 @@ class Item extends StatelessWidget {
   }
 
   void jumpWebView(BuildContext context) async {
-    print("----${model.productId}");
     UserDao.jumpWebView(context, model.productId);
   }
+
 }

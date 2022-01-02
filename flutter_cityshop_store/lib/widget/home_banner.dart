@@ -95,7 +95,7 @@ class HomeBanner extends StatelessWidget {
                       child: Text("立即激活",
                           style: TextStyle(
                             fontSize: ScreenUtil().setSp(32),
-                            color: ThemeColors.appliedColor, //35,17,0
+                            color: ThemeColors.whiteColor, //35,17,0
                           )),
                     ),
                   )

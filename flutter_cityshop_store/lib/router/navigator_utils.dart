@@ -8,6 +8,7 @@ import 'package:flutter_cityshop_store/pages/associator/associator_page.dart';
 import 'package:flutter_cityshop_store/pages/index_page.dart';
 import 'package:flutter_cityshop_store/pages/login/login_page.dart';
 import 'package:flutter_cityshop_store/pages/mine/system/system_page.dart';
+import 'package:flutter_cityshop_store/pages/vip/vip_associator_page.dart';
 import 'package:flutter_cityshop_store/pages/vip/vip_page.dart';
 import 'package:flutter_cityshop_store/pages/vip/vip_pay_page.dart';
 import 'package:flutter_cityshop_store/pages/webView/flutter_web_page.dart';
@@ -69,7 +70,7 @@ class NavigatorUtils {
 
   static goWebView(BuildContext context, String url, String title) {
     return NavigatorUtils.NavigatorRouter(
-        context, WebViewUrlPage(url: url, title: title , isHtml: false));
+        context, WebViewUrlPage(url: url, title: title, isHtml: false));
   }
 
   static Future goToHtmlWebView(
@@ -81,6 +82,11 @@ class NavigatorUtils {
   ///用户配置
   static gotoUserSystem(BuildContext context) {
     NavigatorRouter(context, SystemPage());
+  }
+
+//VipAssociator
+  static goVipAssociator(BuildContext context) {
+    return NavigatorUtils.NavigatorRouter(context, VipAssociator());
   }
 
   // ignore: non_constant_identifier_names
