@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cityshop_store/router/navigator_utils.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_cityshop_store/utils/utils.dart';
+import 'package:flutter_cityshop_store/widget/alert.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -13,10 +14,6 @@ class VipPages extends StatefulWidget {
 }
 
 class _VipPagesState extends State<VipPages> {
-  
-
-
-
   List dataSource = [
     {"name": "privilege_check", "title": "黑名单检测", "text": "会员免费 原价39.9元"},
     {"name": "privilege_risk", "title": "网袋风险检测", "text": "会员免费 原价59.9元"},
@@ -54,7 +51,15 @@ class _VipPagesState extends State<VipPages> {
                 icon:
                     Icon(Icons.arrow_back_ios, color: ThemeColors.titlesColor),
                 onPressed: () {
-                  Navigator.pop(context);
+                  Alert.showAssociatorSheet(
+                      context: context,
+                      cancel: true,
+                      onPressed: () {
+                        Navigator.pop(context);
+                      }, 
+                      gotoVipPressed: () {
+                             NavigatorUtils.gotoPayVip(context);
+                      });
                 })),
         body: Column(
           children: [
@@ -105,7 +110,7 @@ class _VipPagesState extends State<VipPages> {
     return InkWell(
         onTap: () {
           print("即刻加入");
-            NavigatorUtils.gotoPayVip(context);
+          NavigatorUtils.gotoPayVip(context);
         },
         child: Container(
             alignment: Alignment.center,
@@ -125,8 +130,7 @@ class _VipPagesState extends State<VipPages> {
             )));
   }
 
-  Widget _vipOnly(
-      BuildContext context,
+  Widget _vipOnly(BuildContext context,
       {@required String name,
       @required String titel,
       @required String text,
@@ -169,8 +173,8 @@ class _VipPagesState extends State<VipPages> {
           InkWell(
               onTap: () {
                 print("----$titel----");
-               
-                 NavigatorUtils.gotoPayVip(context);
+
+                NavigatorUtils.gotoPayVip(context);
               },
               child: Container(
                   alignment: Alignment.center,

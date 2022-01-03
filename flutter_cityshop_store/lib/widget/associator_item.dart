@@ -1,23 +1,24 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cityshop_store/https/user_dao.dart';
-import 'package:flutter_cityshop_store/model/homerecommed.dart';
+import 'package:flutter_cityshop_store/model/associator.dart';
 import 'package:flutter_cityshop_store/provide/user_provider.dart';
+import 'package:flutter_cityshop_store/router/navigator_utils.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
+import 'package:flutter_cityshop_store/utils/utils.dart';
 import 'package:flutter_cityshop_store/widget/alert.dart';
 import 'package:flutter_cityshop_store/widget/onTop_botton.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:transparent_image/transparent_image.dart';
 
-class Item extends StatelessWidget {
-  final HomeRecommed model;
+class AssociatorItem extends StatelessWidget {
+  final Associator model;
 
-  const Item({Key key, this.model}) : super(key: key);
+  const AssociatorItem({Key key, this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     bool isReal = Provider.of<UserProvider>(context, listen: false).isReal;
+    bool isVIP = Provider.of<UserProvider>(context, listen: false).isVIP;
     return Container(
       margin: EdgeInsets.symmetric(
           horizontal: ScreenUtil().setWidth(15),
@@ -37,27 +38,24 @@ class Item extends StatelessWidget {
               Row(
                 children: [
                   Container(
-                    width: ScreenUtil().setWidth(55),
-                    height: ScreenUtil().setHeight(55),
-                    decoration: BoxDecoration(
-                        color: ThemeColors.mainBgColor,
-                        borderRadius:
-                            BorderRadius.circular(ScreenUtil().setWidth(5))),
-                    child: (model?.productImgUrl != null)
-                        ? FadeInImage.memoryNetwork(
-                            placeholder: kTransparentImage,
-                            image: model.productImgUrl,
-                            fit: BoxFit.fill)
-                        : Container(),
-                  ),
+                      width: ScreenUtil().setWidth(50),
+                      height: ScreenUtil().setWidth(50),
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(
+                            Utils.getImgPath('vip_icon'),
+                          ),
+                          fit: BoxFit.cover,
+                        ),
+                      )),
                   Container(
                     margin: EdgeInsets.symmetric(
                         horizontal: ScreenUtil().setHeight(10)),
                     child: Text(
-                      model?.productName ?? "",
+                      "会员专享产品",
                       style: TextStyle(
-                        fontSize: ScreenUtil().setSp(32),
-                        fontWeight: FontWeight.w500,
+                        fontSize: ScreenUtil().setSp(35),
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),
@@ -71,35 +69,13 @@ class Item extends StatelessWidget {
                         borderRadius:
                             BorderRadius.circular(ScreenUtil().setWidth(6))),
                     child: Text(
-                      model?.longContent ?? "审核快",
+                      "会员独享",
                       style: TextStyle(
                           fontSize: ScreenUtil().setSp(22),
                           color: ThemeColors.subtitlesColor),
                     ),
                   ),
-                  (model?.shortContent != "")
-                      ? Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: ScreenUtil().setHeight(8)),
-                          decoration: BoxDecoration(
-                              color: ThemeColors.brandColor,
-                              borderRadius: BorderRadius.circular(
-                                  ScreenUtil().setWidth(6))),
-                          child: Text(
-                            model?.shortContent ?? "品牌",
-                            style: TextStyle(
-                                fontSize: ScreenUtil().setSp(22),
-                                color: ThemeColors.brandtitleColor),
-                          ),
-                        )
-                      : Container(),
                 ],
-              ),
-              Text(
-                computedownload(model?.applyNum),
-                style: TextStyle(
-                    fontSize: ScreenUtil().setSp(29),
-                    color: ThemeColors.titleColor),
               ),
             ],
           ),
@@ -133,22 +109,29 @@ class Item extends StatelessWidget {
                   OnTopBotton(
                     callBack: () {
                       if (isReal) {
-                        jumpWebView(context);
+                        if (isVIP) {
+                          jumpWebView(context);
+                        } else {
+                          Alert.showAssociatorSheet(context: context, gotoVipPressed: () { 
+                             NavigatorUtils.gotoVipPages(context);
+                           });
+                           
+                        }
                       } else {
                         Alert.showDialogSheet(context: context);
                       }
                     },
-                    title: "立即申请",
+                    title: isVIP ? "立即申请" : "立即解锁",
                     widget: Container(
                       alignment: Alignment.center,
                       padding: EdgeInsets.symmetric(
                           horizontal: ScreenUtil().setWidth(35)),
                       height: ScreenUtil().setWidth(60),
                       decoration: BoxDecoration(
-                          color: ThemeColors.homemainColor,
+                          color: ThemeColors.toastColor,
                           borderRadius:
                               BorderRadius.circular(ScreenUtil().setWidth(28))),
-                      child: Text("立即申请",
+                      child: Text("立即解锁",
                           style: TextStyle(
                             fontSize: ScreenUtil().setSp(30),
                             color: ThemeColors.whiteColor, //35,17,0
@@ -157,13 +140,25 @@ class Item extends StatelessWidget {
                   )
                 ],
               )),
-          Container(
-            child: Text(model?.loanSpeed ?? "",
-                style: TextStyle(
-                  fontSize: ScreenUtil().setSp(32),
-                  color: ThemeColors.titleColor,
-                )),
-          )
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                child: Text("VIP独享额度|放款率高达95%",
+                    style: TextStyle(
+                      fontSize: ScreenUtil().setSp(32),
+                      color: ThemeColors.titleColor,
+                    )),
+              ),
+              Container(
+                child: Text("24小时放款",
+                    style: TextStyle(
+                      fontSize: ScreenUtil().setSp(32),
+                      color: ThemeColors.titleColor,
+                    )),
+              ),
+            ],
+          ),
         ],
       ),
     );
@@ -202,5 +197,4 @@ class Item extends StatelessWidget {
   void jumpWebView(BuildContext context) async {
     UserDao.jumpWebView(context, model.productId);
   }
-
 }

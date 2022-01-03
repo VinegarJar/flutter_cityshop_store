@@ -206,19 +206,18 @@ class Alert {
                           if (_names.isEmpty) {
                             return eventBus
                                 .fire(new HttpErrorEvent(99, "请输入姓名"));
-                          } 
+                          }
                           if (_idNum.isEmpty) {
                             return eventBus
                                 .fire(new HttpErrorEvent(99, "请输身份证号码"));
-                          } 
+                          }
                           var params = {
-                              "names": _names,
-                              "idNum": _idNum, //身份证号码
-                          }; 
-                           UserDao.usercheck(params, context); 
+                            "names": _names,
+                            "idNum": _idNum, //身份证号码
+                          };
+                          UserDao.usercheck(params, context);
                           // bool checkCard = CheckOutils.checkCard(_idNum);
                           // if (checkCard) {
-                    
 
                           //    UserDao.usercheck(params, context);
                           // } else {
@@ -272,5 +271,192 @@ class Alert {
             ),
           );
         });
+  }
+
+  static showAssociatorSheet({
+    @required BuildContext context,
+    @required Function() gotoVipPressed,
+    bool cancel = false,
+    Function() onPressed,
+  }) async {
+    await showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          contentPadding: EdgeInsets.zero,
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: ScreenUtil().setWidth(600),
+                height: ScreenUtil().setWidth(580),
+                decoration: BoxDecoration(
+                    color: cancel ? Colors.white : ThemeColors.associatorColor,
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
+                child: Column(
+                  children: [
+                    cancel
+                        ? Container()
+                        : Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: ScreenUtil().setWidth(25),
+                                vertical: ScreenUtil().setWidth(5)),
+                            decoration: BoxDecoration(
+                                color: Color.fromRGBO(34, 31, 27, 0.8),
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(0),
+                                  topRight: Radius.circular(0),
+                                  bottomLeft: Radius.circular(
+                                      ScreenUtil().setWidth(20)),
+                                  bottomRight: Radius.circular(
+                                      ScreenUtil().setWidth(20)),
+                                )),
+                            child: Text("会员专享产品",
+                                style: TextStyle(
+                                  fontSize: ScreenUtil().setSp(38),
+                                  color: ThemeColors.associatorColor,
+                                  fontWeight: FontWeight.w600,
+                                ))),
+                    cancel
+                        ? Container(
+                            margin:
+                                EdgeInsets.only(top: ScreenUtil().setWidth(30)),
+                            child: Text("真的要放弃吗?",
+                                style: TextStyle(
+                                  fontSize: ScreenUtil().setSp(40),
+                                  color: ThemeColors.appliedColor,
+                                  fontWeight: FontWeight.w600,
+                                )))
+                        : Container(
+                            margin: EdgeInsets.symmetric(
+                                vertical: ScreenUtil().setWidth(20)),
+                            child: Text("开通会员即可解锁",
+                                style: TextStyle(
+                                  fontSize: ScreenUtil().setSp(36),
+                                  color: cancel
+                                      ? ThemeColors.appliedColor
+                                      : ThemeColors.titlesColor,
+                                  fontWeight: FontWeight.w600,
+                                ))),
+                    cancel
+                        ? Container(
+                            margin:
+                                EdgeInsets.only(top: ScreenUtil().setWidth(10)),
+                            child: Text("98%的用户开通会员后下款成功",
+                                style: TextStyle(
+                                  fontSize: ScreenUtil().setSp(28),
+                                  color: Color.fromRGBO(195, 121, 81, 1),
+                                  fontWeight: FontWeight.w500,
+                                )))
+                        : Container(
+                            child: Text("高通过率产品",
+                                style: TextStyle(
+                                  fontSize: ScreenUtil().setSp(40),
+                                  color: Color.fromRGBO(195, 121, 81, 1),
+                                  fontWeight: FontWeight.w500,
+                                ))),
+                    cancel
+                        ? Container(
+                            margin:
+                                EdgeInsets.only(top: ScreenUtil().setWidth(10)),
+                            child: Text("开通会员即可享受以下权益",
+                                style: TextStyle(
+                                  fontSize: ScreenUtil().setSp(28),
+                                  color: Color.fromRGBO(202, 200, 200, 1),
+                                  fontWeight: FontWeight.w500,
+                                )))
+                        : Container(),
+                    Container(
+                      margin: EdgeInsets.symmetric(
+                          vertical: ScreenUtil().setWidth(20)),
+                      width: ScreenUtil().setWidth(500),
+                      height: ScreenUtil().setWidth(200),
+                      decoration: BoxDecoration(
+                          color: ThemeColors.whiteColor,
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ItemImage(url: 'privilege_verify', title: '优先审核'),
+                          ItemImage(url: 'privilege_money', title: '拒就赔保障'),
+                          ItemImage(url: 'privilege_pass', title: '高通过率')
+                        ],
+                      ),
+                    ),
+                    OnTopBotton(
+                      callBack: () async {
+                        Navigator.of(context).pop();
+                        gotoVipPressed();
+                      },
+                      widget: Container(
+                        margin: EdgeInsets.only(top: 10),
+                        alignment: Alignment.center,
+                        width: ScreenUtil().setWidth(320),
+                        height: ScreenUtil().setWidth(80),
+                        decoration: BoxDecoration(
+                            color: ThemeColors.toastColor,
+                            borderRadius: BorderRadius.circular(
+                                ScreenUtil().setWidth(40))),
+                        child: Text("立即开通",
+                            style: TextStyle(
+                              fontSize: ScreenUtil().setSp(30),
+                              color: ThemeColors.whiteColor, //35,17,0
+                            )),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).pop();
+                  onPressed();
+                },
+                child: Container(
+                  margin: EdgeInsets.only(top: ScreenUtil().setWidth(50)),
+                  padding: EdgeInsets.all(ScreenUtil().setWidth(10)),
+                  child: Icon(CupertinoIcons.xmark_circle,
+                      size: ScreenUtil().setSp(80),
+                      color: ThemeColors.whiteColor),
+                ),
+              )
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+class ItemImage extends StatelessWidget {
+  final String url;
+  final String title;
+  const ItemImage({Key key, @required this.url, @required this.title})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal:ScreenUtil().setWidth(10) ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image(
+              width: ScreenUtil().setWidth(80),
+              height: ScreenUtil().setWidth(80),
+              image: AssetImage(
+                Utils.getImgPath(url ?? ""),
+              ),
+              fit: BoxFit.cover),
+          SizedBox(width: ScreenUtil().setWidth(20)),
+          Text(
+            title ?? "",
+            style: TextStyle(fontSize: ScreenUtil().setSp(28)),
+          )
+        ],
+      ),
+    );
   }
 }

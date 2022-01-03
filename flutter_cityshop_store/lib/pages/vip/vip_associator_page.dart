@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cityshop_store/common/config/config.dart';
 import 'package:flutter_cityshop_store/https/httpRequest_method.dart';
+import 'package:flutter_cityshop_store/model/associator.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_cityshop_store/utils/utils.dart';
+import 'package:flutter_cityshop_store/widget/associator_item.dart';
 import 'package:flutter_cityshop_store/widget/placeitem.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,7 +19,7 @@ class _VipAssociatorState extends State<VipAssociator> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: ThemeColors.mainBgColor,
       appBar: AppBar(
           elevation: 0, // 隐藏阴影
           backgroundColor: ThemeColors.mainBgColor,
@@ -32,7 +34,7 @@ class _VipAssociatorState extends State<VipAssociator> {
           leading: IconButton(
               icon: Icon(Icons.arrow_back_ios, color: ThemeColors.titlesColor),
               onPressed: () {
-                Navigator.pop(context);
+                 Navigator.pop(context);
               })),
       body: FutureBuilder(
         future: HttpRequestMethod.instance.requestWithMetod(
@@ -40,31 +42,27 @@ class _VipAssociatorState extends State<VipAssociator> {
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.hasData) {
             var res = snapshot.data;
-            print('获取CaterGoryPages信息----res----${res.data}');
-            // List<Map> list = [];
-            // if ((res.data is List)) {
-            //   list = (res.data as List).cast<Map>();
-            // }
-            // final List dataSource =
-            //     list.map((data) => HomeRecommed.fromJson(data)).toList();
+            List<Map> list = [];
+            if ((res.data["list"] is List)) {
+              list = (res.data["list"] as List).cast<Map>();
+            }
+            final List dataSource =
+                list.map((data) => Associator.fromJson(data)).toList();
+
+            print('获取CaterGoryPages信息----res----$dataSource');
+
             return ListView(
               children: [
-                Container(
-                    width: ScreenUtil().setWidth(750),
-                    height: ScreenUtil().setWidth(245),
-                    decoration: BoxDecoration(
-                      // borderRadius:
-                      //     BorderRadius.circular(ScreenUtil().setWidth(15)),
-                      image: DecorationImage(
-                        image: AssetImage(
-                          Utils.getImgPath('associators'),
-                        ),
-                        fit: BoxFit.cover,
-                      ),
-                    ))
-                // Associator(),
-                // Tage(),
-                // HomeListPage(dataSource: dataSource)
+                banner(),
+                ListView.builder(
+                  shrinkWrap: true, //为true可以解决子控件必须设置高度的问题
+                  physics: NeverScrollableScrollPhysics(), //禁用滑动事件
+                  itemCount: dataSource.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    Associator model = dataSource[index];
+                    return AssociatorItem(model: model);
+                  },
+                )
               ],
             );
           } else {
@@ -78,5 +76,19 @@ class _VipAssociatorState extends State<VipAssociator> {
         },
       ),
     );
+  }
+
+  Widget banner() {
+    return (Container(
+        width: ScreenUtil().setWidth(750),
+        height: ScreenUtil().setWidth(245),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+              Utils.getImgPath('associators'),
+            ),
+            fit: BoxFit.cover,
+          ),
+        )));
   }
 }
