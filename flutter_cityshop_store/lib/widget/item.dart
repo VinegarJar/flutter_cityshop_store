@@ -37,8 +37,8 @@ class Item extends StatelessWidget {
               Row(
                 children: [
                   Container(
-                    width: ScreenUtil().setWidth(55),
-                    height: ScreenUtil().setHeight(55),
+                    width: ScreenUtil().setWidth(50),
+                    height: ScreenUtil().setHeight(50),
                     decoration: BoxDecoration(
                         color: ThemeColors.mainBgColor,
                         borderRadius:
