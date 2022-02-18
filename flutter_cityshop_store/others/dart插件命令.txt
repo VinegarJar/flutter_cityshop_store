@@ -50,3 +50,9 @@ flutter create --template=package xxapp_package
 
 iOS创建自己的pod库
 https://www.jianshu.com/p/1dabeb10c33a
+
+iOS-直播开发(开发从底层做起)  关于音视频编解码的代码,
+Github: https://github.com/jessonliu/JFLivePlaye
+
+iOS-直播开发(开发从底层做起)之音视频采集
+https://github.com/jessonliu/JFCollectVideoAndAudioData
