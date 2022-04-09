@@ -56,3 +56,7 @@ Github: https://github.com/jessonliu/JFLivePlaye
 
 iOS-直播开发(开发从底层做起)之音视频采集
 https://github.com/jessonliu/JFCollectVideoAndAudioData
+
+Flutter 结合json_serializable将json转model 
+https://www.cnblogs.com/sonofdark/p/11726025.html
+https://adoontheway.gitee.io/2021/08/25/everydayprogress021/
