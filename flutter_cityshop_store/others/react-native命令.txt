@@ -1,0 +1,15 @@
+Code Push终端操作
+第一步
+查看创建的APP 
+执行命令 查看安装的App包code-push app ls
+执行命令 查看安装的医生App包信息 code-push deployment ls doctor-ios
+iOS 打包 react-native bundle --entry-file index.js --bundle-output ./ios/main.jsbundle --platform ios --assets-dest ./ios --dev false
+执行code-push命令  code-push release-react doctor-ios ios  --t 2.2.6 --dev false --d Production --des  --m true
+说明版本已经上线进行热更新
+其中参数--t为二进制(.ipa与apk)安装包的的版本；--dev为是否启用开发者模式(默认为false)；--d是要发布更新的环境分Production与Staging(默认为Staging)；--des为更新说明；--m 是强制更新,--t 表示版本号(这里版本号要与在用户设备中安装版本对应) — m是强制更新 用户界面显示只有一个按钮 强制更新 如果不填写这个时候用户可以忽略更新到个人中心进行更新。
+code-push release-react CCBZZB ios  --t 1.0.0 --dev false --d Production --des "1.优化操作流程" --m true
+
+
+执行查看上传状态code-push deployment ls doctor-ios
+
+参考文档地址https://www.jianshu.com/p/adb47cb565f7
