@@ -5,6 +5,7 @@ import 'package:flutter_cityshop_store/provide/user_provider.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_cityshop_store/utils/utils.dart';
 import 'package:flutter_cityshop_store/widget/alert.dart';
+import 'package:flutter_cityshop_store/widget/messagebar.dart';
 import 'package:flutter_cityshop_store/widget/onTop_botton.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -31,6 +32,7 @@ class HomeBanner extends StatelessWidget {
           context: context,
           onPressed: (Map<String, dynamic> result) {
             print("弹框关闭 $result");
+            //MessageBar messagebar
           });
     }
   }
@@ -45,17 +47,18 @@ class HomeBanner extends StatelessWidget {
             vertical: ScreenUtil().setWidth(20)),
         child: Swiper(
           itemBuilder: (BuildContext context, int index) {
-            Advert model = bannner[index];
+            Advert model = bannner.length > 0 ? bannner[index] : null;
             return Container(
               decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: (model.bannerImgUrl != null)
+                      image: (model?.bannerImgUrl != null)
                           ? NetworkImage(model?.bannerImgUrl)
                           : ExactAssetImage(Utils.getImgPath('placeholderImg')),
                       fit: BoxFit.fill),
                   borderRadius: BorderRadius.all(Radius.circular(10))),
               child: Column(
                 children: [
+                  MessageBar(),
                   _titleWidget(model),
                   Container(
                     margin: EdgeInsets.only(top: ScreenUtil().setWidth(10)),
@@ -70,46 +73,49 @@ class HomeBanner extends StatelessWidget {
                         horizontal: ScreenUtil().setWidth(15),
                         vertical: ScreenUtil().setWidth(20)),
                     child: Text(
-                      computeLongContent(model?.loanLower, model?.loanUpper),
+                      model != null
+                          ? computeLongContent(
+                              model?.loanLower, model?.loanUpper)
+                          : "",
                       style: TextStyle(
                           fontSize: ScreenUtil().setSp(60),
                           fontWeight: FontWeight.w700,
                           color: Colors.black),
                     ),
                   ),
-                  OnTopBotton(
-                    callBack: () {
-                      jumpToRealName(context, model.productId);
-                    },
-                    title: "立即激活",
-                    widget: Container(
-                      alignment: Alignment.center,
-                      margin: EdgeInsets.symmetric(
-                        horizontal: ScreenUtil().setWidth(40),
-                      ),
-                      height: ScreenUtil().setWidth(88),
-                      decoration: BoxDecoration(
-                          color: ThemeColors.homemainColor,
-                          borderRadius:
-                              BorderRadius.circular(ScreenUtil().setWidth(44))),
-                      child: Text("立即激活",
-                          style: TextStyle(
-                            fontSize: ScreenUtil().setSp(32),
-                            color: ThemeColors.whiteColor, //35,17,0
-                          )),
-                    ),
-                  )
+                  model != null
+                      ? OnTopBotton(
+                          callBack: () {
+                            jumpToRealName(context, model.productId);
+                          },
+                          title: "立即激活",
+                          widget: Container(
+                            alignment: Alignment.center,
+                            margin: EdgeInsets.symmetric(
+                              horizontal: ScreenUtil().setWidth(40),
+                            ),
+                            height: ScreenUtil().setWidth(88),
+                            decoration: BoxDecoration(
+                                color: ThemeColors.homemainColor,
+                                borderRadius: BorderRadius.circular(
+                                    ScreenUtil().setWidth(44))),
+                            child: Text("立即激活",
+                                style: TextStyle(
+                                  fontSize: ScreenUtil().setSp(32),
+                                  color: ThemeColors.whiteColor, //35,17,0
+                                )),
+                          ),
+                        )
+                      : Container()
                 ],
               ),
             );
           },
 
-          itemCount: bannner?.length ?? 0,
+          itemCount: bannner.length > 0 ? bannner.length : 1,
           scrollDirection: Axis.horizontal,
           autoplay: false,
-          onIndexChanged: (index) {
-            //  print('onIndexChanged$index个');
-          },
+          onIndexChanged: (index) {},
           scale: 0.95, // 两张图片之间的间隔
           onTap: (index) {
             print('点击了第$index个');
@@ -135,49 +141,52 @@ class HomeBanner extends StatelessWidget {
   }
 
   Widget _titleWidget(Advert model) {
-    return Container(
-      margin: EdgeInsets.only(top: ScreenUtil().setWidth(50)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          (model?.productUrl != null)
-              ? Container(
-                  width: ScreenUtil().setWidth(50),
-                  height: ScreenUtil().setHeight(50),
+    return model != null
+        ? Container(
+            margin: EdgeInsets.only(top: ScreenUtil().setWidth(50)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                (model?.productUrl != null)
+                    ? Container(
+                        width: ScreenUtil().setWidth(50),
+                        height: ScreenUtil().setHeight(50),
+                        decoration: BoxDecoration(
+                            color: ThemeColors.mainBgColor,
+                            borderRadius: BorderRadius.circular(
+                                ScreenUtil().setWidth(5))),
+                        child: FadeInImage.memoryNetwork(
+                            placeholder: kTransparentImage,
+                            image: model?.productUrl,
+                            fit: BoxFit.fill))
+                    : Container(),
+                Container(
+                  margin: EdgeInsets.symmetric(
+                      horizontal: ScreenUtil().setHeight(20)),
+                  child: Text(
+                    model?.productName ?? "",
+                    style: TextStyle(
+                      fontSize: ScreenUtil().setSp(38),
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 3, vertical: 2),
                   decoration: BoxDecoration(
-                      color: ThemeColors.mainBgColor,
+                      color: ThemeColors.homeColor,
                       borderRadius:
                           BorderRadius.circular(ScreenUtil().setWidth(5))),
-                  child: FadeInImage.memoryNetwork(
-                      placeholder: kTransparentImage,
-                      image: model?.productUrl,
-                      fit: BoxFit.fill))
-              : Container(),
-          Container(
-            margin:
-                EdgeInsets.symmetric(horizontal: ScreenUtil().setHeight(20)),
-            child: Text(
-              model?.productName ?? "",
-              style: TextStyle(
-                fontSize: ScreenUtil().setSp(38),
-                fontWeight: FontWeight.w600,
-              ),
+                  child: Text(
+                    model?.longContent ?? "新口子",
+                    style: TextStyle(
+                        fontSize: ScreenUtil().setSp(23),
+                        color: ThemeColors.subtitlesColor),
+                  ),
+                )
+              ],
             ),
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 3, vertical: 2),
-            decoration: BoxDecoration(
-                color: ThemeColors.homeColor,
-                borderRadius: BorderRadius.circular(ScreenUtil().setWidth(5))),
-            child: Text(
-              model?.longContent ?? "新口子",
-              style: TextStyle(
-                  fontSize: ScreenUtil().setSp(23),
-                  color: ThemeColors.subtitlesColor),
-            ),
-          ),
-        ],
-      ),
-    );
+          )
+        : Container();
   }
 }

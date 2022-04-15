@@ -49,6 +49,7 @@ dependencies:
   intl: ^0.17.0
   # tobias: 1.2.0
   flutter_alipay: ^1.0.0
+  marquee_flutter: ^0.1.4
 
 dev_dependencies:
   flutter_test:

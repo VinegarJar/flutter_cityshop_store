@@ -189,10 +189,10 @@ class Item extends StatelessWidget {
     if (loanPeriodLower.toString().length > 3) {
       return ("3" + "~" + "12月");
     }
-    return (loanPeriodLower.toString() +
+    return (
+       loanPeriodLower.toString() +
         "~" +
-        loanPeriodUpper.toString() +
-        "月");
+        loanPeriodUpper.toString());
   }
 
   computedownload(var applyNum) {

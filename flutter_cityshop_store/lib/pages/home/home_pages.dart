@@ -49,11 +49,14 @@ class _HomePagesState extends State<HomePages>
         .requestWithMetod(Config.todayRecommed, params)
         .then((res) {
       List<Map> list = (res.data as List).cast();
-      final List dataSource =
-          list.map((data) => Advert.fromJson(data)).toList();
-      setState(() {
-        banner = dataSource;
-      });
+      final json = list.first;
+      if (res.result && json != null) {
+        final List dataSource =
+            list.map((data) => Advert.fromJson(data)).toList();
+        setState(() {
+          banner = dataSource;
+        });
+      }
     });
   }
 
