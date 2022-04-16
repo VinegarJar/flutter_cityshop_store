@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_cityshop_store/common/event/http_error_event.dart';
+import 'package:flutter_cityshop_store/common/local/local_storage.dart';
 import 'package:flutter_cityshop_store/https/user_dao.dart';
+import 'package:flutter_cityshop_store/router/navigator_utils.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_cityshop_store/utils/utils.dart';
 import 'package:flutter_cityshop_store/widget/onTop_botton.dart';
@@ -39,6 +42,131 @@ class Alert {
               },
             ),
           ],
+        );
+      },
+    );
+  }
+
+
+  static showPolicySheet({
+    @required BuildContext context,
+    Function(Map<String, dynamic> result) onPressed,
+  }) async {
+    await showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          contentPadding: EdgeInsets.zero,
+          shape: RoundedRectangleBorder(
+              borderRadius:
+                  BorderRadius.all(Radius.circular(ScreenUtil().setWidth(20)))),
+          content: Container(
+            width: ScreenUtil().setWidth(600),
+            height: ScreenUtil().setWidth(460),
+            child: Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(
+                      top: ScreenUtil().setWidth(20),
+                      bottom: ScreenUtil().setWidth(10)),
+                  child: Text(
+                    "同意隐私政策才能体验全部服务",
+                    style: TextStyle(
+                      fontSize: ScreenUtil().setSp(34),
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(
+                      horizontal: ScreenUtil().setWidth(40)),
+                  child: Text.rich(TextSpan(children: [
+                    TextSpan(
+                      text: "我们将充分尊重并保护你的隐私,关于个人信息使用的详细信息可点击",
+                      style: TextStyle(
+                        fontSize: ScreenUtil().setSp(32),
+                        color: Colors.black,
+                      ),
+                    ),
+                    TextSpan(
+                      text: "《用呗隐私政策》",
+                      style: TextStyle(
+                        color: ThemeColors.colorRed,
+                        fontSize: ScreenUtil().setSp(32),
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () async {
+                          String fileUrl = await rootBundle
+                              .loadString(Utils.getHtmlPath('privacy'));
+                          NavigatorUtils.goToHtmlWebView(
+                              context, fileUrl, "用呗隐私政策");
+                        },
+                    ),
+                    TextSpan(
+                      text: "查看。若不同意隐私政策,我们将无法提供有效性的产品或服务",
+                      style: TextStyle(
+                        fontSize: ScreenUtil().setSp(32),
+                        color: Colors.black,
+                      ),
+                    ),
+                  ])),
+                ),
+                SizedBox(height: ScreenUtil().setWidth(30)),
+                Container(
+                    margin: EdgeInsets.symmetric(
+                        horizontal: ScreenUtil().setWidth(40)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        OnTopBotton(
+                          callBack: () async {
+                            SystemNavigator.pop();
+                          },
+                          widget: Container(
+                            alignment: Alignment.center,
+                            width: ScreenUtil().setWidth(240),
+                            height: ScreenUtil().setWidth(66),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(ScreenUtil().setWidth(33))),
+                              border: Border.all(
+                                  width: 0.8,
+                                  style: BorderStyle.solid,
+                                  color: ThemeColors.mainColor),
+                            ),
+                            child: Text("暂不同意",
+                                style: TextStyle(
+                                  fontSize: ScreenUtil().setSp(32),
+                                  color: ThemeColors.mainColor, //35,17,0
+                                )),
+                          ),
+                        ),
+                        OnTopBotton(
+                          callBack: () async {
+                            LocalStorage.save("policy", "1");
+                            Navigator.of(context).pop();
+                          },
+                          widget: Container(
+                            alignment: Alignment.center,
+                            width: ScreenUtil().setWidth(240),
+                            height: ScreenUtil().setWidth(66),
+                            decoration: BoxDecoration(
+                                color: ThemeColors.mainColor,
+                                borderRadius: BorderRadius.circular(
+                                    ScreenUtil().setWidth(33))),
+                            child: Text("同意并继续",
+                                style: TextStyle(
+                                  fontSize: ScreenUtil().setSp(32),
+                                  color: ThemeColors.mainBgColor, //35,17,0
+                                )),
+                          ),
+                        )
+                      ],
+                    )),
+              ],
+            ),
+          ),
         );
       },
     );
@@ -439,7 +567,7 @@ class ItemImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal:ScreenUtil().setWidth(10) ),
+      margin: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(10)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

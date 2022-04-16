@@ -16,6 +16,7 @@ import 'package:flutter_cityshop_store/pages/login/login_logo.dart';
 import 'package:flutter_cityshop_store/provide/user_provider.dart';
 import 'package:flutter_cityshop_store/router/navigator_utils.dart';
 import 'package:flutter_cityshop_store/utils/utils.dart';
+import 'package:flutter_cityshop_store/widget/alert.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -112,8 +113,17 @@ class _LoginHomePageState extends State<LoginHomePage> {
           ),
           SizedBox(height: ScreenUtil().setWidth(35)),
           LoginBotton(onPressed: () async {
-            print('LoginBotton----');
-            _loginRequest();
+     
+            final policy = await LocalStorage.get("policy");
+               print('LoginBotton----$policy');  
+            if (policy =="1") {
+               _loginRequest();
+            } else {
+              Alert.showPolicySheet(context: context);
+            }
+
+                               
+
           }),
           SizedBox(height: ScreenUtil().setWidth(35)),
           LoginAgree(
