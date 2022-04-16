@@ -47,7 +47,7 @@
             android:name="flutterEmbedding"
             android:value="2" />  
         <!-- 第3处修改，添加友盟密钥-->
-　　　　　<meta-data
+       <meta-data
             android:name="UMENG_APPKEY"
             android:value="61a07a2fe014255fcb8d33bc"/>
         <meta-data
@@ -55,7 +55,7 @@
             android:value="Umeng"/>
 
     </application>
-    <!-- 第4处修改,深圳安卓访问权限-->
+    <!-- 第4处修改,安卓访问权限-->
     <!-- 获取访问网络连接-->
     <uses-permission android:name="android.permission.INTERNET"/>
     <!-- 获取网络信息状态,如当前的网络连接是否有效-->
@@ -67,9 +67,9 @@
     <!-- 通过WiFi或移动基站的方式获取用户错略的经纬度信息,定位精度大概误差在30~1500米-->
     <!-- <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/> -->
     <!-- 改变WiFi多播状态-->
-    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"/>
+    <!-- <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"/> -->
     <!-- 允许程序写入外部存储,如SD卡上写文件-->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <!-- -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <!-- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/> -->
+    <!-- 访问用户设备上的媒体文件(音乐)以进行播放-->
+    <!-- <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/> -->
 </manifest>

@@ -9,3 +9,6 @@
 -keep class io.flutter.view.**  { *; }
 -keep class io.flutter.**  { *; }
 -keep class io.flutter.plugins.**  { *; }
+-keepattributes *Annotation*
+-keep class com.umeng.** {*;}
+-dontwarn com.umeng.**
