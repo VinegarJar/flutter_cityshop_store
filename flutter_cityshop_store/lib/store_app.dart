@@ -29,6 +29,7 @@ class _StoreAppState extends State<StoreApp> with HttpErrorListener {
   @override
   void initState() {
     super.initState();
+
   }
 
   @override
@@ -67,6 +68,8 @@ mixin HttpErrorListener on State<StoreApp> {
     stream = eventBus.on<HttpErrorEvent>().listen((event) {
       errorHandleFunction(event.code, event.message);
     });
+
+
   }
 
   @override
@@ -77,6 +80,8 @@ mixin HttpErrorListener on State<StoreApp> {
       stream = null;
     }
   }
+
+
 
   void logOutAction() async {
     Future.delayed(Duration(seconds: 0)).then((onValue) {

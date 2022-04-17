@@ -16,7 +16,6 @@ import 'package:flutter_cityshop_store/pages/login/login_logo.dart';
 import 'package:flutter_cityshop_store/provide/user_provider.dart';
 import 'package:flutter_cityshop_store/router/navigator_utils.dart';
 import 'package:flutter_cityshop_store/utils/utils.dart';
-import 'package:flutter_cityshop_store/widget/alert.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -82,6 +81,8 @@ class _LoginHomePageState extends State<LoginHomePage> {
     BlocProvider.of<LoginBloc>(context).add(LoginChangeEvent(phoneNum: text));
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -113,17 +114,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
           ),
           SizedBox(height: ScreenUtil().setWidth(35)),
           LoginBotton(onPressed: () async {
-     
-            final policy = await LocalStorage.get("policy");
-               print('LoginBotton----$policy');  
-            if (policy =="1") {
-               _loginRequest();
-            } else {
-              Alert.showPolicySheet(context: context);
-            }
-
-                               
-
+              _loginRequest();
           }),
           SizedBox(height: ScreenUtil().setWidth(35)),
           LoginAgree(
