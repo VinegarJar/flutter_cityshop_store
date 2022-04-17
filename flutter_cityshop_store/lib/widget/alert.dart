@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +12,7 @@ import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_cityshop_store/utils/utils.dart';
 import 'package:flutter_cityshop_store/widget/onTop_botton.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 class Alert {
   static showAlert({
@@ -48,10 +51,12 @@ class Alert {
   }
 
   static showPolicySheet({
+    @required String url,
     @required BuildContext context,
     @required Function() onPressed,
   }) async {
     await showDialog<bool>(
+      barrierDismissible: false,
       context: context,
       builder: (context) {
         return AlertDialog(
@@ -60,107 +65,118 @@ class Alert {
               borderRadius:
                   BorderRadius.all(Radius.circular(ScreenUtil().setWidth(20)))),
           content: Container(
-            width: ScreenUtil().setWidth(600),
-            height: ScreenUtil().setWidth(860),
-            child: Column(
-              children: [
-             
-                Container(
-                  margin: EdgeInsets.only(
-                      top: ScreenUtil().setWidth(20),
-                      bottom: ScreenUtil().setWidth(10)),
-                  child: Text(
-                    "用户协议与隐私政策提示",
-                    style: TextStyle(
-                      fontSize: ScreenUtil().setSp(34),
-                      color: Colors.black,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(
-                      horizontal: ScreenUtil().setWidth(40)),
-                  child: Text.rich(TextSpan(children: [
-                    TextSpan(
-                      text: "点击[同意授权并继续]视为您已阅读并同意",
+              width: ScreenUtil().setWidth(600),
+              height: ScreenUtil().setWidth(860),
+              child: Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(
+                        top: ScreenUtil().setWidth(20),
+                        bottom: ScreenUtil().setWidth(10)),
+                    child: Text(
+                      "用呗隐私政策协议",
                       style: TextStyle(
-                        fontSize: ScreenUtil().setSp(32),
+                        fontSize: ScreenUtil().setSp(34),
                         color: Colors.black,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
-                    TextSpan(
-                      text: "《用呗用户注册协议》",
-                      style: TextStyle(
-                        color: ThemeColors.colorRed,
-                        fontSize: ScreenUtil().setSp(32),
-                      ),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () async {
-                          String fileUrl = await rootBundle
-                              .loadString(Utils.getHtmlPath('agreement'));
-                          NavigatorUtils.goToHtmlWebView(
-                              context, fileUrl, "用呗用户注册协议");
-                        },
-                    ),
-                    TextSpan(
-                      text: "《用呗隐私政策》",
-                      style: TextStyle(
-                        color: ThemeColors.colorRed,
-                        fontSize: ScreenUtil().setSp(32),
-                      ),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () async {
-                          String fileUrl = await rootBundle
-                              .loadString(Utils.getHtmlPath('privacy'));
-                          NavigatorUtils.goToHtmlWebView(
-                              context, fileUrl, "用呗隐私政策");
-                        },
-                    ),
-                  ])),
-                ),
-                SizedBox(height: ScreenUtil().setWidth(20)),
-                OnTopBotton(
-                  callBack: () async {
-                    LocalStorage.save("policy", "1");
-                    Navigator.of(context).pop();
-                    onPressed();
-                  },
-                  widget: Container(
-                    alignment: Alignment.center,
+                  ),
+                  Container(
+                    height: ScreenUtil().setWidth(450),
                     margin: EdgeInsets.symmetric(
-                        horizontal: ScreenUtil().setWidth(20)),
-                    height: ScreenUtil().setWidth(66),
-                    decoration: BoxDecoration(
-                        color: ThemeColors.mainColor,
-                        borderRadius:
-                            BorderRadius.circular(ScreenUtil().setWidth(33))),
-                    child: Text("同意授权并继续",
+                        horizontal: ScreenUtil().setWidth(30)),
+                    child: WebviewScaffold(
+                      mediaPlaybackRequiresUserGesture: false,
+                      url: Uri.dataFromString(url,
+                              mimeType: 'text/html',
+                              encoding: Encoding.getByName('utf-8'))
+                          .toString(),
+                    ),
+                  ),
+                  SizedBox(height: ScreenUtil().setWidth(20)),
+                  Container(
+                    margin: EdgeInsets.symmetric(
+                        horizontal: ScreenUtil().setWidth(40)),
+                    child: Text.rich(TextSpan(children: [
+                      TextSpan(
+                        text: "点击[同意授权并继续]视为您已阅读并同意",
                         style: TextStyle(
                           fontSize: ScreenUtil().setSp(32),
-                          color: ThemeColors.mainBgColor, //35,17,0
-                        )),
-                  ),
-                ),
-                OnTopBotton(
-                  callBack: () async {
-                    SystemNavigator.pop();
-                  },
-                  widget: Container(
-                    alignment: Alignment.center,
-                    margin: EdgeInsets.symmetric(
-                        horizontal: ScreenUtil().setWidth(20)),
-                    height: ScreenUtil().setWidth(66),
-                    child: Text("不同意,退出app",
+                          color: Colors.black,
+                        ),
+                      ),
+                      TextSpan(
+                        text: "《用呗用户注册协议》",
                         style: TextStyle(
+                          color: ThemeColors.colorRed,
                           fontSize: ScreenUtil().setSp(32),
-                          color: ThemeColors.mainColor, //35,17,0
-                        )),
+                        ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () async {
+                            String fileUrl = await rootBundle
+                                .loadString(Utils.getHtmlPath('agreement'));
+                            NavigatorUtils.goToHtmlWebView(
+                                context, fileUrl, "用呗用户注册协议");
+                          },
+                      ),
+                      TextSpan(
+                        text: "《用呗隐私政策》",
+                        style: TextStyle(
+                          color: ThemeColors.colorRed,
+                          fontSize: ScreenUtil().setSp(32),
+                        ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () async {
+                            String fileUrl = await rootBundle
+                                .loadString(Utils.getHtmlPath('privacy'));
+                            NavigatorUtils.goToHtmlWebView(
+                                context, fileUrl, "用呗隐私政策");
+                          },
+                      ),
+                    ])),
                   ),
-                ),
-              ],
-            ),
-          ),
+                  SizedBox(height: ScreenUtil().setWidth(20)),
+                  OnTopBotton(
+                    callBack: () async {
+                      LocalStorage.save("policy", "1");
+                      Navigator.of(context).pop();
+                      onPressed();
+                    },
+                    widget: Container(
+                      alignment: Alignment.center,
+                      margin: EdgeInsets.symmetric(
+                          horizontal: ScreenUtil().setWidth(20)),
+                      height: ScreenUtil().setWidth(66),
+                      decoration: BoxDecoration(
+                          color: ThemeColors.mainColor,
+                          borderRadius:
+                              BorderRadius.circular(ScreenUtil().setWidth(33))),
+                      child: Text("同意授权并继续",
+                          style: TextStyle(
+                            fontSize: ScreenUtil().setSp(32),
+                            color: ThemeColors.mainBgColor, //35,17,0
+                          )),
+                    ),
+                  ),
+                  OnTopBotton(
+                    callBack: () async {
+                      SystemNavigator.pop();
+                    },
+                    widget: Container(
+                      alignment: Alignment.center,
+                      margin: EdgeInsets.symmetric(
+                          horizontal: ScreenUtil().setWidth(20)),
+                      height: ScreenUtil().setWidth(66),
+                      child: Text("不同意,退出app",
+                          style: TextStyle(
+                            fontSize: ScreenUtil().setSp(32),
+                            color: ThemeColors.mainColor, //35,17,0
+                          )),
+                    ),
+                  ),
+                ],
+              )),
         );
       },
     );

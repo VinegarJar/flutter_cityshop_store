@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_cityshop_store/common/local/local_storage.dart';
 import 'package:flutter_cityshop_store/https/user_dao.dart';
 import 'package:flutter_cityshop_store/provide/user_provider.dart';
@@ -19,18 +20,16 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
-
-
   void loadPolicySheet() async {
     final policy = await LocalStorage.get("policy");
-    print('LoginBotton----$policy');
     if (policy == "1") {
-       loadJumpPage();
-
+      loadJumpPage();
     } else {
-
+      String fileUrl =
+          await rootBundle.loadString(Utils.getHtmlPath('privacy'));
       BuildContext context = navigatorKey.currentState.overlay.context;
       Alert.showPolicySheet(
+          url: fileUrl,
           context: context,
           onPressed: () {
             NavigatorUtils.goLogin(context);
