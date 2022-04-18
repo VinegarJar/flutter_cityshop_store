@@ -1,7 +1,5 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_cityshop_store/common/local/local_storage.dart';
 import 'package:flutter_cityshop_store/https/user_dao.dart';
 import 'package:flutter_cityshop_store/provide/user_provider.dart';
@@ -25,11 +23,11 @@ class _WelcomePageState extends State<WelcomePage> {
     if (policy == "1") {
       loadJumpPage();
     } else {
-      String fileUrl =
-          await rootBundle.loadString(Utils.getHtmlPath('privacy'));
+      // String fileUrl =
+      //     await rootBundle.loadString(Utils.getHtmlPath('privacy'));
       BuildContext context = navigatorKey.currentState.overlay.context;
       Alert.showPolicySheet(
-          url: fileUrl,
+          url: "http://yinsi.xingdiandeng.com",
           context: context,
           onPressed: () {
             NavigatorUtils.goLogin(context);

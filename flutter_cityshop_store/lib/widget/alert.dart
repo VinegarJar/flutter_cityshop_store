@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -88,10 +86,7 @@ class Alert {
                         horizontal: ScreenUtil().setWidth(30)),
                     child: WebviewScaffold(
                       mediaPlaybackRequiresUserGesture: false,
-                      url: Uri.dataFromString(url,
-                              mimeType: 'text/html',
-                              encoding: Encoding.getByName('utf-8'))
-                          .toString(),
+                      url: url,
                     ),
                   ),
                   SizedBox(height: ScreenUtil().setWidth(20)),
