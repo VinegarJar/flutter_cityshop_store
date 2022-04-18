@@ -100,7 +100,7 @@ class Alert {
                         horizontal: ScreenUtil().setWidth(40)),
                     child: Text.rich(TextSpan(children: [
                       TextSpan(
-                        text: "点击[同意授权并继续]视为您已阅读并同意",
+                        text: "点击同意授权并继续视为您已阅读并同意",
                         style: TextStyle(
                           fontSize: ScreenUtil().setSp(32),
                           color: Colors.black,
@@ -168,7 +168,7 @@ class Alert {
                       margin: EdgeInsets.symmetric(
                           horizontal: ScreenUtil().setWidth(20)),
                       height: ScreenUtil().setWidth(66),
-                      child: Text("不同意,退出app",
+                      child: Text("不同意,退出App",
                           style: TextStyle(
                             fontSize: ScreenUtil().setSp(32),
                             color: ThemeColors.mainColor, //35,17,0
