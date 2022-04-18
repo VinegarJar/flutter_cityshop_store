@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_cityshop_store/common/event/http_error_event.dart';
 import 'package:flutter_cityshop_store/common/local/local_storage.dart';
 import 'package:flutter_cityshop_store/https/user_dao.dart';
-import 'package:flutter_cityshop_store/router/navigator_utils.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_cityshop_store/utils/utils.dart';
 import 'package:flutter_cityshop_store/widget/onTop_botton.dart';
@@ -85,8 +86,13 @@ class Alert {
                     margin: EdgeInsets.symmetric(
                         horizontal: ScreenUtil().setWidth(30)),
                     child: WebviewScaffold(
+                      withZoom: true,
+                      withLocalStorage: true,
                       mediaPlaybackRequiresUserGesture: false,
-                      url: url,
+                      url: Uri.dataFromString(url,
+                              mimeType: 'text/html',
+                              encoding: Encoding.getByName('utf-8'))
+                          .toString(),
                     ),
                   ),
                   SizedBox(height: ScreenUtil().setWidth(20)),
@@ -101,32 +107,32 @@ class Alert {
                           color: Colors.black,
                         ),
                       ),
-                      TextSpan(
-                        text: "《用呗用户注册协议》",
-                        style: TextStyle(
-                          color: ThemeColors.colorRed,
-                          fontSize: ScreenUtil().setSp(32),
-                        ),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () async {
-                            String fileUrl = await rootBundle
-                                .loadString(Utils.getHtmlPath('agreement'));
-                            NavigatorUtils.goToHtmlWebView(
-                                context, fileUrl, "用呗用户注册协议");
-                          },
-                      ),
+                      // TextSpan(
+                      //   text: "《用呗用户注册协议》",
+                      //   style: TextStyle(
+                      //     color: ThemeColors.colorRed,
+                      //     fontSize: ScreenUtil().setSp(32),
+                      //   ),
+                      //   recognizer: TapGestureRecognizer()
+                      //     ..onTap = () async {
+                      //       String fileUrl = await rootBundle
+                      //           .loadString(Utils.getHtmlPath('agreement'));
+                      //       NavigatorUtils.goToHtmlWebView(
+                      //           context, fileUrl, "用呗用户注册协议");
+                      //     },
+                      // ),
                       TextSpan(
                         text: "《用呗隐私政策》",
                         style: TextStyle(
-                          color: ThemeColors.colorRed,
+                          color: ThemeColors.mainColor,
                           fontSize: ScreenUtil().setSp(32),
                         ),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () async {
-                            String fileUrl = await rootBundle
-                                .loadString(Utils.getHtmlPath('privacy'));
-                            NavigatorUtils.goToHtmlWebView(
-                                context, fileUrl, "用呗隐私政策");
+                            // String fileUrl = await rootBundle
+                            //     .loadString(Utils.getHtmlPath('privacy'));
+                            // NavigatorUtils.goToHtmlWebView(
+                            //     context, fileUrl, "用呗隐私政策");
                           },
                       ),
                     ])),
