@@ -47,13 +47,12 @@
             android:name="flutterEmbedding"
             android:value="2" />  
         <!-- 第3处修改，添加友盟密钥-->
-       <meta-data
+       <!-- <meta-data
             android:name="UMENG_APPKEY"
             android:value="61a07a2fe014255fcb8d33bc"/>
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="Umeng"/>
-
+            android:value="Umeng"/> -->
     </application>
     <!-- 第4处修改,安卓访问权限-->
     <!-- 获取访问网络连接-->
@@ -63,7 +62,7 @@
     <!-- 获取当前WiFi接入的状态以及WLAN热点的信息-->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <!--访问电话状态 -->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <!-- <uses-permission android:name="android.permission.READ_PHONE_STATE"/> -->
     <!-- 通过WiFi或移动基站的方式获取用户错略的经纬度信息,定位精度大概误差在30~1500米-->
     <!-- <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/> -->
     <!-- 改变WiFi多播状态-->
