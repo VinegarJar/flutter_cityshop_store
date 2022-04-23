@@ -84,7 +84,7 @@ class _CaterGoryPagesState extends State<CaterGoryPages> {
                 },
                 child: ListView(
                   children: [
-                    Associator(),
+                    // Associator(),
                     Tage(),
                     HomeListPage(dataSource: dataSource)
                   ],

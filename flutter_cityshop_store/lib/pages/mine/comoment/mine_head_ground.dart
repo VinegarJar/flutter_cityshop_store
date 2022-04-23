@@ -9,9 +9,11 @@ import 'package:provider/provider.dart';
 
 class MineHeadGround extends StatefulWidget {
   final VoidCallback callBack;
+  final VoidCallback onPressed;
   MineHeadGround({
     Key key,
     this.callBack,
+    this.onPressed,
   }) : super(key: key);
 
   @override
@@ -25,42 +27,65 @@ class _MineHeadGroundState extends State<MineHeadGround> {
 
   Widget _userInfo(UserInfo userInfo) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Container(
-            margin: EdgeInsets.only(
-                bottom: ScreenUtil().setWidth(35),
-                left: ScreenUtil().setWidth(40),
-                right: ScreenUtil().setWidth(20)),
-            width: ScreenUtil().setWidth(120),
-            height: ScreenUtil().setWidth(120),
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: ExactAssetImage(Utils.getImgPath('head_image')),
-                    fit: BoxFit.fill),
-                borderRadius: BorderRadius.all(
-                    Radius.circular(ScreenUtil().setWidth(60))))),
-        Container(
-          height: ScreenUtil().setWidth(120),
-          margin: EdgeInsets.only(bottom: ScreenUtil().setWidth(35)),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                userInfo?.nickName ?? "未实名认证",
-                style: TextStyle(
-                    color: ThemeColors.titlesColor,
-                    fontSize: ScreenUtil().setSp(32)),
+        Row(
+          children: [
+            Container(
+                margin: EdgeInsets.only(
+                    bottom: ScreenUtil().setWidth(35),
+                    left: ScreenUtil().setWidth(40),
+                    right: ScreenUtil().setWidth(20)),
+                width: ScreenUtil().setWidth(120),
+                height: ScreenUtil().setWidth(120),
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: ExactAssetImage(Utils.getImgPath('head_image')),
+                        fit: BoxFit.fill),
+                    borderRadius: BorderRadius.all(
+                        Radius.circular(ScreenUtil().setWidth(60))))),
+            Container(
+              height: ScreenUtil().setWidth(120),
+              margin: EdgeInsets.only(bottom: ScreenUtil().setWidth(35)),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    userInfo?.nickName ?? "未实名认证",
+                    style: TextStyle(
+                        color: ThemeColors.titlesColor,
+                        fontSize: ScreenUtil().setSp(32)),
+                  ),
+                  Text(
+                    mobile(userInfo.phoneNum),
+                    style: TextStyle(
+                        color: ThemeColors.titlesColor,
+                        fontSize: ScreenUtil().setSp(30)),
+                  ),
+                ],
               ),
-              Text(
-                mobile(userInfo.phoneNum),
-                style: TextStyle(
-                    color: ThemeColors.titlesColor,
-                    fontSize: ScreenUtil().setSp(30)),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            InkWell(
+                onTap: () {
+                  // print("专属服务专区---$val---");
+                  widget.onPressed();
+                },
+                child: Container(
+                    width: MediaQuery.of(context).size.width / 4,
+                    margin: EdgeInsets.only(bottom: ScreenUtil().setWidth(40)),
+                    child: Image(
+                        width: ScreenUtil().setWidth(50),
+                        height: ScreenUtil().setWidth(50),
+                        image: AssetImage(Utils.getImgPath('set')),
+                        fit: BoxFit.contain)))
+          ],
+        )
       ],
     );
   }
