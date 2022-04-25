@@ -334,3 +334,26 @@ int syncFibonacci(int n) {
     File info1 = new File('$documentsPath/test/info.json');
     info1.copySync('$documentsPath/test2/info2.json');
   }
+
+
+//单选操作数据源
+   async checkItem(productId) {
+        var checkprice = 0;
+        var products = this.state.products && this.state.products.map(item => {
+            if (item.productId && item.productId == productId) {
+                item.check = !item.check;
+            } else {
+                item.check = false;
+            }
+            return item;
+        });
+        products && products.forEach(item => {
+            if (item.check) {
+                checkprice = item.price
+            }
+        });
+        this.setState({
+            products: products,
+            checkprice: checkprice
+        });
+    }
