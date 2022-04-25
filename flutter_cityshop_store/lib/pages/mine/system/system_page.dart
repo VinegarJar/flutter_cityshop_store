@@ -1,6 +1,4 @@
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_cityshop_store/common/config/config.dart';
 import 'package:flutter_cityshop_store/common/event/http_error_event.dart';
 import 'package:flutter_cityshop_store/common/local/local_storage.dart';
@@ -8,7 +6,6 @@ import 'package:flutter_cityshop_store/https/httpRequest_method.dart';
 import 'package:flutter_cityshop_store/provide/user_provider.dart';
 import 'package:flutter_cityshop_store/router/navigator_utils.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
-import 'package:flutter_cityshop_store/utils/utils.dart';
 import 'package:flutter_cityshop_store/widget/alert.dart';
 import 'package:flutter_cityshop_store/widget/onTop_botton.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,18 +16,17 @@ class SystemPage extends StatelessWidget {
 
   List<Widget> _wrapList(context) {
     List tabs = [
-      {"title": "隐私政策说明", "path": "privacy"},
-      {"title": "知情告知书", "path": "inform"},
-      {"title": "个人信息授权使用声明", "path": "information"},
-      {"title": "欢迎您注册金用呗账号并使用分期", "path": "agreement"},
+      {"title": "隐私政策说明", "path": "http://yinsi.xingdiandeng.com"},
+      {"title": "知情告知书", "path": "http://gaozhishu.xingdiandeng.com/"},
+      {"title": "个人信息授权使用声明", "path": "http://shouquan.xingdiandeng.com/"},
+      {"title": "欢迎您注册金用呗账号并使用分期", "path": "http://welcome.xingdiandeng.com/"},
     ];
 
     final List listWidget = tabs.map((results) {
       return InkWell(
           onTap: () async {
-            String fileUrl =
-                await rootBundle.loadString(Utils.getHtmlPath(results["path"]));
-            NavigatorUtils.goToHtmlWebView(context, fileUrl, results["title"]);
+            NavigatorUtils.goWebView(
+                context, results["path"], results["title"]);
           },
           child: Container(
             color: Colors.white,

@@ -1,9 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_cityshop_store/router/navigator_utils.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
-import 'package:flutter_cityshop_store/utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 typedef CheckedProtocol = void Function(bool checked);
@@ -52,8 +50,7 @@ class _LoginAgreeState extends State<LoginAgree> {
                   fontSize: ScreenUtil().setSp(30)),
               recognizer: TapGestureRecognizer()
                 ..onTap = () async {
-                  String fileUrl = await rootBundle.loadString(Utils.getHtmlPath('agreement'));
-                  NavigatorUtils.goToHtmlWebView(context, fileUrl, "用呗用户注册协议");
+                   NavigatorUtils.goWebView(context, "http://welcome.xingdiandeng.com/", "金用呗用户注册协议");
                 },
             ),
             TextSpan(
@@ -61,15 +58,14 @@ class _LoginAgreeState extends State<LoginAgree> {
                 style: TextStyle(
                     color: Colors.white, fontSize: ScreenUtil().setSp(30))),
             TextSpan(
-              text: "《用呗隐私政策》",
+              text: "《金用呗隐私政策》",
               style: TextStyle(
                   color: ThemeColors.loginBgColor,
                   fontSize: ScreenUtil().setSp(30)),
               recognizer: TapGestureRecognizer()
                 ..onTap = () async{
                   print("用呗隐私政策点击事件---");
-                  String fileUrl = await rootBundle.loadString(Utils.getHtmlPath('privacy'));
-                  NavigatorUtils.goToHtmlWebView(context, fileUrl, "用呗隐私政策");
+                  NavigatorUtils.goWebView(context, "http://yinsi.xingdiandeng.com/", "金用呗隐私政策");
                 },
             ),
           ]))),

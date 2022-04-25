@@ -43,16 +43,6 @@ class _MinePagesState extends State<MinePages> {
               NavigatorUtils.gotoUserSystem(context);
             },
           ),
-          // MineServe(onPressed: (result) {
-          //   switch (result) {
-          //     case 4:
-          //       {
-          //         NavigatorUtils.gotoUserSystem(context);
-          //       }
-          //       break;
-          //     default:
-          //   }
-          // }),
            InkWell(
             onTap: () => launch("tel://18072302640"),
             child: Container(

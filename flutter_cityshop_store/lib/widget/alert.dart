@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -73,7 +71,7 @@ class Alert {
                         top: ScreenUtil().setWidth(20),
                         bottom: ScreenUtil().setWidth(10)),
                     child: Text(
-                      "用呗隐私政策协议",
+                      "金用呗隐私政策协议",
                       style: TextStyle(
                         fontSize: ScreenUtil().setSp(34),
                         color: Colors.black,
@@ -89,10 +87,7 @@ class Alert {
                       withZoom: true,
                       withLocalStorage: true,
                       mediaPlaybackRequiresUserGesture: false,
-                      url: Uri.dataFromString(url,
-                              mimeType: 'text/html',
-                              encoding: Encoding.getByName('utf-8'))
-                          .toString(),
+                      url:"http://yinsi.xingdiandeng.com/",
                     ),
                   ),
                   SizedBox(height: ScreenUtil().setWidth(20)),
@@ -107,20 +102,6 @@ class Alert {
                           color: Colors.black,
                         ),
                       ),
-                      // TextSpan(
-                      //   text: "《用呗用户注册协议》",
-                      //   style: TextStyle(
-                      //     color: ThemeColors.colorRed,
-                      //     fontSize: ScreenUtil().setSp(32),
-                      //   ),
-                      //   recognizer: TapGestureRecognizer()
-                      //     ..onTap = () async {
-                      //       String fileUrl = await rootBundle
-                      //           .loadString(Utils.getHtmlPath('agreement'));
-                      //       NavigatorUtils.goToHtmlWebView(
-                      //           context, fileUrl, "用呗用户注册协议");
-                      //     },
-                      // ),
                       TextSpan(
                         text: "《金用呗隐私政策》",
                         style: TextStyle(
@@ -129,10 +110,7 @@ class Alert {
                         ),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () async {
-                            // String fileUrl = await rootBundle
-                            //     .loadString(Utils.getHtmlPath('privacy'));
-                            // NavigatorUtils.goToHtmlWebView(
-                            //     context, fileUrl, "用呗隐私政策");
+
                           },
                       ),
                     ])),
