@@ -8,6 +8,7 @@ import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_cityshop_store/widget/alert.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MinePages extends StatefulWidget {
   MinePages({Key key}) : super(key: key);
@@ -52,9 +53,23 @@ class _MinePagesState extends State<MinePages> {
           //     default:
           //   }
           // }),
+           InkWell(
+            onTap: () => launch("tel://18072302640"),
+            child: Container(
+              color: Colors.white,
+              width: ScreenUtil().setWidth(750),
+              height: ScreenUtil().setWidth(100),
+              padding:EdgeInsets.symmetric(vertical: ScreenUtil().setWidth(20),horizontal:ScreenUtil().setWidth(40) ),
+              child: Text("在线客服电话:18072302640",
+                  style: TextStyle(
+                      color: ThemeColors.appliedColor,
+                      fontSize: ScreenUtil().setSp(38)))),  
+          ),
+          
           SizedBox(
             height: ScreenUtil().setWidth(40),
           ),
+
           MineBanner(),
         ]),
       ),

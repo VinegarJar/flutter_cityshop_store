@@ -122,7 +122,7 @@ class Alert {
                       //     },
                       // ),
                       TextSpan(
-                        text: "《用呗隐私政策》",
+                        text: "《金用呗隐私政策》",
                         style: TextStyle(
                           color: ThemeColors.mainColor,
                           fontSize: ScreenUtil().setSp(32),

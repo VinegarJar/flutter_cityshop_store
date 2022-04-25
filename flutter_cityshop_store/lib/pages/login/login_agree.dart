@@ -46,7 +46,7 @@ class _LoginAgreeState extends State<LoginAgree> {
                 style: TextStyle(
                     color: Colors.white, fontSize: ScreenUtil().setSp(30))),
             TextSpan(
-              text: "《用呗用户注册协议》",
+              text: "《金用呗用户注册协议》",
               style: TextStyle(
                   color: ThemeColors.loginBgColor,
                   fontSize: ScreenUtil().setSp(30)),

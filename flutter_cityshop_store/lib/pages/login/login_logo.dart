@@ -14,7 +14,7 @@ class LoginLogo extends StatelessWidget {
             alignment: Alignment.bottomLeft,
             child: Container(
               padding: EdgeInsets.only(left: 20, top: 8, right: 20, bottom: 8),
-              child: Text("用呗",
+              child: Text("金用呗",
                   style: TextStyle(
                     fontSize: ScreenUtil().setSp(38),
                     color: Colors.white,

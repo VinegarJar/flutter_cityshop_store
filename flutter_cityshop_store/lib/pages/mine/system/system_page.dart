@@ -22,7 +22,7 @@ class SystemPage extends StatelessWidget {
       {"title": "隐私政策说明", "path": "privacy"},
       {"title": "知情告知书", "path": "inform"},
       {"title": "个人信息授权使用声明", "path": "information"},
-      {"title": "欢迎您注册用呗账号并使用分期", "path": "agreement"},
+      {"title": "欢迎您注册金用呗账号并使用分期", "path": "agreement"},
     ];
 
     final List listWidget = tabs.map((results) {

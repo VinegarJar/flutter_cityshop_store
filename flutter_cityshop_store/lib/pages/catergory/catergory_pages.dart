@@ -6,7 +6,6 @@ import 'package:flutter_cityshop_store/https/httpRequest_method.dart';
 import 'package:flutter_cityshop_store/model/homerecommed.dart';
 import 'package:flutter_cityshop_store/pages/home/home_list_page.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
-import 'package:flutter_cityshop_store/widget/associator.dart';
 import 'package:flutter_cityshop_store/widget/placeitem.dart';
 import 'package:flutter_cityshop_store/widget/tag.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';

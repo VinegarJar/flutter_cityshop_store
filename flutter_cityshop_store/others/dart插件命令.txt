@@ -17,6 +17,7 @@ dart pub add device_info_plus flutter 获取设备信息
 dart pub add flutter_easyloading
 dart pub add flutter_alipay
 dart pub add marquee_flutter: ^0.1.4
+dart pub add url_launcher
 
 1.在工程根目录下创建一个名为 "jsons" 的目录;
 2.创建或拷贝Json文件到"jsons" 目录中 ;

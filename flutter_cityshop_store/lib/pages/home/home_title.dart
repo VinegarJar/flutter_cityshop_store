@@ -12,7 +12,7 @@ class HomeTitle extends StatelessWidget {
         Container(
           width: ScreenUtil().setWidth(245),
           child: Text(
-            "用呗",
+            "金用呗",
             style: TextStyle(
                 color: ThemeColors.titlesColor,
                 fontWeight: FontWeight.w600,

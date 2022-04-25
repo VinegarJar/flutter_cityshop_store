@@ -23,7 +23,7 @@
 # Uncomment the line if you want fastlane to automatically update itself
 # 安装插件 (bundle exec fastlane add_plugin fir_cli)  (bundle exec fastlane add_plugin ding_talk_msg_push)
 # 执行打包命令 fastlane uploadFir     fastlane debugUploadFir
-# 应用名称：用呗App-Android #App Key：61a07a2fe014255fcb8d33bc复制
+# 应用名称：金用呗App-Android #App Key：61a07a2fe014255fcb8d33bc复制
 default_platform(:android)
 
 platform :android do
