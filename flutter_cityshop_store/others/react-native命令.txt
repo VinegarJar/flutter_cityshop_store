@@ -13,3 +13,17 @@ code-push release-react CCBZZB ios  --t 1.0.0 --dev false --d Production --des "
 执行查看上传状态code-push deployment ls doctor-ios
 
 参考文档地址https://www.jianshu.com/p/adb47cb565f7
+
+
+移动端组件化架构（上)
+https://mp.weixin.qq.com/s?__biz=MzU3NTY3MTQzMg==&mid=2247484069&idx=1&sn=cf69dc4429dbdf20abe470a7043be069&chksm=fd1edf42ca695654f5e10043d8994efbe7d168a8799b6916978bba08b65c53b58128d285f385&scene=21#wechat_redirect
+
+
+移动端组件化架构（下)
+https://mp.weixin.qq.com/s?__biz=MzU3NTY3MTQzMg==&mid=2247484069&idx=2&sn=9d0c8977ab2b1c265ffca4562b17503d&chksm=fd1edf42ca695654962424fcac0b5248ed2458fdc58fb5ca22bbc7d581cde307e03529f8483f&scene=21#wechat_redirect
+
+Flutter编程指南
+https://github.com/DeveloperErenLiu/Flutter-PDF
+
+编程技术拓展
+https://github.com/DeveloperErenLiu
