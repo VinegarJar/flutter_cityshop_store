@@ -15,7 +15,9 @@ import 'package:flutter_cityshop_store/pages/login/login_input.dart';
 import 'package:flutter_cityshop_store/pages/login/login_logo.dart';
 import 'package:flutter_cityshop_store/provide/user_provider.dart';
 import 'package:flutter_cityshop_store/router/navigator_utils.dart';
+import 'package:flutter_cityshop_store/store_app.dart';
 import 'package:flutter_cityshop_store/utils/utils.dart';
+import 'package:flutter_cityshop_store/widget/alert.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -51,6 +53,14 @@ class _LoginHomePageState extends State<LoginHomePage> {
   String _phoneNum = "";
   bool _checked = false;
 
+  void loadPolicySheet() async {
+    final policy = await LocalStorage.get("policy");
+    if (policy != "1") {
+      BuildContext context = navigatorKey.currentState.overlay.context;
+      Alert.showPolicySheet(context: context, onPressed: () {});
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -81,7 +91,11 @@ class _LoginHomePageState extends State<LoginHomePage> {
     BlocProvider.of<LoginBloc>(context).add(LoginChangeEvent(phoneNum: text));
   }
 
-
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    loadPolicySheet();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +128,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
           ),
           SizedBox(height: ScreenUtil().setWidth(35)),
           LoginBotton(onPressed: () async {
-              _loginRequest();
+            _loginRequest();
           }),
           SizedBox(height: ScreenUtil().setWidth(35)),
           LoginAgree(
@@ -163,10 +177,10 @@ class _LoginHomePageState extends State<LoginHomePage> {
     var res = await HttpRequestMethod.instance
         .requestWithMetod(Config.userInfo, params);
     //  print('获取用户信息----res----${res.data}');
- 
+
     UserInfo user = UserInfo.fromJson(res.data);
-        print('获取用户信息----user----${user.realNameVerify}');
-        print('获取用户nickName----user----${user.nickName}');
+    print('获取用户信息----user----${user.realNameVerify}');
+    print('获取用户nickName----user----${user.nickName}');
     Provider.of<UserProvider>(context, listen: false).savaUserInfoCache(user);
     LocalStorage.save(Config.USER_INFO, json.encode(user.toJson()));
     LocalStorage.save(Config.TOKEN_KEY, user.phoneNum);

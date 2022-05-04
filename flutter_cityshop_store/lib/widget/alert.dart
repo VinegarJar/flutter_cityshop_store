@@ -48,7 +48,6 @@ class Alert {
   }
 
   static showPolicySheet({
-    @required String url,
     @required BuildContext context,
     @required Function() onPressed,
   }) async {
