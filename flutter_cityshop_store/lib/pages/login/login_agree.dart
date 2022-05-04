@@ -44,13 +44,13 @@ class _LoginAgreeState extends State<LoginAgree> {
                 style: TextStyle(
                     color: Colors.white, fontSize: ScreenUtil().setSp(30))),
             TextSpan(
-              text: "《金用呗用户注册协议》",
+              text: "《用呗分期用户注册协议》",
               style: TextStyle(
                   color: ThemeColors.loginBgColor,
                   fontSize: ScreenUtil().setSp(30)),
               recognizer: TapGestureRecognizer()
                 ..onTap = () async {
-                   NavigatorUtils.goWebView(context, "http://welcome.xingdiandeng.com/", "金用呗用户注册协议");
+                   NavigatorUtils.goWebView(context, "http://welcome.xingdiandeng.com/", "用呗分期用户注册协议");
                 },
             ),
             TextSpan(
@@ -58,14 +58,14 @@ class _LoginAgreeState extends State<LoginAgree> {
                 style: TextStyle(
                     color: Colors.white, fontSize: ScreenUtil().setSp(30))),
             TextSpan(
-              text: "《金用呗隐私政策》",
+              text: "《用呗分期隐私政策》",
               style: TextStyle(
                   color: ThemeColors.loginBgColor,
                   fontSize: ScreenUtil().setSp(30)),
               recognizer: TapGestureRecognizer()
                 ..onTap = () async{
                   print("用呗隐私政策点击事件---");
-                  NavigatorUtils.goWebView(context, "http://yinsi.xingdiandeng.com/", "金用呗隐私政策");
+                  NavigatorUtils.goWebView(context, "http://yinsi.xingdiandeng.com/", "用呗分期隐私政策");
                 },
             ),
           ]))),

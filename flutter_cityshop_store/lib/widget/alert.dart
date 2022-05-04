@@ -5,11 +5,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_cityshop_store/common/event/http_error_event.dart';
 import 'package:flutter_cityshop_store/common/local/local_storage.dart';
 import 'package:flutter_cityshop_store/https/user_dao.dart';
+import 'package:flutter_cityshop_store/router/navigator_utils.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_cityshop_store/utils/utils.dart';
 import 'package:flutter_cityshop_store/widget/onTop_botton.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 class Alert {
   static showAlert({
@@ -62,7 +62,7 @@ class Alert {
                   BorderRadius.all(Radius.circular(ScreenUtil().setWidth(20)))),
           content: Container(
               width: ScreenUtil().setWidth(600),
-              height: ScreenUtil().setWidth(860),
+              height: ScreenUtil().setWidth(800),
               child: Column(
                 children: [
                   Container(
@@ -70,7 +70,7 @@ class Alert {
                         top: ScreenUtil().setWidth(20),
                         bottom: ScreenUtil().setWidth(10)),
                     child: Text(
-                      "金用呗隐私政策协议",
+                      "服务协议及隐私政策",
                       style: TextStyle(
                         fontSize: ScreenUtil().setSp(34),
                         color: Colors.black,
@@ -79,20 +79,20 @@ class Alert {
                     ),
                   ),
                   Container(
-                    height: ScreenUtil().setWidth(450),
+                    height: ScreenUtil().setWidth(410),
                     margin: EdgeInsets.symmetric(
                         horizontal: ScreenUtil().setWidth(30)),
-                    child: WebviewScaffold(
-                      withZoom: true,
-                      withLocalStorage: true,
-                      mediaPlaybackRequiresUserGesture: false,
-                      url:"http://yinsi.xingdiandeng.com/",
+                    child:Text(
+                      "请你务必审慎阅读、充分理解“隐私政策”和“服务协议”各条款,包括但不限于:为了向你提供内容展现、分享等服务,我们需要收集你的设备信息、操作日志等个人信息。你可以在设置中查看、变更、删除个人信息并管理你的授权。你可以阅读“隐私政策”和“服务协议”了解详情信息。如你同意,请点击“同意授权”开始接受我们的服务。",
+                      style: TextStyle(
+                        fontSize: ScreenUtil().setSp(32),
+                        color: Colors.black,
+                      ),
                     ),
                   ),
-                  SizedBox(height: ScreenUtil().setWidth(20)),
                   Container(
                     margin: EdgeInsets.symmetric(
-                        horizontal: ScreenUtil().setWidth(40)),
+                        horizontal: ScreenUtil().setWidth(30)),
                     child: Text.rich(TextSpan(children: [
                       TextSpan(
                         text: "点击同意授权并继续视为您已阅读并同意",
@@ -102,14 +102,34 @@ class Alert {
                         ),
                       ),
                       TextSpan(
-                        text: "《金用呗隐私政策》",
+                        text: "《隐私政策》",
                         style: TextStyle(
                           color: ThemeColors.mainColor,
                           fontSize: ScreenUtil().setSp(32),
                         ),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () async {
-
+                            NavigatorUtils.goWebView(
+                           context, "http://yinsi.xingdiandeng.com", "隐私政策");
+                          },
+                      ),
+                      TextSpan(
+                        text: "和",
+                        style: TextStyle(
+                          fontSize: ScreenUtil().setSp(32),
+                          color: Colors.black,
+                        ),
+                      ),
+                        TextSpan(
+                        text: "《服务协议》",
+                        style: TextStyle(
+                          color: ThemeColors.mainColor,
+                          fontSize: ScreenUtil().setSp(32),
+                        ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () async {
+                            NavigatorUtils.goWebView(
+                           context, "http://welcome.xingdiandeng.com/", "服务协议");
                           },
                       ),
                     ])),
@@ -130,7 +150,7 @@ class Alert {
                           color: ThemeColors.mainColor,
                           borderRadius:
                               BorderRadius.circular(ScreenUtil().setWidth(33))),
-                      child: Text("同意授权并继续",
+                      child: Text("同意授权",
                           style: TextStyle(
                             fontSize: ScreenUtil().setSp(32),
                             color: ThemeColors.mainBgColor, //35,17,0
@@ -146,7 +166,7 @@ class Alert {
                       margin: EdgeInsets.symmetric(
                           horizontal: ScreenUtil().setWidth(20)),
                       height: ScreenUtil().setWidth(66),
-                      child: Text("不同意,退出App",
+                      child: Text("拒绝",
                           style: TextStyle(
                             fontSize: ScreenUtil().setSp(32),
                             color: ThemeColors.mainColor, //35,17,0

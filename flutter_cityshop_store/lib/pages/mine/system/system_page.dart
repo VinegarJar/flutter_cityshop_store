@@ -19,7 +19,7 @@ class SystemPage extends StatelessWidget {
       {"title": "隐私政策说明", "path": "http://yinsi.xingdiandeng.com"},
       {"title": "知情告知书", "path": "http://gaozhishu.xingdiandeng.com/"},
       {"title": "个人信息授权使用声明", "path": "http://shouquan.xingdiandeng.com/"},
-      {"title": "欢迎您注册金用呗账号并使用分期", "path": "http://welcome.xingdiandeng.com/"},
+      {"title": "欢迎您注册和使用用呗分期的服务", "path": "http://welcome.xingdiandeng.com/"},
     ];
 
     final List listWidget = tabs.map((results) {
