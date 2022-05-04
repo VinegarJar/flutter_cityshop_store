@@ -64,6 +64,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
   @override
   void initState() {
     super.initState();
+    loadPolicySheet();
     _editTextController.addListener(_onQueryChanged);
   }
 
@@ -91,11 +92,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
     BlocProvider.of<LoginBloc>(context).add(LoginChangeEvent(phoneNum: text));
   }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    loadPolicySheet();
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -128,7 +125,14 @@ class _LoginHomePageState extends State<LoginHomePage> {
           ),
           SizedBox(height: ScreenUtil().setWidth(35)),
           LoginBotton(onPressed: () async {
-            _loginRequest();
+             final policy = await LocalStorage.get("policy");
+          if (policy != "1") {
+            BuildContext context = navigatorKey.currentState.overlay.context;
+            Alert.showPolicySheet(context: context, onPressed: () {});
+          }else{
+                _loginRequest();
+          }
+
           }),
           SizedBox(height: ScreenUtil().setWidth(35)),
           LoginAgree(
