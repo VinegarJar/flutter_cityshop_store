@@ -21,6 +21,7 @@ dart pub add url_launcher
 dart pub add flutter_inappwebview
 dart pub add permission_handler
 dart pub add flutter_downloader
+dart pub add  install_plugin
 
 1.在工程根目录下创建一个名为 "jsons" 的目录;
 2.创建或拷贝Json文件到"jsons" 目录中 ;
