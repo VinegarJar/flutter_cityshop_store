@@ -357,3 +357,46 @@ int syncFibonacci(int n) {
             checkprice: checkprice
         });
     }
+
+
+    flutter创建方式二：指定编程语言
+flutter create -i objc -a java 项目名
+
+
+替换flutter废弃的函数和方法
+$ dart flix --day-run
+
+批量替换应用flutter废弃的函数和方法
+$ dart flix --apply
+$ dart migrate --apply-changes
+
+
+
+fluter 删除iOS或者android项目文件创建最新文件
+flutter create .
+
+
+在命令提示符中输入
+flutter --version
+
+
+要查看当前频道，请使用以下命令
+flutter channel
+
+要更改为其他频道，请使用flutter channel <channel-name>。更改频道后，使用flutter upgrade 来下载Flutter SDK和相关程序包
+flutter channel dev
+flutter upgrade
+
+
+查看Dart版本命令
+dart --version
+
+
+查看Dart检查更新
+dart pub outdated
+
+查看flutter 检查空安全依赖包的的最新版本的状态
+dart pub outdated --mode=null-safety
+
+
+
