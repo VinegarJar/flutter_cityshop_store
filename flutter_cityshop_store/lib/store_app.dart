@@ -29,7 +29,6 @@ class _StoreAppState extends State<StoreApp> with HttpErrorListener {
   @override
   void initState() {
     super.initState();
-
   }
 
   @override
@@ -57,6 +56,7 @@ class _StoreAppState extends State<StoreApp> with HttpErrorListener {
   }
 }
 
+//要指定(State这个类能使用HttpErrorListener这个混入的类)只有某些类型可以使用mixin。例如所以你的mixin可以调用它没有定义的方法,用于on指定所需的超类
 mixin HttpErrorListener on State<StoreApp> {
   StreamSubscription stream;
 
@@ -68,8 +68,6 @@ mixin HttpErrorListener on State<StoreApp> {
     stream = eventBus.on<HttpErrorEvent>().listen((event) {
       errorHandleFunction(event.code, event.message);
     });
-
-
   }
 
   @override
@@ -80,8 +78,6 @@ mixin HttpErrorListener on State<StoreApp> {
       stream = null;
     }
   }
-
-
 
   void logOutAction() async {
     Future.delayed(Duration(seconds: 0)).then((onValue) {
