@@ -91,6 +91,10 @@ class _MineHeadGroundState extends State<MineHeadGround> {
   }
 
   Widget _userInfoVIP(UserInfo userInfo) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(32)),
+      height: ScreenUtil().setWidth(100),
+    );
     bool isVIP = Provider.of<UserProvider>(context, listen: false).isVIP;
     var radius = ScreenUtil().setWidth(25);
     return Container(

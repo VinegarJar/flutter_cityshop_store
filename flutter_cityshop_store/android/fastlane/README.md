@@ -26,11 +26,6 @@ Fir测试版本ap
 fastlane android debugUploadFir
 ```
 打包DBUG版本安卓包
-### android uploadFir64
-```
-fastlane android uploadFir64
-```
-Deploy a new version to the Google Play
 
 ----
 

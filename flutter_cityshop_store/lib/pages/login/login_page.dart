@@ -13,6 +13,7 @@ import 'package:flutter_cityshop_store/pages/login/login_agree.dart';
 import 'package:flutter_cityshop_store/pages/login/login_botton.dart';
 import 'package:flutter_cityshop_store/pages/login/login_input.dart';
 import 'package:flutter_cityshop_store/pages/login/login_logo.dart';
+import 'package:flutter_cityshop_store/pages/login/login_msgCode_input.dart';
 import 'package:flutter_cityshop_store/provide/user_provider.dart';
 import 'package:flutter_cityshop_store/router/navigator_utils.dart';
 import 'package:flutter_cityshop_store/store_app.dart';
@@ -49,8 +50,9 @@ class LoginHomePage extends StatefulWidget {
 
 class _LoginHomePageState extends State<LoginHomePage> {
   final TextEditingController _editTextController = TextEditingController();
-  // ignore: unused_field
+
   String _phoneNum = "";
+  String _smsCode = "";
   bool _checked = false;
 
   void loadPolicySheet() async {
@@ -88,11 +90,9 @@ class _LoginHomePageState extends State<LoginHomePage> {
   }
 
   void _inputChanged(String text) {
-    _phoneNum = text;
+    _smsCode = text;
     BlocProvider.of<LoginBloc>(context).add(LoginChangeEvent(phoneNum: text));
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -116,8 +116,17 @@ class _LoginHomePageState extends State<LoginHomePage> {
         ),
         child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
           LoginLogo(),
-          LoginInput(
+          LoginMsgCodeInput(
             hintText: "请输入手机号",
+            onChanged: (String value) {
+              // _inputChanged(value);
+              // print("验证码输入框value---$value");
+              _phoneNum = value;
+            },
+          ),
+          SizedBox(height: ScreenUtil().setWidth(20)),
+          LoginInput(
+            hintText: "请输入验证码",
             controller: _editTextController,
             onChanged: (String value) {
               _inputChanged(value);
@@ -125,14 +134,13 @@ class _LoginHomePageState extends State<LoginHomePage> {
           ),
           SizedBox(height: ScreenUtil().setWidth(35)),
           LoginBotton(onPressed: () async {
-             final policy = await LocalStorage.get("policy");
-          if (policy != "1") {
-            BuildContext context = navigatorKey.currentState.overlay.context;
-            Alert.showPolicySheet(context: context, onPressed: () {});
-          }else{
-                _loginRequest();
-          }
-
+            final policy = await LocalStorage.get("policy");
+            if (policy != "1") {
+              BuildContext context = navigatorKey.currentState.overlay.context;
+              Alert.showPolicySheet(context: context, onPressed: () {});
+            } else {
+              _loginRequest();
+            }
           }),
           SizedBox(height: ScreenUtil().setWidth(35)),
           LoginAgree(
@@ -158,7 +166,11 @@ class _LoginHomePageState extends State<LoginHomePage> {
         status: '登陆中...',
         maskType: EasyLoadingMaskType.black,
       );
-      var params = {"phoneNum": _phoneNum, "channelId": "vivo"};
+      var params = {
+        "phoneNum": _phoneNum,
+        "smsCode": _smsCode,
+        "channelId": "vivo"
+      };
       if (Platform.isAndroid) {
         params['androidVisited'] = "1";
       } else {

@@ -7,5 +7,3 @@ class LoginChangeEvent extends LoginEvent {
   final String phoneNum;
   LoginChangeEvent({@required this.phoneNum});
 }
-
-

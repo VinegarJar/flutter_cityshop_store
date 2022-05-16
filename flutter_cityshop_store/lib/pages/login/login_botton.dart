@@ -9,14 +9,14 @@ class LoginBotton extends StatelessWidget {
   final GestureTapCallback onPressed;
   const LoginBotton({@required this.onPressed});
 
-  final title = "一键登录";
+  final title = "登录";
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
       return Center(
-        child: OnTopBotton(
-        callBack:( state.phoneNum == "") ? null : onPressed,
+          child: OnTopBotton(
+        callBack: (state.phoneNum == "") ? null : onPressed,
         title: title,
         widget: Container(
           alignment: Alignment.center,

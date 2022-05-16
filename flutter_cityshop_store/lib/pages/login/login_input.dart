@@ -30,7 +30,7 @@ class _LoginInputState extends State<LoginInput> {
                 borderRadius: BorderRadius.circular(ScreenUtil().setWidth(10))),
             child: TextField(
               inputFormatters: <TextInputFormatter>[
-                LengthLimitingTextInputFormatter(11),
+                LengthLimitingTextInputFormatter(4),
               ],
               controller: widget.controller,
               onChanged: widget.onChanged,
@@ -39,7 +39,7 @@ class _LoginInputState extends State<LoginInput> {
               // autocorrect: true, //是否自动更正
               // autofocus: false, //是否自动对焦
               obscureText: false, //是否是密码
-              textAlign: TextAlign.center, //文本对齐方式
+              textAlign: TextAlign.left, //文本对齐方式
               style: TextStyle(
                   letterSpacing: 1,
                   fontSize: ScreenUtil().setSp(28),

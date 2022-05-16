@@ -11,7 +11,11 @@ class Config {
   //埋点
   static const String addEventUrl = "/record/event/addEvent";
   // 登录
-  static const String loginUrl = "/szgjadmin/app/appuser/loginNoRegister";
+  // static const String loginUrl = "/szgjadmin/app/appuser/loginNoRegister";
+  static const String loginUrl = "/szgjadmin/app/appuser/loginBySmsCode";
+
+  static const String appSmsCode = "/szgjadmin/app/appuser/appSmsCode";
+
   //首页贷款列表-特别推荐
   static const String homeBankUrl = "/szgjadmin/app/product/getRecommed";
   //首页今日推荐
