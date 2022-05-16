@@ -11,8 +11,8 @@ class Config {
   //埋点
   static const String addEventUrl = "/record/event/addEvent";
   // 登录
-  // static const String loginUrl = "/szgjadmin/app/appuser/loginNoRegister";
-  static const String loginUrl = "/szgjadmin/app/appuser/loginBySmsCode";
+   static const String loginUrl = "/szgjadmin/app/appuser/loginNoRegister";
+  //static const String loginUrl = "/szgjadmin/app/appuser/loginBySmsCode";
 
   static const String appSmsCode = "/szgjadmin/app/appuser/appSmsCode";
 

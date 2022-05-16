@@ -169,7 +169,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
       var params = {
         "phoneNum": _phoneNum,
         "smsCode": _smsCode,
-        "channelId": "vivo"
+        "channelId": "huawei"
       };
       if (Platform.isAndroid) {
         params['androidVisited'] = "1";
@@ -179,10 +179,16 @@ class _LoginHomePageState extends State<LoginHomePage> {
 
       var res = await HttpRequestMethod.instance
           .requestWithMetod(Config.loginUrl, params);
-      if (res.result) {
-        getUserInfo();
-        _inputChanged("");
-      }
+      print("-----登陆数据---->${res.data}");  
+           var data = res.data ?? {};
+       
+        if (data["code"] == 200) {
+            getUserInfo();
+            _inputChanged("");
+        }else{
+          eventBus.fire(new HttpErrorEvent(99, data["msg"]??"验证码有误"));
+          EasyLoading.dismiss();
+        }    
     } else {
       eventBus.fire(new HttpErrorEvent(99, "输入手机号有误,请重新输入!"));
     }

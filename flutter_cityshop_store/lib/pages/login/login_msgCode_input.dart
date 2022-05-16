@@ -25,19 +25,22 @@ class _LoginMsgCodeInputState extends State<LoginMsgCodeInput> {
   bool sendCodeBtn = false; //判断发送短信按钮是否点击过标志
   bool checkCodeBtn = false; //判断输入框是否有值
   int seconds = 60; //倒计时 10秒
+  Timer _timer;
 
   @override
   void initState() {
     super.initState();
-
+    
     _codeTextController.addListener(_onCodeChanged);
   }
 
   @override
   void dispose() {
     super.dispose();
-
     _codeTextController.removeListener(_onCodeChanged);
+    _timer?.cancel();
+    _timer = null;
+
   }
 
   @override
@@ -65,13 +68,12 @@ class _LoginMsgCodeInputState extends State<LoginMsgCodeInput> {
 
   //倒计时
   void _showTimer() {
-    Timer t;
-    t = Timer.periodic(Duration(milliseconds: 1000), (timer) {
+   _timer = Timer.periodic(Duration(milliseconds: 1000), (timer) {
       setState(() {
         this.seconds--;
       });
       if (this.seconds == 0) {
-        t.cancel(); //清除定时器
+       _timer.cancel(); //清除定时器
         setState(() {
           this.sendCodeBtn = false;
           this.checkCodeBtn = true;
@@ -95,6 +97,7 @@ class _LoginMsgCodeInputState extends State<LoginMsgCodeInput> {
         });
         var params = {
           "phoneNum": _codeTextController.text,
+          "channelId": "huawei"
         };
         var res = await HttpRequestMethod.instance
             .requestWithMetod(Config.appSmsCode, params);
