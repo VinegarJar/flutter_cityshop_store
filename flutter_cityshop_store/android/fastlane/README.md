@@ -21,9 +21,9 @@ or alternatively using `brew install fastlane`
 fastlane android uploadFir
 ```
 Fir测试版本ap
-### android debugUploadFir
+### android uploadFirs
 ```
-fastlane android debugUploadFir
+fastlane android uploadFirs
 ```
 打包DBUG版本安卓包
 
