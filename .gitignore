@@ -63,3 +63,6 @@ Pods/
 # pip3 list 是否安装
 # sudo pip3 install chardet 安装
 report.xml
+IDEWorkspaceChecks.plist
+用呗.app.dSYM.zip
+fir-用呗.png

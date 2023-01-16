@@ -1,0 +1,63 @@
+一行命令，将Json文件转为Dart model类。
+
+安装插件
+json_model: ^1.0.0
+json_serializable: ^5.0.0
+
+安装插件命令
+dart pub add json_model
+dart pub add json_serializable
+dart pub add build_runner
+dart pub add json_annotation
+dart pub add fluttertoast
+dart pub add umeng_common_sdk
+dart pub add image_picker
+dart pub add path_provider file存储使用
+dart pub add device_info_plus flutter 获取设备信息
+dart pub add flutter_easyloading
+dart pub add flutter_alipay
+dart pub add marquee_flutter: ^0.1.4
+
+1.在工程根目录下创建一个名为 "jsons" 的目录;
+2.创建或拷贝Json文件到"jsons" 目录中 ;
+3.运行 pub run json_model (Dart VM工程)or
+flutter packages pub run json_model(Flutter中) 命令生成Dart model类，生成的文件默认在"lib/models"目录下
+4.默认的生成的字段都不是可空类型，我们可以通过设置--nullable参数来切换生成的类型为可空类型
+flutter packages pub run json_model 
+
+flutter packages pub run build_runner build
+
+typedef onSuccess = void Function(dynamic data);
+typedef onError = void Function(String error);
+
+
+1. Flutter Application (全新的APP)
+flutter create xxapp
+//默认Android使用Java，iOS使用Objective-C。
+flutter create -i objc -a java flutter_hello 
+//如果要指定语言，比如安卓使用Kotlin，iOS使用Swift
+flutter create -i swift -a kotlin xxapp
+
+2. Flutter Module (混编到已有的安卓/iOS工程内)
+flutter create -t module xxapp_module
+
+3. Flutter Plugin
+Flutter平台插件工程，包含Dart层与Native平台层的实现
+flutter create --template=plugin xxapp_plugin
+
+4. Flutter Package
+Flutter纯Dart插件工程，仅包含Dart层的实现，往往定义一些公共Widget
+flutter create --template=package xxapp_package
+
+iOS创建自己的pod库
+https://www.jianshu.com/p/1dabeb10c33a
+
+iOS-直播开发(开发从底层做起)  关于音视频编解码的代码,
+Github: https://github.com/jessonliu/JFLivePlaye
+
+iOS-直播开发(开发从底层做起)之音视频采集
+https://github.com/jessonliu/JFCollectVideoAndAudioData
+
+Flutter 结合json_serializable将json转model 
+https://www.cnblogs.com/sonofdark/p/11726025.html
+https://adoontheway.gitee.io/2021/08/25/everydayprogress021/

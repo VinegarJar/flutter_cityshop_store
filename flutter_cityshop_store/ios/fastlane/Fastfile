@@ -14,6 +14,7 @@
 # update_fastlane
 ##在项目文件android目录下执行命令fastlane uploadFir生成IPA文件,并且会自动上传到Fir,发送到钉钉群通知
 #使用flutter打包命令 flutter build ios --release
+# 应用名称：用呗App 友盟AppKey 61a07941e014255fcb8d32ac
 default_platform(:ios)
 
 platform :ios do
@@ -31,20 +32,11 @@ platform :ios do
      clean: true,# 打包前是否 clean 项目
      export_options: { method: "development"}
    )
-   version = get_version_number_from_plist(xcodeproj: "Runner.xcodeproj",target: 'Runner')
-   buildVersion = get_build_number_from_plist(xcodeproj: "Runner.xcodeproj", target: 'Runner')
 
-   fir_cli api_token:"d2f653948d859d2f06f88eb4d1d39e8f"
-   puts "============================上传ios测试版到Fir成功============================\n"
-   puts "\n\n============================\n app版本号"+version+" \(Build "+buildVersion+"\)测试版============================\n"
-   ding_talk_msg_push(
-        token:"3a01c05738abaaeaf5c5e17d80d4cc5870410387126c5a5e2fbf0095a79977ef", 
-        text: "########## 钉钉群通知,千城小店App,更新ios版本安装包啦!!
-              \n千城小店App更新ios安装包已经上传到fir,请更新下载最新版本App进行测试!
-              \n##########😁😁😁😁😁😁 下载地址:http://d.7short.com/bqsr ##########\n",
-        at_all: true
-      )
-  time = Time.new.strftime("%Y年%m月%d日/%H时%M分%S秒")
-  puts "app版本号"+time+"============================"   
+   fir_cli api_token:"d2f653948d859d2f06f88eb4d1d39e8f", specify_file_path:"./fastlane/用呗.ipa",need_release_id:true,dingtalk_access_token:"3a01c05738abaaeaf5c5e17d80d4cc5870410387126c5a5e2fbf0095a79977ef",dingtalk_custom_message:"钉钉群通知,用呗App,更新iOS版本安装包啦!!",dingtalk_at_all:"true"
+   time = Time.new.strftime("%Y年%m月%d日/%H时%M分%S秒")
+   puts "上传ios测试版到Fir成功===== 测试版=============\n"+time+"============================" 
+
   end
+
 end

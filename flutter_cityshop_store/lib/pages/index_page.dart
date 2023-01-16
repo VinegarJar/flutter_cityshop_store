@@ -1,60 +1,52 @@
 import "package:flutter/cupertino.dart";
 import 'package:flutter/material.dart';
-
-import 'package:flutter_cityshop_store/pages/car_pages/car_pages.dart';
-import 'package:flutter_cityshop_store/pages/catergory_pages/catergory_pages.dart';
-import 'package:flutter_cityshop_store/pages/home_pages/home_pages.dart';
-import 'package:flutter_cityshop_store/pages/mine_pages/mine_pages.dart';
 import 'package:flutter_cityshop_store/provide/common_provider.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart'; //屏幕适配
+import 'package:provider/provider.dart';
+import 'catergory/catergory_pages.dart';
+import 'home/home_pages.dart';
+import 'mine/mine_pages.dart';
 
+class IndexPages extends StatefulWidget {
+  static final String name = "tabpages";
+  IndexPages({Key key}) : super(key: key);
 
-class IndexPages extends StatelessWidget {
+  @override
+  _IndexPagesState createState() => _IndexPagesState();
+}
 
+class _IndexPagesState extends State<IndexPages> {
   final List<BottomNavigationBarItem> bottomTabs = [
+    BottomNavigationBarItem(icon: Icon(CupertinoIcons.home), label: '首页'),
     BottomNavigationBarItem(
-      icon: Icon(CupertinoIcons.home), label:'首页'),
+        icon: Icon(CupertinoIcons.news_solid), label: '新口子'),
     BottomNavigationBarItem(
-        icon: Icon(CupertinoIcons.search), label:'分类'),
-    BottomNavigationBarItem(
-        icon: Icon(CupertinoIcons.shopping_cart), label:'购物车'),
-    BottomNavigationBarItem(
-        icon: Icon(CupertinoIcons.profile_circled), label:'会员中心'),
-    
+        icon: Icon(CupertinoIcons.profile_circled), label: '会员中心'),
   ];
 
   final List<Widget> tabBodies = [
     HomePages(),
     CaterGoryPages(),
-    CarPages(),
     MinePages(),
-
   ];
-
 
   @override
   Widget build(BuildContext context) {
     //初始化屏幕适配组件
-    ScreenUtil.init(context, width: 750, height: 1334, allowFontScaling: false);
+    // ScreenUtil.init(context, width: 750, height: 1334, allowFontScaling: false);
     int currentIndex = Provider.of<CommonProvider>(context).currentIndex;
-   
-
     return Scaffold(
-        backgroundColor: Color.fromRGBO(244, 245, 245, 1.0),
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          fixedColor: ThemeColors.mainColor,
-          currentIndex:currentIndex,
-          items: bottomTabs,
-          onTap: (index) {
-            Provider.of<CommonProvider>(context, listen: false)
-                .changeIndex(index);
-        
-          },
-        ),
-        body: IndexedStack(index:currentIndex, children: tabBodies),
-      );
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        fixedColor: ThemeColors.mainColor,
+        currentIndex: currentIndex,
+        items: bottomTabs,
+        onTap: (index) {
+          Provider.of<CommonProvider>(context, listen: false)
+              .changeIndex(index);
+        },
+      ),
+      body: IndexedStack(index: currentIndex, children: tabBodies),
+    );
   }
 }

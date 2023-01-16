@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_cityshop_store/router/routes.dart';
 import 'package:flutter_cityshop_store/utils/themecolors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -45,14 +44,14 @@ class SwiperDiy extends StatelessWidget {
             print('点击了第$index个');
               print('点击了第${swiperDataList[index]}');
             if(jump){
-                Routes.navigateTo(
-                context,
-                Routes.webView,
-                params: {
-                  'title': "商品详情",
-                  'url': swiperDataList[index]['link'],
-                },
-              );
+              //   Routes.navigateTo(
+              //   context,
+              //   Routes.webView,
+              //   params: {
+              //     'title': "商品详情",
+              //     'url': swiperDataList[index]['link'],
+              //   },
+              // );
             }
            
           },

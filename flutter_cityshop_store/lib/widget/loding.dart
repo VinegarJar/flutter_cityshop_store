@@ -20,7 +20,7 @@ class LoadingWidget extends StatelessWidget {
             ),
             SizedBox(width: 10),
             Text(
-              '正在加载---',
+              '正在加载..',
               style: TextStyle(
                         color: ThemeColors.titleColor,
                         fontSize: ScreenUtil()

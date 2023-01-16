@@ -1,0 +1,336 @@
+2021年6月5日dart基础开始学习
+
+模客后台登录地址：http://mock-api.com/
+模客后台
+账号： gxcjny74813@chacuo.net  29664973@qq.com
+密码：Test2020
+
+极光：
+账号： any046@aeutlook.com
+密码：Test2020   新密码Test2020121
+ 
+开源的网络设计UI 
+https://dribbble.com/ 
+
+代码仓库 账号：2966497308@qq.com 
+github  gitee  coding(密码后面+@) 
+
+leancloud网络存储,个人开发者福利。快速入门
+https://www.leancloud.cn/
+
+钉钉中设置代码提交提醒--Github机器人通知
+https://www.cnblogs.com/muxi0407/p/11984151.html
+
+一款跨平台的开源Github客户端App,地址
+https://github.com/CarGuo/gsy_github_app_flutter
+
+在线生成icon
+https://icon.wuruihong.com/icon?utm_source=3JBPiJAV#/android
+https://appicon.co/#app-icon
+
+iOS开发者账号   打包IDcom.solve.globuleSports
+bianyobeng290229@163.com  邮箱密码re818711 Bonnie123bo 朋友5200，工作5211，父母5222 
+https://106.55.69.56
+
+一款开源习惯打卡APP，流畅的动画体验，Bloc实现状态管理，主题(颜色)切换，字体切换，数据库管理等。
+https://github.com/designDo/flutter-checkio.git
+
+计算代码行数日期
+git log --since=2021-06-29 --until=2021-07-20 --pretty=tformat: --numstat | awk '{ add += $1; subs += $2; loc += $1 - $2 } END { printf "added lines: %s, removed lines: %s, total lines: %s\n", add, subs, loc }'
+
+git log --author="chenmeian" --since=2021-11-19 --until=2021-11-30 --pretty=tformat: --numstat | awk '{ add += $1; subs += $2; loc += $1 - $2 } END { printf "added lines: %s, removed lines: %s, total lines: %s\n", add, subs, loc }'
+
+
+final 和 const区别
+1.final只能赋值一次
+2.final最重要的是运行时的常量,并且final是惰性初始化,即在运行时第一次使用前初始化
+3.初始化时间DateTime可以使用final进行,final进行调用方法赋值,const调用方法赋值报错
+final timer = DateTime.now();
+const  timers = DateTime.now();
+
+dart的数据类型
+
+String user = "我是字符串,指定数据类型";
+print(user);
+
+int count = 10;
+print("我是init类型--$count");
+
+double count = 10.0;
+print("我是double类型,既可以是整型也可以是浮点类型--$count");
+
+bool flag = true;
+print("我是bool类型,--$flag");
+
+List list = [];
+print("List类型,--$list");
+
+List<String> list = ["222",];
+print("我是List类型指定内部数据类型<String>,--$list");
+
+List list = List.filled(2, "string");
+print("创建指定长度List类型,--$list");
+
+final user = 20(数据存在赋值)??10;
+print("数据存在赋值,--$user");
+
+final user = "";
+if(user.isEmpty){
+   print("user为空");
+}
+  
+final user = 0/0;
+ if(user.isNaN){
+    print("user为sNaN");
+}
+
+final user = 10;
+String string = user.toString();
+print("转换为字符串=$string");
+
+final user = "0";
+var count  = double.parse(user);
+print("转换为浮点类型=$count");
+//判断是否为double关键字用is
+print(count is double);
+
+var count  = 10;
+// var b = count++; 
+//b用(count++) = 10, b用(count+=1) = 11
+var b = count+=1; 
+print("count=$count");
+print("b=$b");
+
+List list = [
+      {
+        "title":"标题"
+      },
+      "我是小明",
+      13528,
+      3.258,
+      null,
+];
+    
+//list通过map转换新对象 
+var dict = list.map((element) =>(element is Map)?element:{"title":element}).toList();
+// dict = [{title: 标题}, {title: 我是小明}, {title: 13528}, {title: 3.258}, {title: null}]
+print(dict);
+
+   
+/*闭包的优点 
+ * 1.常驻内存
+ * 2.不污染全局
+ * */  
+  user () {
+       var count = 100;
+       return(){
+          count++;
+          print("闭包返回数据--$count");
+       };
+    } 
+    
+  var counts = user();
+  //101 102 103
+  counts();
+  counts();
+  counts();
+
+//调用
+Person person = Person(name: '初始化名称');
+print('私有变量访问--${person.getUser()}');  
+print('私有变量通过get方法访问--${person.getUserNames}');
+
+person.setUserName = "改变私有变量名称";
+print('改变后私有变量访问--${person.getUser()}'); 
+
+
+class Person{
+   
+   //声明的属性
+   String name = "章三";
+   
+
+
+   String getUser(){
+     return this.name;
+   }
+
+   get getUserNames{
+     return this.name;
+   }
+
+   //set 赋值
+   set setUserName(String name){
+      this.name = name;
+   }
+
+ 
+
+   //声明方法
+   getUserInfo(){
+     print('声明方法触发--${this.name}');
+   }
+
+   //构造函数,初始化的时候可以对变量赋值
+   Person({@required String name}){
+     print('构造函数默认name--${this.name}');
+     this.name = name;
+     print('构造函数在实立化触发--${this.name}');
+   }
+
+  
+
+
+}
+
+
+sendPortIsolate() async {
+  //1.创建一个和isoLate环境交流的Port
+  var receivePort = new ReceivePort();
+  //2.创建一个隔离isolate并且提供用于回执的sendPort,receivePort.sendPort是一个给当前receive发消息的sendPort
+  await Isolate.spawn(speak, receivePort.sendPort);
+  //5.现在需要一个sendPort给isolate发送消息
+  SendPort sendPort = await receivePort.first;
+  //6. 利用sendPort给isoLate发送一个消息
+  var resultFromIsoLate = await sendMessage2IsoLate(sendPort, 'apple');
+  //8.打印来自于isolate的执行结果
+  // ignore: unnecessary_brace_in_string_interps
+  print('sendPort发送一个消息$resultFromIsoLate');
+  resultFromIsoLate = await sendMessage2IsoLate(sendPort, 'banana');
+  print('sendPort发送第二个个消息$resultFromIsoLate');
+}
+
+//3.创建用于在新isolate执行的函数speak
+speak(SendPort sendPort) async {
+  //4.现在提供给主isolate一个用于给子isolate发消息的sendPort
+  var receivePort = new ReceivePort();
+  sendPort.send(receivePort.sendPort);
+
+  //单次读取
+  // var msgFromMainIsoLate = await receivePort.first;
+  // var msg = msgFromMainIsoLate[0];
+  // SendPort replyTo = msgFromMainIsoLate[1];
+  // replyTo.send("单次读取 " + msg);
+
+  //7. 读取receivePort并且回传消息, receivePort看起来是一个可迭代器
+  await for (var r in receivePort) {
+    print('读取receivePort并且回传消息$r');
+    var msg = r[0];
+    SendPort replyTo = r[1];
+    replyTo.send("i like eat " + msg);
+  }
+}
+//如果需要关闭，使用receivePort.close
+
+//发送一条消息给isolate
+Future sendMessage2IsoLate(SendPort sendPort, String msg) {
+  ReceivePort receivePort = ReceivePort();
+  sendPort.send([msg, receivePort.sendPort]);
+  return receivePort.first;
+}
+
+//Flutter的isolate异步线程机制及使用实战详解 完整的Isolate创建和使用示例
+//这里以计算斐波那契数列为例，返回的值是Future，因为是异步的
+Future<dynamic> asyncFibonacci(int n) async {
+  //首先创建一个ReceivePort，为什么要创建这个？
+  //因为创建isolate所需的参数，必须要有SendPort，SendPort需要ReceivePort来创建
+  final response = new ReceivePort();
+  //开始创建isolate,Isolate.spawn函数是isolate.dart里的代码,_isolate是我们自己实现的函数
+  //_isolate是创建isolate必须要的参数。
+  await Isolate.spawn(_isolate, response.sendPort);
+  //获取sendPort来发送数据
+  final sendPort = await response.first as SendPort;
+  //接收消息的ReceivePort
+  final answer = new ReceivePort();
+  //发送数据
+  sendPort.send([n, answer.sendPort]);
+  //获得数据并返回
+  return answer.first;
+}
+
+//创建isolate必须要的参数
+void _isolate(SendPort initialReplyTo) {
+  final port = new ReceivePort();
+  //绑定
+  initialReplyTo.send(port.sendPort);
+  //监听
+  port.listen((message) {
+    //获取数据并解析
+    final data = message[0] as int;
+    final send = message[1] as SendPort;
+    //返回结果
+    send.send(syncFibonacci(data));
+  });
+}
+
+int syncFibonacci(int n) {
+  return n < 2 ? n : syncFibonacci(n - 2) + syncFibonacci(n - 1);
+}
+
+
+  void createFile() async {
+    // 获取应用文档目录并创建文件
+    Directory documentsDir = await getApplicationDocumentsDirectory();
+    String documentsPath = documentsDir.path;
+    File file = new File('$documentsPath/analytics');
+    if (!file.existsSync()) {
+      file.createSync();
+    }
+    writeToFile(file, title);
+  }
+
+  //将数据内容写入指定文件中
+  void writeToFile(File file, String notes) async {
+    File file1 = await file.writeAsString(notes);
+    // File file1 = await file.writeAsBytesSync([notes]);
+    file.writeAsBytesSync([]);
+    if (file1.existsSync()) {
+      print('保存成功');
+    }
+  }
+
+  void getCacheFile() async {
+    Directory documentsDir = await getApplicationDocumentsDirectory();
+    String documentsPath = documentsDir.path;
+    File file = new File('$documentsPath/analytics');
+    if (!file.existsSync()) {
+      return;
+    }
+
+    String notes = await file.readAsString();
+    //读取到数据后设置数据更新UI
+    print('读取到数据后设置数据更新UI--$notes');
+  }
+
+  void deleteOldCacheFile() async {
+    Directory documentsDir = await getApplicationDocumentsDirectory();
+    String documentsPath = documentsDir.path;
+    Directory directory = new Directory('$documentsPath/analytics');
+
+    if (directory is Directory || directory.existsSync()) {
+      final List<FileSystemEntity> files = directory.listSync();
+      for (final FileSystemEntity file in files) {
+        file.deleteSync();
+      }
+    }
+  }
+
+  //json文件读写
+  void writeToFileJson() async {
+    var json1 = {'name': 'xiaoming', 'age': 22, 'address': 'hangzhou'};
+    Directory documentsDir = await getApplicationDocumentsDirectory();
+    String documentsPath = documentsDir.path;
+    File jsonFile = new File('$documentsPath/test.json');
+    jsonFile.writeAsString(convert.jsonEncode(json1));
+
+    // json文件读取
+    var jsonStr = await jsonFile.readAsString();
+    var json = convert.jsonDecode(jsonStr);
+    print(json['name']); // xiaoming
+    print(json['age']); // 22
+    print(json['address']); // hangzhou
+
+    //文件的拷贝
+    File info1 = new File('$documentsPath/test/info.json');
+    info1.copySync('$documentsPath/test2/info2.json');
+  }
